@@ -1,4 +1,4 @@
-# =========== 21.01.10  회의===========
+### =========== 21.01.10  회의===========
 
 
 
@@ -12,13 +12,11 @@
 
 
 
-![Pic1](md-images/Pic1.PNG)
-
-![Pic2](md-images/Pic2.PNG)
-
-![Pic3](md-images/Pic3.PNG)
-
-![Pic4](md-images/Pic4.PNG)
+|          Main 화면          |       **글쓰기 화면**       |
+| :-------------------------: | :-------------------------: |
+| ![Pic1](md-images/Pic1.PNG) | ![Pic2](md-images/Pic2.PNG) |
+|        **SNS 화면**         |       **마케팅 화면**       |
+| ![Pic3](md-images/Pic3.PNG) | ![Pic4](md-images/Pic4.PNG) |
 
 
 

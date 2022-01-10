@@ -1,4 +1,3 @@
-````
 [공통] 마크다운 markdown 작성법
 ======================
 
@@ -65,15 +64,15 @@
 >	>	> This is a third blockqute.
 ```
 > This is a first blockqute.
->	> This is a second blockqute.
->	>	> This is a third blockqute.
+> 	> This is a second blockqute.
+> 	>	> This is a third blockqute.
 
 이 안에서는 다른 마크다운 요소를 포함할 수 있다.
 > ### This is a H3
 > * List
->	```
->	code
->	```
+> 	```
+> 	code
+> 	```
 
 ## 2.3. 목록
 ### ● 순서있는 목록(번호)
@@ -339,7 +338,7 @@ __double underscores__
 ![Alt text](/path/to/img.jpg)
 ![Alt text](/path/to/img.jpg "Optional title")
 ```
-![석촌호수 러버덕](http://cfile6.uf.tistory.com/image/2426E646543C9B4532C7B0)
+![석촌호수 러버덕](md-images/2426E646543C9B4532C7B0.jpeg)
 ![석촌호수 러버덕](http://cfile6.uf.tistory.com/image/2426E646543C9B4532C7B0 "RubberDuck")
 
 사이즈 조절 기능은 없기 때문에 ```<img width="" height=""></img>```를 이용한다.
@@ -392,7 +391,7 @@ View 영역의 항목을 그대로 붙여넣거나 HTML 내보내기 등으로 �
 저는 Dropbox 프로를 구매해서 집-랩탑-스마트폰이 각각 연동을 시켜서 사용하고 있습니다. 드랍박스에 저장된 마크다운 문서는 Dropbox 웹서비스 상에서 제공하기 때문에 웹상에서 바로 열람할 수도 있어 링크를 걸어서 다른 사람과 공유하는 형식으로 사용하고 있다.
 * 링크 예: [Markdown 설명](https://www.dropbox.com/s/mzp9tq4qtfjdlif/20141021_markdown_use_tip.md?dl=0)
 
-***** 
+*****
 
 # P.S.
 최근에는 [Notion](https://www.notion.so/product) 을 조금씩 사용중이다. Notion 에서 작성한 문서는 Atom(<https://atom.io/>), Visual Studio Code(<https://code.visualstudio.com/>), Notepad++(<https://notepad-plus-plus.org/>)텍스트 편집기에 복붙(복사하고 붙여넣기)하면 마크다운문법으로 작성된 문장이 기입되고 이지윅 에디터를 제공하는 웹에디터에 붙여넣기 하면 거의 완벽한 형태로 복사된다. 그래서 애용중이다.
@@ -406,4 +405,3 @@ View 영역의 항목을 그대로 붙여넣거나 HTML 내보내기 등으로 �
 * Atom(<https://atom.io/>)
 * Visual Studio Code(<https://code.visualstudio.com/>)
 * Notepad++(<https://notepad-plus-plus.org/>)
-````

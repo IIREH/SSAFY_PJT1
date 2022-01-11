@@ -45,13 +45,34 @@
 
 ### 📙 01/11 Tue
 
+> git commit 컨벤션
+
+
+
+- 규칙 1
+  - 첫 글자는 대문자로 작성한다. ex) Fix, Add, Change
+- 규칙2
+  - "고침", "추가", "변경" 등 명령어로 시작하기 ex) Feat : 추가 get data api 함수
+
+
+
+<img src="md-images/image-20220111152706867.png" alt="image-20220111152706867" style="zoom:80%;" />
+
+
+
+```
+지금부터 README를 업로드할 때, Docs:수정 README
+```
+
+
+
 ### 왜 자바스크립트가 인기가 많을까?
 
 - frontend에서 쓸 수 있는 유일한 언어
 
 - 모든 브라우저에 내장되어 있어서 설치할 필요가 없다.
 
-- three.js ?
+
 
 
 

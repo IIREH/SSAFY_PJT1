@@ -343,3 +343,699 @@ $ git rebase -i HEAD~2
 ```
 
  
+
+## 22.01.12(수)
+
+### JSX
+
+맨 처음, 리액트로 앱을 생성해 App.js 파일을 열어보면 다음의 코드를 볼 수 있다.
+
+```
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+```
+
+이 코드는 App이라는 컴포넌트를 만들어 준다!
+
+ 
+
+function 키워드를 사용하여 컴포넌트를 만들게 되는데 이러한 컴포넌트를 함수 컴포넌트라고 부른다.
+
+이 함수가 반환하는 부분을 보면 마치 HTML을 작성한 것 처럼 보이지만, 이 코드는 HTML이 아니다. 이러한 코드를 바로 JSX라고 부른다.
+
+ 
+
+### [**JSX란?**](https://kimcookie-lab.tistory.com/entry/JSX#JSX%EB%-E%--%-F)
+
+JSX는 자바스크립트의 확장 문법이며 XML과 매우 비슷하게 생겼다. 이런 형식으로 작성한 코드는 브라우저에서 실행되기 전에 코드가 번들링되는 과정에서 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환된다.
+
+ 
+
+### [**JSX 문법**](https://kimcookie-lab.tistory.com/entry/JSX#JSX%--%EB%AC%B-%EB%B-%--)
+
+JSX를 올바르게 사용하기 위해서는 몇 가지 규칙을 준수해야 한다.
+
+ 
+
+#### [1. 감싸인 요소](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EA%B-%--%EC%-B%B-%EC%-D%B-%--%EC%-A%--%EC%--%-C)
+
+컴포넌트에 여러 요소가 있다면 반드시 **부모 요소 하나**로 감싸야 한다.
+
+```
+function App() {
+	return (
+    	<h1>Hello, World!</h1>
+        <h2>Hello, World!</h2>
+    )
+}
+```
+
+이런 형태의 코드는 제대로 작동하지 않는다. 어째서 이러한 일이 발생하는 것일까?
+
+ 
+
+Virtual DOM에서 컴포넌트 변화를 감지해 낼 때 효율적으로 비교할 수 있도록 컴포넌트 내부는 하나의 DOM 트리 구조로 이루어져야 한다는 규칙이 존재한다. 따라서 위 코드를 div 요소로 묶어준다면 정상적으로 작동하는 것을 확인할 수 있다.
+
+ 
+
+#### [2. 자바스크립트 표현](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EC%-E%--%EB%B-%--%EC%-A%A-%ED%--%AC%EB%A-%BD%ED%-A%B-%--%ED%--%-C%ED%--%--)
+
+JSX 안에서는 자바스크립트 표현식을 사용할 수 있다. 자바스크립트 표현식을 작성하려면 JSX 내부에서 코드를 { }로 감싸면 된다.
+
+```
+function App() {
+  const name = '쿠키';
+  return (
+    <>
+      <h1>{name} 안녕!</h1>
+    </>
+  );
+}
+```
+
+name 이라는 상수를 const를 사용하여 선언하였는데 만약 동적인 값을 담고싶다면 let을 사용해 선언할 수 있다.
+
+ 
+
+#### [3. If 문 대신 조건부 연산자](https://kimcookie-lab.tistory.com/entry/JSX#--%--If%--%EB%AC%B-%--%EB%-C%--%EC%-B%A-%--%EC%A-%B-%EA%B-%B-%EB%B-%--%--%EC%--%B-%EC%--%B-%EC%-E%--)
+
+JSX 내부의 자바스크립트 표현식에서 if 문을 사용할 수는 없다. 하지만 조건에 따라 다른 내용을 렌더링 해야한다면 JSX밖에서 if 문을 사용하거나, { } 안에 조건부 연산자를 사용하면 된다. 
+
+```
+function App() {
+  const name = '쿠키';
+  return (
+    <div>
+      {name === '쿠키' ? (
+        <h1>쿠키입니다.</h1>
+      ) : (
+        <h1>쿠키가 아닙니다.</h1>
+      )}      
+    </div>
+  );
+}
+```
+
+이렇게 코드를 작성한 후 저장하면 브라우저에서는 '쿠키입니다.' 라는 문구를 볼 수 있다. 하지만 name 값을 변경하면 '쿠키가 아닙니다.' 라는 문구가 출력된다.
+
+ 
+
+#### [4. undefined를 렌더링하지 않기](https://kimcookie-lab.tistory.com/entry/JSX#--%--undefined%EB%A-%BC%--%EB%A-%-C%EB%-D%--%EB%A-%--%ED%--%--%EC%A-%--%--%EC%--%-A%EA%B-%B-)
+
+리액트 컴포넌트에서는 함수에서 undefined만 반환하여 렌더링하면 오류가 발생한다.
+
+```
+function App() {
+  const name = undefined;
+  return name;
+}
+```
+
+이 코드는 오류가 발생하기 때문에 OR( || ) 연산자를 사용하여 해당 값이 undefined일 때 사용할 값을 지정하는 식으로 오류를 방지할 수 있다.
+
+ 
+
+#### [5. 인라인 스타일링](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EC%-D%B-%EB%-D%BC%EC%-D%B-%--%EC%-A%A-%ED%--%--%EC%-D%BC%EB%A-%--)
+
+리액트에서 DOM 요소에 스타일을 적용할 때는 객체 형태로 넣어 주어야 한다. 스타일 이름 중에서 background-color 처럼 - 문자가 포함되는 이름은 - 문자를 없애고 카멜 표기법으로 작성해야 한다.
+
+ 
+
+#### [6. class 대신 className](https://kimcookie-lab.tistory.com/entry/JSX#--%--class%--%EB%-C%--%EC%-B%A-%--className)
+
+일반 HTML에서 CSS 클래스를 사용할 때는 <div class="myclass"></div> 와 같이 class라는 속성을 설정해야 한다. 하지만 JSX에서는 class가 아닌 className으로 설정해주어야 한다.
+
+ 
+
+#### [7. 꼭 닫아야 하는 태그](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EA%BC%AD%--%EB%-B%AB%EC%--%--%EC%--%BC%--%ED%--%--%EB%-A%--%--%ED%--%-C%EA%B-%B-)
+
+HTML 코드를 작성할 때 가끔 태그를 닫지 않은 상태로 코드를 작성하기도 한다. 하지만 JSX에서는 태그를 닫지 않으면 오류가 발생한다.
+
+
+
+### props
+
+리액트에서 컴포넌트의 기능은 단순한 템플릿 이상이라고 볼 수 있다. 데이터가 주어졌을 때 이에 맞추어 UI를 만들어 주고, 라이프사이클 API를 이용하여 컴포넌트가 화면에서 나타날 때, 사라질 때, 변화가 일어날 때 주어진 작업들을 처리할 수 있으며, 임의 메서드를 만들어 특별한 기능을 붙여 줄 수 있다.
+
+ 
+
+### [**클래스형 컴포넌트**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%ED%--%B-%EB%-E%--%EC%-A%A-%ED%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-)
+
+앞서 살펴봤던 컴포넌트는 함수 컴포넌트라고 설명했다. 그렇다면 클래스형 컴포넌트는 어떻게 이루어질까?
+
+```
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    const name = '쿠키';
+    return <div className='cookie'>{name}</div>;
+  }
+}
+```
+
+ 
+
+클래스형 컴포넌트와 함수 컴포넌트의 차이점은 클래스형 컴포넌트의 경우 state의 기능 및 라이프사이클 기능을 사용할 수 있다는 것이다.
+
+ 
+
+클래스형 컴포넌트에서는 render 함수가 꼭 있어야 하고, 그 안에서 보여 주어야 할 JSX를 반환해야 한다.
+
+ 
+
+그렇다면 함수 컴포넌트는 어느 상황에 사용해야 할까?
+
+ 
+
+함수 컴포넌트의 장점은 클래스형 컴포넌트보다 선언하기가 훨씬 편하다는 점이 있다. 메모리 자원도 클래스형 컴포넌트에 비해 덜 사용하고 프로젝트를 완성하여 빌드한 후 배포할 때도 함수 컴포넌트를 사용하는 것이 결과물의 크기가 더 작다.
+
+ 
+
+하지만 함수 컴포넌트의 주요 단점은 앞서 말한 state와 라이프사이클 API의 사용이 불가능하다는 점이다. 그런데 이러한 장점은 리액트의 기능인 Hooks 를 사용하여 클래스형 컴포넌트와 동일하지는 않지만 비슷한 작업을 할 수 있게 되었다.
+
+ 
+
+리액트 공식 매뉴얼에서도 함수 컴포넌트와 Hooks를 사용하도록 권장한다고 하니 되도록이면 함수 컴포넌트를 사용하는 것이 좋은것 같다.
+
+ 
+
+### [**props**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#props)
+
+props 기능을 사용하기 위해 MyComponent 컴포넌트를 새로 만들어보자. 우선 MyComponent.js 파일을 생성 후 다음 컴포넌트를 생성한다.
+
+```
+const MyComponent = () => {
+  return <div>나의 새로운 컴포넌트!</div>;
+}
+
+export default MyComponent;
+```
+
+화살표 함수 문법을 통해 위와 같은 코드를 작성해 주었다. 이때 아래에 적인 export 코드는 다른 파일에서 이 파일을 import 한다면, 위에서 선언한 MyComponent 클래스를 불러오겠다는 의미이다.
+
+ 
+
+이제 이 컴포넌트를 App 컴포넌트에서 불러와서 사용해 보자!
+
+```
+import MyComponent from "./MyComponent";
+
+const App = () => {
+  return (
+    <MyComponent />
+  );
+}
+
+export default App;
+```
+
+이를 통해, 결과적으로 브라우저에 '나의 새로운 컴포넌트!' 문구를 출력할 수 있다.
+
+ 
+
+#### [**JSX 내부에서 props 렌더링**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#JSX%--%EB%--%B-%EB%B-%--%EC%--%--%EC%--%-C%--props%--%EB%A-%-C%EB%-D%--%EB%A-%--)
+
+App에서 props 값을 전달해 MyComponent 컴포넌트에서 렌더링해보도록 하자. 우선 App.js 에서 props 값 지정은 다음과 같이 수행할 수 있다.
+
+```
+import MyComponent from "./MyComponent";
+
+const App = () => {
+  return (
+    <MyComponent name="쿠키" />
+  );
+}
+
+export default App;
+```
+
+위 코드를 통해 MyComponent 컴포넌트에 name: "쿠키" props를 전달해 줄 수 있다.
+
+ 
+
+MyComponent 에서는 JSX 내부에서 { } 기호로 감싸 주는 것을 통해 props 값을 렌더링 할 수 있다.
+
+```
+const MyComponent = props => {
+  return <div>안녕하세요, 제 이름은 {props.name}입니다.</div>;
+}
+
+export default MyComponent;
+```
+
+#### [ ](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%C-%A-)
+
+#### [**props 기본값 설정**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#props%--%EA%B-%B-%EB%B-%B-%EA%B-%--%--%EC%--%A-%EC%A-%--)
+
+props 값을 따로 지정하지 않았을 때 보여 줄 기본값은 defaultProps 를 통해 설정할 수 있다.
+
+```
+const MyComponent = props => {
+  return <div>안녕하세요, 제 이름은 {props.name}입니다.</div>;
+};
+
+MyComponent.defaultProps = {
+  name: "쿠키"
+};
+
+export default MyComponent;
+```
+
+위 코드를 통해, 내가 props에 name을 설정해주지 않아도 기본으로 name 값에 "쿠키"가 설정된다.
+
+ 
+
+#### [**태그 사이의 내용을 보여주기**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%ED%--%-C%EA%B-%B-%--%EC%--%AC%EC%-D%B-%EC%-D%--%--%EB%--%B-%EC%-A%A-%EC%-D%--%--%EB%B-%B-%EC%--%AC%EC%A-%BC%EA%B-%B-)
+
+리액트 컴포넌트에는 컴포넌트 태그 사이의 내용을 보여 주는 props가 존재하는데 이것이 바로 children이다.
+
+ 
+
+App 컴포넌트를 다음과 같이 수정해보자.
+
+```
+import MyComponent from "./MyComponent";
+
+const App = () => {
+  return <MyComponent>쿠키</MyComponent>;
+}
+
+export default App;
+```
+
+위 코드에서 MyComponent 태그 사이에 작성한 쿠키라는 문자열을 MyComponent 로 가져가보자.
+
+ 
+
+```
+const MyComponent = props => {
+  return (
+    <div>
+      안녕하세요, 제 이름은 {props.name}입니다.
+      <br />
+      제 다른 이름은 {props.children}입니다.
+    </div>
+  );  
+};
+
+MyComponent.defaultProps = {
+  name: "cookie"
+};
+
+export default MyComponent;
+```
+
+위 코드를 통해 두번째 줄에 '제 다른 이름은 쿠키입니다.' 구문을 출력할 수 있다.
+
+ 
+
+#### [**비구조화 할당 문법**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%EB%B-%--%EA%B-%AC%EC%A-%B-%ED%--%--%--%ED%--%A-%EB%-B%B-%--%EB%AC%B-%EB%B-%--)
+
+현재 MyComponent에서 props를 사용할 때마다 props. 를 붙여 주고 있다. 이러한 작업을 편리하게 하기 위해서 내부 값을 바로 추출하는 방법이 있다.
+
+ 
+
+```
+const MyComponent = props => {
+  const { name, children } = props
+  return (
+    <div>
+      안녕하세요, 제 이름은 {name}입니다.
+      <br />
+      제 다른 이름은 {children}입니다.
+    </div>
+  );  
+};
+
+MyComponent.defaultProps = {
+  name: "cookie"
+};
+
+export default MyComponent;
+```
+
+위와 같이 MyComponent 컴포넌트를 변경한다면, 더 짧은 코드로 사용할 수 있다.
+
+ 
+
+이처럼 객체에서 값을 추출하는 문법을 비구조화 할당이라고 부른다. 이는 함수의 파라미터 부분에서도 사용할 수 있는데, 함수의 파라미터가 객체라면 그 값을 바로 비구조화해서 사용할 수 있다.
+
+ 
+
+```
+const MyComponent = ({ name, children }) => {
+  return (
+    <div>
+      ...
+    </div>
+  );  
+};
+...
+```
+
+이처럼 새로 선언하지 않고 훨씬 편리하게 사용할 수 있다.
+
+ 
+
+#### [**propTypes**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#propTypes)
+
+컴포넌트의 필수 props를 지정하거나 props의 타입을 지정할 때는 propTypes를 사용해 지정할 수 있다.
+
+만약 name 값을 무조건 문자열 형태로 전달하고 싶다면 다음과 같이 입력하면 된다. 같은 방식으로 필수 propTypes는 isRequired를 사용하여 설정할 수 있다.
+
+```
+import PropTypes from 'prop-types';
+
+const MyComponent = ({ name, children }) => {
+  return (...);  
+};
+...
+MyComponent.propTypes = {
+  name: PropTypes.string
+};
+...
+```
+
+ 
+
+#### [**클래스형 컴포넌트에서 props 사용하기**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%ED%--%B-%EB%-E%--%EC%-A%A-%ED%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%EC%--%-C%--props%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+클래스형 컴포넌트에서 props를 사용할 때는 render 함수에서 this.props를 조회하여 사용할 수 있다.
+
+```
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+class MyComponentClass extends Component {
+  render() {
+    const { name, children } = this.props;
+    return (
+      <div>
+        안녕하세요, 제 이름은 {name}입니다.
+        <br />
+        children 값은 {children}입니다.
+      </div>
+    );
+  }
+}
+
+MyComponentClass.defaultProps = {
+  name: '기본 이름'
+};
+
+MyComponentClass.propTypes = {
+  name: PropTypes.string.isRequired,
+};
+
+export default MyComponentClass;
+```
+
+
+
+### state
+
+리액트에서 state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미한다.
+
+ 
+
+### [**클래스형 컴포넌트의 state**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%ED%--%B-%EB%-E%--%EC%-A%A-%ED%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%-D%--%--state)
+
+state를 사용해보기 위해 새로운 컴포넌트를 Counter.js 에 생성해보자.
+
+```
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  constructor(props) {
+  	super(props);
+    this.state = {
+    	number: 0
+  };
+
+  render() {
+    const { number } = this.state;    
+
+    return (
+      <div>
+        <h1>{number}</h1>
+        <button
+          onClick={() => {
+            this.setState({ number: number + 1 });
+          }}
+        >
+          +1
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Counter
+```
+
+우선, 각 코드가 어떤 역할을 하는지 살펴보자.
+
+ 
+
+컴포넌트에 state를 설정할 때는 다음과 같이 constructor 메서드를 작성하여 설정한다.
+
+constructor(props) {
+
+ super(props);
+
+ this.state = {
+
+  number: 0
+
+};
+
+이는 컴포넌트의 생성자 메서드로, 클래스형 컴포넌트에서 constructor를 작성할 때는 반드시 super(props)를 호출해 주어야 한다. 이 함수가 호출되면 현재 클래스형 컴포넌트가 상속받고 있는 리액트의 Component 클래스가 지닌 생성자 함수를 호출해 준다.
+
+ 
+
+이후에는 this.state를 통해 초기값을 설정해준다. 이때 컴포넌트의 state는 객체 형식으로 작성한다.
+
+ 
+
+render 함수에서 현재 state를 조회할 때는 this.state를 통해 조회한다. 그리고 button 안에 onClick 이라는 값을 props로 넣어주어 이벤트를 설정해준다. 추후에 배울 이벤트에서 설정할 함수를 넣어 줄 때는 화살표 함수를 사용하여 넣어주어야 한다. 이때 this.setState라는 함수를 사용하여 state 값을 변경한다.
+
+ 
+
+이 컴포넌트를 App에서 불러와 실행시키면 버튼을 누를때마다 숫자가 1씩 증가하는 브라우저를 확인할 수 있다.
+
+ 
+
+#### [**constructor 없이 state 사용하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#constructor%--%EC%--%--%EC%-D%B-%--state%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+state의 초기값을 설정해주는 또다른 방법은 다음과 같다.
+
+```
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  state = {
+    number: 0,
+    fixedNumber: 0,
+  };
+
+  render() {
+    const { number, fixedNumber } = this.state;    
+
+    return (...);
+  }
+}
+
+export default Counter
+```
+
+ 
+
+#### [**this.setState에 객체 대신 함수 인자 전달하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#this-setState%EC%--%--%--%EA%B-%-D%EC%B-%B-%--%EB%-C%--%EC%-B%A-%--%ED%--%A-%EC%--%--%--%EC%-D%B-%EC%-E%--%--%EC%A-%--%EB%-B%AC%ED%--%--%EA%B-%B-)
+
+만약 onClick에 설정한 함수 내부에서 this.setState를 두 번 호출하면 어떻게 될까? 별다른 설정없이 this.setState를 두 번 사용하면 동일한 코드를 작성해도 숫자가 1씩 더해진다.
+
+ 
+
+이에 대한 해결책은 this.setState를 사용할 때 객체 대신에 함수를 인자로 넣어주는 것이다. 이는 다음과 같은 형식을 통해 사용할 수 있다.
+
+```
+this.setState((prevState, props) => {
+	return {
+    	// 업데이트 내용
+    }
+})
+```
+
+이 때, prevState는 기존 상태를 의미하고 props는 현재 지니고 있는 props를 가리킨다. 이를 사용해 Counter 컴포넌트를 수정해보자.
+
+```
+<button
+  onClick={() => {
+    this.setState((prevState) => {
+      return {
+        number: prevState.number + 1
+      };
+    });
+
+    this.setState(prevState => ({
+      number: prevState.number + 1
+    }));
+  }}
+>
+  +1
+</button>
+```
+
+이제 브라우저에서 버튼을 누른다면 숫자가 2씩 올라가는 것을 확인할 수 있다.
+
+ 
+
+#### [**this.setState가 끝난 후 특정 작업 실행하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#this-setState%EA%B-%--%--%EB%--%-D%EB%--%-C%--%ED%-B%--%--%ED%-A%B-%EC%A-%--%--%EC%-E%--%EC%--%--%--%EC%-B%A-%ED%--%--%ED%--%--%EA%B-%B-)
+
+setState를 사용하여 값을 업데이트 한 후, 특정 작업을 수행하고 싶다면 두 번째 파라미터로 콜백함수를 등록하면 된다.
+
+```
+render() {
+    const { number } = this.state;    
+
+    return (
+      <div>
+        <h1>{number}</h1>
+        <button
+          onClick={() => {
+            this.setState(
+              { number: number + 1 },
+              // 두 번째 파라미터
+              () => {
+              	console.log('setState 호출, 1 증가');
+              }
+            );
+          }}
+        >
+          +1
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+ 
+
+### [**함수 컴포넌트에서 useState 사용하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%ED%--%A-%EC%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%EC%--%-C%--useState%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+함수 컴포넌트도 useState를 사용하면 state를 사용할 수 있다. 이 과정에서 Hooks를 사용하게 되는데, 우선 useState만 알아보자.
+
+ 
+
+#### [**배열 비구조화 할당**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%EB%B-%B-%EC%--%B-%--%EB%B-%--%EA%B-%AC%EC%A-%B-%ED%--%--%--%ED%--%A-%EB%-B%B-)
+
+Hooks를 사용하기 이전에, 배열 비구조화 할당에 대해 알아야 한다.
+
+배열 비구조화 할당은 객체 비구조화 할당과 비슷한데, 배열 안에 있는 값을 쉽게 추출할 수 있도록 해주는 문법이다.
+
+ 
+
+만약 다음과 같은 코드가 있다고 하자.
+
+```
+const array = [1, 2];
+const one = array[0];
+const two = array[1];
+```
+
+이는 array 안에 있는 값을 one과 two에 담아 주는 코드이다. 이를 배열 비구조화 할당을 사용하면 다음과 같이 표현할 수 있다.
+
+```
+const array = [1, 2];
+const [one, two] = array;
+```
+
+ 
+
+#### [**useState 사용**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#useState%--%EC%--%AC%EC%-A%A-)
+
+useState를 사용하기에 앞서 새로운 컴포넌트인 Say 컴포넌트를 생성해보자.
+
+입장버튼과 퇴장버튼을 통해 각각 인사말을 출력해 볼 것이다.
+
+```
+import React, { useState } from 'react';
+
+const Say = () => {
+  const [message, setMessage] = useState('');
+  const onClickEnter = () => setMessage('안녕하세요');
+  const onClickLeave = () => setMessage('안녕히 가세요');
+
+  return (
+    <div>
+      <button onClick={onClickEnter}>입장</button>
+      <button onClick={onClickLeave}>퇴장</button>
+      <h1>{message}</h1>
+    </div>
+  );
+};
+
+export default Say;
+```
+
+useState 함수의 인자에는 상태의 초기값을 넣어준다. 클래스형 컴포넌트에서는 state 초기값을 객체 형태로 넣어주었지만, useState에서는 반드시 객체가 아니여도 상관없다.
+
+ 
+
+함수를 호출하면 배열이 반환되는데, 배열의 첫 번째 원소는 현재 상태이고, 두 번째 원소는 상태를 바꾸어 주는 함수를 의미한다. 이 함수를 Setter 함수라고 부른다. 현재는 message와 setMessage로 이름이 설정되어 있지만, 이름은 자유롭게 변경할 수 있다.
+
+ 
+
+#### [**여러개의 useState 사용하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%EC%--%AC%EB%-F%AC%EA%B-%-C%EC%-D%--%--useState%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+useState는 여러 번 사용해도 문제가 발생하지 않는다. 이번에는 버튼을 클릭해 글씨의 색상을 변경해보자.
+
+```
+import React, { useState } from 'react';
+
+const Say = () => {
+  const [message, setMessage] = useState('');
+  const onClickEnter = () => setMessage('안녕하세요');
+  const onClickLeave = () => setMessage('안녕히 가세요');
+
+  const [color, setColor] = useState('black');
+
+  return (
+    <div>
+      <button onClick={onClickEnter}>입장</button>
+      <button onClick={onClickLeave}>퇴장</button>
+      <h1 style={{ color }}>{message}</h1>
+      <button 
+        style={{ color: 'red' }}
+        onClick={() => setColor('red')}
+      >
+      Red
+      </button>
+    </div>
+  );
+};
+
+export default Say;
+```
+
+기존 message 에 style을 추가하여 "Red"버튼을 클릭하면 빨간색으로 글씨색이 변환되게 만들어주었다. 같은 방식으로 다른 색깔로 변경이 가능하다.

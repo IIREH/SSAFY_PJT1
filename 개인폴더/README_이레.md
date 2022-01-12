@@ -85,6 +85,16 @@
 2. flow를 이해하고 상황에 맞는 전략도 이해하고 고민
 3. 컨벤션을 경험
 
+## BE 학습 조언
+- Java, Spring 잘 숙지(JVM, GC, Collection, ..)
+- 면접에서 묻는 자료구조도 java의 자료구조를 주로 생각하며 묻는 것이니 java의 collection 잘 익히기
+- MVC, DI, IoC, AOP 개념도 잘 숙지
+- 공부자료는 토비, 백기선
+- RDBsms vlftn + NoSql(mongoDB, Redis)
+- CS도 필수(쓰레드와 프로세스 차이, 배열과 링크드리스트 차이, HashMap과 HashTable 차이, ...)
+- 단순 구현이 아니라 자기 기술스택을 깊게 고민하고 생각하며 다뤄야(면접은 내가 바닥을 보일 때까지 꼬리질문한다.)
+- 부하가 걸리는 상황: 주니어에겐 무리인 상황이지만 묻긴 하더라. 어찌 처리해야하는지 방향성, 프레임워크를 고민이라도 해볼 것(대기업 기술 블로그 등 간접적으로)
+
 ## 팀 회의
 - 우리는 git branch를 develop과 master 투트랙으로 간다.
 - 근데 커밋이 어느 부분인지 헷갈릴 수 있다는 의견에 develop의 경우 FE, BE 따로 있어서 결국 developFE, developBE, master 3개 브랜치
@@ -98,3 +108,54 @@
 - GUI 못 띄울 환경도 드문데 잘은 몰라도 그런 환경이면 애초에 git 잘 안쓰일 거 같은데
 
 배우긴 배우지만 좀 더 생각해보고 어디까지 배워야할지 결정해야겠다.
+
+# 1월 12일
+## 코치님 피드백
+- SEO: 한다면 next.js, 플젝 후반에
+- 배치: Spring 기본 스케쥴러 써도 되고 Spring batch 써도 되고 둘 다 해도 되고
+- 사용자배려: 가입 후 로그인 화면으로 돌릴 게 아니라 바로 로그인 시켜주기
+- NoSql: SNS 특성상 관계형 DB보단 NoSql이 유리(게시글, 댓글, 대댓글, ...)
+- 검색 성능: 매번 DB 검색은 무리, 항상 최신화라는 신화는 포기하고 이런저런 기법 도입(짬 날 때마다 **캐싱** 등)
+
+그리고 BE에 내주신 숙제로 다음 내용 공부하고 올 것:
+1. 문자열 기반 검색
+2. mongoDB
+
+## FE 학습조언
+- HTML, CSS, JS는 필수
+- SPA framework 하나 정해서 깊게
+- 렌더링 라이프사이클, 저장소의 쓰임을 깊게 생각
+- 공식문서!
+- TypeScript
+- UI/UX는 주로 대기업의 가이드를 레퍼런스로(google, apple 등)
+- 어느정도 됐다싶으면 vanilla js도 깊게 익혀서 자신만의 composite set 구현해보기
+
+## 팀 회의
+### FE
+- 웹 중심의 반응형 디자인
+- 메인페이지는 비회원에게도 사이트의 컨텐츠를 노출
+- 게시글엔 사진 첨부를 강제하며 이용자가 첨부하지 않을시 기본이미지 첨부
+- 게시글은 한 화면에 2 * 4 개 정도 노출하며 인피니트 스크롤
+### BE
+- elastic search 적용 고려
+- NoSql(mongoDB) 적용 고려
+
+## 개인 공부 - NoSql과 mongoDB
+### NoSql
+Not only Sql의 약자로 
+- 일관성을 좀 포기하고(ACID X)
+- 데이터를 통으로 저장하는 특징이 있다.
+
+이로 인해
+- 속도가 빠르며
+- 분산저장에 용이하고
+- 데이터를 코드에서 익숙한 형태로 바로 다룰 수 있고
+- 스키마가 따로 필요 없어 필드의 이름만 잘 유지하면 됨
+
+### mongoDB
+NoSql 중 하나로 Document model을 따름, 그냥 DB가 JSON을 뭉테기로 쌓아놓은 것 같다.
+- 용어:
+    - Document: Row
+    - Collection: Table
+    - Collection의 집합: DB 
+- Document model: K-V model과 비슷하되 좀 더 발전시켜 V값에 document를 계층적으로 사용 가능(OOP의 composite같은?)

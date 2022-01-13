@@ -1039,3 +1039,142 @@ export default Say;
 ```
 
 기존 message 에 style을 추가하여 "Red"버튼을 클릭하면 빨간색으로 글씨색이 변환되게 만들어주었다. 같은 방식으로 다른 색깔로 변경이 가능하다.
+
+
+
+## 22.01.14 (목)
+
+### 이벤트 핸들링
+
+사용자가 웹 브라우저에서 DOM 요소들과 상호 작용하는 것을 이벤트(event)라고 한다. 다음과 같은 코드를 HTML 파일로 저장하여 웹 브라우저로 실행시켜 보면 Click me 버튼이 생성될 것이다.
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <button onClick="alert('executed')">
+    Click me
+  </button>
+</body>
+</html>
+```
+
+버튼에 설정된 onClick 이벤트를 통해 " " 사이에 있는 자바스크립트를 실행하도록 코드를 작성한다.
+
+
+
+### **이벤트 시스템**
+
+state 포스트에서 작성한 버튼 코드를 다시 한 번 살펴보자.
+
+```
+import React, { useState } from 'react';
+
+const Say = () => {
+  const [message, setMessage] = useState('');
+  const onClickEnter = () => setMessage('안녕하세요!');
+  const onClickLeave = () => setMessage('안녕히 가세요.');
+
+  const [color, setColor] = useState('black');
+
+  return (
+    <div>
+      <button onClick={onClickEnter}>입장</button>
+      <button onClick={onClickLeave}>퇴장</button>
+      <h1 style={{ color }}>{message}</h1>
+
+      <button
+        style={{ color : 'Black' }}
+        onClick={() => setColor('Black')}
+      >
+        Black
+      </button>
+      <button
+        style={{ color : 'red' }}
+        onClick={() => setColor('red')}
+      >
+        Red
+      </button>
+    </div>
+  );
+}
+
+export default Say;
+```
+
+
+
+#### **이벤트를 사용할 때 주의 사항**
+
+\1. 이벤트 이름은 카멜 표기법으로 작성한다.
+
+HTML 에서의 onclick은 리액트에서 onClick으로 작성해야 한다.
+
+
+
+\2. 이벤트에 실행할 함수 형태의 값을 전달한다.
+
+HTML 에서는 " " 안에 실행할 코드를 넣었지만, 리액트에서는 함수 형태의 객체를 전달한다. 위 코드에서 버튼에서도 화살표 함수 문법으로 함수를 만들어 전달한 것을 볼 수 있다.
+
+
+
+\3. DOM 요소에만 이벤트를 설정할 수 있다.
+
+div, button, input, form 등의 DOM 요소에는 이벤트를 설정할 수 있지만, 내가 직접 만든 컴포넌트에는 이벤트를 자체적으로 설정할 수 없다.
+
+
+
+### **onChange 이벤트**
+
+input 요소를 렌더링하는 코드와 해당 요소에 onChange 이벤트를 설정하는 코드를 작성해보자.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="message"
+          placeholder="아무거나 입력해 보세요"
+          onChange={
+            (e) => {
+              console.log(e)
+            }
+          }
+        >
+        </input>
+      </div>
+    );
+  }
+}
+
+export default EventPractice;
+```
+
+개발자 도구를 키고 input 에 아무값이나 입력하면 콘솔에 e 객체가 기록되는 것을 확인할 수 있다. 이 e 객체는 SyntheticEvent로 웹 브라우저의 네이티브 이벤트를 감싸는 객체이다.
+
+
+
+SyntheticEvent는 네이티브 이벤트와 달리 이벤트가 끝나고 나면 이벤트가 초기화되므로 정보를 참조할 수 없다. 따라서 비동기적으로 이벤트 객체를 참조할 일이 있다면 e.persist( ) 함수를 호출해 주어야 한다.
+
+
+
+예를 들어 onChange 이벤트가 발생할 때, 앞으로 변할 인풋 값인 e.target.value를 콘솔에 기록해보자.
+
+```
+onChange={
+  (e) => {
+    console.log(e.target.value);
+  }
+}
+```
+
+코드를 위와 같이 수정하면 값이 바뀔 때마다 바뀌는 값이 콘솔에 기록되는 것을 확인할 수 있다.

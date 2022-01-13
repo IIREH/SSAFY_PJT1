@@ -179,8 +179,8 @@ NoSql 중 하나로 Document model을 따름, 그냥 DB가 JSON을 뭉테기로 
 4. 서비스 추가시 3번 이유 묻기: 서비스가 산으로 가지 않도록
 5. 사회 문제에 관심
 
-## 아침 미팅 - 취업은 부족에 받아들여지는 과정
-으로 보자면 사실 나도 그 부족원과 비슷한 놈이예요 라는 동질감을 어필하는 게 좋은데 그 어필은
+## 아침 미팅 - 부족에 받아들여지는 과정
+을 취업으로 보자면 사실 나도 그 부족원과 비슷한 놈이예요 라는 동질감을 어필하는 게 좋은데 그 어필은
 1. 비슷한 기술스택
 2. 비슷한 기술문서 양식
 3. 외모
@@ -200,6 +200,6 @@ NoSql 중 하나로 Document model을 따름, 그냥 DB가 JSON을 뭉테기로 
 - Redis 사용 고려
 - db_schema(잠정적)
 
-<img src="README_이레.assets/db_schema.jpg" alt="db_schema.jpg" style="zoom:50%;" />
+![1](./README_이레.assets/db_schema.jpg)
 
 ## mongoDB 환경 세팅

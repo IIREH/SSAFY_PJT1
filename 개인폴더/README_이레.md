@@ -203,3 +203,18 @@ NoSql 중 하나로 Document model을 따름, 그냥 DB가 JSON을 뭉테기로 
 ![1](./README_이레.assets/db_schema.jpg)
 
 ## mongoDB 환경 세팅
+
+# 1월 14일
+## mongo express 연동
+- mongoDB를 웹 환경으로 쉽게 보고 다룰 수 있는 mongo express라는 걸 써보자는 의견에 도입을 시도 
+- docker에 mongoDB와 mongo express 컨테이너를 생성해 port를 맞추었으나 express가 mongoDB에 접속을 못함
+- 에러 로그를 살피니 connection 자체가 안된다하고 대충 dns, lookup 등 키워드가 보여 도커 네트워크 구성을 찾아봄
+- 도커 내부적으로 bridge, host, none 등으로 구분되는데 저 두 컨테이너 모두 기본 bridge network에 연결되는데 왜안되지?
+- 공식문서를 보니 기본 bridge는 명시적으로 컨테이너를 지정해주지 않으면 연결이 안된다함
+- 그래서 커스텀 네트워크를 만들어 두 컨테이너에 붙였더니 문제해결
+- 생각해보니 컨테이너간의 격리를 위해 기본 bridge에서 컨테이너간의 통신 차단이 디폴트인 건 당연하지싶음
+- 그리고 간단히 mongoDB 찍먹하며 express로 모니터링해봄
+
+## 내일 할 것
+- docker composite으로 두 컨테이너 묶어보기
+- Spring Data mongoDB로 다루어보기

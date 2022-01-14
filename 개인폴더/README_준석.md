@@ -1178,3 +1178,276 @@ onChange={
 ```
 
 코드를 위와 같이 수정하면 값이 바뀔 때마다 바뀌는 값이 콘솔에 기록되는 것을 확인할 수 있다.
+
+
+
+## 22.01.14(금)
+
+### ref
+
+일반 HTML에서 DOM 요소에 이름을 달 때는 주로 id를 사용한다. 특정 DOM 요소에 id를 달면 CSS 에서 특정 id에 특정 스타일을 적용하거나 자바스크립트에서 해당 id를 가진 요소를 찾아서 작업할 수 있다.
+
+ 
+
+이렇게 HTML에서 id를 사용하여 DOM에 이름을 다는 것처럼 리액트 프로젝트 내부에서 DOM에 이름을 다는 방법이 바로 ref 개념이다.
+
+ 
+
+### [**ref를 사용하는 상황**](https://kimcookie-lab.tistory.com/entry/ref#ref%EB%A-%BC%--%EC%--%AC%EC%-A%A-%ED%--%--%EB%-A%--%--%EC%--%--%ED%--%A-)
+
+우선 ref는 어떤 상황에 사용해야 하는지 짚고 넘어가야 한다. 특정 DOM에 작업을 해야 할 때에 ref를 사용한다고 하였는데, 정확히 어떤 작업을 할 때 ref를 사용해야 할까?
+
+ 
+
+그것은 DOM을 반드시 직접적으로 건드려야 할 때이다. 좀 더 감을 잡기 위해 새로운 컴포넌트를 생성해보자.
+
+ 
+
+**Validation.css**
+
+```
+.success {
+  background-color: lightgreen;
+}
+.failure {
+  background-color: lightcoral;
+}
+```
+
+**Validation.js**
+
+```
+import React, { Component } from 'react';
+import './Validation.css';
+
+class Validation extends Component {
+  state = {
+    password: '',
+    clicked: false,
+    validated: false,
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  handleButtonClick = (e) => {
+    this.setState({
+      clicked: true,
+      validated: this.state.password === '0000'
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type='password'
+          value={this.state.password}
+          onChange={this.handleChange}
+          className={this.state.clicked ? 
+            (this.state.validated ? 'success' : 'failure')
+            :
+            ''
+          }
+        >
+        </input>
+        <button
+          onClick={this.handleButtonClick}
+        >
+          확인
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Validation;
+```
+
+위 코드를 보면, input에서 onChange 이벤트가 발생하면 handleChange를 호출하여 state에 저장되어 있는 password의 값을 업데이트 하였다.
+
+button에서 onClick 이벤트가 발생하면 handleButtonClick을 통해 clicked 값을 참으로 설정하였고, validated 검증을 실시한다.
+
+따라서, input에 값을 입력한 후 버튼을 클릭하면 검증 결과에 따라 success, failure에 따라 배경색상이 변경되게 된다.
+
+ 
+
+#### [**DOM을 꼭 사용해야 하는 상황**](https://kimcookie-lab.tistory.com/entry/ref#DOM%EC%-D%--%--%EA%BC%AD%--%EC%--%AC%EC%-A%A-%ED%--%B-%EC%--%BC%--%ED%--%--%EB%-A%--%--%EC%--%--%ED%--%A-)
+
+지금까지 구현한 코드에서는 state를 사용하여 기능을 구현했지만, 가끔 state만으로 해결할 수 없는 기능이 존재한다.
+
+- 특정 input에 포거스 주기
+- 스크롤 박스 조작하기
+- Canvas 요소에 그림 그리기 등
+
+이러한 경우에는 어쩔 수 없이 DOM에 직접적으로 접근해야 하는데, 이를 위해 ref를 사용하는 것이다.
+
+ 
+
+### [**ref 사용**](https://kimcookie-lab.tistory.com/entry/ref#ref%--%EC%--%AC%EC%-A%A-)
+
+#### [**콜백 함수를 통한 ref 설정**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BD%-C%EB%B-%B-%--%ED%--%A-%EC%--%--%EB%A-%BC%--%ED%--%B-%ED%--%-C%--ref%--%EC%--%A-%EC%A-%--)
+
+ref를 만드는 가장 기본적인 방법은 콜백 함수를 사용하는 것이다. ref를 달고자 하는 요소에 ref라는 콜백 함수를 props로 전달해 주면된다. 이 콜백 함수는 ref 값을 파라미터로 전달받게된다.
+
+```
+<input ref={(ref) => {this.input=ref}} />
+```
+
+위 코드에서 this.input은 input 요소의 DOM을 가리키게 된다. ref의 이름은 원하는 것으로 자유롭게 작성할 수 있다. this.myInput = ref 처럼 자유롭게 지정할 수 있다.
+
+ 
+
+#### [**createRef를 통한 ref 설정**](https://kimcookie-lab.tistory.com/entry/ref#createRef%EB%A-%BC%--%ED%--%B-%ED%--%-C%--ref%--%EC%--%A-%EC%A-%--)
+
+ref를 만드는 또 다른 방법은 리액트에 내장되어 있는 createRef라는 함수를 사용하는 것이다.
+
+```
+class RefSample extends Component {
+  input = React.createRef();
+
+  handleFocus = () => {
+    this.input.current.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input ref={this.input}></input>
+      </div>
+    );
+  }
+}
+```
+
+createRef를 사용하여 ref를 만들려면 우선 컴포넌트 내부에서 멤버 변수로 React.createRef() 를 담아주어야 한다. 그리고 ref를 달고자 하는 요소에 ref props로 넣어 주면 ref 설정이 완료된다.
+
+ 
+
+이후, ref를 설정해 준 DOM에 접근하려면 this.input.current를 조회하면 된다.
+
+ 
+
+#### [**적용하기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%A-%--%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+앞서 작성한 Validation 컴포넌트는 검증 버튼을 클릭하면 포커스가 버튼으로 넘어가면서 인풋 요소의 텍스트 커서가 보이지 않게 된다. 버튼을 눌렀을 때, 자동으로 포커스가 input 요소로 옮겨가도록 변경해보자.
+
+```
+...
+  handleButtonClick = (e) => {
+    this.setState({
+      ...
+    });
+    this.input.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          ref={(ref) => this.input=ref}
+          ...
+        >
+        ...
+```
+
+input 요소에 this.input 이라는 ref를 달아주었고, handleButtonClick 함수에서 this.input.focus()를 통해 this.input으로 포커스가 넘어가도록 설정해주었다.
+
+ 
+
+이제 값을 입력한 후, 버튼을 누르면 자동으로 input 요소로 포커스가 옮겨가게 되고, 커서가 깜빡이는 것을 볼 수 있다.
+
+ 
+
+### [**컴포넌트에 ref 달기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--ref%--%EB%-B%AC%EA%B-%B-)
+
+리액트에서는 컴포넌트에도 ref를 달 수 있다. 이 방법은 주로 컴포넌트 내부에 있는 DOM을 컴포넌트 외부에서 사용할 때 사용하게 된다.
+
+ 
+
+이번에는 스크롤 박스가 있는 컴포넌트를 생성해 확인해 보도록 하자.
+
+```
+import React, { Component } from 'react';
+
+class ScrollBox extends Component {
+  render() {
+    const style = {
+      border: '1px solid black',
+      height: '300px',
+      width: '300px',
+      overflow: 'auto',
+      position: 'relative',
+    };
+    
+    const innerStyle = {
+      width: '100%',
+      height: '650px',
+      background: 'linear-gradient(white, black)',
+    };
+
+    return (
+      <div
+        style={style}
+        ref={(ref) => this.box=ref}
+      >
+        <div style={innerStyle}></div>  
+      </div>
+    );
+  }
+}
+
+export default ScrollBox;
+```
+
+ 
+
+#### [**컴포넌트에 메서드 생성**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EC%--%-D%EC%--%B-)
+
+컴포넌트에 스크롤바를 맨 아래쪽으로 내리는 메서드를 생성해보자. 이를 구현하기 위해서는 DOM 노드가 가진 다음 값들을 사용하게 된다.
+
+- scrollTop: 세로 스크롤바 위치
+- scrollHeight: 스크롤이 있는 박스 안의 div 높이
+- clientHeight: 스크롤이 있는 박스의 높이
+
+```
+import React, { Component } from 'react';
+
+class ScrollBox extends Component {
+  scrollToBottom = () => {
+    const { scrollHeight, clientHeight } = this.box;
+    this.box.scrollTop = scrollHeight - clientHeight;
+  }
+  ...
+}
+
+export default ScrollBox;
+```
+
+ 
+
+#### [**컴포넌트에 ref 달고 내부 메서드 사용하기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--ref%--%EB%-B%AC%EA%B-%A-%--%EB%--%B-%EB%B-%--%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+그럼 이제 App 컴포넌트에서 ScrollBox에 ref를 달고 버튼을 만들어 누르면, ScrollBox 컴포넌트의 scrollToBottom 메서드를 실행하도록 만들어보자.
+
+```
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <ScrollBox ref={(ref) => this.scrollBox=ref}/>
+        <button
+          onClick={() => this.scrollBox.scrollToBottom()}
+        >
+          밑으로 이동
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+button을 클릭할 시 this.scrollBox가 가리키는 ScrollBox 컴포넌트를 바라보게 되고, 그 안에 있는 scrollToBottom을 실행하게 되는 것이다.

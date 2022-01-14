@@ -113,13 +113,53 @@
 
 
 
+### 📙 01/14 Fri
+
+> 리액트 공부하기
+
+​	
+
+### JSX의 규칙
+
+1. 태그는 꼭 닫혀있어야 한다. 
+
+2. 모든 태그는 2개이상이 된다면 꼭 하나로 감싸져야 한다.
+
+```react
+import React from "react";
+class App extends React.Component{
+  render(){
+     return (
+      <div>
+         <div>
+          첫 번째 div입니다.
+         </div>
+         <div>
+          두 번째 div입니다.
+        </div>
+     </div>
+      )       
+    }
+}
+
+export default App; 
+```
+
+- `<div>`가 2개이기 때문에 그 위에 `<div>`로 감싸줘야만 오류가 나지 않는다 .
 
 
 
+### 컴포넌트
 
+- 컴포넌트를 통해 UI를 재사용 가능한 개별적인 여러 조각으로 나누고, 각 조각을 개별적으로 살펴볼 수 있다.
 
+```react
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+```
 
-
+**주의: 컴포넌트의 이름은 항상 대문자로 시직한다.**
 
 
 

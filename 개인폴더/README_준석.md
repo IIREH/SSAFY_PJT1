@@ -1,0 +1,1453 @@
+## 22.01.11(월)
+
+### 1. UI 설계(글작성, 상세페이지, 검색, 공연 상세 페이지)
+
+![1](README_준석.assets/1.png)
+
+![2](README_준석.assets/2.png)
+
+### 2. React를 사용하는 이유?
+
+####  :raising_hand: 무엇을 개발하는가?
+
+프로젝트의 주제는 웹 큐레이션 SNS로, 이용자가 글을 작성하고 이에 대해 다른 이용자의 상호작용이 필수적이다. 
+
+
+
+예를 들어, 게시글에 좋아요 기능이 존재하고 누군가가 좋아요 버튼을 누른다면 해당하는 값이 1 올라야 한다.
+
+이 값을 업데이트하여 실시간으로 반영해야 하는데 좋아요 요소를 찾아 내부를 일일이 수정하는 것은 애플리케이션 규모가 커진다면 매우 복잡해지고 성능도 떨어질 것이다.
+
+
+
+이러한 단점을 개선하기 위해, 데이터가 변할 때마다 기존 뷰를 날려 버리고 처음부터 새로 렌더링하는 방식을 채용한 것이다. 그런데 여기까지 생각 했을 때, 하나의 정보를 수정하기 위해 전체를 렌더링한다면 사용자 경험이 떨어지게 될거라고 예상할 수 있다.
+
+
+
+#### :ok_woman: 리액트의 기능
+
+리액트는 자바스크립트 라이브러리로 다른 프레임워크와 달리 오직 View만 신경 쓰는 라이브러리이다.
+
+
+
+1. 초기 렌더링
+
+   리액트에서 사용하는 render 함수는 컴포넌트가 어떻게 생겼는지를 정의하는 역할을 한다. 이 함수는 html 형식의 문자열을 반환하는 것이 아니라, 뷰가 어떻게 생겼고 어떻게 작동하는지에 대한 정보를 지낸 객체를 반환한다.
+
+   렌더링 작업을 통해 지니고 있는 정보들을 사용하여 HTML 마크업을 만들고, 이를 우리가 정하는 실제 페이지의 DOM 요소 안에 주입하게 된다.
+
+
+
+2. 업데이트
+
+   여기서 리액트가 어떻게 사용자 경험을 살리면서 렌더링을 하는지 알 수 있다. 컴포넌트는 데이터를 업데이트 했을 때 단순히 업데이트한 값을 수정하는 것이 아니라, 새로운 데이터를 통해 render함수를 다시 호출하게 된다.
+
+   그렇다면 이 데이터를 가진 새로운 뷰가 생성될텐데, 이전에 render함수가 만들었던 컴포넌트 정보와 현재 render함수가 만든 텀포넌트 정보를 비교한 후 둘의 차이를 알아내 DOM 트리를 업데이트 하는 것이다.
+
+
+
+3. Virtual DOM
+
+   Virtual DOM을 사용하면 실제 DOM에 접근하여 조작하는 대신, 이를 추상화한 자바스크립트 객체를 구성하여 사용한다.
+
+   리액트에서 데이터가 변하여 웹 브라우저에 실제 DOM을 업데이트 할 때는 다음 세 가지 절차를 밟는다.
+
+   - 데이터를 업데이트하면 전체 UI를 Virtual DOM에 리렌더링 한다.
+   - 이전 Virtual DOM에 있던 내용과 현재 내용을 비교한다.
+   - 바뀐 부분만 실제 DOM에 적용한다.
+
+   물론 Virtual DOM을 사용한다고 해서 무조건 더 빠른 사용자 경험을 제공하는 것은 아니다. 하지만, 지속적으로 데이터가 변화하는 대규모 애플리케이션 구축에서는 강점을 지닌다.
+
+
+
+## 22.01.11(화)
+
+### 1. Git 사용법 
+
+분명 공부를 하면서 git을 사용하기는 하는데, 내가 할 수 있는 거라곤 git add 와 git commit 밖에 없었다...
+
+이번에 git을 공부해야 될 상황이 생겨, 추후에 나같은 사람이나 git을 까먹을 미래의 나를 위해 정리하기로 했다..!
+
+ 
+
+### [**Git 커밋**](https://kimcookie-lab.tistory.com/entry/Git-1#Git%--%EC%BB%A-%EB%B-%-B)
+
+커밋이란 Git 저장소에 나의 디렉토리에 있는 **모든 파일에 대한 스냅샷을 기록**하는 것이다. 각 커밋은 저장소의 이전 버전과 다음 버전의 변경내역을 저장하기 때문에, 대부분의 커밋이 그 커밋 위의 부모 커밋을 가리킨다.
+
+ 
+
+### [**Git 브랜치**](https://kimcookie-lab.tistory.com/entry/Git-1#Git%--%EB%B-%-C%EB%-E%-C%EC%B-%--)
+
+브랜치는 특정 커밋에 대한 참조라고 할 수 있다. 브랜치를 많이 만들어도 메모리나 디스크 공간에 부담이 되지 않기 때문에, 작업을 할 때 작은 단위로 잘게 나누는 것이 좋다.
+
+ 
+
+**하나의 커밋과 그 부모 커밋들을 포함하는 작업 내역**
+
+ 
+
+git branch [브랜치 이름] : 브랜치 생성git checkout [브랜치 이름] : 브랜치로 이동
+
+ 
+
+### [**브랜치와 합치기(Merge)**](https://kimcookie-lab.tistory.com/entry/Git-1#%EB%B-%-C%EB%-E%-C%EC%B-%--%EC%--%--%--%ED%--%A-%EC%B-%--%EA%B-%B--Merge-)
+
+작업을 하다보면 여러개의 브랜치가 생성되게 될 텐데, 이 브랜치를 합치는 몇가지 방법을 알아볼 것이다. merge는 두 개의 부모를 가리키는 특별한 커밋을 만들어 낸다. 두 개의 부모가 있는 커밋이라는 것은 **한 부모의 모든 작업내역과 나머지 부모의 모든 작업 내역, 그리고 그 두 모의 모든 부모들의 작업내역을 포함**한다.
+
+ 
+
+1. bugFix 브랜치를 main 브랜치에 merge
+
+```
+$ git merge bugFix
+```
+
+두 브랜치가 합쳐지면서 main이 두 부모가 있는 커밋을 가리키게 된다.
+
+ 
+
+2. main 브랜치에 bugFix를 merge
+
+```
+$ git checkout bugFix
+$ git merge main
+```
+
+bugFix가 main의 부모쪽에 있었기 때문에, git이 별다른 일을 할 필요가 없어진다.
+
+ 
+
+### [**Git 리베이스(Rebase)**](https://kimcookie-lab.tistory.com/entry/Git-1#Git%--%EB%A-%AC%EB%B-%A-%EC%-D%B-%EC%-A%A--Rebase-)
+
+브랜치끼리의 작업을 접목하는 두번째 방법은 리베이스이다. 리베이스는 기본적으로 커밋들을 모아서 복사한 뒤, 다른 곳에 떨궈 놓는 것을 의미한다.
+
+이를 이용하면, 커밋들의 흐름을 보기 좋게 한 줄로 만들 수 있다는 장점이 있다.
+
+ 
+
+브랜치를 사용해 두 개의 작업을 수행했을 때, rebase를 통해 합친다면 실제로는 두 기능을 따로 개발했지만 마치 순서대로 개발한 것처럼 보이게 된다.
+
+ 
+
+1. bugFix 브랜치를 생성해 작업한 후 bugFix 브랜치를 선택
+
+```
+$ git branch bugFix
+$ git checkout bugFix
+```
+
+ 
+
+2. rebase
+
+```
+$ git rebase main
+```
+
+bugFix 브랜치의 작업 내용이 main을 부모로 하게 되는 한 줄의 커밋을 생성
+
+(기존 커밋은 어딘가에 아직 남아있고 main 위에 올려진것은 복사본)
+
+ 
+
+3. main 브랜치를 bugFix 브랜치쪽으로 리베이스
+
+```
+$ git checkout main
+$ git rebase bugFix
+```
+
+main 브랜치를 선택하고 리베이스
+
+
+
+### [**HEAD**](https://kimcookie-lab.tistory.com/entry/Git-2?category=1023358#HEAD)
+
+"HEAD"는 현재 체크아웃된 커밋을 가리킨다. 즉 현재 작업중인 커밋을 의미한다.
+
+ 
+
+HEAD는 항상 작업트리의 가장 최근 커밋을 가리키므로 작업트리에 변화를 주는 git 명령어들은 대부분 HEAD를 변경하는것으로 시작한다.
+
+ 
+
+일반적으로 HEAD는 브랜치의 이름을 가리키고 있는데, 커밋을 하게 되면 해당 브랜치의 상태가 바뀌고 이 변경은 HEAD를 통해서 확인이 가능하다.
+
+ 
+
+#### [**HEAD 분리하기**](https://kimcookie-lab.tistory.com/entry/Git-2?category=1023358#HEAD%--%EB%B-%--%EB%A-%AC%ED%--%--%EA%B-%B-)
+
+HEAD를 분리한다는 것은 HEAD를 브랜치 대신 커밋에 붙이는 것을 의미한다. 명령어를 사용하기 전의 모습은
+
+ 
+
+HEAD -> main -> C1
+
+ 
+
+이다.
+
+```
+$ git checkout [commit 해시]
+```
+
+다음 명령어를 통해,
+
+HEAD -> C1
+
+으로 변경한다.
+
+ 
+
+#### [**상대참조**](https://kimcookie-lab.tistory.com/entry/Git-2?category=1023358#%EC%--%--%EB%-C%--%EC%B-%B-%EC%A-%B-)
+
+실제 Git에서 해시는 매우 길기 때문에, 해시 자리에 앞의 4글자만 입력해줘도 된다.
+
+ 
+
+하지만, 커밋들을 해시로 구분하고 사용하는것이 그렇게 썩 편하지는 않다. Git의 상대 참조를 활용하면 내가 기억할 만한 지점에서 출발하여 이동한 후 다른 지점에 도달해 작업을 할 수 있다.
+
+ 
+
+상대 커밋의 방법 중 두가지가 있다.
+
+```
+한 번에 한 커밋 위로 움직이는 ^
+한 번에 여러 커밋 위로 올라가는 ~<num>
+```
+
+ 
+
+C2(main) -> C1 -> C0
+
+ 
+
+다음과 같은 구조에서
+
+```
+$ git checkout main^
+```
+
+명령어를 실행하게 되면, HEAD가 C1을 가리키게 된다.
+
+ 
+
+이번에는, 한번에 커밋을 두번 옮겨보도록 하자.
+
+```
+$ git checkout main~2
+```
+
+위 명령어를 통해, HEAD는 C0를 가리키게 된다.
+
+ 
+
+### [**브랜치 강제로 옮기기**](https://kimcookie-lab.tistory.com/entry/Git-2?category=1023358#%EB%B-%-C%EB%-E%-C%EC%B-%--%--%EA%B-%--%EC%A-%-C%EB%A-%-C%--%EC%--%AE%EA%B-%B-%EA%B-%B-)
+
+C4(main, bugFix*) -> C3 -> C2 -> C1 -> C0
+
+ 
+
+상대 참조를 통해 브랜치를 강제로 옮길 수 있다. " -f " 옵션을 이용하여 브랜치를 특정 커밋에 직접적으로 재지정 할 수 있다.
+
+ 
+
+main 브랜치를 HEAD에서 세번 뒤로 옮기고 싶다면 다음 명령어를 실행하면 된다.
+
+```
+$ git branch -f main HEAD~3
+```
+
+C4(bugFix*) -> C3 -> C2 -> C1(main) -> C0
+
+ 
+
+### [**Git 에서 작업 되돌리기**](https://kimcookie-lab.tistory.com/entry/Git-2?category=1023358#Git%--%EC%--%--%EC%--%-C%--%EC%-E%--%EC%--%--%--%EB%--%--%EB%-F%-C%EB%A-%AC%EA%B-%B-)
+
+Git에는 작업한 것을 되돌리는 여러가지 방법이 존재한다. 변경내용을 되돌리는 것도 커밋과 마찬가지로 낮은 수준의 일(개별 파일이나 묶음을 스테이징 하는 것)과 높은 수준의 일(실제 변경이 복구되는 방법)이 있다. 우선, 여기서 후자에 대해 알아보자.
+
+ 
+
+Git에서 변경한 내용을 되돌리는 방법은 크게 두가지가 있는데, "git reset"과 "git revert"이다.
+
+ 
+
+#### [**Git 리셋(reset)**](https://kimcookie-lab.tistory.com/entry/Git-2?category=1023358#Git%--%EB%A-%AC%EC%--%-B-reset-)
+
+git reset은 브랜치로 하여금 예전의 커밋을 가리키도록 이동시키는 방식으로 변경 내용을 되돌린다. 즉, 애초에 커밋하지 않은 것처럼 예전 커밋으로 브랜치를 옮기는 것이다.
+
+ 
+
+#### [**Git 리버트(revert)**](https://kimcookie-lab.tistory.com/entry/Git-2?category=1023358#Git%--%EB%A-%AC%EB%B-%--%ED%-A%B--revert-)
+
+각자의 컴퓨터에서 작업하는 로컬 브랜치의 경우 리셋을 효율적으로 사용할 수 있다. 하지만 "히스토리를 고쳐쓴다"는 점 때문에 다른 사람이 작업하는 리모트 브랜치에는 사용할 수 없게 된다.
+
+ 
+
+내용을 되돌리고, 이 되돌린 내용을 다른 사람들과 공유하기 위해서는, git revert를 써야한다.
+
+ 
+
+C2(main) -> C1 -> C0
+
+ 
+
+```
+$ git revert HEAD
+```
+
+C2`(main) - > C2 -> C1 -> C0
+
+위 코드를 실행하면, HEAD 바로 위의 커밋으로 되돌릴 수 있다. 그런데, 우리가 되돌리려고 한 커밋의 아래에 새로운 커밋이 생기게 된다.
+
+ 
+
+바로 이 커밋이, 되돌리고자 하는 내용을 담은 변경내용이 기록된다. 이 변경 내역을 push 하여 다른 사람과 공유할 수 있다.
+
+
+
+### [**Git 체리-픽(Cherry-pick)**](https://kimcookie-lab.tistory.com/entry/Git-3?category=1023358#Git%--%EC%B-%B-%EB%A-%AC-%ED%--%BD-Cherry-pick-)
+
+```
+$ git cherry-pick <Commit1> <Commit2> <...>
+```
+
+이 명령어는 현재 위치(HEAD) 아래에 있는 일련의 커밋들에 대한 복사본을 만들겠다는 것을 의미한다.
+
+ 
+
+
+
+![img](https://blog.kakaocdn.net/dn/UPwBN/btrqmNCRu2Y/UzngjTHMVqb9vwr9KKv25k/img.png)
+
+
+
+HEAD가 C5를 가르키고 있을 때, C2와 C4의 내용의 복사본을 다음과 같이 손쉽게 붙일 수 있다.
+
+ 
+
+### [**Git 인터렉티브 리베이스**](https://kimcookie-lab.tistory.com/entry/Git-3?category=1023358#Git%--%EC%-D%B-%ED%--%B-%EB%A-%--%ED%-B%B-%EB%B-%-C%--%EB%A-%AC%EB%B-%A-%EC%-D%B-%EC%-A%A-)
+
+인터렉티브 리베이스 대화창을 통해 3가지 기능을 수행 할 수 있다.
+
+\- 적용할 커밋들의 순서를 UI를 통해 바꿀 수 있다.
+
+\- 원하지 않는 커밋들을 뺄 수 있다.
+
+\- 커밋을 스쿼시 할 수 있다.(커밋을 합칠 수 있다.)
+
+ 
+
+```
+$ git rebase -i HEAD~2
+```
+
+ 
+
+## 22.01.12(수)
+
+### JSX
+
+맨 처음, 리액트로 앱을 생성해 App.js 파일을 열어보면 다음의 코드를 볼 수 있다.
+
+```
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
+```
+
+이 코드는 App이라는 컴포넌트를 만들어 준다!
+
+ 
+
+function 키워드를 사용하여 컴포넌트를 만들게 되는데 이러한 컴포넌트를 함수 컴포넌트라고 부른다.
+
+이 함수가 반환하는 부분을 보면 마치 HTML을 작성한 것 처럼 보이지만, 이 코드는 HTML이 아니다. 이러한 코드를 바로 JSX라고 부른다.
+
+ 
+
+### [**JSX란?**](https://kimcookie-lab.tistory.com/entry/JSX#JSX%EB%-E%--%-F)
+
+JSX는 자바스크립트의 확장 문법이며 XML과 매우 비슷하게 생겼다. 이런 형식으로 작성한 코드는 브라우저에서 실행되기 전에 코드가 번들링되는 과정에서 바벨을 사용하여 일반 자바스크립트 형태의 코드로 변환된다.
+
+ 
+
+### [**JSX 문법**](https://kimcookie-lab.tistory.com/entry/JSX#JSX%--%EB%AC%B-%EB%B-%--)
+
+JSX를 올바르게 사용하기 위해서는 몇 가지 규칙을 준수해야 한다.
+
+ 
+
+#### [1. 감싸인 요소](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EA%B-%--%EC%-B%B-%EC%-D%B-%--%EC%-A%--%EC%--%-C)
+
+컴포넌트에 여러 요소가 있다면 반드시 **부모 요소 하나**로 감싸야 한다.
+
+```
+function App() {
+	return (
+    	<h1>Hello, World!</h1>
+        <h2>Hello, World!</h2>
+    )
+}
+```
+
+이런 형태의 코드는 제대로 작동하지 않는다. 어째서 이러한 일이 발생하는 것일까?
+
+ 
+
+Virtual DOM에서 컴포넌트 변화를 감지해 낼 때 효율적으로 비교할 수 있도록 컴포넌트 내부는 하나의 DOM 트리 구조로 이루어져야 한다는 규칙이 존재한다. 따라서 위 코드를 div 요소로 묶어준다면 정상적으로 작동하는 것을 확인할 수 있다.
+
+ 
+
+#### [2. 자바스크립트 표현](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EC%-E%--%EB%B-%--%EC%-A%A-%ED%--%AC%EB%A-%BD%ED%-A%B-%--%ED%--%-C%ED%--%--)
+
+JSX 안에서는 자바스크립트 표현식을 사용할 수 있다. 자바스크립트 표현식을 작성하려면 JSX 내부에서 코드를 { }로 감싸면 된다.
+
+```
+function App() {
+  const name = '쿠키';
+  return (
+    <>
+      <h1>{name} 안녕!</h1>
+    </>
+  );
+}
+```
+
+name 이라는 상수를 const를 사용하여 선언하였는데 만약 동적인 값을 담고싶다면 let을 사용해 선언할 수 있다.
+
+ 
+
+#### [3. If 문 대신 조건부 연산자](https://kimcookie-lab.tistory.com/entry/JSX#--%--If%--%EB%AC%B-%--%EB%-C%--%EC%-B%A-%--%EC%A-%B-%EA%B-%B-%EB%B-%--%--%EC%--%B-%EC%--%B-%EC%-E%--)
+
+JSX 내부의 자바스크립트 표현식에서 if 문을 사용할 수는 없다. 하지만 조건에 따라 다른 내용을 렌더링 해야한다면 JSX밖에서 if 문을 사용하거나, { } 안에 조건부 연산자를 사용하면 된다. 
+
+```
+function App() {
+  const name = '쿠키';
+  return (
+    <div>
+      {name === '쿠키' ? (
+        <h1>쿠키입니다.</h1>
+      ) : (
+        <h1>쿠키가 아닙니다.</h1>
+      )}      
+    </div>
+  );
+}
+```
+
+이렇게 코드를 작성한 후 저장하면 브라우저에서는 '쿠키입니다.' 라는 문구를 볼 수 있다. 하지만 name 값을 변경하면 '쿠키가 아닙니다.' 라는 문구가 출력된다.
+
+ 
+
+#### [4. undefined를 렌더링하지 않기](https://kimcookie-lab.tistory.com/entry/JSX#--%--undefined%EB%A-%BC%--%EB%A-%-C%EB%-D%--%EB%A-%--%ED%--%--%EC%A-%--%--%EC%--%-A%EA%B-%B-)
+
+리액트 컴포넌트에서는 함수에서 undefined만 반환하여 렌더링하면 오류가 발생한다.
+
+```
+function App() {
+  const name = undefined;
+  return name;
+}
+```
+
+이 코드는 오류가 발생하기 때문에 OR( || ) 연산자를 사용하여 해당 값이 undefined일 때 사용할 값을 지정하는 식으로 오류를 방지할 수 있다.
+
+ 
+
+#### [5. 인라인 스타일링](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EC%-D%B-%EB%-D%BC%EC%-D%B-%--%EC%-A%A-%ED%--%--%EC%-D%BC%EB%A-%--)
+
+리액트에서 DOM 요소에 스타일을 적용할 때는 객체 형태로 넣어 주어야 한다. 스타일 이름 중에서 background-color 처럼 - 문자가 포함되는 이름은 - 문자를 없애고 카멜 표기법으로 작성해야 한다.
+
+ 
+
+#### [6. class 대신 className](https://kimcookie-lab.tistory.com/entry/JSX#--%--class%--%EB%-C%--%EC%-B%A-%--className)
+
+일반 HTML에서 CSS 클래스를 사용할 때는 <div class="myclass"></div> 와 같이 class라는 속성을 설정해야 한다. 하지만 JSX에서는 class가 아닌 className으로 설정해주어야 한다.
+
+ 
+
+#### [7. 꼭 닫아야 하는 태그](https://kimcookie-lab.tistory.com/entry/JSX#--%--%EA%BC%AD%--%EB%-B%AB%EC%--%--%EC%--%BC%--%ED%--%--%EB%-A%--%--%ED%--%-C%EA%B-%B-)
+
+HTML 코드를 작성할 때 가끔 태그를 닫지 않은 상태로 코드를 작성하기도 한다. 하지만 JSX에서는 태그를 닫지 않으면 오류가 발생한다.
+
+
+
+### props
+
+리액트에서 컴포넌트의 기능은 단순한 템플릿 이상이라고 볼 수 있다. 데이터가 주어졌을 때 이에 맞추어 UI를 만들어 주고, 라이프사이클 API를 이용하여 컴포넌트가 화면에서 나타날 때, 사라질 때, 변화가 일어날 때 주어진 작업들을 처리할 수 있으며, 임의 메서드를 만들어 특별한 기능을 붙여 줄 수 있다.
+
+ 
+
+### [**클래스형 컴포넌트**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%ED%--%B-%EB%-E%--%EC%-A%A-%ED%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-)
+
+앞서 살펴봤던 컴포넌트는 함수 컴포넌트라고 설명했다. 그렇다면 클래스형 컴포넌트는 어떻게 이루어질까?
+
+```
+import React, { Component } from 'react';
+
+class App extends Component {
+  render() {
+    const name = '쿠키';
+    return <div className='cookie'>{name}</div>;
+  }
+}
+```
+
+ 
+
+클래스형 컴포넌트와 함수 컴포넌트의 차이점은 클래스형 컴포넌트의 경우 state의 기능 및 라이프사이클 기능을 사용할 수 있다는 것이다.
+
+ 
+
+클래스형 컴포넌트에서는 render 함수가 꼭 있어야 하고, 그 안에서 보여 주어야 할 JSX를 반환해야 한다.
+
+ 
+
+그렇다면 함수 컴포넌트는 어느 상황에 사용해야 할까?
+
+ 
+
+함수 컴포넌트의 장점은 클래스형 컴포넌트보다 선언하기가 훨씬 편하다는 점이 있다. 메모리 자원도 클래스형 컴포넌트에 비해 덜 사용하고 프로젝트를 완성하여 빌드한 후 배포할 때도 함수 컴포넌트를 사용하는 것이 결과물의 크기가 더 작다.
+
+ 
+
+하지만 함수 컴포넌트의 주요 단점은 앞서 말한 state와 라이프사이클 API의 사용이 불가능하다는 점이다. 그런데 이러한 장점은 리액트의 기능인 Hooks 를 사용하여 클래스형 컴포넌트와 동일하지는 않지만 비슷한 작업을 할 수 있게 되었다.
+
+ 
+
+리액트 공식 매뉴얼에서도 함수 컴포넌트와 Hooks를 사용하도록 권장한다고 하니 되도록이면 함수 컴포넌트를 사용하는 것이 좋은것 같다.
+
+ 
+
+### [**props**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#props)
+
+props 기능을 사용하기 위해 MyComponent 컴포넌트를 새로 만들어보자. 우선 MyComponent.js 파일을 생성 후 다음 컴포넌트를 생성한다.
+
+```
+const MyComponent = () => {
+  return <div>나의 새로운 컴포넌트!</div>;
+}
+
+export default MyComponent;
+```
+
+화살표 함수 문법을 통해 위와 같은 코드를 작성해 주었다. 이때 아래에 적인 export 코드는 다른 파일에서 이 파일을 import 한다면, 위에서 선언한 MyComponent 클래스를 불러오겠다는 의미이다.
+
+ 
+
+이제 이 컴포넌트를 App 컴포넌트에서 불러와서 사용해 보자!
+
+```
+import MyComponent from "./MyComponent";
+
+const App = () => {
+  return (
+    <MyComponent />
+  );
+}
+
+export default App;
+```
+
+이를 통해, 결과적으로 브라우저에 '나의 새로운 컴포넌트!' 문구를 출력할 수 있다.
+
+ 
+
+#### [**JSX 내부에서 props 렌더링**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#JSX%--%EB%--%B-%EB%B-%--%EC%--%--%EC%--%-C%--props%--%EB%A-%-C%EB%-D%--%EB%A-%--)
+
+App에서 props 값을 전달해 MyComponent 컴포넌트에서 렌더링해보도록 하자. 우선 App.js 에서 props 값 지정은 다음과 같이 수행할 수 있다.
+
+```
+import MyComponent from "./MyComponent";
+
+const App = () => {
+  return (
+    <MyComponent name="쿠키" />
+  );
+}
+
+export default App;
+```
+
+위 코드를 통해 MyComponent 컴포넌트에 name: "쿠키" props를 전달해 줄 수 있다.
+
+ 
+
+MyComponent 에서는 JSX 내부에서 { } 기호로 감싸 주는 것을 통해 props 값을 렌더링 할 수 있다.
+
+```
+const MyComponent = props => {
+  return <div>안녕하세요, 제 이름은 {props.name}입니다.</div>;
+}
+
+export default MyComponent;
+```
+
+#### [ ](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%C-%A-)
+
+#### [**props 기본값 설정**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#props%--%EA%B-%B-%EB%B-%B-%EA%B-%--%--%EC%--%A-%EC%A-%--)
+
+props 값을 따로 지정하지 않았을 때 보여 줄 기본값은 defaultProps 를 통해 설정할 수 있다.
+
+```
+const MyComponent = props => {
+  return <div>안녕하세요, 제 이름은 {props.name}입니다.</div>;
+};
+
+MyComponent.defaultProps = {
+  name: "쿠키"
+};
+
+export default MyComponent;
+```
+
+위 코드를 통해, 내가 props에 name을 설정해주지 않아도 기본으로 name 값에 "쿠키"가 설정된다.
+
+ 
+
+#### [**태그 사이의 내용을 보여주기**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%ED%--%-C%EA%B-%B-%--%EC%--%AC%EC%-D%B-%EC%-D%--%--%EB%--%B-%EC%-A%A-%EC%-D%--%--%EB%B-%B-%EC%--%AC%EC%A-%BC%EA%B-%B-)
+
+리액트 컴포넌트에는 컴포넌트 태그 사이의 내용을 보여 주는 props가 존재하는데 이것이 바로 children이다.
+
+ 
+
+App 컴포넌트를 다음과 같이 수정해보자.
+
+```
+import MyComponent from "./MyComponent";
+
+const App = () => {
+  return <MyComponent>쿠키</MyComponent>;
+}
+
+export default App;
+```
+
+위 코드에서 MyComponent 태그 사이에 작성한 쿠키라는 문자열을 MyComponent 로 가져가보자.
+
+ 
+
+```
+const MyComponent = props => {
+  return (
+    <div>
+      안녕하세요, 제 이름은 {props.name}입니다.
+      <br />
+      제 다른 이름은 {props.children}입니다.
+    </div>
+  );  
+};
+
+MyComponent.defaultProps = {
+  name: "cookie"
+};
+
+export default MyComponent;
+```
+
+위 코드를 통해 두번째 줄에 '제 다른 이름은 쿠키입니다.' 구문을 출력할 수 있다.
+
+ 
+
+#### [**비구조화 할당 문법**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%EB%B-%--%EA%B-%AC%EC%A-%B-%ED%--%--%--%ED%--%A-%EB%-B%B-%--%EB%AC%B-%EB%B-%--)
+
+현재 MyComponent에서 props를 사용할 때마다 props. 를 붙여 주고 있다. 이러한 작업을 편리하게 하기 위해서 내부 값을 바로 추출하는 방법이 있다.
+
+ 
+
+```
+const MyComponent = props => {
+  const { name, children } = props
+  return (
+    <div>
+      안녕하세요, 제 이름은 {name}입니다.
+      <br />
+      제 다른 이름은 {children}입니다.
+    </div>
+  );  
+};
+
+MyComponent.defaultProps = {
+  name: "cookie"
+};
+
+export default MyComponent;
+```
+
+위와 같이 MyComponent 컴포넌트를 변경한다면, 더 짧은 코드로 사용할 수 있다.
+
+ 
+
+이처럼 객체에서 값을 추출하는 문법을 비구조화 할당이라고 부른다. 이는 함수의 파라미터 부분에서도 사용할 수 있는데, 함수의 파라미터가 객체라면 그 값을 바로 비구조화해서 사용할 수 있다.
+
+ 
+
+```
+const MyComponent = ({ name, children }) => {
+  return (
+    <div>
+      ...
+    </div>
+  );  
+};
+...
+```
+
+이처럼 새로 선언하지 않고 훨씬 편리하게 사용할 수 있다.
+
+ 
+
+#### [**propTypes**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#propTypes)
+
+컴포넌트의 필수 props를 지정하거나 props의 타입을 지정할 때는 propTypes를 사용해 지정할 수 있다.
+
+만약 name 값을 무조건 문자열 형태로 전달하고 싶다면 다음과 같이 입력하면 된다. 같은 방식으로 필수 propTypes는 isRequired를 사용하여 설정할 수 있다.
+
+```
+import PropTypes from 'prop-types';
+
+const MyComponent = ({ name, children }) => {
+  return (...);  
+};
+...
+MyComponent.propTypes = {
+  name: PropTypes.string
+};
+...
+```
+
+ 
+
+#### [**클래스형 컴포넌트에서 props 사용하기**](https://kimcookie-lab.tistory.com/entry/props?category=1047913#%ED%--%B-%EB%-E%--%EC%-A%A-%ED%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%EC%--%-C%--props%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+클래스형 컴포넌트에서 props를 사용할 때는 render 함수에서 this.props를 조회하여 사용할 수 있다.
+
+```
+import React, {Component} from 'react';
+import PropTypes from 'prop-types';
+
+class MyComponentClass extends Component {
+  render() {
+    const { name, children } = this.props;
+    return (
+      <div>
+        안녕하세요, 제 이름은 {name}입니다.
+        <br />
+        children 값은 {children}입니다.
+      </div>
+    );
+  }
+}
+
+MyComponentClass.defaultProps = {
+  name: '기본 이름'
+};
+
+MyComponentClass.propTypes = {
+  name: PropTypes.string.isRequired,
+};
+
+export default MyComponentClass;
+```
+
+
+
+### state
+
+리액트에서 state는 컴포넌트 내부에서 바뀔 수 있는 값을 의미한다.
+
+ 
+
+### [**클래스형 컴포넌트의 state**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%ED%--%B-%EB%-E%--%EC%-A%A-%ED%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%-D%--%--state)
+
+state를 사용해보기 위해 새로운 컴포넌트를 Counter.js 에 생성해보자.
+
+```
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  constructor(props) {
+  	super(props);
+    this.state = {
+    	number: 0
+  };
+
+  render() {
+    const { number } = this.state;    
+
+    return (
+      <div>
+        <h1>{number}</h1>
+        <button
+          onClick={() => {
+            this.setState({ number: number + 1 });
+          }}
+        >
+          +1
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Counter
+```
+
+우선, 각 코드가 어떤 역할을 하는지 살펴보자.
+
+ 
+
+컴포넌트에 state를 설정할 때는 다음과 같이 constructor 메서드를 작성하여 설정한다.
+
+constructor(props) {
+
+ super(props);
+
+ this.state = {
+
+  number: 0
+
+};
+
+이는 컴포넌트의 생성자 메서드로, 클래스형 컴포넌트에서 constructor를 작성할 때는 반드시 super(props)를 호출해 주어야 한다. 이 함수가 호출되면 현재 클래스형 컴포넌트가 상속받고 있는 리액트의 Component 클래스가 지닌 생성자 함수를 호출해 준다.
+
+ 
+
+이후에는 this.state를 통해 초기값을 설정해준다. 이때 컴포넌트의 state는 객체 형식으로 작성한다.
+
+ 
+
+render 함수에서 현재 state를 조회할 때는 this.state를 통해 조회한다. 그리고 button 안에 onClick 이라는 값을 props로 넣어주어 이벤트를 설정해준다. 추후에 배울 이벤트에서 설정할 함수를 넣어 줄 때는 화살표 함수를 사용하여 넣어주어야 한다. 이때 this.setState라는 함수를 사용하여 state 값을 변경한다.
+
+ 
+
+이 컴포넌트를 App에서 불러와 실행시키면 버튼을 누를때마다 숫자가 1씩 증가하는 브라우저를 확인할 수 있다.
+
+ 
+
+#### [**constructor 없이 state 사용하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#constructor%--%EC%--%--%EC%-D%B-%--state%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+state의 초기값을 설정해주는 또다른 방법은 다음과 같다.
+
+```
+import React, { Component } from 'react';
+
+class Counter extends Component {
+  state = {
+    number: 0,
+    fixedNumber: 0,
+  };
+
+  render() {
+    const { number, fixedNumber } = this.state;    
+
+    return (...);
+  }
+}
+
+export default Counter
+```
+
+ 
+
+#### [**this.setState에 객체 대신 함수 인자 전달하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#this-setState%EC%--%--%--%EA%B-%-D%EC%B-%B-%--%EB%-C%--%EC%-B%A-%--%ED%--%A-%EC%--%--%--%EC%-D%B-%EC%-E%--%--%EC%A-%--%EB%-B%AC%ED%--%--%EA%B-%B-)
+
+만약 onClick에 설정한 함수 내부에서 this.setState를 두 번 호출하면 어떻게 될까? 별다른 설정없이 this.setState를 두 번 사용하면 동일한 코드를 작성해도 숫자가 1씩 더해진다.
+
+ 
+
+이에 대한 해결책은 this.setState를 사용할 때 객체 대신에 함수를 인자로 넣어주는 것이다. 이는 다음과 같은 형식을 통해 사용할 수 있다.
+
+```
+this.setState((prevState, props) => {
+	return {
+    	// 업데이트 내용
+    }
+})
+```
+
+이 때, prevState는 기존 상태를 의미하고 props는 현재 지니고 있는 props를 가리킨다. 이를 사용해 Counter 컴포넌트를 수정해보자.
+
+```
+<button
+  onClick={() => {
+    this.setState((prevState) => {
+      return {
+        number: prevState.number + 1
+      };
+    });
+
+    this.setState(prevState => ({
+      number: prevState.number + 1
+    }));
+  }}
+>
+  +1
+</button>
+```
+
+이제 브라우저에서 버튼을 누른다면 숫자가 2씩 올라가는 것을 확인할 수 있다.
+
+ 
+
+#### [**this.setState가 끝난 후 특정 작업 실행하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#this-setState%EA%B-%--%--%EB%--%-D%EB%--%-C%--%ED%-B%--%--%ED%-A%B-%EC%A-%--%--%EC%-E%--%EC%--%--%--%EC%-B%A-%ED%--%--%ED%--%--%EA%B-%B-)
+
+setState를 사용하여 값을 업데이트 한 후, 특정 작업을 수행하고 싶다면 두 번째 파라미터로 콜백함수를 등록하면 된다.
+
+```
+render() {
+    const { number } = this.state;    
+
+    return (
+      <div>
+        <h1>{number}</h1>
+        <button
+          onClick={() => {
+            this.setState(
+              { number: number + 1 },
+              // 두 번째 파라미터
+              () => {
+              	console.log('setState 호출, 1 증가');
+              }
+            );
+          }}
+        >
+          +1
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+ 
+
+### [**함수 컴포넌트에서 useState 사용하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%ED%--%A-%EC%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%EC%--%-C%--useState%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+함수 컴포넌트도 useState를 사용하면 state를 사용할 수 있다. 이 과정에서 Hooks를 사용하게 되는데, 우선 useState만 알아보자.
+
+ 
+
+#### [**배열 비구조화 할당**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%EB%B-%B-%EC%--%B-%--%EB%B-%--%EA%B-%AC%EC%A-%B-%ED%--%--%--%ED%--%A-%EB%-B%B-)
+
+Hooks를 사용하기 이전에, 배열 비구조화 할당에 대해 알아야 한다.
+
+배열 비구조화 할당은 객체 비구조화 할당과 비슷한데, 배열 안에 있는 값을 쉽게 추출할 수 있도록 해주는 문법이다.
+
+ 
+
+만약 다음과 같은 코드가 있다고 하자.
+
+```
+const array = [1, 2];
+const one = array[0];
+const two = array[1];
+```
+
+이는 array 안에 있는 값을 one과 two에 담아 주는 코드이다. 이를 배열 비구조화 할당을 사용하면 다음과 같이 표현할 수 있다.
+
+```
+const array = [1, 2];
+const [one, two] = array;
+```
+
+ 
+
+#### [**useState 사용**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#useState%--%EC%--%AC%EC%-A%A-)
+
+useState를 사용하기에 앞서 새로운 컴포넌트인 Say 컴포넌트를 생성해보자.
+
+입장버튼과 퇴장버튼을 통해 각각 인사말을 출력해 볼 것이다.
+
+```
+import React, { useState } from 'react';
+
+const Say = () => {
+  const [message, setMessage] = useState('');
+  const onClickEnter = () => setMessage('안녕하세요');
+  const onClickLeave = () => setMessage('안녕히 가세요');
+
+  return (
+    <div>
+      <button onClick={onClickEnter}>입장</button>
+      <button onClick={onClickLeave}>퇴장</button>
+      <h1>{message}</h1>
+    </div>
+  );
+};
+
+export default Say;
+```
+
+useState 함수의 인자에는 상태의 초기값을 넣어준다. 클래스형 컴포넌트에서는 state 초기값을 객체 형태로 넣어주었지만, useState에서는 반드시 객체가 아니여도 상관없다.
+
+ 
+
+함수를 호출하면 배열이 반환되는데, 배열의 첫 번째 원소는 현재 상태이고, 두 번째 원소는 상태를 바꾸어 주는 함수를 의미한다. 이 함수를 Setter 함수라고 부른다. 현재는 message와 setMessage로 이름이 설정되어 있지만, 이름은 자유롭게 변경할 수 있다.
+
+ 
+
+#### [**여러개의 useState 사용하기**](https://kimcookie-lab.tistory.com/entry/state?category=1047913#%EC%--%AC%EB%-F%AC%EA%B-%-C%EC%-D%--%--useState%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+useState는 여러 번 사용해도 문제가 발생하지 않는다. 이번에는 버튼을 클릭해 글씨의 색상을 변경해보자.
+
+```
+import React, { useState } from 'react';
+
+const Say = () => {
+  const [message, setMessage] = useState('');
+  const onClickEnter = () => setMessage('안녕하세요');
+  const onClickLeave = () => setMessage('안녕히 가세요');
+
+  const [color, setColor] = useState('black');
+
+  return (
+    <div>
+      <button onClick={onClickEnter}>입장</button>
+      <button onClick={onClickLeave}>퇴장</button>
+      <h1 style={{ color }}>{message}</h1>
+      <button 
+        style={{ color: 'red' }}
+        onClick={() => setColor('red')}
+      >
+      Red
+      </button>
+    </div>
+  );
+};
+
+export default Say;
+```
+
+기존 message 에 style을 추가하여 "Red"버튼을 클릭하면 빨간색으로 글씨색이 변환되게 만들어주었다. 같은 방식으로 다른 색깔로 변경이 가능하다.
+
+
+
+## 22.01.14 (목)
+
+### 이벤트 핸들링
+
+사용자가 웹 브라우저에서 DOM 요소들과 상호 작용하는 것을 이벤트(event)라고 한다. 다음과 같은 코드를 HTML 파일로 저장하여 웹 브라우저로 실행시켜 보면 Click me 버튼이 생성될 것이다.
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <button onClick="alert('executed')">
+    Click me
+  </button>
+</body>
+</html>
+```
+
+버튼에 설정된 onClick 이벤트를 통해 " " 사이에 있는 자바스크립트를 실행하도록 코드를 작성한다.
+
+
+
+### **이벤트 시스템**
+
+state 포스트에서 작성한 버튼 코드를 다시 한 번 살펴보자.
+
+```
+import React, { useState } from 'react';
+
+const Say = () => {
+  const [message, setMessage] = useState('');
+  const onClickEnter = () => setMessage('안녕하세요!');
+  const onClickLeave = () => setMessage('안녕히 가세요.');
+
+  const [color, setColor] = useState('black');
+
+  return (
+    <div>
+      <button onClick={onClickEnter}>입장</button>
+      <button onClick={onClickLeave}>퇴장</button>
+      <h1 style={{ color }}>{message}</h1>
+
+      <button
+        style={{ color : 'Black' }}
+        onClick={() => setColor('Black')}
+      >
+        Black
+      </button>
+      <button
+        style={{ color : 'red' }}
+        onClick={() => setColor('red')}
+      >
+        Red
+      </button>
+    </div>
+  );
+}
+
+export default Say;
+```
+
+
+
+#### **이벤트를 사용할 때 주의 사항**
+
+\1. 이벤트 이름은 카멜 표기법으로 작성한다.
+
+HTML 에서의 onclick은 리액트에서 onClick으로 작성해야 한다.
+
+
+
+\2. 이벤트에 실행할 함수 형태의 값을 전달한다.
+
+HTML 에서는 " " 안에 실행할 코드를 넣었지만, 리액트에서는 함수 형태의 객체를 전달한다. 위 코드에서 버튼에서도 화살표 함수 문법으로 함수를 만들어 전달한 것을 볼 수 있다.
+
+
+
+\3. DOM 요소에만 이벤트를 설정할 수 있다.
+
+div, button, input, form 등의 DOM 요소에는 이벤트를 설정할 수 있지만, 내가 직접 만든 컴포넌트에는 이벤트를 자체적으로 설정할 수 없다.
+
+
+
+### **onChange 이벤트**
+
+input 요소를 렌더링하는 코드와 해당 요소에 onChange 이벤트를 설정하는 코드를 작성해보자.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="message"
+          placeholder="아무거나 입력해 보세요"
+          onChange={
+            (e) => {
+              console.log(e)
+            }
+          }
+        >
+        </input>
+      </div>
+    );
+  }
+}
+
+export default EventPractice;
+```
+
+개발자 도구를 키고 input 에 아무값이나 입력하면 콘솔에 e 객체가 기록되는 것을 확인할 수 있다. 이 e 객체는 SyntheticEvent로 웹 브라우저의 네이티브 이벤트를 감싸는 객체이다.
+
+
+
+SyntheticEvent는 네이티브 이벤트와 달리 이벤트가 끝나고 나면 이벤트가 초기화되므로 정보를 참조할 수 없다. 따라서 비동기적으로 이벤트 객체를 참조할 일이 있다면 e.persist( ) 함수를 호출해 주어야 한다.
+
+
+
+예를 들어 onChange 이벤트가 발생할 때, 앞으로 변할 인풋 값인 e.target.value를 콘솔에 기록해보자.
+
+```
+onChange={
+  (e) => {
+    console.log(e.target.value);
+  }
+}
+```
+
+코드를 위와 같이 수정하면 값이 바뀔 때마다 바뀌는 값이 콘솔에 기록되는 것을 확인할 수 있다.
+
+
+
+## 22.01.14(금)
+
+### ref
+
+일반 HTML에서 DOM 요소에 이름을 달 때는 주로 id를 사용한다. 특정 DOM 요소에 id를 달면 CSS 에서 특정 id에 특정 스타일을 적용하거나 자바스크립트에서 해당 id를 가진 요소를 찾아서 작업할 수 있다.
+
+ 
+
+이렇게 HTML에서 id를 사용하여 DOM에 이름을 다는 것처럼 리액트 프로젝트 내부에서 DOM에 이름을 다는 방법이 바로 ref 개념이다.
+
+ 
+
+### [**ref를 사용하는 상황**](https://kimcookie-lab.tistory.com/entry/ref#ref%EB%A-%BC%--%EC%--%AC%EC%-A%A-%ED%--%--%EB%-A%--%--%EC%--%--%ED%--%A-)
+
+우선 ref는 어떤 상황에 사용해야 하는지 짚고 넘어가야 한다. 특정 DOM에 작업을 해야 할 때에 ref를 사용한다고 하였는데, 정확히 어떤 작업을 할 때 ref를 사용해야 할까?
+
+ 
+
+그것은 DOM을 반드시 직접적으로 건드려야 할 때이다. 좀 더 감을 잡기 위해 새로운 컴포넌트를 생성해보자.
+
+ 
+
+**Validation.css**
+
+```
+.success {
+  background-color: lightgreen;
+}
+.failure {
+  background-color: lightcoral;
+}
+```
+
+**Validation.js**
+
+```
+import React, { Component } from 'react';
+import './Validation.css';
+
+class Validation extends Component {
+  state = {
+    password: '',
+    clicked: false,
+    validated: false,
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  handleButtonClick = (e) => {
+    this.setState({
+      clicked: true,
+      validated: this.state.password === '0000'
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type='password'
+          value={this.state.password}
+          onChange={this.handleChange}
+          className={this.state.clicked ? 
+            (this.state.validated ? 'success' : 'failure')
+            :
+            ''
+          }
+        >
+        </input>
+        <button
+          onClick={this.handleButtonClick}
+        >
+          확인
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Validation;
+```
+
+위 코드를 보면, input에서 onChange 이벤트가 발생하면 handleChange를 호출하여 state에 저장되어 있는 password의 값을 업데이트 하였다.
+
+button에서 onClick 이벤트가 발생하면 handleButtonClick을 통해 clicked 값을 참으로 설정하였고, validated 검증을 실시한다.
+
+따라서, input에 값을 입력한 후 버튼을 클릭하면 검증 결과에 따라 success, failure에 따라 배경색상이 변경되게 된다.
+
+ 
+
+#### [**DOM을 꼭 사용해야 하는 상황**](https://kimcookie-lab.tistory.com/entry/ref#DOM%EC%-D%--%--%EA%BC%AD%--%EC%--%AC%EC%-A%A-%ED%--%B-%EC%--%BC%--%ED%--%--%EB%-A%--%--%EC%--%--%ED%--%A-)
+
+지금까지 구현한 코드에서는 state를 사용하여 기능을 구현했지만, 가끔 state만으로 해결할 수 없는 기능이 존재한다.
+
+- 특정 input에 포거스 주기
+- 스크롤 박스 조작하기
+- Canvas 요소에 그림 그리기 등
+
+이러한 경우에는 어쩔 수 없이 DOM에 직접적으로 접근해야 하는데, 이를 위해 ref를 사용하는 것이다.
+
+ 
+
+### [**ref 사용**](https://kimcookie-lab.tistory.com/entry/ref#ref%--%EC%--%AC%EC%-A%A-)
+
+#### [**콜백 함수를 통한 ref 설정**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BD%-C%EB%B-%B-%--%ED%--%A-%EC%--%--%EB%A-%BC%--%ED%--%B-%ED%--%-C%--ref%--%EC%--%A-%EC%A-%--)
+
+ref를 만드는 가장 기본적인 방법은 콜백 함수를 사용하는 것이다. ref를 달고자 하는 요소에 ref라는 콜백 함수를 props로 전달해 주면된다. 이 콜백 함수는 ref 값을 파라미터로 전달받게된다.
+
+```
+<input ref={(ref) => {this.input=ref}} />
+```
+
+위 코드에서 this.input은 input 요소의 DOM을 가리키게 된다. ref의 이름은 원하는 것으로 자유롭게 작성할 수 있다. this.myInput = ref 처럼 자유롭게 지정할 수 있다.
+
+ 
+
+#### [**createRef를 통한 ref 설정**](https://kimcookie-lab.tistory.com/entry/ref#createRef%EB%A-%BC%--%ED%--%B-%ED%--%-C%--ref%--%EC%--%A-%EC%A-%--)
+
+ref를 만드는 또 다른 방법은 리액트에 내장되어 있는 createRef라는 함수를 사용하는 것이다.
+
+```
+class RefSample extends Component {
+  input = React.createRef();
+
+  handleFocus = () => {
+    this.input.current.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input ref={this.input}></input>
+      </div>
+    );
+  }
+}
+```
+
+createRef를 사용하여 ref를 만들려면 우선 컴포넌트 내부에서 멤버 변수로 React.createRef() 를 담아주어야 한다. 그리고 ref를 달고자 하는 요소에 ref props로 넣어 주면 ref 설정이 완료된다.
+
+ 
+
+이후, ref를 설정해 준 DOM에 접근하려면 this.input.current를 조회하면 된다.
+
+ 
+
+#### [**적용하기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%A-%--%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+앞서 작성한 Validation 컴포넌트는 검증 버튼을 클릭하면 포커스가 버튼으로 넘어가면서 인풋 요소의 텍스트 커서가 보이지 않게 된다. 버튼을 눌렀을 때, 자동으로 포커스가 input 요소로 옮겨가도록 변경해보자.
+
+```
+...
+  handleButtonClick = (e) => {
+    this.setState({
+      ...
+    });
+    this.input.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          ref={(ref) => this.input=ref}
+          ...
+        >
+        ...
+```
+
+input 요소에 this.input 이라는 ref를 달아주었고, handleButtonClick 함수에서 this.input.focus()를 통해 this.input으로 포커스가 넘어가도록 설정해주었다.
+
+ 
+
+이제 값을 입력한 후, 버튼을 누르면 자동으로 input 요소로 포커스가 옮겨가게 되고, 커서가 깜빡이는 것을 볼 수 있다.
+
+ 
+
+### [**컴포넌트에 ref 달기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--ref%--%EB%-B%AC%EA%B-%B-)
+
+리액트에서는 컴포넌트에도 ref를 달 수 있다. 이 방법은 주로 컴포넌트 내부에 있는 DOM을 컴포넌트 외부에서 사용할 때 사용하게 된다.
+
+ 
+
+이번에는 스크롤 박스가 있는 컴포넌트를 생성해 확인해 보도록 하자.
+
+```
+import React, { Component } from 'react';
+
+class ScrollBox extends Component {
+  render() {
+    const style = {
+      border: '1px solid black',
+      height: '300px',
+      width: '300px',
+      overflow: 'auto',
+      position: 'relative',
+    };
+    
+    const innerStyle = {
+      width: '100%',
+      height: '650px',
+      background: 'linear-gradient(white, black)',
+    };
+
+    return (
+      <div
+        style={style}
+        ref={(ref) => this.box=ref}
+      >
+        <div style={innerStyle}></div>  
+      </div>
+    );
+  }
+}
+
+export default ScrollBox;
+```
+
+ 
+
+#### [**컴포넌트에 메서드 생성**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EC%--%-D%EC%--%B-)
+
+컴포넌트에 스크롤바를 맨 아래쪽으로 내리는 메서드를 생성해보자. 이를 구현하기 위해서는 DOM 노드가 가진 다음 값들을 사용하게 된다.
+
+- scrollTop: 세로 스크롤바 위치
+- scrollHeight: 스크롤이 있는 박스 안의 div 높이
+- clientHeight: 스크롤이 있는 박스의 높이
+
+```
+import React, { Component } from 'react';
+
+class ScrollBox extends Component {
+  scrollToBottom = () => {
+    const { scrollHeight, clientHeight } = this.box;
+    this.box.scrollTop = scrollHeight - clientHeight;
+  }
+  ...
+}
+
+export default ScrollBox;
+```
+
+ 
+
+#### [**컴포넌트에 ref 달고 내부 메서드 사용하기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--ref%--%EB%-B%AC%EA%B-%A-%--%EB%--%B-%EB%B-%--%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+그럼 이제 App 컴포넌트에서 ScrollBox에 ref를 달고 버튼을 만들어 누르면, ScrollBox 컴포넌트의 scrollToBottom 메서드를 실행하도록 만들어보자.
+
+```
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <ScrollBox ref={(ref) => this.scrollBox=ref}/>
+        <button
+          onClick={() => this.scrollBox.scrollToBottom()}
+        >
+          밑으로 이동
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+button을 클릭할 시 this.scrollBox가 가리키는 ScrollBox 컴포넌트를 바라보게 되고, 그 안에 있는 scrollToBottom을 실행하게 되는 것이다.

@@ -76,7 +76,7 @@
 ### mongodb
 
 1. 설정에 삽질을 너무함.
-2.  아직도 해결을 못하고 있음.
+2. 아직도 해결을 못하고 있음.
 3. 하도 안되서 로컬로 할려고했는데, 이것도 맘대로 잘안되네요.
 4. 후순위로 밀려야하나 고민중
 
@@ -145,3 +145,33 @@
 
 - 팔로잉, 팔로우 나눌거임?
 - 팔로잉수 보여줄건지??
+
+
+
+# 01-17
+
+### Spring security
+
+1. 좋은 아키택처로 유인.
+
+   - spring security는 좋은 아키택처로 유인하는 느낌을 받았다
+
+     - userNameAndPasswordAuthenticationToken 발급.
+
+     - UserNamePasswordToken을 AuthenticaitionManager에 전달
+
+     - manager가 provider에게 전달
+
+     - UserDetailsService로 조회할 아이디를 전달
+
+     - 조회후, 역순으로 다시감.
+
+     - 인증된 토큰은 SecurityContextHolder에 저장 한다고 함.
+
+       ​
+
+   2. 궁금한 점
+
+      - 세션저장과 securityContextHolder 저장은 차이가있는지 궁금함.
+
+        ​	- 아마 securityConextextHolder는 인증다음부터는 캐싱 되는 것같긴한데 정확하진않음.

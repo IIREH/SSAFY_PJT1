@@ -163,6 +163,77 @@ function Welcome(props) {
 
 
 
+### 📙 01/17 Mon
+
+# Git 이력 옮기는 방법
+
+1. 원본 저장소의 모든 이력 복사
+
+```bash
+git clone --mirror [원본저장소 경로]
+```
+
+
+
+### 💡 **잠.깐.!!**  
+
+### 오류가 나서 찾아봤더니 mirror대신 bare를 사용했고, 오류를 해결할 수 있었다!!
+
+
+
+1. clone한 폴더로 이동
+
+```bash
+cd [원본 저장소 이름].git
+```
+
+1. 이동할 원격 저장소 경로 지정
+
+```bash
+git remote set-url --push origin [이동할 저장소 경로]
+```
+
+1. 원격 저장소로 push
+
+```bash
+git push --mirror
+```
+
+------
+
+
+
+# Git Push 취소하는 방법
+
+- 일반적으로 push를 취소하려면 아래와 같이 입력하면 된다.
+
+```bash
+git reset HEAD^
+```
+
+- 1개를 취소할 때는, HEAD~1, 2개는 HEAD~2와 같이 최근 푸쉬로부터 취소할 개수를 입력해 줄 수도 있다.
+
+```bash
+git reset HEAD~2
+```
+
+B.U.T. 그러나!!
+
+First Commit만은 쉽게 취소가 되지 않는다!! 그럴때 쓰는 방법!!
+
+```bash
+git update-ref -d HEAD
+git rm --cached -r .
+```
+
+를 입력해주고
+
+```bash
+git push -f origin master
+```
+
+를 하면 First Commit 마저 지운 깨끗한 상태를 만들 수 있다.
+
 
 
 

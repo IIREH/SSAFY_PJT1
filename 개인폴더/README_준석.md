@@ -1451,3 +1451,584 @@ class App extends Component {
 ```
 
 button을 클릭할 시 this.scrollBox가 가리키는 ScrollBox 컴포넌트를 바라보게 되고, 그 안에 있는 scrollToBottom을 실행하게 되는 것이다.
+
+
+
+## 22.01.17(월)
+
+### 이벤트 핸들링
+
+사용자가 웹 브라우저에서 DOM 요소들과 상호 작용하는 것을 이벤트(event)라고 한다. 다음과 같은 코드를 HTML 파일로 저장하여 웹 브라우저로 실행시켜 보면 Click me 버튼이 생성될 것이다.
+
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>JS Bin</title>
+</head>
+<body>
+  <button onClick="alert('executed')">
+    Click me
+  </button>
+</body>
+</html>
+```
+
+버튼에 설정된 onClick 이벤트를 통해 " " 사이에 있는 자바스크립트를 실행하도록 코드를 작성한다.
+
+ 
+
+### [**이벤트 시스템**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#%EC%-D%B-%EB%B-%A-%ED%-A%B-%--%EC%-B%-C%EC%-A%A-%ED%--%-C)
+
+state 포스트에서 작성한 버튼 코드를 다시 한 번 살펴보자.
+
+```
+import React, { useState } from 'react';
+
+const Say = () => {
+  const [message, setMessage] = useState('');
+  const onClickEnter = () => setMessage('안녕하세요!');
+  const onClickLeave = () => setMessage('안녕히 가세요.');
+
+  const [color, setColor] = useState('black');
+
+  return (
+    <div>
+      <button onClick={onClickEnter}>입장</button>
+      <button onClick={onClickLeave}>퇴장</button>
+      <h1 style={{ color }}>{message}</h1>
+
+      <button
+        style={{ color : 'Black' }}
+        onClick={() => setColor('Black')}
+      >
+        Black
+      </button>
+      <button
+        style={{ color : 'red' }}
+        onClick={() => setColor('red')}
+      >
+        Red
+      </button>
+    </div>
+  );
+}
+
+export default Say;
+```
+
+ 
+
+#### [**이벤트를 사용할 때 주의 사항**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#%EC%-D%B-%EB%B-%A-%ED%-A%B-%EB%A-%BC%--%EC%--%AC%EC%-A%A-%ED%--%A-%--%EB%--%-C%--%EC%A-%BC%EC%-D%--%--%EC%--%AC%ED%--%AD)
+
+\1. 이벤트 이름은 카멜 표기법으로 작성한다.
+
+HTML 에서의 onclick은 리액트에서 onClick으로 작성해야 한다.
+
+ 
+
+\2. 이벤트에 실행할 함수 형태의 값을 전달한다.
+
+HTML 에서는 " " 안에 실행할 코드를 넣었지만, 리액트에서는 함수 형태의 객체를 전달한다. 위 코드에서 버튼에서도 화살표 함수 문법으로 함수를 만들어 전달한 것을 볼 수 있다.
+
+ 
+
+\3. DOM 요소에만 이벤트를 설정할 수 있다.
+
+div, button, input, form 등의 DOM 요소에는 이벤트를 설정할 수 있지만, 내가 직접 만든 컴포넌트에는 이벤트를 자체적으로 설정할 수 없다.
+
+ 
+
+### [**onChange 이벤트**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#onChange%--%EC%-D%B-%EB%B-%A-%ED%-A%B-)
+
+input 요소를 렌더링하는 코드와 해당 요소에 onChange 이벤트를 설정하는 코드를 작성해보자.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="message"
+          placeholder="아무거나 입력해 보세요"
+          onChange={
+            (e) => {
+              console.log(e)
+            }
+          }
+        >
+        </input>
+      </div>
+    );
+  }
+}
+
+export default EventPractice;
+```
+
+개발자 도구를 키고 input 에 아무값이나 입력하면 콘솔에 e 객체가 기록되는 것을 확인할 수 있다. 이 e 객체는 SyntheticEvent로 웹 브라우저의 네이티브 이벤트를 감싸는 객체이다.
+
+ 
+
+SyntheticEvent는 네이티브 이벤트와 달리 이벤트가 끝나고 나면 이벤트가 초기화되므로 정보를 참조할 수 없다. 따라서 비동기적으로 이벤트 객체를 참조할 일이 있다면 e.persist( ) 함수를 호출해 주어야 한다.
+
+ 
+
+예를 들어 onChange 이벤트가 발생할 때, 앞으로 변할 인풋 값인 e.target.value를 콘솔에 기록해보자.
+
+```
+onChange={
+  (e) => {
+    console.log(e.target.value);
+  }
+}
+```
+
+코드를 위와 같이 수정하면 값이 바뀔 때마다 바뀌는 값이 콘솔에 기록되는 것을 확인할 수 있다.
+
+ 
+
+#### [**state 에 input 값 담기**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#state%--%EC%--%--%--input%--%EA%B-%--%--%EB%-B%B-%EA%B-%B-)
+
+이번에는 이전에 배운 state에 input 값을 담아보자. 생성자 메서드인 constructor에서 state 초기값을 설정하고, 이벤트 핸들링 내부에서 this.setState 메서드를 호출하여 state를 업데이트 하면 된다.
+
+```
+class EventPractice extends Component {
+  state = {
+    message: '',
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="message"
+          placeholder="아무거나 입력해 보세요"
+          value={this.state.message}
+          onChange={
+            (e) => {
+              this.setState({
+                message: e.target.value
+              })
+            }
+          }
+        >
+        </input>
+      </div>
+    );
+  }
+}
+```
+
+인풋에 아무것이나 입력하였을 때, 오류가 발생하지 않고 제대로 입력이 가능하다면 state에 input 값을 잘 저장했다고 볼 수 있다.
+
+ 
+
+그렇다면 정말로 내가 입력한 값이 state에 잘 들어갔는지 확인해보자. 버튼을 하나 생성하여 버튼을 클릭 할 시 현재 state에 저장되어있는 message 값을 출력하도록 만들어보자.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  state = {
+    message: '',
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          ...
+        >
+        </input>
+        <button
+          onClick={
+            (e) => {
+              alert(this.state.message);
+              this.setState({
+                message: '',
+              });
+            }
+          }
+        >
+          확인
+        </button>
+      </div>
+    );
+  }
+}
+
+export default EventPractice;
+```
+
+ 
+
+### [**임의 메서드 만들기**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#%EC%-E%--%EC%-D%--%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EB%A-%-C%EB%--%A-%EA%B-%B-)
+
+앞서 배운 주의 사항에서 "이벤트에 실행할 함수 형태의 값을 전달한다"라고 했었다. 그렇기 때문에 지금까지 이벤트를 처리할 때 렌더링을 하는 동시에 함수를 만들어서 전달해주었다.
+
+그런데, 이 방법 대신 함수를 미리 준비하는 방법도 존재한다. 성능상으로는 차이가 크게 없지만, 가독성은 훨씬 높아진다.
+
+ 
+
+위에서 작성한 코드에서 onChange와 onClick에 전달한 함수를 밖으로 빼내서 컴포넌트 임의 메서드를 생성해보자.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  state = {
+    message: '',
+  }
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleChange(e) {
+    this.setState({
+      message: e.target.value,
+    });
+  }
+
+  handleClick(e) {
+    alert(this.state.message);
+    this.setState({
+      message: '',
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="message"
+          placeholder="아무거나 입력해 보세요"
+          value={this.state.message}
+          onChange={this.handleChange}
+        >
+        </input>
+        <button
+          onClick={this.handleClick}
+        >
+          확인
+        </button>
+      </div>
+    );
+  }
+}
+
+export default EventPractice;
+```
+
+함수가 호출될 때 this는 호출부에 따라 결정되므로, 클래스의 임의 메서드가 특정 HTML 요소의 이벤트로 등록되는 과정에서 메서드와 this의 관계가 끊어지게 된다. 이 때문에 임의 메서드가 이벤트로 등록되어도 this를 컴포넌트 자신으로 제대로 가리키기 위해서는 메서드를 this와 바인딩하는 작업이 필요하다.
+
+ 
+
+위 코드에서는 constructor 함수에서 함수를 바인딩하는 작업이 이루어지고 있다.
+
+ 
+
+#### [**Property Initializer Syntax를 사용한 메서드 작성**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#Property%--Initializer%--Syntax%EB%A-%BC%--%EC%--%AC%EC%-A%A-%ED%--%-C%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EC%-E%--%EC%--%B-)
+
+메서드 바인딩은 생성자 메서드에서 하는 것이 정석이다. 하지만 새 메서드를 만들 때마다 constructor도 수정해야 하는 불편함이 존재한다. 이러한 작업을 바벨의 transform-class-properties 문법을 사용하여 화살표 함수 형태로 메서드를 정의하면 간단하게 바꿀 수 있다.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  state = {
+    message: '',
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      message: e.target.value,
+    });
+  }
+
+  handleClick = (e) => {
+    alert(this.state.message);
+    this.setState({
+      message: '',
+    });
+  }
+
+  render() {
+  	...
+}
+
+export default EventPractice;
+```
+
+이처럼 constructor를 작성하지 않고 훨씬 깔끔하게 작성할 수 있다!
+
+ 
+
+### [**input 여러 개 사용하기**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#input%--%EC%--%AC%EB%-F%AC%--%EA%B-%-C%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+input 값을 여러 개 만들어야 할 때 메서드를 여러 개 만드는 것 또한 방법이 될 수 있다. 하지만 event 객체를 활용하면 더 쉽게 처리가 가능하다.
+
+ 
+
+e.target.name 값을 사용하면 이벤트를 실행하였을 때 해당 이벤트와 묶여 있는 name 값을 가리키게 된다. 이를 이용해 각각의 상황에 맞춰서 메서드를 사용할 수 있다.
+
+ 
+
+현재 작성된 코드에서 message 말고 username 이라는 state를 추가해보자. 이 값도 onChange를 통해 state에 저장할 것이다.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  state = {
+    username: '',
+    message: '',
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleClick = (e) => {
+    alert(this.state.username + ': ' + this.state.message);
+    this.setState({
+      message: '',
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="username"
+          placeholder='이름을 입력하세요'
+          value={this.state.username}
+          onChange={this.handleChange}
+        >
+        </input>
+        <input
+          type="text"
+          name="message"
+          placeholder="아무거나 입력해 보세요"
+          value={this.state.message}
+          onChange={this.handleChange}
+        >
+        </input>
+        <button
+          onClick={this.handleClick}
+        >
+          확인
+        </button>
+      </div>
+    );
+  }
+}
+
+export default EventPractice;
+```
+
+여기서 handleChange 부분의 객체 key 값이 [ ] 로 감싸져 있는 것을 확인할 수 있다. 객체 안에서 key를 [ ] 로 감싸면 그 안에 넣은 레퍼런스가 가리키는 실체 값이 key 값으로 사용된다.
+
+ 
+
+### [**onKeyPress 이벤트 핸들링**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#onKeyPress%--%EC%-D%B-%EB%B-%A-%ED%-A%B-%--%ED%--%B-%EB%--%A-%EB%A-%--)
+
+이번에는 키를 눌렀을 때 발생하는 이벤트를 처리하는 방법에 대해 알아보자. 여기서는 comment 인풋에서 Enter 키를 눌렀을 때 handleClick 메서드를 호출하도록 만들 것이다.
+
+```
+import React, { Component } from 'react';
+
+class EventPractice extends Component {
+  state = {
+    username: '',
+    message: '',
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  }
+
+  handleClick = (e) => {
+    alert(this.state.username + ': ' + this.state.message);
+    this.setState({
+      message: '',
+    });
+  }
+
+  handleKeyPress = (e) => {
+    if(e.key == 'Enter') {
+      this.handleClick();
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type="text"
+          name="username"
+          placeholder='이름을 입력하세요'
+          value={this.state.username}
+          onChange={this.handleChange}
+        >
+        </input>
+        <input
+          type="text"
+          name="message"
+          placeholder="아무거나 입력해 보세요"
+          value={this.state.message}
+          onChange={this.handleChange}
+          onKeyPress={this.handleKeyPress}
+        >
+        </input>
+        <button
+          onClick={this.handleClick}
+        >
+          확인
+        </button>
+      </div>
+    );
+  }
+}
+
+export default EventPractice;
+```
+
+위 코드에서 추가된 handleKeyPress 메서드를 살펴보면, 두 번째 인풋에서 키를 입력하였는데 그 값이 "Enter" 키 라면 handleClick을 수행하도록 되어있다.
+
+ 
+
+### [**함수 컴포넌트로 구현하기**](https://kimcookie-lab.tistory.com/entry/%EC%9D%B4%EB%B2%A4%ED%8A%B8-%ED%95%B8%EB%93%A4%EB%A7%81#%ED%--%A-%EC%--%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EB%A-%-C%--%EA%B-%AC%ED%--%--%ED%--%--%EA%B-%B-)
+
+그럼 지금까지 작업한 내용을 함수 컴포넌트로 구현해 보자.
+
+```
+import React, { useState } from 'react';
+
+const EventPractice = () => {
+  const [username, setUsername] = useState('');
+  const [message, setMessage] = useState('');
+  const onChangeUsername = e => setUsername(e.target.value);
+  const onChangeMessage = e => setMessage(e.target.value);
+
+  const onClick = () => {
+    alert(username + ': ' + message);
+    setUsername('');
+    setMessage('');
+  };
+
+  const onKeyPress = e => {
+    if (e.key === 'Enter') {
+      onClick();
+    }
+  };
+
+  return (
+    <div>
+      <input
+        type='text'
+        name='username'
+        placeholder='이름을 입력하세요'
+        value={username}
+        onChange={onChangeUsername}
+      >
+      </input>
+      <input
+        type='text'
+        name='message'
+        placeholder='메시지를 입력하세요'
+        value={message}
+        onChange={onChangeMessage}
+        onKeyPress={onKeyPress}
+      >
+      </input>
+      <button
+        onClick={onClick}
+      >
+        확인
+      </button>
+    </div>
+  )
+}
+
+export default EventPractice;
+```
+
+자세히보면 위 코드에서는 e.target.name을 활용하지 않고 onChange 관련 함수를 따로 작성하여 만들었다. 이처럼 인풋이 두 개밖에 없는 경우에는 상관이 없겠지만, 인풋의 개수가 많아질 경우 e.target.name을 활용하는 것이 훨씬 좋을 것이다.
+
+ 
+
+이번에는 useState를 통해 사용하는 상태에 문자열이 아닌 객체를 넣어보도록 하자.
+
+```
+import React, { useState } from 'react';
+
+const EventPractice = () => {
+  // 기존 두 개의 인풋을 form으로 묶기
+  const [form, setForm] = useState({
+    username: '',
+    message: '',
+  });
+  const { username, message } = form;
+
+  const onChange = e => {
+    const changedForm = {
+      // 1. 기존의 form 내용을 복사해서 가져오기
+      ...form,
+
+      // 2. 원하는 값(e.target.name)을 덮어 씌우기
+      [e.target.name]: e.target.value,
+    };
+    setForm(changedForm);
+  }
+
+  const onClick = () => {
+    alert(username + ': ' + message);
+    setForm({
+      username: '',
+      message: '',
+    });
+  };
+
+  const onKeyPress = e => {
+    if (e.key === 'Enter') {
+      onClick();
+    }
+  };
+
+  return (
+    <div>
+      <input
+        ...
+        onChange={onChange}
+      >
+      </input>
+      <input
+        ...
+        onChange={onChange}
+        onKeyPress={onKeyPress}
+      >
+      </input>
+      ...
+    </div>
+  )
+}
+
+export default EventPractice;
+```
+

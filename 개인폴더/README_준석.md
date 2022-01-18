@@ -2032,3 +2032,464 @@ const EventPractice = () => {
 export default EventPractice;
 ```
 
+
+
+## 22.01.18(화)
+
+### ref
+
+일반 HTML에서 DOM 요소에 이름을 달 때는 주로 id를 사용한다. 특정 DOM 요소에 id를 달면 CSS 에서 특정 id에 특정 스타일을 적용하거나 자바스크립트에서 해당 id를 가진 요소를 찾아서 작업할 수 있다.
+
+ 
+
+이렇게 HTML에서 id를 사용하여 DOM에 이름을 다는 것처럼 리액트 프로젝트 내부에서 DOM에 이름을 다는 방법이 바로 ref 개념이다.
+
+ 
+
+### [**ref를 사용하는 상황**](https://kimcookie-lab.tistory.com/entry/ref#ref%EB%A-%BC%--%EC%--%AC%EC%-A%A-%ED%--%--%EB%-A%--%--%EC%--%--%ED%--%A-)
+
+우선 ref는 어떤 상황에 사용해야 하는지 짚고 넘어가야 한다. 특정 DOM에 작업을 해야 할 때에 ref를 사용한다고 하였는데, 정확히 어떤 작업을 할 때 ref를 사용해야 할까?
+
+ 
+
+그것은 DOM을 반드시 직접적으로 건드려야 할 때이다. 좀 더 감을 잡기 위해 새로운 컴포넌트를 생성해보자.
+
+ 
+
+**Validation.css**
+
+```
+.success {
+  background-color: lightgreen;
+}
+.failure {
+  background-color: lightcoral;
+}
+```
+
+**Validation.js**
+
+```
+import React, { Component } from 'react';
+import './Validation.css';
+
+class Validation extends Component {
+  state = {
+    password: '',
+    clicked: false,
+    validated: false,
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      password: e.target.value,
+    });
+  }
+
+  handleButtonClick = (e) => {
+    this.setState({
+      clicked: true,
+      validated: this.state.password === '0000'
+    })
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          type='password'
+          value={this.state.password}
+          onChange={this.handleChange}
+          className={this.state.clicked ? 
+            (this.state.validated ? 'success' : 'failure')
+            :
+            ''
+          }
+        >
+        </input>
+        <button
+          onClick={this.handleButtonClick}
+        >
+          확인
+        </button>
+      </div>
+    );
+  }
+}
+
+export default Validation;
+```
+
+위 코드를 보면, input에서 onChange 이벤트가 발생하면 handleChange를 호출하여 state에 저장되어 있는 password의 값을 업데이트 하였다.
+
+button에서 onClick 이벤트가 발생하면 handleButtonClick을 통해 clicked 값을 참으로 설정하였고, validated 검증을 실시한다.
+
+따라서, input에 값을 입력한 후 버튼을 클릭하면 검증 결과에 따라 success, failure에 따라 배경색상이 변경되게 된다.
+
+ 
+
+#### [**DOM을 꼭 사용해야 하는 상황**](https://kimcookie-lab.tistory.com/entry/ref#DOM%EC%-D%--%--%EA%BC%AD%--%EC%--%AC%EC%-A%A-%ED%--%B-%EC%--%BC%--%ED%--%--%EB%-A%--%--%EC%--%--%ED%--%A-)
+
+지금까지 구현한 코드에서는 state를 사용하여 기능을 구현했지만, 가끔 state만으로 해결할 수 없는 기능이 존재한다.
+
+- 특정 input에 포거스 주기
+- 스크롤 박스 조작하기
+- Canvas 요소에 그림 그리기 등
+
+이러한 경우에는 어쩔 수 없이 DOM에 직접적으로 접근해야 하는데, 이를 위해 ref를 사용하는 것이다.
+
+ 
+
+### [**ref 사용**](https://kimcookie-lab.tistory.com/entry/ref#ref%--%EC%--%AC%EC%-A%A-)
+
+#### [**콜백 함수를 통한 ref 설정**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BD%-C%EB%B-%B-%--%ED%--%A-%EC%--%--%EB%A-%BC%--%ED%--%B-%ED%--%-C%--ref%--%EC%--%A-%EC%A-%--)
+
+ref를 만드는 가장 기본적인 방법은 콜백 함수를 사용하는 것이다. ref를 달고자 하는 요소에 ref라는 콜백 함수를 props로 전달해 주면된다. 이 콜백 함수는 ref 값을 파라미터로 전달받게된다.
+
+```
+<input ref={(ref) => {this.input=ref}} />
+```
+
+위 코드에서 this.input은 input 요소의 DOM을 가리키게 된다. ref의 이름은 원하는 것으로 자유롭게 작성할 수 있다. this.myInput = ref 처럼 자유롭게 지정할 수 있다.
+
+ 
+
+#### [**createRef를 통한 ref 설정**](https://kimcookie-lab.tistory.com/entry/ref#createRef%EB%A-%BC%--%ED%--%B-%ED%--%-C%--ref%--%EC%--%A-%EC%A-%--)
+
+ref를 만드는 또 다른 방법은 리액트에 내장되어 있는 createRef라는 함수를 사용하는 것이다.
+
+```
+class RefSample extends Component {
+  input = React.createRef();
+
+  handleFocus = () => {
+    this.input.current.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input ref={this.input}></input>
+      </div>
+    );
+  }
+}
+```
+
+createRef를 사용하여 ref를 만들려면 우선 컴포넌트 내부에서 멤버 변수로 React.createRef() 를 담아주어야 한다. 그리고 ref를 달고자 하는 요소에 ref props로 넣어 주면 ref 설정이 완료된다.
+
+ 
+
+이후, ref를 설정해 준 DOM에 접근하려면 this.input.current를 조회하면 된다.
+
+ 
+
+#### [**적용하기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%A-%--%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+앞서 작성한 Validation 컴포넌트는 검증 버튼을 클릭하면 포커스가 버튼으로 넘어가면서 인풋 요소의 텍스트 커서가 보이지 않게 된다. 버튼을 눌렀을 때, 자동으로 포커스가 input 요소로 옮겨가도록 변경해보자.
+
+```
+...
+  handleButtonClick = (e) => {
+    this.setState({
+      ...
+    });
+    this.input.focus();
+  }
+
+  render() {
+    return (
+      <div>
+        <input
+          ref={(ref) => this.input=ref}
+          ...
+        >
+        ...
+```
+
+input 요소에 this.input 이라는 ref를 달아주었고, handleButtonClick 함수에서 this.input.focus()를 통해 this.input으로 포커스가 넘어가도록 설정해주었다.
+
+ 
+
+이제 값을 입력한 후, 버튼을 누르면 자동으로 input 요소로 포커스가 옮겨가게 되고, 커서가 깜빡이는 것을 볼 수 있다.
+
+ 
+
+### [**컴포넌트에 ref 달기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--ref%--%EB%-B%AC%EA%B-%B-)
+
+리액트에서는 컴포넌트에도 ref를 달 수 있다. 이 방법은 주로 컴포넌트 내부에 있는 DOM을 컴포넌트 외부에서 사용할 때 사용하게 된다.
+
+ 
+
+이번에는 스크롤 박스가 있는 컴포넌트를 생성해 확인해 보도록 하자.
+
+```
+import React, { Component } from 'react';
+
+class ScrollBox extends Component {
+  render() {
+    const style = {
+      border: '1px solid black',
+      height: '300px',
+      width: '300px',
+      overflow: 'auto',
+      position: 'relative',
+    };
+    
+    const innerStyle = {
+      width: '100%',
+      height: '650px',
+      background: 'linear-gradient(white, black)',
+    };
+
+    return (
+      <div
+        style={style}
+        ref={(ref) => this.box=ref}
+      >
+        <div style={innerStyle}></div>  
+      </div>
+    );
+  }
+}
+
+export default ScrollBox;
+```
+
+ 
+
+#### [**컴포넌트에 메서드 생성**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EC%--%-D%EC%--%B-)
+
+컴포넌트에 스크롤바를 맨 아래쪽으로 내리는 메서드를 생성해보자. 이를 구현하기 위해서는 DOM 노드가 가진 다음 값들을 사용하게 된다.
+
+- scrollTop: 세로 스크롤바 위치
+- scrollHeight: 스크롤이 있는 박스 안의 div 높이
+- clientHeight: 스크롤이 있는 박스의 높이
+
+```
+import React, { Component } from 'react';
+
+class ScrollBox extends Component {
+  scrollToBottom = () => {
+    const { scrollHeight, clientHeight } = this.box;
+    this.box.scrollTop = scrollHeight - clientHeight;
+  }
+  ...
+}
+
+export default ScrollBox;
+```
+
+ 
+
+#### [**컴포넌트에 ref 달고 내부 메서드 사용하기**](https://kimcookie-lab.tistory.com/entry/ref#%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%EC%--%--%--ref%--%EB%-B%AC%EA%B-%A-%--%EB%--%B-%EB%B-%--%--%EB%A-%--%EC%--%-C%EB%--%-C%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+그럼 이제 App 컴포넌트에서 ScrollBox에 ref를 달고 버튼을 만들어 누르면, ScrollBox 컴포넌트의 scrollToBottom 메서드를 실행하도록 만들어보자.
+
+```
+class App extends Component {
+  render() {
+    return (
+      <div>
+        <ScrollBox ref={(ref) => this.scrollBox=ref}/>
+        <button
+          onClick={() => this.scrollBox.scrollToBottom()}
+        >
+          밑으로 이동
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+button을 클릭할 시 this.scrollBox가 가리키는 ScrollBox 컴포넌트를 바라보게 되고, 그 안에 있는 scrollToBottom을 실행하게 되는 것이다.
+
+
+
+### 컴포넌트 반복
+
+작업을 하다보면 반복되는 코드를 작성할 때가 있다. 코드가 작을 때는 상관없지만 좀 더 복잡해진다면 관리가 힘들어 질 것이다.
+
+ 
+
+이러한 반복적인 내용을 효율적으로 보여주고 관리하는 방법에 대해 알아보자.
+
+ 
+
+#### [**map() 함수**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5?category=1047913#map--%--%ED%--%A-%EC%--%--)
+
+배열 객체의 내장 함수인 map 함수는 파라미터로 전달된 함수를 사용해서 배열 내 각 요소를 원하는 규칙에 따라 변환한 후 그 결과로 새로운 배열을 생성한다.
+
+ 
+
+### [**데이터 배열을 컴포넌트 배열로 변환하기**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5?category=1047913#%EB%-D%B-%EC%-D%B-%ED%--%B-%--%EB%B-%B-%EC%--%B-%EC%-D%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%--%EB%B-%B-%EC%--%B-%EB%A-%-C%--%EB%B-%--%ED%--%--%ED%--%--%EA%B-%B-)
+
+기존 배열로 컴포넌트로 구성된 배열을 생성할 수 있다.
+
+```
+const Iteration = () => {
+  const names = ['사과', '바나나', '수박', '딸기'];
+  const nameList = names.map(name => <li>{name}</li>);
+  return <ul>{nameList}</ul>;
+}
+
+export default Iteration;
+```
+
+nameList를 보면 names에 map 함수를 적용하여 name 값들을 각각 li 태그에 넣어주는 작업을 수행하였다. 이를 통해 name에 있는 모든 요소들이 li 태그에 들어간 상태로 새로운 배열이 생성된다.
+
+ 
+
+하지만 브라우저를 열어서 개발자 도구를 열어보면 "key" prop이 없다는 경고 메시지를 확인할 수 있다.
+
+ 
+
+### [**key**](https://kimcookie-lab.tistory.com/entry/컴포넌트-반복?category=1047913#key)
+
+리액트에서 key는 컴포넌트 배열을 렌더링했을 때 어떤 원소에 변동이 있었는 지 알아내기 위해 사용한다. 유동적인 데이터를 다룰 때는 원소를 새로 생성할 수도 있고, 제거나 수정이 가능하다.
+
+이때 key가 존재하지 않다면, Virtual DOM을 비교하는 과정에서 리스트를 순차적으로 비교하면서 변화를 감지해야 한다. 하지만 key가 있다면 이 값을 이용해 어디에 어떤 변화가 일어났는지 더욱 빠르게 알아낼 수 있다.
+
+ 
+
+#### [**key 설정**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5?category=1047913#key%--%EC%--%A-%EC%A-%--)
+
+key 값을 설정할 때는 map 함수의 인자로 전달되는 함수 내부에서 컴포넌트 props를 설정하듯이 설정하면 된다. 이때, key 값은 언제나 유일해야 한다. 따라서 데이터가 가진 고유값을 key 값으로 설정해야 한다.
+
+ 
+
+나는 앞서 만들었던 컴포넌트에서 map 함수에 전달되는 콜백 함수의 인수인 index 값을 사용하여 key 값을 설정할 것이다.
+
+```
+const Iteration = () => {
+  const names = ['사과', '바나나', '수박', '딸기'];
+  const nameList = names.map((name, index) => <li key={index}>{name}</li>);
+  return <ul>{nameList}</ul>;
+}
+
+export default Iteration;
+```
+
+이제 개발자 도구를 확인해보면, 경고 메시지가 사라진 것을 확인할 수 있다. 하지만 지금은 불가피하게 index 값을 key 값으로 사용했지만, 배열이 변경될 때 효율적으로 리렌더링하지 못하기 때문에 index를 key로 사용하는 것은 추천하지 않는다.
+
+ 
+
+### [**응용해보기**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5?category=1047913#%EC%-D%--%EC%-A%A-%ED%--%B-%EB%B-%B-%EA%B-%B-)
+
+index를 key로 사용하면 리렌더링이 비효율적이라는 것을 알기 때문에, 새로운 항목을 추가할 때 사용할 고유 id를 사용해 보자.
+
+```
+import React, { useState } from "react";
+
+const Iteration = () => {
+  const [names, setNames] = useState([
+    { id: 1, text: '사과'},
+    { id: 2, text: '바나나'},
+    { id: 3, text: '수박'},
+    { id: 4, text: '딸기'},
+  ]);
+  const [inputText, setInputText] = useState('');
+  const [inputId, setInputId] = useState(5);
+
+  const nameList = names.map(name => <li key={name.id}>{name.text}</li>);
+  return <ul>{nameList}</ul>
+}
+
+export default Iteration;
+```
+
+이번에는 map 함수를 사용할 때 key 값을 index 대신 name.id 값으로 지정해주었다.
+
+ 
+
+#### [**데이터 추가 기능 구현**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5?category=1047913#%EB%-D%B-%EC%-D%B-%ED%--%B-%--%EC%B-%--%EA%B-%--%--%EA%B-%B-%EB%-A%A-%--%EA%B-%AC%ED%--%--)
+
+이제 새로운 이름을 등록할 수 있는 기능을 구현해 보자.
+
+```
+import React, { useState } from "react";
+
+const Iteration = () => {
+  const [names, setNames] = useState([
+    { id: 1, text: '사과'},
+    { id: 2, text: '바나나'},
+    { id: 3, text: '수박'},
+    { id: 4, text: '딸기'},
+  ]);
+  const [inputText, setInputText] = useState('');
+  const [newId, setNewId] = useState(5);
+
+  const onChange = e => setInputText(e.target.value);
+
+  const onClick = () => {
+    const newNames = names.concat({
+      id: newId,
+      text: inputText,
+    });
+    setNewId(newId + 1);
+    setNames(newNames);
+    setInputText('');
+  };
+
+  const nameList = names.map(name => <li key={name.id}>{name.text}</li>);
+  
+  return (
+    <div>
+      <input
+        value={inputText}
+        onChange={onChange}
+      ></input>
+      <button
+        onClick={onClick}
+      >추가</button>
+      <ul>{nameList}</ul>
+    </div>
+  );
+};
+
+export default Iteration;
+```
+
+배열에 새 항목을 추가할 때 concat을 사용하였는데, concat은 새로운 배열을 만들어 주는 함수이다.
+
+ 
+
+위 코드에서 input 요소에 값을 입력하면 onChange 를 통해 state에 있는 inputText가 변하게 된다.
+
+이후 버튼을 클릭하면 newNames 라는 항목이 새롭게 생성되고 id 와 text 값을 가지게 된다. 그리고 nextId 값이 1 증가하게 만들어 추후에 다른 항목을 추가하더라도 id 값이 겹치지 않도록 구현하였다. 추가로 input의 내용이 비워지게 된다.
+
+ 
+
+#### [**데이터 제거 기능 구현**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5?category=1047913#%EB%-D%B-%EC%-D%B-%ED%--%B-%--%EC%A-%-C%EA%B-%B-%--%EA%B-%B-%EB%-A%A-%--%EA%B-%AC%ED%--%--)
+
+이번에는 각 항목을 더블클릭 했을 때 해당 항목을 제거하는 기능을 구현해보자. 배열의 특정 항목을 가리키기 위해서 filter 함수를 사용할 것이다.
+
+```
+import React, { useState } from "react";
+
+const Iteration = () => {
+  ...
+  const onRemove = id => {
+    const newNames = names.filter(name => name.id !== id);
+    setNames(newNames);
+  };
+
+  const nameList = names.map(name => (
+    <li 
+      key={name.id}
+      onDoubleClick={() => onRemove(name.id)}
+    >
+      {name.text}
+    </li>
+   ));
+  
+  return (
+    ...
+  );
+};
+
+export default Iteration;
+```
+
+항목을 더블클릭할 시 name.id 가 파라미터로 전달되고, onRemve 함수를 통해 전체 항목에서 파라미터로 전달된 id 값과 다른 id 를 가진 항목만으로 새로운 배열을 생성하고 이를 통해 names를 변경하게 된다.

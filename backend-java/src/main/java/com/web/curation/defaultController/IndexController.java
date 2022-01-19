@@ -1,4 +1,4 @@
-package com.web.curation.api;
+package com.web.curation.defaultController;
 
 import com.web.curation.model.BasicResponse;
 import io.swagger.annotations.ApiResponse;

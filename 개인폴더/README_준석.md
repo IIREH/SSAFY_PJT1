@@ -2493,3 +2493,194 @@ export default Iteration;
 ```
 
 항목을 더블클릭할 시 name.id 가 파라미터로 전달되고, onRemve 함수를 통해 전체 항목에서 파라미터로 전달된 id 값과 다른 id 를 가진 항목만으로 새로운 배열을 생성하고 이를 통해 names를 변경하게 된다.
+
+
+
+## 22.01.19(수)
+
+### 컴포넌트 반복
+
+작업을 하다보면 반복되는 코드를 작성할 때가 있다. 코드가 작을 때는 상관없지만 좀 더 복잡해진다면 관리가 힘들어 질 것이다.
+
+ 
+
+이러한 반복적인 내용을 효율적으로 보여주고 관리하는 방법에 대해 알아보자.
+
+ 
+
+#### [**map() 함수**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5#map--%--%ED%--%A-%EC%--%--)
+
+배열 객체의 내장 함수인 map 함수는 파라미터로 전달된 함수를 사용해서 배열 내 각 요소를 원하는 규칙에 따라 변환한 후 그 결과로 새로운 배열을 생성한다.
+
+ 
+
+### [**데이터 배열을 컴포넌트 배열로 변환하기**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5#%EB%-D%B-%EC%-D%B-%ED%--%B-%--%EB%B-%B-%EC%--%B-%EC%-D%--%--%EC%BB%B-%ED%-F%AC%EB%--%-C%ED%-A%B-%--%EB%B-%B-%EC%--%B-%EB%A-%-C%--%EB%B-%--%ED%--%--%ED%--%--%EA%B-%B-)
+
+기존 배열로 컴포넌트로 구성된 배열을 생성할 수 있다.
+
+```
+const Iteration = () => {
+  const names = ['사과', '바나나', '수박', '딸기'];
+  const nameList = names.map(name => <li>{name}</li>);
+  return <ul>{nameList}</ul>;
+}
+
+export default Iteration;
+```
+
+nameList를 보면 names에 map 함수를 적용하여 name 값들을 각각 li 태그에 넣어주는 작업을 수행하였다. 이를 통해 name에 있는 모든 요소들이 li 태그에 들어간 상태로 새로운 배열이 생성된다.
+
+ 
+
+하지만 브라우저를 열어서 개발자 도구를 열어보면 "key" prop이 없다는 경고 메시지를 확인할 수 있다.
+
+ 
+
+### [**key**](https://kimcookie-lab.tistory.com/entry/컴포넌트-반복#key)
+
+리액트에서 key는 컴포넌트 배열을 렌더링했을 때 어떤 원소에 변동이 있었는 지 알아내기 위해 사용한다. 유동적인 데이터를 다룰 때는 원소를 새로 생성할 수도 있고, 제거나 수정이 가능하다.
+
+이때 key가 존재하지 않다면, Virtual DOM을 비교하는 과정에서 리스트를 순차적으로 비교하면서 변화를 감지해야 한다. 하지만 key가 있다면 이 값을 이용해 어디에 어떤 변화가 일어났는지 더욱 빠르게 알아낼 수 있다.
+
+ 
+
+#### [**key 설정**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5#key%--%EC%--%A-%EC%A-%--)
+
+key 값을 설정할 때는 map 함수의 인자로 전달되는 함수 내부에서 컴포넌트 props를 설정하듯이 설정하면 된다. 이때, key 값은 언제나 유일해야 한다. 따라서 데이터가 가진 고유값을 key 값으로 설정해야 한다.
+
+ 
+
+나는 앞서 만들었던 컴포넌트에서 map 함수에 전달되는 콜백 함수의 인수인 index 값을 사용하여 key 값을 설정할 것이다.
+
+```
+const Iteration = () => {
+  const names = ['사과', '바나나', '수박', '딸기'];
+  const nameList = names.map((name, index) => <li key={index}>{name}</li>);
+  return <ul>{nameList}</ul>;
+}
+
+export default Iteration;
+```
+
+이제 개발자 도구를 확인해보면, 경고 메시지가 사라진 것을 확인할 수 있다. 하지만 지금은 불가피하게 index 값을 key 값으로 사용했지만, 배열이 변경될 때 효율적으로 리렌더링하지 못하기 때문에 index를 key로 사용하는 것은 추천하지 않는다.
+
+ 
+
+### [**응용해보기**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5#%EC%-D%--%EC%-A%A-%ED%--%B-%EB%B-%B-%EA%B-%B-)
+
+index를 key로 사용하면 리렌더링이 비효율적이라는 것을 알기 때문에, 새로운 항목을 추가할 때 사용할 고유 id를 사용해 보자.
+
+```
+import React, { useState } from "react";
+
+const Iteration = () => {
+  const [names, setNames] = useState([
+    { id: 1, text: '사과'},
+    { id: 2, text: '바나나'},
+    { id: 3, text: '수박'},
+    { id: 4, text: '딸기'},
+  ]);
+  const [inputText, setInputText] = useState('');
+  const [inputId, setInputId] = useState(5);
+
+  const nameList = names.map(name => <li key={name.id}>{name.text}</li>);
+  return <ul>{nameList}</ul>
+}
+
+export default Iteration;
+```
+
+이번에는 map 함수를 사용할 때 key 값을 index 대신 name.id 값으로 지정해주었다.
+
+ 
+
+#### [**데이터 추가 기능 구현**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5#%EB%-D%B-%EC%-D%B-%ED%--%B-%--%EC%B-%--%EA%B-%--%--%EA%B-%B-%EB%-A%A-%--%EA%B-%AC%ED%--%--)
+
+이제 새로운 이름을 등록할 수 있는 기능을 구현해 보자.
+
+```
+import React, { useState } from "react";
+
+const Iteration = () => {
+  const [names, setNames] = useState([
+    { id: 1, text: '사과'},
+    { id: 2, text: '바나나'},
+    { id: 3, text: '수박'},
+    { id: 4, text: '딸기'},
+  ]);
+  const [inputText, setInputText] = useState('');
+  const [newId, setNewId] = useState(5);
+
+  const onChange = e => setInputText(e.target.value);
+
+  const onClick = () => {
+    const newNames = names.concat({
+      id: newId,
+      text: inputText,
+    });
+    setNewId(newId + 1);
+    setNames(newNames);
+    setInputText('');
+  };
+
+  const nameList = names.map(name => <li key={name.id}>{name.text}</li>);
+  
+  return (
+    <div>
+      <input
+        value={inputText}
+        onChange={onChange}
+      ></input>
+      <button
+        onClick={onClick}
+      >추가</button>
+      <ul>{nameList}</ul>
+    </div>
+  );
+};
+
+export default Iteration;
+```
+
+배열에 새 항목을 추가할 때 concat을 사용하였는데, concat은 새로운 배열을 만들어 주는 함수이다.
+
+ 
+
+위 코드에서 input 요소에 값을 입력하면 onChange 를 통해 state에 있는 inputText가 변하게 된다.
+
+이후 버튼을 클릭하면 newNames 라는 항목이 새롭게 생성되고 id 와 text 값을 가지게 된다. 그리고 nextId 값이 1 증가하게 만들어 추후에 다른 항목을 추가하더라도 id 값이 겹치지 않도록 구현하였다. 추가로 input의 내용이 비워지게 된다.
+
+ 
+
+#### [**데이터 제거 기능 구현**](https://kimcookie-lab.tistory.com/entry/%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8-%EB%B0%98%EB%B3%B5#%EB%-D%B-%EC%-D%B-%ED%--%B-%--%EC%A-%-C%EA%B-%B-%--%EA%B-%B-%EB%-A%A-%--%EA%B-%AC%ED%--%--)
+
+이번에는 각 항목을 더블클릭 했을 때 해당 항목을 제거하는 기능을 구현해보자. 배열의 특정 항목을 가리키기 위해서 filter 함수를 사용할 것이다.
+
+```
+import React, { useState } from "react";
+
+const Iteration = () => {
+  ...
+  const onRemove = id => {
+    const newNames = names.filter(name => name.id !== id);
+    setNames(newNames);
+  };
+
+  const nameList = names.map(name => (
+    <li 
+      key={name.id}
+      onDoubleClick={() => onRemove(name.id)}
+    >
+      {name.text}
+    </li>
+   ));
+  
+  return (
+    ...
+  );
+};
+
+export default Iteration;
+```
+
+항목을 더블클릭할 시 name.id 가 파라미터로 전달되고, onRemve 함수를 통해 전체 항목에서 파라미터로 전달된 id 값과 다른 id 를 가진 항목만으로 새로운 배열을 생성하고 이를 통해 names를 변경하게 된다.

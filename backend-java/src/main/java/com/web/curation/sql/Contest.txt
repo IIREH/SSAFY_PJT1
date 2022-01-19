@@ -1,0 +1,9 @@
+{
+"contest_id":ObjectID()
+,"name":"멋진공연"
+,startDate:"2022-01-15"
+,"startDate":"2022-01-20"
+,"location":"광주"
+,"cast":["멋","진","공","..."]
+,"story":"멋,진,공,연이 펼치는 이야기"
+}

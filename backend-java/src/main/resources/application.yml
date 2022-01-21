@@ -6,6 +6,7 @@
 
 spring:
   data:
+    mongodb:
       host: localhost
       port: 27017
       database: sns
@@ -22,4 +23,3 @@ jwt:
 db:
   uri: mongodb://localhost:27017
   db-name: sns
-

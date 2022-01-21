@@ -1,9 +1,8 @@
 {
-   "user_id":ObjectID()
+ "user_id":ObjectID()
 ,"email":"test@test"
 ,"name":"test"
 ,"nickname":"testName"
 ,"pwd":1234
 ,"follower":["test1@test","test2@test"]
-,"following":[]
 }

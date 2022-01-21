@@ -8,5 +8,8 @@ import java.util.List;
 
 public interface UserRepository extends MongoRepository<User, ObjectId> {
     @Override
+    User insert(User user);
+
+    @Override
     List<User> findAll();
 }

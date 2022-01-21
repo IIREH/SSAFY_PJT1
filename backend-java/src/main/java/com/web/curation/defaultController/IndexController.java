@@ -67,7 +67,7 @@ public class IndexController {
 
         userRepository.insert(user);
         List<User> userList = userRepository.findAll();
-
+        log.info("user list:{}",userList);
         return "index";
     }
 }

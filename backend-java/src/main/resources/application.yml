@@ -10,8 +10,6 @@ spring:
       host: localhost
       port: 27017
       database: sns
-      username: root
-      password: example
       authenticaion-database: admin
   batch:
     job:

@@ -1,11 +1,25 @@
-#spring:
-#  datasource:
-#    driverClassName: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost/ssafy-sns
-#    username:
-#    password:
+#datasource:
+#  driverClassName: com.mysql.cj.jdbc.Driver
+#  url: jdbc:mysql://localhost/ssafy-sns
+#  username:
+#  password:
 
+spring:
+  data:
+      host: localhost
+      port: 27017
+      database: sns
+      username: root
+      password: example
+      authenticaion-database: admin
+  batch:
+    job:
+      enabled: false
 jwt:
   header: Authorization
   secret: ssafy
   token-validity-in-seconds: 86400
+db:
+  uri: mongodb://localhost:27017
+  db-name: sns
+

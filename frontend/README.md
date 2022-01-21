@@ -1,54 +1,96 @@
-# 웹 디자인 Frontend
+## [Material Kit - React](https://material-kit-react.devias.io/) [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social&logo=twitter)](https://twitter.com/intent/tweet?text=%F0%9F%9A%A8Devias%20Freebie%20Alert%20-%20An%20awesome%20ready-to-use%20register%20page%20made%20with%20%23material%20%23react%0D%0Ahttps%3A%2F%2Fdevias.io%20%23createreactapp%20%23devias%20%23material%20%23freebie%20%40devias-io)
 
-<!-- 필수 항목 -->
+![license](https://img.shields.io/badge/license-MIT-blue.svg)
 
-## 소개
-웹 디자인 프로젝트의 Frontend 스켈레톤 코드
+[![Material Kit - React](https://github.com/devias-io/material-kit-react/blob/main/public/static/thumbnail.png)](https://material-kit-react.devias.io/)
 
-<!-- 필수 항목 -->
+> Free React Admin Dashboard made with [MUI's](https://mui.com/?ref=devias-io) components, [React](https://reactjs.org/?ref=devias-io) and of course [Next.js](https://github.com/vercel/next.js/?ref=devias-io) to boost your app development process!
 
-## 기술스택 및 라이브러리
+## Demo
 
-| Project | Version | Description |
-| ------- | ------- | ----------- |
-| Vue.js | 2.6.10 | JavaScript Framework |
-| Vuex | 3.1.2 | State Management Library |
-| Vue-router | 3.1.3 | Vue3 Official Router |
-| sass-loader | 8.0.0 | SCSS Compiler |
+- [Dashboard Page](https://material-kit-react.devias.io)
+- [Users Page](https://material-kit-react.devias.io/customers)
+- [Products Page](https://material-kit-react.devias.io/products)
+- [Register Page](https://material-kit-react.devias.io/register)
+- [Login Page](https://material-kit-react.devias.io/login)
+- [Account Page](https://material-kit-react.devias.io/account)
+- [Settings Page](https://material-kit-react.devias.io/settings)
 
-<!-- 필수 항목 -->
+## Free Figma Community File
+ - [Duplicate File](https://www.figma.com/community/file/1039837897183395483/Devias-Dashboard-Design-Library-Kit)
 
-## 개발 환경 구성
+## Upgrade to PRO Version
 
-1. 프로젝트 다운로드
-    ```
-    git clone <repo URL> <folder-name>
-    ```
+We also have a pro version of this product which bundles even more pages and components if you want to save more time and design efforts :)
 
-2. frontend 폴더로 이동
-    ```
-    cd <folder-name>/frontend
-    ```
+| Free Version (this one)  | [Material Kit Pro - React](https://material-ui.com/store/items/devias-kit-pro/) |
+| ------------------------ | :----------------------------------------------------------- |
+| **7** Demo Pages         | **40+** demo pages
+| -                        | ✔ Dark & light mode
+| -                        | ✔ Authentication with *Amplify**, **Auth0**, **JWT** and **Firebase**
+| -                        | ✔ TypeScript version - for Standard Plus and Extended license
+| -                        | ✔ Design files (sketch & figma) - for Standard Plus and Extended license
+| -                        | ✔ Complete users flows
 
-3. 패키지 설치
-    ```
-    npm install
-    ```
+## Quick start
 
-4. 프로젝트 실행
-    ```
-    npm run serve
-    ```
+- [Download from Github](https://github.com/devias-io/material-kit-react/archive/master.zip) or [Download from Devias](https://devias.io/products/material-kit-react) or clone the repo: `git clone https://github.com/devias-io/material-kit-react.git`
 
+- Make sure your NodeJS and npm versions are up to date for `React 17`
 
-## 디렉토리 구조
+- Install dependencies: `npm install` or `yarn`
+
+- Start the server: `npm run dev` or `yarn dev`
+
+- Views are on: `localhost:3000`
+
+## File Structure
+
+Within the download you'll find the following directories and files:
 
 ```
-.
-└─src
-    ├─api
-    ├─assets  /* image, css, js 등의 리소스 */
-    ├─components  /* 컴포넌트 단위의 Vue 파일 */
-    ├─views  /* 페이지 단위의 Vue 파일 */
-    └─vuex  /* Vuex 관련 파일 */
+material-kit-react
+
+┌── .eslintrc.json
+├── .gitignore
+├── CHANGELOG.md
+├── jsconfig.json
+├── LICENSE.md
+├── package.json
+├── README.md
+├── public
+└── src
+	├── __mocks__
+	├── components
+	├── icons
+	├── theme
+	├── utils
+	└── pages
+		├── 404.js
+		├── _app.js
+		├── _document.js
+		├── account.js
+		├── customers.js
+		├── index.js
+		├── login.js
+		├── products.js
+		├── register.js
+		└── settings.js
 ```
+
+## Resources
+
+- More freebies like this one: <https://devias.io>
+
+## Reporting Issues:
+
+- [Github Issues Page](https://github.com/devias-io/react-material-dashboard/issues?ref=devias-io)
+
+## License
+
+- Licensed under MIT (https://github.com/devias-io/react-material-dashboard/blob/master/LICENSE.md)
+
+## Contact Us
+
+- Email Us: support@deviasio.zendesk.com
+- [Follow us on Instagram](https://www.instagram.com/deviasio/)

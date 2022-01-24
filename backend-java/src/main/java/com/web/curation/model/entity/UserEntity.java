@@ -11,7 +11,7 @@ import java.util.List;
 @Document(collection = "user")
 @Getter
 @ToString
-public class User {
+public class UserEntity {
     private ObjectId id;
     private String email;
     private String name;
@@ -20,7 +20,7 @@ public class User {
     private List<String> follower;
 
     @Builder
-    public User(ObjectId id, String email, String name, String nickname, String pwd, List<String> follower) {
+    public UserEntity(ObjectId id, String email, String name, String nickname, String pwd, List<String> follower) {
         this.id = id;
         this.email = email;
         this.name = name;

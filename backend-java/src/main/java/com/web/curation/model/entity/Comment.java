@@ -10,11 +10,8 @@ import java.util.List;
 @Document(collection = "user")
 @Getter
 @ToString
-public class User {
+public class Comment {
     private ObjectId id;
+    private String comment;
     private String email;
-    private String name;
-    private String nickname;
-    private String pwd;
-    private List<String> follower;
 }

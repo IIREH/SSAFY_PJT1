@@ -6,11 +6,10 @@
 
 spring:
   data:
+    mongodb:
       host: localhost
       port: 27017
       database: sns
-      username: root
-      password: example
       authenticaion-database: admin
   batch:
     job:
@@ -22,4 +21,3 @@ jwt:
 db:
   uri: mongodb://localhost:27017
   db-name: sns
-

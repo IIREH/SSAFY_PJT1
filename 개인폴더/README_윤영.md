@@ -1545,40 +1545,119 @@ title.unshift(inputValue);
 
 
 
+---
 
+### react bootstrap 적용하기
 
-
-
-
-
-
-
-
-
-```react
+```bash
+npm install react-bootstrap bootstrap@5.1.3
 ```
 
-```react
+- bash에 다음과 같은 명령어 입력하기
+
+```bash
+yarn add react-bootstrap bootstrap@5.1.3
+```
+
+- npm install 혹은 yarn add 둘중 하나 이용
+
+![image-20220125040059186](md-images/image-20220125040059186.png)
+
+![image-20220125040432605](md-images/image-20220125040432605.png)
+
+- index.html에 복붙하기
+- cdn방식으로 라이브러리 첨부하기
+
+```html
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+/>
+```
+
+
+
+---
+
+![image-20220125041922798](md-images/image-20220125041922798.png)
+
+![image-20220125043055695](md-images/image-20220125043055695.png)
+
+
+
+- src에 넣은 파일은 파일명 변경 + 압축된다.
+- public 폴더에 넣은 파일은 보존된다.
+
+
+
+- 3등분 하고싶다?
+
+```js
+<div className="container">
+    <div className="row">
+        <div className="col-md-4"> 박스 </div>
+ 		<div className="col-md-4"> 박스 </div>
+ 		<div className="col-md-4"> 박스 </div>
+	</div>
+</div>
+```
+
+
+
+---
+
+### import 와 export 사용하기
+
+- 데이터 바인딩할 상품데이터 3개
+- 하나하나의 상품 정보를 object {} 자료형에 담았으며 이거 3개를 하나의 array에다가 담았다.
 
 ```react
+[
+  {
+    id : 0,
+    title : "White and Black",
+    content : "Born in France",
+    price : 120000
+  },
 
-```react
+  {
+    id : 1,
+    title : "Red Knit",
+    content : "Born in Seoul",
+    price : 110000
+  },
 
-```react
+  {
+    id : 2,
+    title : "Grey Yordan",
+    content : "Born in the States",
+    price : 130000
+  }
+] 
+```
 
-```react
 
-```react
 
-```react
+- 연습용 데이터가 너무 길어서 다른파일로 잘라내자.
+  - 그 다음에 state로 저장하고 데이터바인딩 할것!
 
-```react
 
-```react
 
-```react
+### useState를 쓸때는 꼭 import 잊지말고 할것
 
-```react
+```
+import React, {useState} from 'react';
+```
+
+
+
+- 새로운 js파일을 만들었다면, export default 적기 
+
+
+
+
 
 
 

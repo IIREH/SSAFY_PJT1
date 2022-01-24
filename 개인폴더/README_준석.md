@@ -3049,3 +3049,544 @@ export default ErrorBoundary;
  
 
 이 컴포넌트를 이용하여 App 컴포넌트의 LifeCycle을 감싸주면 에러가 발생할 때 에러문구가 출력되게 된다.
+
+
+
+## 22.01.24(월)
+
+### Hooks
+
+Hooks는 함수 컴포넌트에서도 상태 관리를 할 수 있는 useState, 렌더링 직후 작업을 설정하는 useEffect 등의 기능을 제공한다.
+
+ 
+
+### [**useState**](https://kimcookie-lab.tistory.com/entry/Hooks-useState-useEffect?category=1047913#useState)
+
+useState는 가장 기본적인 Hook로, 함수 컴포넌트에서도 가변적인 상태를 지닐 수 있게 만들어준다. 만약 함수 컴포넌트에서도 상태를 관리해야 한다면 이 Hook를 사용하면 된다.
+
+ 
+
+useState를 이용해서 숫자 카운터를 구현해보자.
+
+```
+import React, { useState } from 'react';
+
+const Counter = () => {
+  const [value, setValue] = useState(0);
+
+  return (
+    <div>
+      <p>
+        현재 카운터 값은 {value}입니다.
+      </p>
+      <button onClick={() => setValue(value + 1)}>+1</button>
+      <button onClick={() => setValue(value - 1)}>-1</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+useState 함수의 파라미터에는 상태의 초기값을 넣어준다. 위 코드에서는 0으로 설정되어 있어 브라우저 상에 처음에는 0으로 표시될 것이다.
+
+ 
+
+이 함수가 호출되면 배열을 반환하는데, 첫 번째 원소는 상태값이고 두 번째 원소는 상태를 결정하는 함수를 의미한다.
+
+ 
+
+#### [**useState를 여러 번 사용하기**](https://kimcookie-lab.tistory.com/entry/Hooks-useState-useEffect?category=1047913#useState%EB%A-%BC%--%EC%--%AC%EB%-F%AC%--%EB%B-%--%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+하나의 useState 함수는 하나의 상태 값만 관리할 수 있다. 만약 컴포넌트에서 관리해야 할 상태가 여러 개라면, useState를 여러 번 사용하면 된다.
+
+```
+import React, { useState } from 'react';
+
+const Info = () => {
+  const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
+
+  const onChangeName = e => {
+    setName(e.target.value);
+  }
+
+  const onChangeNickname = e => {
+    setNickname(e.target.value);
+  }
+
+  return (
+    <div>
+      <div>
+        <input value={name} onChange={onChangeName} />
+        <br />
+        <input value={nickname} onChange={onChangeNickname} />
+      </div>
+      <div>
+        <div>
+          <b>이름: {name}</b>
+        </div>
+        <div>
+          <b>닉네임: {nickname}</b>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Info;
+```
+
+위 코드에서 첫 번째 인풋을 입력하면 name 값이 변경되고 두 번째 인풋을 입력하면 nickname 값이 변경되어 브라우저 상에 표시된다.
+
+ 
+
+### [**useEffect**](https://kimcookie-lab.tistory.com/entry/Hooks-useState-useEffect?category=1047913#useEffect)
+
+useEffect는 리액트 컴포넌트가 렌더링될 때마다 특정 작업을 수행하도록 설정하는 Hook이다. 클래스형 컴포넌트의 componentDidMount와 componentDidUpdate를 합친 형태로 생각할 수 있다.
+
+ 
+
+```
+import React, { useState, useEffect } from 'react';
+
+const Info = () => {
+  const [name, setName] = useState('');
+  const [nickname, setNickname] = useState('');
+  useEffect(() => {
+    console.log('렌더링이 완료되었습니다.');
+    console.log({
+      name,
+      nickname,
+    });
+  });
+  ...
+  return (
+    ...
+  );
+}
+
+export default Info;
+```
+
+개발자 도구를 열고 인풋의 내용을 변경하면 키를 입력할 때마다 콘솔창이 변하는 것을 확인할 수 있다.
+
+ 
+
+#### [**마운트될 때만 실행**](https://kimcookie-lab.tistory.com/entry/Hooks-useState-useEffect?category=1047913#%EB%A-%--%EC%-A%B-%ED%-A%B-%EB%--%A-%--%EB%--%-C%EB%A-%-C%--%EC%-B%A-%ED%--%--)
+
+componentDidMount와 같은 역할로 컴포넌트를 만들고 맨 처음 렌더링될때만 실행하고, 업데이트될 때는 실행하지 않으려면 함수의 두 번째 파라미타로 비어 있는 배열을 넣어 주면 된다.
+
+```
+useEffect(() => {
+    console.log('렌더링이 완료되었습니다.');
+    console.log({
+      name,
+      nickname,
+    });
+  }, []);
+```
+
+위와 같이 빈 배열을 추가해주면 컴포넌트가 처음 나타날 때만 콘솔에 문구가 나타나고, 인풋값을 변경해도 콘솔창에 문구가 나타나지 않는것을 확인할 수 있다.
+
+ 
+
+#### [**업데이트될 때만 실행**](https://kimcookie-lab.tistory.com/entry/Hooks-useState-useEffect?category=1047913#%EC%--%--%EB%-D%B-%EC%-D%B-%ED%-A%B-%EB%--%A-%--%EB%--%-C%EB%A-%-C%--%EC%-B%A-%ED%--%--)
+
+componentDidUpdate와 같은 역할로 특정 값이 변경될 때만 호출하고 싶을 경우도 있을 것이다. 이때는 useEffect의 두 번째 파라미타로 전달되는 배열 안에 검사하고 싶은 값을 넣어주면 된다. 이번에는 name 값이 변경될때만 콘솔창에 문구를 출력해보자.
+
+```
+useEffect(() => {
+    console.log('렌더링이 완료되었습니다.');
+    console.log({
+      name,
+      nickname,
+    });
+  }, [name]);
+```
+
+nickname 인풋을 변경하여도 콘솔창은 변화가 없지만 name 값을 입력할 때마다 콘솔창에 문구가 출력되는 것을 볼 수 있다.
+
+ 
+
+배열 안에는 useState를 통해 관리하고 있는 상태를 넣어주어도 되고, props로 전달받은 값을 넣어 주어도 된다.
+
+ 
+
+#### [**뒷정리하기**](https://kimcookie-lab.tistory.com/entry/Hooks-useState-useEffect?category=1047913#%EB%--%B-%EC%A-%--%EB%A-%AC%ED%--%--%EA%B-%B-)
+
+useEffect는 렌더링되고 난 직후마다 실행되며, 두 번째 파라미터 배열에 무엇을 넣는지에 따라 실행되는 조건이 달라지는 것을 확인할 수 있다.
+
+ 
+
+컴포넌트가 언마운트되기 전이나 업데이트되기 직전에 어떠한 작업을 수행하고 싶다면 useEffect에서 뒷정리 함수를 반환해 주어야 한다.
+
+```
+useEffect(() => {
+    console.log('effect');
+    console.log(name);
+    return () => {
+      console.log('cleanup');
+      console.log(name);
+    };
+  }, [name]);
+```
+
+Info 컴포넌트가 언마운트될 때마다 useEffect 안의 return 함수가 실행되게 된다. 조금 더 명확하게 확인하기 위해 App 컴포넌트에서 Info 컴포넌트의 가시성을 관리할 수 있게 변경해보자.
+
+```
+import React, { useState } from 'react';
+import Info from './Info';
+
+const App = () => {
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <div className="App">
+      <button
+        onClick={() => {
+          setVisible(!visible);
+        }}
+      >
+        {visible ? '숨기기' : '보이기'}
+      </button>
+      <hr />
+      {visible && <Info />}
+    </div>
+  );
+}
+
+export default App;
+```
+
+useState를 사용하여 가시성을 관리하고 처음 초기값은 false로 설정해 Info 컴포넌트를 숨겨놓을 것이다. 이후 버튼을 누르면 컴포넌트가 나타날 때 콘솔에 effect가 나타나고, 사라질 때 cleanup이 나타나는 것을 확인할 수 있다.
+
+ 
+
+이번에도 언마운트될 때만 뒷정리 함수를 호출하고 싶다면 useEffect 함수의 두 번째 파라미터에 비어 있는 배열을 넣으면 된다.
+
+
+
+### [**useReducer**](https://kimcookie-lab.tistory.com/entry/Hooks-useReducer-useMemo?category=1047913#useReducer)
+
+useReducer는 useState보다 더 다양한 컴포넌트 상황에 따라 다양한 상태를 다른 값으로 업데이트 하고 싶을 때 사용하는 Hook이다.
+
+ 
+
+리듀서는 현재 상태, 그리고 업데이트를 위해 필요한 정보를 담은 액션 값을 전달받아 새로운 상태를 반환하는 함수이다. 리듀서 함수에서 새로운 상태를 만들 때는 반드시 불변성을 지켜주어야 한다.
+
+```
+function reducer(state, action) {
+  return {
+    ...
+  };
+}
+```
+
+액션 값은 주로 다음과 같은 형태로 이루어져 있다.
+
+```
+{
+  type: 'INCREMENT',
+  // 추가사항
+}
+```
+
+useReducer에서 사용하는 액션 객체는 반드시 type을 지니고 있을 필요가 없다. 그리고 객체가 아니라 문자열이나 숫자여도 상관이 없다.
+
+ 
+
+#### [**카운터 구현하기**](https://kimcookie-lab.tistory.com/entry/Hooks-useReducer-useMemo?category=1047913#%EC%B-%B-%EC%-A%B-%ED%--%B-%--%EA%B-%AC%ED%--%--%ED%--%--%EA%B-%B-)
+
+useReducer를 이용하여 Counter 컴포넌트를 다시 구현해보자
+
+```
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return { value: state.value + 1 };
+    case 'DECREMENT':
+      return { value: state.value - 1 };
+    default:
+      return state;
+  }
+}
+
+const Counter = () => {
+  const [state, dispatch] = useReducer(reducer, { value: 0 });
+
+  return (
+    <div>
+      <p>
+        현재 카운터 값은 {state.value}입니다.
+      </p>
+      <button onClick={() => dispatch({ type: 'INCREMENT' })}>+1</button>
+      <button onClick={() => dispatch({ type: 'DECREMENT' })}>-1</button>
+    </div>
+  );
+};
+
+
+export default Counter;
+```
+
+위 코드에서 useReducer의 첫 번째 파라미터에는 리듀서 함수를 넣었고, 두 번째 파라미터에는 해당 리듀서의 초기값을 설정해 주었다.
+
+이 Hook를 사용하면 state 값과 dispatch 함수를 받아오게 되는데 여기서 state는 현재 가리키고 있는 상태이고, dispatch는 액션을 발생시키는 함수이다.
+
+dispatch(action)의 형태로, 함수 안에 파라미터로 액션 값을 넣어 주면 리듀서 함수가 호출되는 구조이다.
+
+ 
+
+#### [**인풋 상태 관리하기**](https://kimcookie-lab.tistory.com/entry/Hooks-useReducer-useMemo?category=1047913#%EC%-D%B-%ED%--%-B%--%EC%--%--%ED%--%-C%--%EA%B-%--%EB%A-%AC%ED%--%--%EA%B-%B-)
+
+이번에는 useReducer를 사용하여 Info 컴포넌트의 인풋 상태를 관리해보자. 기존에는 인풋이 여러개라 useState를 여러 번 사용하였는데, useReducer를 사용하면 input 태그에 name 값을 할당하여 e.target.name을 참조하면 깔끔하게 처리할 수 있다.
+
+```
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+  return {
+    ...state,
+    [action.name]: action.value
+  };
+}
+
+const Info = () => {
+  const [state, dispatch] = useReducer(reducer, {
+    name: '',
+    nickname: ''
+  });
+
+  const { name, nickname } = state;
+
+  const onChange = e => {
+    dispatch(e.target);
+  }
+
+  return (
+    <div>
+      <div>
+        <input name='name' value={name} onChange={onChange} />
+        <br />
+        <input name='nickname' value={nickname} onChange={onChange} />
+      </div>
+      <div>
+        <div>
+          <b>이름: {name}</b>
+        </div>
+        <div>
+          <b>닉네임: {nickname}</b>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Info;
+```
+
+인풋 요소에 name을 설정하여 useReducer에서 액션 값으로 e.target 값 자체를 사용하였다. 이를 통해 reducer 함수안에서 action.name 은 e.target.name 을 가리키게 되고 해당 인풋 값에 맞추어 state가 변경된다.
+
+ 
+
+### [**useMemo**](https://kimcookie-lab.tistory.com/entry/Hooks-useReducer-useMemo?category=1047913#useMemo)
+
+useMemo를 사용하면 함수 컴포넌트 내부에서 발생하는 연산을 최적화 할 수 있다. 이를 확인하기 위해 숫자를 추가하면 추가된 숫자들의 평균을 보여 주는 함수 컴포넌트를 생성해보자.
+
+```
+import React, { useState } from 'react';
+
+const getAverage = numbers => {
+  console.log('평균값 계산 중...');
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b);
+  return sum / numbers.length;
+};
+
+const Average = () => {
+  const [list, setList] = useState([]);
+  const [number, setNumber] = useState('');
+
+  const onChange = e => {
+    setNumber(e.target.value);
+  };
+  
+  const onInsert = e => {
+    const nextList = list.concat(parseInt(number));
+    setList(nextList);
+    setNumber('');
+  };
+
+  return (
+    <div>
+      <input value={number} onChange={onChange}></input>
+      <button onClick={onInsert}>등록</button>
+      <ul>
+        {list.map((value, index) => (
+          <li key={index}>{value}</li>
+        ))}
+      </ul>
+      <div>
+        <b>평균값: </b>{getAverage(list)}
+      </div>
+    </div>
+  );
+}
+
+export default Average;
+```
+
+브라우저에서 인풋에 숫자를 입력해보면 number 값이 변경되고 등록 버튼을 클릭하면 해당 number 값이 list에 추가된다. 그리고 getAverage 함수를 통해 평균값이 출력된다.
+
+ 
+
+그런데 콘솔창을 보면 클릭을 눌러 숫자를 등록할 때 뿐만 아니라 인풋 내용을 수정할 때마다 getAverage 함수가 호출되는 것을 확인할 수 있다. 이렇게 렌더링할때마다 계산하는 것은 낭비이므로 useMomo Hook을 사용하여 이러한 작업을 최소화 할 수 있다.
+
+ 
+
+렌더링하는 과정에서 특정 값이 바뀌었을 때만 연산을 실행하고 원하는 값이 바뀌지 않으면 이전에 연산했던 결과를 다시 사용하는 방식이다. 이를 적용해보자.
+
+```
+import React, { useState, useMemo } from 'react';
+...
+const Average = () => {
+  ...
+  const avg = useMemo(() => getAverage(list), [list]);
+
+  return (
+    <div>
+      ...
+      <div>
+        <b>평균값: </b>{avg}
+      </div>
+    </div>
+  );
+}
+
+export default Average;
+```
+
+useMemo를 통해 계산된 avg 가 브라우저 상에 나타나게 된다.
+
+
+
+### [**useCallback**](https://kimcookie-lab.tistory.com/entry/Hooks-useCallback-useRef?category=1047913#useCallback)
+
+useCallback은 useMemo와 비슷한 함수이다. 주로 렌더링 성능을 최적화하는 상황에서 사용하는데 이 Hook을 사용하면 만들어 놨던 함수를 재사용할 수 있다.
+
+ 
+
+전에 구현한 Average 컴포넌트를 보면 onChange와 onInsert라는 함수를 선언해 주었다. 이렇게 함수를 선언하면 컴포넌트가 리렌더링 될 때마다 새로 만들어진 함수를 사용하게 된다. 대부분의 경우 이러한 방식은 문제가 없지만, 컴포넌트의 렌더링이 자주 발생하거나 렌더링해야할 컴포넌트의 개수가 많아지면 이 부분을 최적화해 주어야 한다.
+
+```
+import React, { useState, useMemo, useCallback } from 'react';
+...
+const Average = () => {
+  ...
+  const onChange = useCallback(e => {
+    setNumber(e.target.value);
+  }, []); // 컴포넌트가 처음 렌더링될 때만 함수 생성
+
+  const onInsert = useCallback(e => {
+    const nextList = list.concat(parseInt(number));
+    setList(nextList);
+    setNumber('');
+  }, [number, list]); // number과 list가 바뀌었을 때만 함수 생성
+  ...
+  return (
+    ...
+  );
+}
+
+export default Average;
+```
+
+이처럼 useCallback의 첫 번째 파라미터에는 생성하고 싶은 함수를 넣고, 두 번째 파라미터에는 배열을 넣으면 된다. 이 배열에 들어간 요소가 바뀌면 함수를 새로 생성하게 된다.
+
+ 
+
+onChange의 경우 비어 있는 배열을 넣어 주었기 때문에 컴포넌트가 렌더링될 때 만들었던 함수를 계속해서 재사용하게 된다. onInsert는 배열 안에 number와 list를 넣어 주었기 때문에 인풋 내용이 바뀌거나 새로운 항목이 추가될 때 새로 만들어진 함수를 사용하게 된다.
+
+ 
+
+이때, 함수 내부에서 상태 값에 의존해야 할 때는 그 값을 반드시 두 번째 파라미터 안에 포함시켜 주어야 한다. onInsert는 기존의 list와 number를 조회해서 nextList를 생성하기 때문에, 반드시 number와 list가 들어가야 한다.
+
+ 
+
+### [**useRef**](https://kimcookie-lab.tistory.com/entry/Hooks-useCallback-useRef?category=1047913#useRef)
+
+useRef는 함수 컴포넌트에서 ref를 쉽게 사용할 수 있도록 만들어준다. Avergage 컴포넌트에서 등록 버튼을 눌렀을 때 포커스가 인풋 쪽으로 넘어가도록 만들어보자
+
+```
+import React, { useState, useMemo, useCallback, useRef } from 'react';
+...
+const Average = () => {
+  const [list, setList] = useState([]);
+  const [number, setNumber] = useState('');
+  const inputEl = useRef(null);
+  ...
+  const onInsert = useCallback(e => {
+    ...
+    inputEl.current.focus();
+  }, [number, list]); // number과 list가 바뀌었을 때만 함수 생성
+  ...
+  return (
+    <div>
+      <input value={number} onChange={onChange} ref={inputEl}></input>
+      ...
+    </div>
+  );
+}
+
+export default Average;
+```
+
+useRef를 사용하여 만든 객체 안의 current 값이 실제 엘리먼트를 가리키게 된다.
+
+ 
+
+#### [**로컬 변수 사용하기**](https://kimcookie-lab.tistory.com/entry/Hooks-useCallback-useRef?category=1047913#%EB%A-%-C%EC%BB%AC%--%EB%B-%--%EC%--%--%--%EC%--%AC%EC%-A%A-%ED%--%--%EA%B-%B-)
+
+컴포넌트 로컬 변수를 사용해야 할 때도 useRef를 활용할 수 있다. 로컬 변수란 렌더링과 상관 없이 바뀔 수 있는 값을 의미한다.
+
+ 
+
+이 때, ref 안의 값이 바뀌어도 컴포넌트가 렌더링되지 않으므로 렌더링과 관련되지 않은 값을 관리할 때만 사용해야 한다.
+
+ 
+
+### [**커스텀 Hooks 만들기**](https://kimcookie-lab.tistory.com/entry/Hooks-useCallback-useRef?category=1047913#%EC%BB%A-%EC%-A%A-%ED%--%--%--Hooks%--%EB%A-%-C%EB%--%A-%EA%B-%B-)
+
+여러 컴포넌트에서 비슷한 기능을 공유할 경우, 이를 따로 분리하여 로직을 재사용할 수 있다. Info 컴포넌트에서 인풋을 관리하기 위해서 작성했던 로직을 useInputs 라는 Hook으로 따로 분리해 보자.
+
+ 
+
+#### [**useInputs.js**](https://kimcookie-lab.tistory.com/entry/Hooks-useCallback-useRef?category=1047913#useInputs-js)
+
+```
+import { useReducer } from 'react';
+
+function reducer(state, action) {
+  return {
+    ...state,
+    [action.name]: action.value
+  };
+}
+
+export default function useInputs(initialForm) {
+  const [state, dispatch] = useReducer(reducer, initialForm);
+  const onChange = e => {
+    dispatch(e.target);
+  };
+  return [state, onChange]
+}
+```
+
+외부 컴포넌트에서 useInputs를 불러오게 되면 state와 onChange 함수를 반환한다. 그리고 useInputs에 넣어준 객체가 initialForm으로 들어가게 되고 useInputs 함수 안에서 reducer 함수를 수행하게 된다.
+
+ 
+
+반환된 onChange 함수를 통해 dispatch 함수가 이루어지고 이를 통해 state 값이 변경되는 것이다.

@@ -5,8 +5,8 @@ export const login = ({ username, password }) =>
   client.post('/api/auth/login', { username, password });
 
 // 회원가입
-export const register = ({ username, password }) =>
-  client.post('/api/auth/register', { username, password });
+export const register = ({ email, username, nickname, password }) =>
+  client.post('/api/auth/register', { email, username, nickname, password });
 
 // 로그인 상태 확인
 export const check = () => client.get('/api/auth/check');

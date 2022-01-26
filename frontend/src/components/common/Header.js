@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Responsive from "./Responsive";
 import Button from "./Button";
+import logo from "../../img/img.jpg"
 import "../../Nav.css"
 
 const HeaderBlock = styled.div`
@@ -56,14 +57,13 @@ const Header = ({ user, onLogout }) => {
   }, []);
   return (
     <>
-      <img
-        className="nav__logo"
-        src="https://edu.ssafy.com/asset/images/logo.png"
-        alt=""
-      />
       <div className={`nav ${show && "nav__white"}`}>
         <Link to="/" className="logo">
-          Artgram
+          <img
+          className="nav__logo"
+          src="https://edu.ssafy.com/asset/images/logo.png"
+          alt=""
+      />
         </Link>
         {user ? (
           <div className="right">

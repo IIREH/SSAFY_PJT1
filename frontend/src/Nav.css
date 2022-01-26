@@ -16,8 +16,8 @@
 }
 
 /* Adds a black color on navbar */
-.nav__black {
-    background-color: #111;
+.nav__white {
+    background-color: whitesmoke;
 }
 
 /* Styling and positioning navbar logo */

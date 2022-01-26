@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Responsive from "./Responsive";
 import Button from "./Button";
+import "../../Nav.css"
 
 const HeaderBlock = styled.div`
-  position: fixed;
   width: 100%;
   background: white;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
@@ -43,25 +43,39 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ user, onLogout }) => {
+  const [show, handleShow] = useState(false);
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 100) {
+        handleShow(true);
+      } else handleShow(false);
+    });
+    return () => {
+      window.removeEventListener("scroll");
+    };
+  }, []);
   return (
     <>
-      <HeaderBlock>
-        <Wrapper>
-          <Link to="/" className="logo">
-            Artgram
-          </Link>
-          {user ? (
-            <div className="right">
-              <UserInfo>{user.username}</UserInfo>
-              <Button onClick={onLogout}>로그아웃</Button>
-            </div>
-          ) : (
-            <div className="right">
-              <Button to="/login">로그인</Button>
-            </div>
-          )}
-        </Wrapper>
-      </HeaderBlock>
+      <img
+        className="nav__logo"
+        src="https://edu.ssafy.com/asset/images/logo.png"
+        alt=""
+      />
+      <div className={`nav ${show && "nav__white"}`}>
+        <Link to="/" className="logo">
+          Artgram
+        </Link>
+        {user ? (
+          <div className="right">
+            <UserInfo>{user.username}</UserInfo>
+            <Button onClick={onLogout}>로그아웃</Button>
+          </div>
+        ) : (
+          <div className="right">
+            <Button to="/login">로그인</Button>
+          </div>
+        )}
+      </div>
       <Spacer />
     </>
   );

@@ -20,7 +20,7 @@ function Nav() {
 
   return (
     //   Always use nav css, except when scrolling 100px down we want the black__navbar class
-    <div className={`nav ${show && "nav__black"}`}>
+    <div className={`nav ${show && "nav__white"}`}>
       {/* Big main logo */}
       <img
         className="nav__logo"

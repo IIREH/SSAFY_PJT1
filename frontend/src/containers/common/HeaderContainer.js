@@ -10,7 +10,7 @@ const HeaderContainer = () => {
     dispatch(logout());
   };
   const onDelete = () => {
-    dispatch(deleteUserInfo(user._id));
+    dispatch(deleteUserInfo(user));
   }
   return <Header user={user} onLogout={onLogout} onDelete={onDelete}/>;
 };

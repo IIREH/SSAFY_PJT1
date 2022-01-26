@@ -16,7 +16,7 @@ const DELETE_USER_INFO = 'user/DELETE_USER_INFO';
 export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 export const check = createAction(CHECK);
 export const logout = createAction(LOGOUT);
-export const deleteUserInfo = createAction(DELETE_USER_INFO);
+export const deleteUserInfo = createAction(DELETE_USER_INFO, user => user);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
@@ -37,9 +37,11 @@ function* logoutSaga() {
   }
 }
 
-function* deleteUserInfoSaga() {
+function* deleteUserInfoSaga(user) {
+  const id = user.payload._id;
   try {
-    yield call(authAPI.deleteUserInfo);
+    console.log(id);
+    yield call(authAPI.deleteUserInfo(id));
   } catch (e) {
     console.log(e);
   }

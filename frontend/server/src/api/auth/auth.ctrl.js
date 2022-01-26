@@ -11,9 +11,24 @@ import User from '../../models/user';
 export const register = async (ctx) => {
   // Request Body 검증하기
   const schema = Joi.object().keys({
-    username: Joi.string().alphanum().min(3).max(20).required(),
-    password: Joi.string().required(),
+    email: Joi.string()
+      .required(),
+    username: Joi.string()
+      .alphanum()
+      .min(3)
+      .max(20)
+      .required(),
+    nickname: Joi.string()
+      .alphanum()
+      .min(3)
+      .max(20)
+      .required(),
+    password: Joi.string()
+      .min(6)
+      .max(20)
+      .required(),
   });
+
   const result = schema.validate(ctx.request.body);
   if (result.error) {
     ctx.status = 400;
@@ -21,7 +36,7 @@ export const register = async (ctx) => {
     return;
   }
 
-  const { username, password } = ctx.request.body;
+  const { email, username, nickname, password } = ctx.request.body;
   try {
     // username  이 이미 존재하는지 확인
     const exists = await User.findByUsername(username);
@@ -31,8 +46,11 @@ export const register = async (ctx) => {
     }
 
     const user = new User({
+      email,
       username,
+      nickname,
     });
+
     await user.setPassword(password); // 비밀번호 설정
     await user.save(); // 데이터베이스에 저장
 
@@ -107,4 +125,17 @@ export const check = async (ctx) => {
 export const logout = async (ctx) => {
   ctx.cookies.set('access_token');
   ctx.status = 204; // No Content
+};
+
+// 회원 탈퇴
+// DELETE /api/auth/remove/:id
+export const remove = async ctx => {
+  const { id } = ctx.params;
+  try {
+    ctx.cookies.set('access_token');
+    await User.findByIdAndRemove(id);
+    ctx.status = 204;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Header from '../../components/common/Header';
-import { logout } from '../../modules/user';
+import { deleteUserInfo, logout } from '../../modules/user';
 
 const HeaderContainer = () => {
   const { user } = useSelector(({ user }) => ({ user: user.user }));
@@ -9,7 +9,10 @@ const HeaderContainer = () => {
   const onLogout = () => {
     dispatch(logout());
   };
-  return <Header user={user} onLogout={onLogout} />;
+  const onDelete = () => {
+    dispatch(deleteUserInfo(user._id));
+  }
+  return <Header user={user} onLogout={onLogout} onDelete={onDelete}/>;
 };
 
 export default HeaderContainer;

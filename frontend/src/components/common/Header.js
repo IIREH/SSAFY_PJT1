@@ -43,7 +43,7 @@ const UserInfo = styled.div`
   margin-right: 1rem;
 `;
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ user, onLogout, onDelete }) => {
   const [show, handleShow] = useState(false);
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -55,6 +55,7 @@ const Header = ({ user, onLogout }) => {
       window.removeEventListener("scroll");
     };
   }, []);
+
   return (
     <>
       <div className={`nav ${show && "nav__white"}`}>
@@ -69,6 +70,7 @@ const Header = ({ user, onLogout }) => {
           <div className="right">
             <UserInfo>{user.username}</UserInfo>
             <Button onClick={onLogout}>로그아웃</Button>
+            <Button onClick={onDelete}>회원탈퇴</Button>
           </div>
         ) : (
           <div className="right">

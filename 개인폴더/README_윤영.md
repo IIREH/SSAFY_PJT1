@@ -1657,6 +1657,106 @@ import React, {useState} from 'react';
 
 
 
+### 📙 01/25 Tue
+
+### 프로젝트 적용 - 아이콘 바꾸기
+
+- 위에 아이콘 바꾸기!
+
+![image-20220125235030910](md-images/image-20220125235030910.png)
+
+- 기본 세팅
+
+![image-20220126001235543](md-images/image-20220126001235543.png)
+
+- 아래로는 스크롤 내릴 수 있고, 옆으로는 스크롤바 없게 만들기
+
+- border-box 사이즈로 지정해주기
+
+![image-20220126001307576](md-images/image-20220126001307576.png)
+
+
+
+- 내가 쓸 모든 html 태그들에 일괄 적용해주기
+
+![image-20220126001432490](md-images/image-20220126001432490.png)
+
+
+
+- 일단 2개 설치해준다. 
+
+```bash
+$ yarn add react-router-dom@5
+```
+
+```bash
+$ yarn add styled-components
+```
+
+
+
+- LoginPage.js에서 잠시 작업해주고, App.js로 간다.
+
+![image-20220126002012626](md-images/image-20220126002012626.png)
+
+
+
+---
+
+
+
+```react
+import logo from '../../images/ag_logo.png'
+
+<NavLink to="/" className="logo" >
+            <img className="logo" alt="" src={ logo }></img>
+</NavLink>
+
+```
+
+- 네브바에 로고가 잘 적용이 되지 않는다. 보류...
+
+- 열심히 적어두었지만, 네브바가 중복되어 일단 보류~~
+
+```react
+const Nav = styled.nav`
+  max-width: 1128px;
+  margin: auto;
+  padding: 12px 0 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+
+  & > a {
+    width: 135px;
+    height: 34px;
+    @media(max-width: 768px){
+      padding: 0.5px
+    }
+  }
+
+`;
+
+
+const Join = styled.a`
+  font-size: 16px;
+  padding: 10px 12px;
+  text-decoration: NamedNodeMap;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-right: 12px
+  &:hover {
+    background-color : rgba(0, 0, 0, 0.08);
+    color : rgba(0, 0, 0, 0.9);
+    text-decoration: none;
+  }
+`;
+```
+
+
+
 ### 📙 01/26 Wed
 
 > 오류와의 싸움...!!

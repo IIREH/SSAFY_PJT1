@@ -1,11 +1,11 @@
 import React from 'react';
 import AuthTemplate from '../components/auth/AuthTemplate';
-import UpdateUserInfoForm from '../containers/auth/UpdateUserInfoForm';
+import UpdateUserInfoFormContainer from '../containers/auth/UpdateUserInfoFormContainer';
 
 const UpdateUserInfoPage = () => {
   return (
     <AuthTemplate>
-      <UpdateUserInfoForm />
+      <UpdateUserInfoFormContainer />
     </AuthTemplate>
   );
 };

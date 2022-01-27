@@ -139,3 +139,49 @@ export const remove = async ctx => {
     ctx.throw(500, e);
   }
 };
+
+// 회원 정보 수정
+// PATCH /api/auth/update/:id
+export const update = async (ctx) => {
+  const { id } = ctx.params;
+  const { nickname, password } = ctx.request.body;
+
+  if (!password) {
+    delete ctx.request.body['password'];
+  }
+  if (!nickname) {
+    delete ctx.request.body['nickname'];
+  }
+
+  const schema = Joi.object().keys({
+    nickname: Joi.string()
+      .alphanum()
+      .min(3)
+      .max(20),
+    password: Joi.string()
+      .min(6)
+      .max(20),
+  });
+
+  // 검증 후, 검증 실패시 에러처리
+  const result = schema.validate(ctx.request.body);
+  if (result.error) {
+    ctx.status = 400; // Bad Request
+    ctx.body = result.error;
+    return;
+  }
+
+  try {
+    const user = await User.findByIdAndUpdate(id, ctx.request.body, {
+      new: true, // 이 값을 설정하면 업데이트된 데이터를 반환합니다.
+      // false 일 때에는 업데이트 되기 전의 데이터를 반환합니다.
+    }).exec();
+    if (!user) {
+      ctx.status = 404;
+      return;
+    }
+    ctx.body = user;
+  } catch (e) {
+    ctx.throw(500, e);
+  }
+};

@@ -70,6 +70,7 @@ const Header = ({ user, onLogout, onDelete }) => {
           <div className="right">
             <UserInfo>{user.username}</UserInfo>
             <Button onClick={onLogout}>로그아웃</Button>
+            <Button to="/updateUserInfo">회원정보수정</Button>
             <Button onClick={onDelete}>회원탈퇴</Button>
           </div>
         ) : (

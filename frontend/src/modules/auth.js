@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { takeLatest } from 'redux-saga/effects';
+import { call, takeLatest } from 'redux-saga/effects';
 import createRequestSaga, {
   createRequestActionTypes
 } from '../lib/createRequestSaga';
@@ -17,6 +17,10 @@ const [LOGIN, LOGIN_SUCCESS, LOGIN_FAILURE] = createRequestActionTypes(
   'auth/LOGIN'
 );
 
+const [UPDATE_USER_INFO, UPDATE_USER_INFO_SUCCESS, UPDATE_USER_INFO_FAILURE] = createRequestActionTypes(
+  'auth/UPDATE_USER_INFO'
+);
+
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }) => ({
@@ -25,7 +29,7 @@ export const changeField = createAction(
     value // 실제 바꾸려는 값
   })
 );
-export const initializeForm = createAction(INITIALIZE_FORM, form => form); // register / login
+export const initializeForm = createAction(INITIALIZE_FORM, form => form); // register / login / updateUserInfo
 export const register = createAction(REGISTER, ({ email, username, nickname, password }) => ({
   email,
   username,
@@ -36,13 +40,21 @@ export const login = createAction(LOGIN, ({ email, password }) => ({
   email,
   password
 }));
+export const updateUserInfo = createAction(UPDATE_USER_INFO, ({ id, nickname, password }) => ({
+  id,
+  nickname,
+  password
+}));
 
 // saga 생성
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
 const loginSaga = createRequestSaga(LOGIN, authAPI.login);
+const updateUserInfoSaga = createRequestSaga(UPDATE_USER_INFO, authAPI.updateUserInfo);
+
 export function* authSaga() {
   yield takeLatest(REGISTER, registerSaga);
   yield takeLatest(LOGIN, loginSaga);
+  yield takeLatest(UPDATE_USER_INFO, updateUserInfoSaga);
 }
 
 const initialState = {
@@ -56,6 +68,11 @@ const initialState = {
   login: {
     email: '',
     password: ''
+  },
+  updateUserInfo: {
+    nickname: '',
+    password: '',
+    passwordConfirm: ''
   },
   auth: null,
   authError: null
@@ -93,7 +110,16 @@ const auth = handleActions(
     [LOGIN_FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error
-    })
+    }),
+    [UPDATE_USER_INFO_SUCCESS]: (state, { payload: auth}) => ({
+      ...state,
+      authError: null,
+      auth
+    }),
+    [UPDATE_USER_INFO_FAILURE]: (state, { payload: error }) => ({
+      ...state,
+      authError: error,
+    }),
   },
   initialState
 );

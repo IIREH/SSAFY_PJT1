@@ -32,3 +32,6 @@ build/
 
 ##Mongodb ###
 /mongo-storage/*
+
+### httpTest###
+/**/src/main/java/**/test/**

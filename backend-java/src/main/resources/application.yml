@@ -18,6 +18,8 @@ jwt:
   header: Authorization
   secret: ssafy
   token-validity-in-seconds: 86400
-db:
-  uri: mongodb://localhost:27017
-  db-name: sns
+
+api:
+  contest:
+    servicekey: fa6c5efa2a0747fe9c047f5af687869d
+    url: http://kopis.or.kr/openApi/restful/pblprfr

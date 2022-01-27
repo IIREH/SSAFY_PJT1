@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Responsive from "./Responsive";
 import Button from "./Button";
-import logo from "../../img/img.jpg"
+import logo from "../../img/ag-logo.png"
 import "../../Nav.css"
 
 const HeaderBlock = styled.div`
@@ -62,7 +62,7 @@ const Header = ({ user, onLogout, onDelete }) => {
         <Link to="/" className="logo">
           <img
           className="nav__logo"
-          src="https://edu.ssafy.com/asset/images/logo.png"
+          src="https://yt3.ggpht.com/QiIRCMnjNvamjIxaJrieyvOFZ7uGCcZx4MQJoyR6lDcB7Q4f0Mb2vVfVG0BlL3V3LoZwQFuR=s900-c-k-c0x00ffffff-no-rj"
           alt=""
       />
         </Link>

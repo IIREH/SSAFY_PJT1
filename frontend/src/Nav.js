@@ -24,13 +24,13 @@ function Nav() {
       {/* Big main logo */}
       <img
         className="nav__logo"
-        src="https://edu.ssafy.com/asset/images/logo.png"
+        src="./img/ag-logo.png"
         alt=""
       />
       {/* Small corner logo */}
       <img
         className="nav__avatar"
-        src="https://edu.ssafy.com/asset/images/logo.png"
+        src="./img/ag-logo.png"
         alt=""
       />
     </div>

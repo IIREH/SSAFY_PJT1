@@ -1,8 +1,8 @@
 import client from './client';
 
 // 로그인
-export const login = ({ username, password }) =>
-  client.post('/api/auth/login', { username, password });
+export const login = ({ email, password }) =>
+  client.post('/api/auth/login', { email, password });
 
 // 회원가입
 export const register = ({ email, username, nickname, password }) =>

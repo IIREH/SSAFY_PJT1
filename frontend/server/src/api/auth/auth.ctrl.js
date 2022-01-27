@@ -12,6 +12,7 @@ export const register = async (ctx) => {
   // Request Body 검증하기
   const schema = Joi.object().keys({
     email: Joi.string()
+      .email()
       .required(),
     username: Joi.string()
       .alphanum()
@@ -74,17 +75,16 @@ export const register = async (ctx) => {
   }
 */
 export const login = async (ctx) => {
-  const { username, password } = ctx.request.body;
+  const { email, password } = ctx.request.body;
 
   // username, password 가 없으면 에러 처리
-  if (!username || !password) {
+  if (!email || !password) {
     ctx.status = 401; // Unauthorized
     return;
   }
 
   try {
-    const user = await User.findByUsername(username);
-    // 계정이 존재하지 않으면 에러 처리
+    const user = await User.findByEmail(email);
     if (!user) {
       ctx.status = 401;
       return;

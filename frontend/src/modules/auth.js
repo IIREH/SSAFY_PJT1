@@ -32,8 +32,8 @@ export const register = createAction(REGISTER, ({ email, username, nickname, pas
   nickname,
   password
 }));
-export const login = createAction(LOGIN, ({ username, password }) => ({
-  username,
+export const login = createAction(LOGIN, ({ email, password }) => ({
+  email,
   password
 }));
 
@@ -54,7 +54,7 @@ const initialState = {
     passwordConfirm: ''
   },
   login: {
-    username: '',
+    email: '',
     password: ''
   },
   auth: null,

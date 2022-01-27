@@ -6,11 +6,14 @@ import com.web.curation.jwt.Token;
 import com.web.curation.jwt.TokenProvider;
 import com.web.curation.model.BasicResponse;
 import com.web.curation.model.dto.UserDto;
+import com.web.curation.model.entity.UserEntity;
+import com.web.curation.model.service.UserService;
 import com.web.curation.utils.ApiUtils;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,15 +31,17 @@ import org.springframework.web.bind.annotation.*;
         @ApiResponse(code = 500, message = "Failure", response = BasicResponse.class) })
 
 @Slf4j
+@Api("사용자 컨트롤러")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    @Autowired
+    UserService userService;
+
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    //TODO 테스트 이후에  PostMapping으로.
-    //TODO 이야기해보고 불편하면, ResponseEntity 로됨.
     @GetMapping("/login")
     public ApiUtils.ApiResult<Token> login(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) throws UnauthorizedException {
         log.info("login mapping");
@@ -57,5 +62,17 @@ public class UserController {
         return ApiUtils.success(new Token(jwt));
     }
 
-
+    @ApiOperation(value = "회원가입", notes = "회원가입 결과 메시지 반환", response = ApiUtils.ApiResult.class)
+    @PostMapping("register")
+    public ApiUtils.ApiResult<?> register(@RequestBody @ApiParam(value = "회원 정보", required = true) UserDto userDto) {
+        userService.registerUser(userDto);
+        return ApiUtils.success("success");
+    }
+    
+    @ApiOperation(value = "회원탈퇴", notes = "회원탈퇴 결과 메시지 반환", response = ApiUtils.ApiResult.class)
+    @DeleteMapping("unregister/{userid}")
+    public ApiUtils.ApiResult<?> unregister(@PathVariable("userid") @ApiParam(value = "회원 ID", required = true) ObjectId objectId) {
+        userService.unregisterUser(objectId);
+        return ApiUtils.success("success");
+    }
 }

@@ -5,13 +5,20 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends MongoRepository<UserEntity, ObjectId> {
     @Override
-    UserEntity insert(UserEntity user);
+    UserEntity save(UserEntity userEntity);
 
     @Override
     List<UserEntity> findAll();
 
-    List<UserEntity>findByEmail(String email);
+    List<UserEntity> findByEmail(String email);
+
+    @Override
+    Optional<UserEntity> findById(ObjectId objectId);
+
+    @Override
+    void deleteById(ObjectId objectId);
 }

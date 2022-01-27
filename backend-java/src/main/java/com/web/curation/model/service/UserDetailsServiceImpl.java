@@ -33,7 +33,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         UserEntity user =userList.get(0);
         return  User.builder().username(user.getEmail())
-                .password(passwordEncoder.encode(user.getPwd()))
+                .password(passwordEncoder.encode(user.getPw()))
                 .roles("USER").build();
     }
 }

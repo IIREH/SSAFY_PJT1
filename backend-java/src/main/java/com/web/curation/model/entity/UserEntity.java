@@ -4,28 +4,23 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collection = "user")
+@Document(collection = "users")
 @Getter
+@Builder
 @ToString
 public class UserEntity {
+    @Id
     private ObjectId id;
     private String email;
     private String name;
     private String nickname;
-    private String pwd;
-    private List<String> follower;
-
-    @Builder
-    public UserEntity(ObjectId id, String email, String name, String nickname, String pwd, List<String> follower) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.nickname = nickname;
-        this.pwd = pwd;
-        this.follower = follower;
-    }
+    private String pw;
+    @DBRef
+    private List<UserEntity> followers;
 }

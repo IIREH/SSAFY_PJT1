@@ -5,12 +5,12 @@ import Banner from "./Banner";
 import "./Banner.css";
 import Nav from "./Nav";
 import { Route, Routes } from "react-router-dom";
-import PostListPage from "./pages/PostListPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
-import WritePage from "./pages/WritePage";
-import PostPage from "./pages/PostPage";
-import UpdateUserInfoPage from "./pages/UpdateUserInfoPage";
+import PostListPage from "./pages/post/PostListPage";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+import WritePage from "./pages/post/WritePage";
+import PostPage from "./pages/post/PostPage";
+import UpdateUserInfoPage from "./pages/auth/UpdateUserInfoPage";
 
 function App() {
   return (

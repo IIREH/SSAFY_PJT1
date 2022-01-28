@@ -20,3 +20,6 @@ export const deleteUserInfo = id => client.delete(`/api/auth/remove/${id}`);
 // 회원 정보 수정
 export const updateUserInfo = ({ id, nickname, password }) =>
   client.patch(`/api/auth/update/${id}`, { nickname, password });
+
+// 카카오 로그인
+// KaKao.Auth.authorize(PARAMETER);

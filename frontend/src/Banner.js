@@ -31,9 +31,8 @@ function Banner() {
 
         <h1 className="banner__description">
         <br></br><br></br><br></br><br></br><br></br>
-          슈배르트가 작곡한 세계 최고의 띵곡...!<br></br>
+          슈배르트가 작곡한 세계 최고의 명곡...!<br></br>
           포브스 선정 꼭 들어야 되는 음악 1위...!<br></br>
-          양승우 선정 심심할때 들으면 좋은 음악 2위...!!
         </h1>
       </div>
       {/* Empty fade div with bottom fade effect  */}

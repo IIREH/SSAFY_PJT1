@@ -39,7 +39,8 @@ const Spacer = styled.div`
 `;
 
 const UserInfo = styled.div`
-  font-weight: 800;
+  color: white;
+  font-weight: 1000;
   margin-right: 1rem;
 `;
 

@@ -61,12 +61,12 @@ public class ContestReader implements ItemReader<List<ContestDto>> {
          log.debug("============");
 
             ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
-//            log.debug("response:{}",response);
+            log.debug("response:{}",response);
             ObjectMapper mapper = new XmlMapper();
             List<ContestDto> originals = mapper.readValue(response.getBody(),List.class);
-//            log.info("response originals:{}",originals);
+            log.info("response originals:{}",originals);
             list=mapper.convertValue(originals, new TypeReference<List<ContestDto>>() {});
-//            log.info("response list:{}",list);
+            log.info("response list:{}",list);
 
 
         }catch (Exception e){

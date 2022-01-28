@@ -18,7 +18,7 @@ public class ContestWriter implements ItemWriter<List<Contest>> {
     public void write(List<? extends List<Contest>> list) throws Exception {
         for (List<Contest> contestList:list) {
             contestRepository.saveAll(contestList);
-//            log.info("batch writer list:{},size:{}",contestList,contestList.size());
+            log.info("batch writer list:{},size:{}",contestList,contestList.size());
         }
     }
 }

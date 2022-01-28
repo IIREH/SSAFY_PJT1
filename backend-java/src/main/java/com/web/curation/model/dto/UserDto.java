@@ -22,8 +22,8 @@ public class UserDto {
     private String email;
     private String name;
     private String nickName;
-//    @NotEmpty(message = "pw를 채워주세요.")
+//    @NotEmpty(message = "pwd를 채워주세요.")
 //    @Size(min=6,message = "비밀번호를 6자리 이상 해주세요.")
-    private String pw;
+    private String pwd;
     List<ObjectId> followers;
 }

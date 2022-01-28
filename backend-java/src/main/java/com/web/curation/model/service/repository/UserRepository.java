@@ -1,23 +1,23 @@
 package com.web.curation.model.service.repository;
 
-import com.web.curation.model.entity.UserEntity;
+import com.web.curation.model.entity.User;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface UserRepository extends MongoRepository<UserEntity, ObjectId> {
+public interface UserRepository extends MongoRepository<User, ObjectId> {
     @Override
-    UserEntity save(UserEntity userEntity);
+    User save(User user);
 
     @Override
-    List<UserEntity> findAll();
+    List<User> findAll();
 
-    List<UserEntity> findByEmail(String email);
+    List<User> findByEmail(String email);
 
     @Override
-    Optional<UserEntity> findById(ObjectId objectId);
+    Optional<User> findById(ObjectId objectId);
 
     @Override
     void deleteById(ObjectId objectId);

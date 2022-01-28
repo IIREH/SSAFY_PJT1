@@ -6,7 +6,7 @@ import com.web.curation.jwt.Token;
 import com.web.curation.jwt.TokenProvider;
 import com.web.curation.model.BasicResponse;
 import com.web.curation.model.dto.UserDto;
-import com.web.curation.model.entity.UserEntity;
+import com.web.curation.model.entity.User;
 import com.web.curation.model.service.UserService;
 import com.web.curation.utils.ApiUtils;
 import io.swagger.annotations.*;
@@ -43,16 +43,16 @@ public class UserController {
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
     @GetMapping("/login")
-    public ApiUtils.ApiResult<Token> login(@RequestParam(value = "id") String id, @RequestParam(value = "pw") String pw) throws UnauthorizedException {
+    public ApiUtils.ApiResult<Token> login(@RequestParam(value = "id") String id, @RequestParam(value = "pwd") String pwd) throws UnauthorizedException {
         log.info("login mapping");
 
         UserDto userDto = UserDto.builder()
                 .id(id)
-                .pw(pw)
+                .pwd(pwd)
                 .build();
         log.info("login info:'{}'",userDto);
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDto.getId(),userDto.getPw());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDto.getId(),userDto.getPwd());
         Authentication authentication =authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt =tokenProvider.createToken(authentication);

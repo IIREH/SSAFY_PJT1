@@ -5,7 +5,7 @@ import com.web.curation.model.dto.PostDto;
 import com.web.curation.model.entity.Comment;
 import com.web.curation.model.entity.Contest;
 import com.web.curation.model.entity.Post;
-import com.web.curation.model.entity.UserEntity;
+import com.web.curation.model.entity.User;
 import com.web.curation.model.service.repository.CommentRepository;
 import com.web.curation.model.service.repository.ContestRepository;
 import com.web.curation.model.service.repository.PostRepository;
@@ -15,6 +15,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,7 @@ public class PostService {
 
     public Post writePost(PostDto postDto) {
         Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
-        Optional<UserEntity> userOrNull = userRepository.findById(postDto.getUserId());
+        Optional<User> userOrNull = userRepository.findById(postDto.getUserId());
 
         if(contestOrNull.isPresent() == false || userOrNull.isPresent() == false) {
             return null;
@@ -67,7 +68,7 @@ public class PostService {
 //            }
 //        }
 //
-//        List<UserEntity> likedByList = new ArrayList<>();
+//        List<User> likedByList = new ArrayList<>();
 //        List<ObjectId> likedByIdList = postDto.getComments();
 //        if(likedByIdList != null) {
 //            for (ObjectId id : postDto.getLikedByList()) {
@@ -107,7 +108,7 @@ public class PostService {
 
     public Comment writeComment(ObjectId objectId, CommentDto commentDto) {
         Optional<Post> postOrNull = postRepository.findById(objectId);
-        Optional<UserEntity> userOrNull = userRepository.findById(commentDto.getUserId());
+        Optional<User> userOrNull = userRepository.findById(commentDto.getUserId());
 
         if(postOrNull.isPresent() == false || userOrNull.isPresent() == false) {
             return null;
@@ -120,7 +121,7 @@ public class PostService {
 
         commentRepository.save(comment);
         Post post = postOrNull.get();
-        List<Comment> comments = post.getComments();
+        List<Comment> comments = post.getComments() == null ? new ArrayList<>() : post.getComments();
         comments.add(comment);
         post.setComments(comments);
         postRepository.save(post);

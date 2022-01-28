@@ -26,12 +26,12 @@ public class Post {
     @DBRef
     private Contest contest;
     @DBRef
-    private UserEntity user;
+    private User user;
     @CreatedDate
     private Date writeDate;
     private String content;
     @DBRef
-    private List<UserEntity> likedByList;
+    private List<User> likedByList;
     @DBRef
     private List<HashTag> hashTags;
     @DBRef

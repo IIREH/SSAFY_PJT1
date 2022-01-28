@@ -49,16 +49,15 @@ public class IndexController {
         log.info("call index");
 
 //        인덱스 페이지 새로고침하며 테스트
-        UserEntity userEntity = UserEntity.builder()
+        User user = User.builder()
                 .email("test@test")
                 .name("testName")
                 .nickname("testNickName")
-                .pw("testPwd")
-                .followers(null)
+                .pwd("testPwd")
                 .build();
 
-        userRepository.insert(userEntity);
-        List<UserEntity> userList = userRepository.findAll();
+        userRepository.insert(user);
+        List<User> userList = userRepository.findAll();
         log.info("user list:{}",userList);
 
         Contest contest = Contest.builder()
@@ -67,17 +66,17 @@ public class IndexController {
                 .startDate("2022-03-10")
                 .endDate("2022-03-15")
                 .location("세종문화회관")
-                .cast(null)
-                .story("테스트를 위해 준비한 공연")
+                .poster("/poster.jpg")
+                .genre("horror")
                 .build();
         contestRepository.save(contest);
         log.info("contest list:{}", contestRepository.findAllByName("테스트 공연"));
 
         Comment comment = Comment.builder()
-                .user(userEntity)
+                .user(user)
                 .content("testComment").build();
         commentRepository.save(comment);
-        Optional<Comment> commentList = commentRepository.findAllByUser(userEntity);
+        Optional<Comment> commentList = commentRepository.findAllByUser(user);
         log.info("comment list:{}", commentList);
 
         HashTag hashTag = HashTag.builder()
@@ -87,9 +86,8 @@ public class IndexController {
         hashTagList.add(hashTag);
 
         Post post = Post.builder()
-//                .id(objectId)
                 .contest(contest)
-                .user(userEntity)
+                .user(user)
                 .content("테스트 공연에 관한 글")
                 .likedByList(null)
                 .hashTags(hashTagList)
@@ -98,11 +96,11 @@ public class IndexController {
         postRepository.save(post);
         postRepository.save(post);
 
-        Optional<Post> postList = postRepository.findAllByUser(userEntity);
+        Optional<Post> postList = postRepository.findAllByUser(user);
         log.info("post list:{}", postList);
         post.setContent("updated content");
         postRepository.save(post);
-        postList = postRepository.findAllByUser(userEntity);
+        postList = postRepository.findAllByUser(user);
         log.info("post list:{}", postList);
 
 //        postRepository.deleteById(objectId);

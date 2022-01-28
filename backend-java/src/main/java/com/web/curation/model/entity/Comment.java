@@ -21,7 +21,7 @@ public class Comment {
     @Id
     private ObjectId id;
     @DBRef
-    private UserEntity user;
+    private User user;
     @CreatedDate
     private Date writeDate;
     private String content;

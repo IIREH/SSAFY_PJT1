@@ -7,8 +7,9 @@ import logo from "../../img/ag-logo.png"
 import "../../Nav.css"
 
 const HeaderBlock = styled.div`
+  position: fixed;
   width: 100%;
-  background: white;
+  background: black;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 `;
 
@@ -45,41 +46,49 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ user, onLogout, onDelete }) => {
-  const [show, handleShow] = useState(false);
-  useEffect(() => {
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 100) {
-        handleShow(true);
-      } else handleShow(false);
-    });
-    return () => {
-      window.removeEventListener("scroll");
-    };
-  }, []);
+  // const [show, handleShow] = useState(false);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", () => {
+  //     if (window.scrollY > 100) {
+  //       handleShow(true);
+  //     } else handleShow(false);
+  //   });
+  //   return () => {
+  //     window.removeEventListener("scroll");
+  //   };
+  // }, []);
 
   return (
     <>
-      <div className={`nav ${show && "nav__white"}`}>
-        <Link to="/" className="logo">
-          <img
-          className="nav__logo"
-          src="https://yt3.ggpht.com/QiIRCMnjNvamjIxaJrieyvOFZ7uGCcZx4MQJoyR6lDcB7Q4f0Mb2vVfVG0BlL3V3LoZwQFuR=s900-c-k-c0x00ffffff-no-rj"
-          alt=""
-      />
-        </Link>
-        {user ? (
-          <div className="right">
-            <UserInfo>{user.username}</UserInfo>
-            <Button onClick={onLogout}>로그아웃</Button>
-            <Button to="/updateUserInfo">회원정보수정</Button>
-            <Button onClick={onDelete}>회원탈퇴</Button>
+      <HeaderBlock>
+        <Wrapper>
+          {/* <div className={`nav ${show && "nav__white"}`}> */}
+          <div>
+            <Link to="/" className="logo">
+              <img
+              height="50"
+              className="nav__logo"
+              src="https://yt3.ggpht.com/QiIRCMnjNvamjIxaJrieyvOFZ7uGCcZx4MQJoyR6lDcB7Q4f0Mb2vVfVG0BlL3V3LoZwQFuR=s900-c-k-c0x00ffffff-no-rj"
+              alt=""
+              />
+            </Link>
           </div>
-        ) : (
-          <div className="right">
-            <Button to="/login">로그인</Button>
+          <div>
+            {user ? (
+              <div className="right">
+                <UserInfo>{user.username}</UserInfo>
+                <Button onClick={onLogout}>로그아웃</Button>
+                <Button to="/updateUserInfo">회원정보수정</Button>
+                <Button onClick={onDelete}>회원탈퇴</Button>
+              </div>
+            ) : (
+              <div className="right">
+                <Button to="/login">로그인</Button>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </Wrapper>
+      </HeaderBlock>
       <Spacer />
     </>
   );

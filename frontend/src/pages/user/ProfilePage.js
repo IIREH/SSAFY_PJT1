@@ -1,9 +1,11 @@
-import React from 'react';
+import { useParams } from "react-router-dom";
 
 const ProfilePage = () => {
+  const { nickname } = useParams();
+
   return (
     <div>
-      프로필 페이지
+      { nickname }님의 프로필 페이지
     </div>
   );
 };

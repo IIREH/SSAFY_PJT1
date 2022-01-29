@@ -11,11 +11,13 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import WritePage from "./pages/post/WritePage";
 import PostPage from "./pages/post/PostPage";
 import UpdateUserInfoPage from "./pages/auth/UpdateUserInfoPage";
+import HeaderContainer from './containers/common/HeaderContainer';
 
 function App() {
   return (
     <div className="app">
       {/* Inserting design components and fetch param from tmdb API */}
+      <HeaderContainer />
       <Routes>
         <Route path="/" element={<PostListPage />} />
         <Route path="/login" element={<LoginPage />} />

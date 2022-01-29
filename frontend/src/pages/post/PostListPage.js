@@ -1,11 +1,10 @@
 import React from 'react';
-import HeaderContainer from '../containers/common/HeaderContainer';
 
 const PostListPage = () => {
   return (
-    <>
-      <HeaderContainer />
-    </>
+    <div>
+      전체 게시글 페이지(메인페이지)
+    </div>
   );
 };
 

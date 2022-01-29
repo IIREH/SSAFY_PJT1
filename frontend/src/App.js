@@ -3,6 +3,7 @@ import "./App.css";
 import Row from "./Row";
 import Banner from "./Banner";
 import "./Banner.css";
+<<<<<<< HEAD
 //import Nav from "./Nav";
 import { Route, Routes } from "react-router-dom";
 import PostListPage from "./pages/PostListPage";
@@ -10,6 +11,16 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import WritePage from "./pages/WritePage";
 import PostPage from "./pages/PostPage";
+=======
+import Nav from "./Nav";
+import { Route, Routes } from "react-router-dom";
+import PostListPage from "./pages/post/PostListPage";
+import LoginPage from "./pages/auth/LoginPage";
+import RegisterPage from "./pages/auth/RegisterPage";
+import WritePage from "./pages/post/WritePage";
+import PostPage from "./pages/post/PostPage";
+import UpdateUserInfoPage from "./pages/auth/UpdateUserInfoPage";
+>>>>>>> develop
 
 const App = () => {
   return (
@@ -19,6 +30,10 @@ const App = () => {
         <Route path="/" element={<PostListPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+<<<<<<< HEAD
+=======
+        <Route path="/updateUserInfo" element={<UpdateUserInfoPage />} />
+>>>>>>> develop
         <Route path="/write" element={<WritePage />} />
         <Route path="/@:username">
           <Route index element={<PostListPage />} />

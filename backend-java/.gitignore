@@ -29,3 +29,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+##Mongodb ###
+/mongo-storage/*
+
+### httpTest###
+/**/src/main/java/**/test/**

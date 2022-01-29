@@ -20,17 +20,17 @@ function Nav() {
 
   return (
     //   Always use nav css, except when scrolling 100px down we want the black__navbar class
-    <div className={`nav ${show && "nav__black"}`}>
+    <div className={`nav ${show && "nav__white"}`}>
       {/* Big main logo */}
       <img
         className="nav__logo"
-        src="https://edu.ssafy.com/asset/images/logo.png"
+        src="./img/ag-logo.png"
         alt=""
       />
       {/* Small corner logo */}
       <img
         className="nav__avatar"
-        src="https://edu.ssafy.com/asset/images/logo.png"
+        src="./img/ag-logo.png"
         alt=""
       />
     </div>

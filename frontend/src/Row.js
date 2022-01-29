@@ -4,7 +4,7 @@ import axios from "./axios";
 import "./Row.css";
 
 // Row component
-function Row({ title, fetchURL }) {
+function Row({ title, fetchURL, isLargeRow }) {
   //   Pulling information from tmdb API when the pages loads
   useEffect(() => {
     //   Running async call
@@ -21,6 +21,55 @@ function Row({ title, fetchURL }) {
     <div className="row">
       <h2>{title}</h2>
       <div className="row__posters">
+        <img
+          // onClick={() => }
+          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+          // Loads poster images from base url
+          src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF185909_220119_120945.gif"
+          alt=""
+        />
+        <img
+          // onClick={() => }
+          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+          // Loads poster images from base url
+          src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF185853_220118_104057.jpg"
+          alt=""
+        />
+        <img
+          // onClick={() => }
+          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+          // Loads poster images from base url
+          src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF185538_220107_125712.png"
+          alt=""
+        />
+        <img
+          // onClick={() => }
+          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+          // Loads poster images from base url
+          src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF185500_220106_102338.gif"
+          alt=""
+        />
+        <img
+          // onClick={() => }
+          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+          // Loads poster images from base url
+          src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF185613_220111_102554.gif"
+          alt=""
+        />
+        <img
+          // onClick={() => }
+          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+          // Loads poster images from base url
+          src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF185112_211223_112729.gif"
+          alt=""
+        />
+        <img
+          // onClick={() => }
+          className={`row__poster ${isLargeRow && "row__posterLarge"}`}
+          // Loads poster images from base url
+          src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF185552_220110_100621.jpg"
+          alt=""
+        />
       </div>
     </div>
   );

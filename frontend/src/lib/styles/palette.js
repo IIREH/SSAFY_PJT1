@@ -23,6 +23,20 @@ const palette = {
     '#1098ad',
     '#0c8599',
     '#0b7285'
+<<<<<<< HEAD
+=======
+  ],
+  purple:[
+    '#f8f0fc',
+    '#f3d9fa',
+    '#eebefa',
+    '#e599f7',
+    '#da77f2',
+    '#cc5de8',
+    '#be4bdb',
+    '#ae3ec9',
+    '#9c36b5'
+>>>>>>> develop
   ]
 };
 

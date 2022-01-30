@@ -1,11 +1,12 @@
 import { useParams } from "react-router-dom";
+import ProfileContainer from "../../containers/user/ProfileContainer";
 
 const ProfilePage = () => {
   const { nickname } = useParams();
 
-  return (
+  return (    
     <div>
-      { nickname }님의 프로필 페이지
+      <ProfileContainer nickname={nickname} />
     </div>
   );
 };

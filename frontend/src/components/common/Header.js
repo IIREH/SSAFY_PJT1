@@ -73,16 +73,16 @@ const Header = ({ user, onLogout, onDelete }) => {
               />
             </Link>
           </div>
-          <div>
+          <div className="right">
             {user ? (
-              <div className="right">
+              <div>
                 <UserInfo>{user.username}</UserInfo>
                 <Button onClick={onLogout}>로그아웃</Button>
                 <Button to="/updateUserInfo">회원정보수정</Button>
                 <Button onClick={onDelete}>회원탈퇴</Button>
               </div>
             ) : (
-              <div className="right">
+              <div>
                 <Button to="/login">로그인</Button>
               </div>
             )}

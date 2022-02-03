@@ -31,9 +31,9 @@ const RegisterForm = () => {
   // 폼 등록 이벤트 핸들러
   const onSubmit = (e) => {
     e.preventDefault();
-    const { email, username, nickname, password, passwordConfirm } = form;
+    const { id, email, username, nickname, password, passwordConfirm } = form;
     // 하나라도 비어있다면
-    if ([email, username, nickname, password, passwordConfirm].includes('')) {
+    if ([id, email, username, nickname, password, passwordConfirm].includes('')) {
       setError('빈 칸을 모두 입력하세요.');
       return;
     }
@@ -46,7 +46,7 @@ const RegisterForm = () => {
       );
       return;
     }
-    dispatch(register({ email, username, nickname, password }));
+    dispatch(register({ id, email, username, nickname, password }));
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함
@@ -59,10 +59,10 @@ const RegisterForm = () => {
     if (authError) {
       console.log(authError);
       // 계정명이 이미 존재할 때
-      if (authError.response.status === 409) {
-        setError('이미 존재하는 계정명입니다.');
-        return;
-      }
+      // if (authError.response.status === 409) {
+      //   setError('이미 존재하는 계정명입니다.');
+      //   return;
+      // }
       // 기타 이유
       setError('회원가입 실패');
       return;

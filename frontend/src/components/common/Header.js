@@ -68,7 +68,7 @@ const Header = ({ user, onLogout, onDelete }) => {
               <img
               height="50"
               className="nav__logo"
-              src="https://yt3.ggpht.com/QiIRCMnjNvamjIxaJrieyvOFZ7uGCcZx4MQJoyR6lDcB7Q4f0Mb2vVfVG0BlL3V3LoZwQFuR=s900-c-k-c0x00ffffff-no-rj"
+              src="https://i.pinimg.com/originals/3c/69/37/3c6937c4aec7129623022d1155dd831a.jpg"
               alt=""
               />
             </Link>

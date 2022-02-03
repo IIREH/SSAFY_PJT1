@@ -84,4 +84,11 @@ public class TokenProvider implements InitializingBean {
         }
         return false;
     }
+    public String getId(String token){
+        validateToken(token);
+        String id=Jwts.parser().setSigningKey(key).parseClaimsJws(token).getBody().getSubject();
+        log.info("jwt id:{}",id);
+        return id;
+    }
+
 }

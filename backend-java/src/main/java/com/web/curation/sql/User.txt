@@ -1,6 +1,5 @@
 {
- "user_id":ObjectID()
-,"email":"test@test"
+"email":"test@test"
 ,"name":"test"
 ,"nickname":"testName"
 ,"pwd":1234

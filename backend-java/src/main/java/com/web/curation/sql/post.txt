@@ -1,6 +1,5 @@
 {
-"post_id":ObjectID()
-,"contest_id":0
+"contest_id":0
 ,"writeDate":"2022-01-15"
 ,"content":"멋진공연 ㄵ"
 ,"likeByList":["멋","진"]

@@ -7,6 +7,8 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface UserRepository extends MongoRepository<User, ObjectId> {
-
-    List<User>findByEmail(String email);
+    User findByEmailOrNickname(String email,String nickname);
+    User findByEmail(String email);
+    @Override
+    <S extends User> S insert(S entity);
 }

@@ -1,6 +1,5 @@
 {
-"contest_id":ObjectID()
-,"name":"멋진공연"
+"name":"멋진공연"
 ,startDate:"2022-01-15"
 ,"startDate":"2022-01-20"
 ,"location":"광주"

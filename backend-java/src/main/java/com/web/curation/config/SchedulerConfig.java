@@ -26,8 +26,8 @@ public class SchedulerConfig {
 
     //TODO 원하는 시간대로 전자는 서비스시 쓸 것 매달 20일 04시 후자는 10초마다 배치를 하게 만듬.
 
-   //@Scheduled(cron="0 0 4 20 * ?")
-   @Scheduled(cron="0/10 * * * *  ?")
+   @Scheduled(cron="0 0 4 20 * ?")
+   //@Scheduled(cron="0/59 * * * *  ?")
     public void batchContestList() throws JobInstanceAlreadyCompleteException, JobExecutionAlreadyRunningException, JobParametersInvalidException, JobRestartException {
         log.info("Run Scheduler");
         LocalDate sdate = LocalDate.now();

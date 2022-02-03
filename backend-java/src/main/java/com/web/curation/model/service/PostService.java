@@ -2,22 +2,14 @@ package com.web.curation.model.service;
 
 import com.web.curation.model.dto.CommentDto;
 import com.web.curation.model.dto.PostDto;
-import com.web.curation.model.entity.Comment;
-import com.web.curation.model.entity.Contest;
-import com.web.curation.model.entity.Post;
-import com.web.curation.model.entity.User;
-import com.web.curation.model.service.repository.CommentRepository;
-import com.web.curation.model.service.repository.ContestRepository;
-import com.web.curation.model.service.repository.PostRepository;
-import com.web.curation.model.service.repository.UserRepository;
+import com.web.curation.model.entity.*;
+import com.web.curation.model.service.repository.*;
 import lombok.extern.slf4j.Slf4j;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -27,6 +19,9 @@ public class PostService {
 
     @Autowired
     CommentRepository commentRepository;
+
+    @Autowired
+    HashTagRepository hashTagRepository;
 
     @Autowired
     ContestRepository contestRepository;
@@ -41,15 +36,32 @@ public class PostService {
         if(contestOrNull.isPresent() == false || userOrNull.isPresent() == false) {
             return null;
         }
-//        TODO: hashTag가 기존에 없던 것일 수 있으니 추가하는 작업
+
+        List<HashTag> hashTags = new ArrayList<>();
+        if(postDto.getHashTags() != null) {
+            for(String ht : postDto.getHashTags()) {
+                HashTag hashTag = HashTag.builder()
+                        .hashTag(ht)
+                        .build();
+                hashTagRepository.save(hashTag);
+
+                hashTags.add(hashTag);
+        }
+
+        }
         Post post = Post.builder()
                 .contest(contestOrNull.get())
                 .user(userOrNull.get())
                 .content(postDto.getContent())
-                .hashTags(postDto.getHashTags())
+                .hashTags(hashTags)
                 .build();
 
         return postRepository.save(post);
+    }
+
+    public List<Post> listPost(Pageable pageable) {
+        List<Post> posts = postRepository.findAll(pageable).getContent();
+        return posts == null ? null : posts;
     }
 
     public Post updatePost(PostDto postDto) {
@@ -60,40 +72,29 @@ public class PostService {
             return null;
         }
 
-//        List<Comment> comments = new ArrayList<>();
-//        List<ObjectId> commentIds = postDto.getComments();
-//        if(commentIds != null) {
-//            for(ObjectId id : postDto.getComments()) {
-//                comments.add(commentRepository.findById(id).get());
-//            }
-//        }
-//
-//        List<User> likedByList = new ArrayList<>();
-//        List<ObjectId> likedByIdList = postDto.getComments();
-//        if(likedByIdList != null) {
-//            for (ObjectId id : postDto.getLikedByList()) {
-//                likedByList.add(userRepository.findById(id).get());
-//            }
-//        }
-//
-//        Post post = Post.builder()
-//                .id(postDto.getId())
-//                .contest(contestOrNull.get())
-//                .user(userOrNull.get())
-//                .content(postDto.getContent())
-//                .likedByList(likedByList)
-//                .hashTags(postDto.getHashTags())
-//                .comments(comments)
-//                .build();
-//        TODO: hashTag가 기존에 없던 것일 수 있으니 추가하는 작업
+        List<HashTag> hashTags = new ArrayList<>();
+        if(postDto.getHashTags() != null) {
+            for (String ht : postDto.getHashTags()) {
+                HashTag hashTag = HashTag.builder()
+                        .hashTag(ht)
+                        .build();
+                hashTagRepository.save(hashTag);
+
+                hashTags.add(hashTag);
+            }
+        }
+
         Post post = postOrNull.get();
         post.setContent(postDto.getContent());
         post.setContest(contestOrNull.get());
+        post.setHashTags(hashTags);
+//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.ssss", Locale.UK);
+//        post.setModifyDate(format.format(new Date()));
         return postRepository.save(post);
     }
 
-    public boolean deletePost(ObjectId id) {
-        Optional<Post> postOrNull = postRepository.findById(id);
+    public boolean deletePost(String postId) {
+        Optional<Post> postOrNull = postRepository.findById(postId);
         if(postOrNull.isPresent() == false) {
             return false;
         }
@@ -102,12 +103,40 @@ public class PostService {
         if(comments != null) {
             commentRepository.deleteAll(comments);
         }
-        postRepository.deleteById(id);
+        postRepository.deleteById(postId);
         return true;
     }
 
-    public Comment writeComment(ObjectId objectId, CommentDto commentDto) {
-        Optional<Post> postOrNull = postRepository.findById(objectId);
+    public boolean clickLikeButton(String postId, String userId) {
+        Optional<Post> postOrNull = postRepository.findById(postId);
+        Optional<User> userOrNull = userRepository.findById(userId);
+        if(postOrNull.isPresent() == false || userOrNull.isPresent() == false) {
+            return false;
+        }
+
+        Post post = postOrNull.get();
+        User user = userOrNull.get();
+        List<User> likedByList = post.getLikedByList() == null ? new ArrayList<>() : post.getLikedByList();
+//        Optional<User> user = postRepository.findByIdAndLikedByListId(postId, userId);
+//        for(User u : likedByList) {
+//            if(u.getId().equals(userId) == false) {
+//                continue;
+//            }
+//            likedByList.remove(user);
+//        }
+
+        if(likedByList.contains(user)) {
+            likedByList.remove(user);
+        } else if(likedByList.contains(user) == false) {
+            likedByList.add(user);
+        }
+//        post.setLikedByList(likedByList);
+        postRepository.save(post);
+        return true;
+    }
+
+    public Comment writeComment(String postId, CommentDto commentDto) {
+        Optional<Post> postOrNull = postRepository.findById(postId);
         Optional<User> userOrNull = userRepository.findById(commentDto.getUserId());
 
         if(postOrNull.isPresent() == false || userOrNull.isPresent() == false) {
@@ -128,7 +157,21 @@ public class PostService {
         return comment;
     }
 
-    public boolean deleteComment(ObjectId postId, ObjectId commentId) {
+    public Comment updateComment(String postId, CommentDto commentDto) {
+        Optional<Post> postOrNull = postRepository.findById(postId);
+        Optional<Comment> commentOrNull = commentRepository.findById(commentDto.getId());
+
+        if(postOrNull.isPresent() == false || commentOrNull.isPresent() == false) {
+            return null;
+        }
+
+        Comment comment = commentOrNull.get();
+        comment.setContent(comment.getContent());
+        commentRepository.save(comment);
+        return comment;
+    }
+
+    public boolean deleteComment(String postId, String commentId) {
         Optional<Comment> commentOrNull = commentRepository.findById(commentId);
         Optional<Post> postOrNull = postRepository.findById(postId);
         if(commentOrNull.isPresent() == false || postOrNull.isPresent() == false) {

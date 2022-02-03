@@ -33,4 +33,15 @@ public class User {
         this.follower = follower;
         this.followee = followee;
     }
+
+    public boolean equals(Object o) {
+        if(o instanceof User) {
+            User user = (User) o;
+            if(user.getId().equals(this.getId())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }

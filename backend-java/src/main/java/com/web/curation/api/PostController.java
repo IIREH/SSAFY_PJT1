@@ -32,7 +32,7 @@ public class PostController {
     PostService postservice;
 
     @ApiOperation(value = "글작성", notes = "새 게시글 작성, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
-    @PostMapping("/")
+    @PostMapping()
     public ApiUtils.ApiResult<?> writePost(@RequestBody PostDto postDto) {
         Post post = postservice.writePost(postDto);
 
@@ -44,7 +44,7 @@ public class PostController {
     }
 
     @ApiOperation(value = "글 목록 조회", notes = "게시글 목록 조회, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
-    @GetMapping("/")
+    @GetMapping()
     public ApiUtils.ApiResult<?> listPost(@ApiParam(value = "가져올 페이지 정보", required = true) Pageable pageable) {
         List<Post> posts = postservice.listPost(pageable);
 
@@ -56,7 +56,7 @@ public class PostController {
     }
 
     @ApiOperation(value = "글수정", notes = "기존 게시글 수정, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
-    @PutMapping("/")
+    @PutMapping()
     public ApiUtils.ApiResult<?> updatePost(@RequestBody @ApiParam(value = "게시글 정보", required = true) PostDto postDto) {
         if(postservice.updatePost(postDto) == null) {
             return ApiUtils.error("행사나 사용자를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST);
@@ -85,7 +85,7 @@ public class PostController {
     }
 
     @ApiOperation(value = "댓글 수정", notes = "기존 댓글 수정, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
-    @PutMapping("/{postId}/")
+    @PutMapping("/{postId}")
     public ApiUtils.ApiResult<?> updateComment(@PathVariable("postId") @ApiParam(value = "게시글 ID", required = true) String postId,
                                               @RequestBody @ApiParam(value = "댓글 정보", required = true) CommentDto commentDto) {
         if(postservice.updateComment(postId, commentDto) == null) {

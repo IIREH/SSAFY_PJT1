@@ -2,7 +2,7 @@
 "email":"test@test"
 ,"name":"test"
 ,"nickname":"testName"
-,"pwd":1234
+,"pwd":1234567
 ,"follower":["test1@test","test2@test"]
 ,role:"ADMIN"
 }

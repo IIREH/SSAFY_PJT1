@@ -6,7 +6,10 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @EnableScheduling
 @EnableBatchProcessing
@@ -17,5 +20,14 @@ public class WebCurationApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(WebCurationApplication.class, args);
 	}
-
+	//TODO 임시적으로 크로스 오리진 허용.(삭제예정)
+	@Bean
+	public WebMvcConfigurer corsConfigurer(){
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*").maxAge(6000);
+			}
+		};
+	}
 }

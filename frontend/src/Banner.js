@@ -18,21 +18,25 @@ function Banner() {
       className="banner"
       style={{
         backgroundSize: "cover",
-        backgroundImage: `url("https://www.kopis.or.kr/upload/pfmPoster/PF_PF185931_220120_104206.jpg")`,
+        backgroundImage: `url("https://cdn.mhns.co.kr/news/photo/201901/156497_205754_5857.jpg")`,
         backgroundPosition: "center center",
       }}
     >
       <div className="banner__contents">
         <h1 className="banner__title">{}</h1>
         <div className="banner__buttons">
-          <button className="banner__button">글 보러가기</button>
-          <button className="banner__button">쪼아요</button>
+        <br></br><br></br><br></br><br></br><br></br>
+        <br></br><br></br><br></br><br></br><br></br>
+        <br></br><br></br><br></br><br></br><br></br>
+        <br></br><br></br><br></br><br></br><br></br>
+          <button className="banner__button">공연 순위</button>
+          <button className="banner__button">SNS 순위</button>
         </div>
 
         <h1 className="banner__description">
         <br></br><br></br><br></br><br></br><br></br>
-          슈배르트가 작곡한 세계 최고의 명곡...!<br></br>
-          포브스 선정 꼭 들어야 되는 음악 1위...!<br></br>
+          <br></br>
+          <br></br>
         </h1>
       </div>
       {/* Empty fade div with bottom fade effect  */}

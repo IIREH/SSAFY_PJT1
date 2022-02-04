@@ -2,33 +2,40 @@ package com.web.curation.model.entity;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
-@Document(collection = "Post")
+@Document(collection = "posts")
 @Getter
+@Setter
+@Builder
 @ToString
 public class Post {
-    private ObjectId id;
-    private String contest_id;
-    private LocalDateTime writeDate;
+    @Id
+    private String id;
+    @DBRef
+    private Contest contest;
+    @DBRef
+    private User user;
+    @CreatedDate
+    private Date writeDate;
+    @LastModifiedDate
+    private Date modifyDate;
     private String content;
-    private List<ObjectId> likeByList;
-    private List<String> hashTag;
-    private List<ObjectId> commentId;
-
-    @Builder
-    public Post(ObjectId id, String contest_id, LocalDateTime writeDate, String content, List<ObjectId> likeByList, List<String> hashTag, List<ObjectId> commentId) {
-        this.id = id;
-        this.contest_id = contest_id;
-        this.writeDate = writeDate;
-        this.content = content;
-        this.likeByList = likeByList;
-        this.hashTag = hashTag;
-        this.commentId = commentId;
-    }
+    @DBRef
+    private List<User> likedByList;
+    @DBRef
+    private List<HashTag> hashTags;
+    @DBRef
+    private List<Comment> comments;
 }

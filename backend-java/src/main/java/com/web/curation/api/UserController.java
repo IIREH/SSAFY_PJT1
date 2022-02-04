@@ -1,7 +1,5 @@
 package com.web.curation.api;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Predicates;
 import com.web.curation.exception.UnauthorizedException;
 import com.web.curation.jwt.JwtFilter;
 import com.web.curation.jwt.Token;
@@ -10,8 +8,7 @@ import com.web.curation.model.BasicResponse;
 import com.web.curation.model.dto.UserDto;
 import com.web.curation.model.service.UserService;
 import com.web.curation.utils.ApiUtils;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -27,6 +24,7 @@ import org.springframework.web.bind.annotation.*;
         @ApiResponse(code = 500, message = "Failure", response = BasicResponse.class) })
 
 @Slf4j
+@Api("사용자 컨트롤러")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/user")
@@ -55,6 +53,7 @@ public class UserController {
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER,"Bearer "+jwt);
         return ApiUtils.success(new Token(jwt));
     }
+    @ApiOperation(value = "회원가입", notes = "회원가입 결과 메시지 반환", response = ApiUtils.ApiResult.class)
     @PostMapping()
     public ApiUtils.ApiResult<Boolean> register(@RequestParam(value = "id") String id,@RequestParam(value = "pwd") String pwd,@RequestParam(value = "nickName") String nickName){
         log.info("register connect");
@@ -67,6 +66,7 @@ public class UserController {
         log.info("register success");
         return ApiUtils.success(Boolean.TRUE);
     }
+    @ApiOperation(value = "회원변경", notes = "회원변경 논리값 반환", response = ApiUtils.ApiResult.class)
     @PutMapping()
     public ApiUtils.ApiResult<Boolean> update(@RequestParam(value = "jwt") String jwt,@RequestParam(value = "pwd") String pwd,@RequestParam(value = "nickName")String nickName){
         log.info("update connect");
@@ -80,6 +80,7 @@ public class UserController {
         return ApiUtils.success(Boolean.TRUE);
 
     }
+    @ApiOperation(value = "회원탈퇴", notes = "회원탈퇴 논리값 반환", response = ApiUtils.ApiResult.class)
     @DeleteMapping()
     public ApiUtils.ApiResult<Boolean> delete(@RequestParam(value = "jwt") String jwt){
         log.info("delete connect");
@@ -88,6 +89,5 @@ public class UserController {
 
         return ApiUtils.success(Boolean.TRUE);
     }
-
 
 }

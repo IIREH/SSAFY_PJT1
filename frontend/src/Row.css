@@ -2,7 +2,7 @@
 /* Positioning rows to right */
 .row {
     margin-left: 20px;
-    color: white;
+    color: grey;
 }
 /* Positioning in flex */
 .row__posters {

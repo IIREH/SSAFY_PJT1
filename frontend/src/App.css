@@ -1,9 +1,9 @@
 
 /* Applies to the html document */
 * {
-  margin:0;
+  margin:4px;
 }
 /* Styling app component */
 .app {
-  background-color: #111;
+  background-color: black;
 }

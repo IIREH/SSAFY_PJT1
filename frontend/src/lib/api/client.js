@@ -23,7 +23,7 @@ const client = axios.create({
       // 요청 실패 시 특정 작업 수행
       return Promise.reject(error);
     }
-  })  
+  })
 */
 
 export default client;

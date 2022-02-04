@@ -1,6 +1,6 @@
 import { createAction, handleActions } from 'redux-actions';
 import produce from 'immer';
-import { call, takeLatest } from 'redux-saga/effects';
+import { takeLatest } from 'redux-saga/effects';
 import createRequestSaga, {
   createRequestActionTypes
 } from '../lib/createRequestSaga';
@@ -21,6 +21,8 @@ const [UPDATE_USER_INFO, UPDATE_USER_INFO_SUCCESS, UPDATE_USER_INFO_FAILURE] = c
   'auth/UPDATE_USER_INFO'
 );
 
+const JWT = 'auth/JWT';
+
 export const changeField = createAction(
   CHANGE_FIELD,
   ({ form, key, value }) => ({
@@ -30,22 +32,21 @@ export const changeField = createAction(
   })
 );
 export const initializeForm = createAction(INITIALIZE_FORM, form => form); // register / login / updateUserInfo
-export const register = createAction(REGISTER, ({ id, email, username, nickname, password }) => ({
-  id,
+export const register = createAction(REGISTER, ({ email, nickname, password }) => ({
   email,
-  username,
   nickname,
   password
 }));
-export const login = createAction(LOGIN, ({ id, password }) => ({
-  id,
+export const login = createAction(LOGIN, ({ email, password }) => ({
+  email,
   password
 }));
-export const updateUserInfo = createAction(UPDATE_USER_INFO, ({ id, nickname, password }) => ({
-  id,
+export const updateUserInfo = createAction(UPDATE_USER_INFO, ({ email, nickname, password }) => ({
+  email,
   nickname,
   password
 }));
+export const jwt = createAction(JWT, jwt => jwt);
 
 // saga 생성
 const registerSaga = createRequestSaga(REGISTER, authAPI.register);
@@ -60,15 +61,13 @@ export function* authSaga() {
 
 const initialState = {
   register: {
-    id: '',
     email: '',
-    username: '',
     nickname: '',
     password: '',
     passwordConfirm: ''
   },
   login: {
-    id: '',
+    email: '',
     password: ''
   },
   updateUserInfo: {
@@ -77,7 +76,7 @@ const initialState = {
     passwordConfirm: ''
   },
   auth: null,
-  authError: null
+  authError: null,
 };
 
 const auth = handleActions(
@@ -121,6 +120,10 @@ const auth = handleActions(
     [UPDATE_USER_INFO_FAILURE]: (state, { payload: error }) => ({
       ...state,
       authError: error,
+    }),
+    [JWT]: (state, { payload: jwt }) => ({
+      ...state,
+      jwt,
     }),
   },
   initialState

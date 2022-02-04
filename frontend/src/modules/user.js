@@ -12,11 +12,13 @@ const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes(
 );
 const LOGOUT = 'user/LOGOUT';
 const DELETE_USER_INFO = 'user/DELETE_USER_INFO';
+const CHECK_JWT = 'user/CHECK_JWT';
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 export const check = createAction(CHECK);
 export const logout = createAction(LOGOUT);
 export const deleteUserInfo = createAction(DELETE_USER_INFO, user => user);
+export const checkJwt = createAction(CHECK_JWT, jwt => jwt);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
@@ -83,6 +85,7 @@ export default handleActions(
       ...state,
       user: null,
     }),
+    // [CHECK_JWT]: (state, )
   },
   initialState,
 );

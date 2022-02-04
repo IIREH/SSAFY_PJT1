@@ -75,31 +75,13 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
     <AuthFormBlock>
       <h3>{text}</h3>
       <form onSubmit={onSubmit}>
-        {type === 'register' && (
-          <StyledInput 
-            autoComplete="email"
-            name="email"
-            placeholder="이메일"
-            onChange={onChange}
-            value={form.email}
-          />
-        )}
         <StyledInput 
-          autoComplete="id"
-          name="id"
-          placeholder="아이디"
+          autoComplete="email"
+          name="email"
+          placeholder="이메일"
           onChange={onChange}
-          value={form.id}
+          value={form.email}
         />
-        {type === 'register' && (
-          <StyledInput
-            autoComplete="username"
-            name="username"
-            placeholder="이름"
-            onChange={onChange}
-            value={form.username}
-          />
-        )}
         {type === 'register' && (
           <StyledInput 
             autoComplete="nickname"

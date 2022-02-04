@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeField, initializeForm, register } from '../../modules/auth';
+import { changeField, initializeForm, register, login } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
-import { check } from '../../modules/user';
 import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
   }));
   const navigate = useNavigate();
 
@@ -31,9 +29,9 @@ const RegisterForm = () => {
   // 폼 등록 이벤트 핸들러
   const onSubmit = (e) => {
     e.preventDefault();
-    const { id, email, username, nickname, password, passwordConfirm } = form;
+    const { email, nickname, password, passwordConfirm } = form;
     // 하나라도 비어있다면
-    if ([id, email, username, nickname, password, passwordConfirm].includes('')) {
+    if ([email, nickname, password, passwordConfirm].includes('')) {
       setError('빈 칸을 모두 입력하세요.');
       return;
     }
@@ -46,7 +44,7 @@ const RegisterForm = () => {
       );
       return;
     }
-    dispatch(register({ id, email, username, nickname, password }));
+    dispatch(register({ email, nickname, password }));
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 을 초기화함
@@ -58,11 +56,11 @@ const RegisterForm = () => {
   useEffect(() => {
     if (authError) {
       console.log(authError);
-      // 계정명이 이미 존재할 때
-      // if (authError.response.status === 409) {
-      //   setError('이미 존재하는 계정명입니다.');
-      //   return;
-      // }
+      //계정명이 이미 존재할 때
+      if (authError.response.status === 409) {
+        setError('이미 존재하는 계정명입니다.');
+        return;
+      }
       // 기타 이유
       setError('회원가입 실패');
       return;
@@ -71,21 +69,23 @@ const RegisterForm = () => {
     if (auth) {
       console.log('회원가입 성공');
       console.log(auth);
-      dispatch(check());
+      const { email, password } = auth
+      dispatch(login({ email, password }));
     }
-  }, [auth, authError, dispatch]);
+  }, [auth, authError, dispatch, navigate]);
 
   // user 값이 잘 설정되었는지 확인
   useEffect(() => {
-    if (user) {
+    const jwt = localStorage.getItem('jwt');
+    if (jwt) {
       navigate('/'); // 홈 화면으로 이동
-      try {
-        localStorage.setItem('user', JSON.stringify(user));
-      } catch (e) {
-        console.log('localStorage is not working');
-      }
+      // try {
+      //   localStorage.setItem('user', JSON.stringify(user));
+      // } catch (e) {
+      //   console.log('localStorage is not working');
+      // }
     }
-  }, [navigate, user]);
+  }, [navigate]);
 
   return (
     <AuthForm

@@ -1,21 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from 'react';
 import UpdateUserInfoForm from '../../components/auth/UpdateUserInfoForm';
-import { check } from "../../modules/user";
-import { useNavigate } from "react-router-dom";
 import { changeField, initializeForm, updateUserInfo } from "../../modules/auth";
 
 const UpdateUserInfoFormContainer = () => {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
+  const { form, auth, authError } = useSelector(({ auth }) => ({
     form: auth.updateUserInfo,
     auth: auth.auth,
     authError: auth.authError,
-    user: user.user,
   }));
-
-  const navigate = useNavigate();
 
   // 인풋 변경 이벤트 핸들러
   const onChange = (e) => {
@@ -33,7 +28,7 @@ const UpdateUserInfoFormContainer = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const { nickname, password, passwordConfirm } = form;
-    const id = user._id;
+    const jwt = localStorage.getItem('jwt');
     
     // 비밀번호가 일치하지 않는다면
     if (password !== passwordConfirm) {
@@ -44,7 +39,7 @@ const UpdateUserInfoFormContainer = () => {
       );
       return;
     }
-    dispatch(updateUserInfo({ id, nickname, password }));
+    dispatch(updateUserInfo({ jwt, nickname, password }));
   };
 
   // 컴포넌트가 처음 렌더링 될 때 form 초기화
@@ -63,11 +58,7 @@ const UpdateUserInfoFormContainer = () => {
       setError('회원정보 수정 실패');
       return;
     }
-
-    if (auth) {
-      dispatch(check());
-    }
-  }, [auth, authError, dispatch])
+  }, [auth, authError])
 
   return (
     <UpdateUserInfoForm 

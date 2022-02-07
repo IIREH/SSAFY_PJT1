@@ -41,8 +41,7 @@ export const login = createAction(LOGIN, ({ email, password }) => ({
   email,
   password
 }));
-export const updateUserInfo = createAction(UPDATE_USER_INFO, ({ email, nickname, password }) => ({
-  email,
+export const updateUserInfo = createAction(UPDATE_USER_INFO, ({ nickname, password }) => ({
   nickname,
   password
 }));

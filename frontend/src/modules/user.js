@@ -12,13 +12,13 @@ const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes(
 );
 const LOGOUT = 'user/LOGOUT';
 const DELETE_USER_INFO = 'user/DELETE_USER_INFO';
-const CHECK_JWT = 'user/CHECK_JWT';
+const CHECK_USER = 'user/CHECK_USER';
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 export const check = createAction(CHECK);
 export const logout = createAction(LOGOUT);
 export const deleteUserInfo = createAction(DELETE_USER_INFO, user => user);
-export const checkJwt = createAction(CHECK_JWT, jwt => jwt);
+export const checkUser = createAction(CHECK_USER, user => user);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
@@ -30,14 +30,15 @@ function checkFailureSaga() {
   }
 }
 
-function* logoutSaga() {
-  try {
-    yield call(authAPI.logout); // logout API 호출
-    localStorage.removeItem('user'); // localStorage 에서 user 제거
-  } catch (e) {
-    console.log(e);
-  }
-}
+// function* logoutSaga() {
+//   try {
+//     yield call(authAPI.logout); // logout API 호출
+//     localStorage.removeItem('jwt');
+//     localStorage.removeItem('user'); // localStorage 에서 user 제거
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
 
 function* deleteUserInfoSaga(user) {
   const id = user.payload._id;
@@ -52,7 +53,7 @@ function* deleteUserInfoSaga(user) {
 export function* userSaga() {
   yield takeLatest(CHECK, checkSaga);
   yield takeLatest(CHECK_FAILURE, checkFailureSaga);
-  yield takeLatest(LOGOUT, logoutSaga);
+  // yield takeLatest(LOGOUT, logoutSaga);
   yield takeLatest(DELETE_USER_INFO, deleteUserInfoSaga);
 }
 
@@ -85,7 +86,10 @@ export default handleActions(
       ...state,
       user: null,
     }),
-    // [CHECK_JWT]: (state, )
+    [CHECK_USER]: (state, { payload: user}) => ({
+      ...state,
+      user
+    }),
   },
   initialState,
 );

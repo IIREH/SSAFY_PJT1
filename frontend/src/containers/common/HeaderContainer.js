@@ -7,7 +7,10 @@ const HeaderContainer = () => {
   const { user } = useSelector(({ user }) => ({ user: user.user }));
   const dispatch = useDispatch();
   const onLogout = () => {
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('user');
     dispatch(logout());
+    window.location.reload();
   };
   const onDelete = () => {
     dispatch(deleteUserInfo(user));

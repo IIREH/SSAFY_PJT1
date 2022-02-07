@@ -8,10 +8,16 @@ import com.web.curation.model.service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+@Validated
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -30,14 +36,15 @@ public class UserServiceImpl implements UserService {
                 .nickname(userDto.getNickName())
                 .role("USER")
                 .build();
-
        userRepository.insert(user);
+       //UserDto dto = UserDto.builder().id(user.getId())
+
     }
 
     @Override
-    public void update(String jwt, UserDto userDto) {
+    public void update(UserDto userDto) {
+        String jwt = userDto.getJwt();
         log.info("jwt:{}",jwt);
-
         log.info("jwt 해독:{}",tokenProvider.getId(jwt));
         User jwtUser = userRepository.findByEmail(tokenProvider.getId(jwt));
         log.info("jwtUser",jwtUser);
@@ -59,6 +66,7 @@ public class UserServiceImpl implements UserService {
         log.info("회원수정 before:{}, after:{}",user,updateUser);
 
         userRepository.save(updateUser);
+
     }
     //TODO 우선 아예 삭제하는걸로 만듬. 추후에 삭제를 기록하는 것도 좋아보임.
 
@@ -71,11 +79,13 @@ public class UserServiceImpl implements UserService {
         log.info("회원 삭제전 유저:{}, 삭제 확인:{}",user,deleteUser);
     }
 
+
     private User findByEmailOrNickName(String email,String nickName,Predicate<User> predicate,String msg){
         User user = userRepository.findByEmailOrNickname(email, nickName);
         if(predicate.test(user))
             throw new RuntimeException(msg);
         return  user;
     }
+
 
 }

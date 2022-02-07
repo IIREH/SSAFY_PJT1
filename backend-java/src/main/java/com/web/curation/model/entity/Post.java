@@ -1,6 +1,5 @@
 package com.web.curation.model.entity;
 
-import com.sun.xml.internal.bind.v2.TODO;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

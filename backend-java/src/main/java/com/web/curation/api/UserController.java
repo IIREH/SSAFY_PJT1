@@ -19,7 +19,13 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import java.util.HashMap;
+import java.util.Map;
 
 @ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized", response = BasicResponse.class),
         @ApiResponse(code = 403, message = "Forbidden", response = BasicResponse.class),
@@ -36,29 +42,33 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public ApiUtils.ApiResult<Token> login(@RequestParam(value = "id") String id, @RequestParam(value = "pwd") String pwd) throws UnauthorizedException {
+    public ApiUtils.ApiResult<Token> login(@RequestParam(value = "id")  String id, @RequestParam(value = "pwd") String pwd) throws UnauthorizedException {
         log.info("login mapping");
-
-        UserDto userDto = UserDto.builder()
+       @Valid
+        UserDto userDto = UserDto.login()
                 .id(id)
                 .pwd(pwd)
                 .build();
 
         log.info("login info:'{}'",userDto);
+        userService.validate(userDto);
+
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDto.getId(),userDto.getPwd());
         Authentication authentication =authenticationManagerBuilder.getObject().authenticate(usernamePasswordAuthenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt =tokenProvider.createToken(authentication);
-        log.info("jwt:{}",jwt);
         HttpHeaders httpHeaders =new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER,"Bearer "+jwt);
+        log.info("jwt:{}",jwt);
+        log.info("login success");
+
         return ApiUtils.success(new Token(jwt));
     }
     @PostMapping()
     public ApiUtils.ApiResult<Boolean> register(@RequestParam(value = "id") String id,@RequestParam(value = "pwd") String pwd,@RequestParam(value = "nickName") String nickName){
         log.info("register connect");
-        UserDto userDto = UserDto.builder()
+        UserDto userDto = UserDto.register()
                 .id(id)
                 .pwd(pwd)
                 .nickName(nickName)
@@ -70,11 +80,12 @@ public class UserController {
     @PutMapping()
     public ApiUtils.ApiResult<Boolean> update(@RequestParam(value = "jwt") String jwt,@RequestParam(value = "pwd") String pwd,@RequestParam(value = "nickName")String nickName){
         log.info("update connect");
-        UserDto userDto = UserDto.builder()
+        UserDto userDto = UserDto.update()
                 .pwd(pwd)
                 .nickName(nickName)
+                .jwt(new StringBuilder(jwt))
                 .build();
-        userService.update(jwt,userDto);
+        userService.update(userDto);
         log.info("update success");
 
         return ApiUtils.success(Boolean.TRUE);

@@ -94,8 +94,15 @@ public class UserController {
         log.info("delete connect");
         userService.delete(jwt);
         log.info("delete success");
-
         return ApiUtils.success(Boolean.TRUE);
     }
+    @GetMapping("/nickName")
+    public ApiUtils.ApiResult<String> getNickName(@RequestParam(value = "jwt") String jwt){
+        log.info("nickName connect");
+        String value=userService.getNickName(jwt);
+        log.info("nickName success:{}",value);
+        return ApiUtils.success(value);
+    }
+
 
 }

@@ -19,7 +19,7 @@ public class UserDto {
     private String nickName;
     private StringBuilder jwt;
 
-    @Builder(builderMethodName = "login" )
+    @Builder(builderClassName = "login",builderMethodName = "login" )
     public UserDto(String id, String pwd) {
         this.id = id;
         this.pwd = pwd;
@@ -27,7 +27,7 @@ public class UserDto {
         validationPwd();
     }
 
-    @Builder(builderMethodName = "register")
+    @Builder(builderClassName = "register",builderMethodName = "register")
     public UserDto(String id, String pwd, String nickName) {
         this.id = id;
         this.pwd = pwd;
@@ -37,7 +37,7 @@ public class UserDto {
         validationNickName();
     }
 
-    @Builder(builderMethodName = "update")
+    @Builder(builderClassName = "update",builderMethodName = "update")
     public UserDto( String pwd, String nickName,StringBuilder jwt) {
         this.pwd = pwd;
         this.nickName = nickName;
@@ -53,7 +53,7 @@ public class UserDto {
     private void validationId(){
         log.info("validationId:{}",id);
         String msg= "아이디는 이메일로 해주세요.";
-        checkArgument(id.isEmpty(),msg);
+        checkArgument(id==null||id.isEmpty(),msg);
         Pattern emailPattern = Pattern.compile("[a-zA-Z0-9[!#$%&'()*+,/\\-_\\.\"]]+@[a-zA-Z0-9[!#$%&'()*+,/\\-_\"]]+\\.[a-zA-Z0-9[!#$%&'()*+,/\\-_\"\\.]]+");
         Matcher m = emailPattern.matcher(id);
         checkArgument(!m.matches(),msg);
@@ -62,7 +62,7 @@ public class UserDto {
         log.info("validationPwd:{}",pwd);
 
         String msg= "비밀번호를 6자리 이상 20자리 이하로 해주세요.";
-        checkArgument(pwd.isEmpty(),msg);
+        checkArgument(pwd==null||pwd.isEmpty(),msg);
         checkArgument(6>pwd.length()||pwd.length()>20,msg);
 
     }
@@ -70,7 +70,7 @@ public class UserDto {
         log.info("validationNickName:{}",nickName);
 
         String msg="닉네임를 3자리 이상 20자리 이하로 해주세요.";
-        checkArgument(nickName.isEmpty(),msg);
+        checkArgument(nickName==null||nickName.isEmpty(),msg);
         checkArgument(3>nickName.length()||nickName.length()>20,msg);
     }
     private void checkArgument(boolean exp, String msg){

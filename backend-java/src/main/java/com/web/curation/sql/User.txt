@@ -1,8 +1,8 @@
 {
-"email":"test@test"
+"email":"test@test.com"
 ,"name":"test"
-,"nickname":"testName"
+,"nickname":"testName23"
 ,"pwd":1234567
-,"follower":["test1@test","test2@test"]
+,"follower":["test1@test.com","test2@test.com"]
 ,role:"ADMIN"
 }

@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -84,9 +87,5 @@ public class UserServiceImpl implements UserService {
         return  user;
     }
 
-    @Override
-    public UserDto validate(@Valid UserDto userDto) {
-        log.info("validate User",userDto);
-        return userDto;
-    }
+
 }

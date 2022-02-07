@@ -44,14 +44,11 @@ public class UserController {
     @PostMapping("/login")
     public ApiUtils.ApiResult<Token> login(@RequestParam(value = "id")  String id, @RequestParam(value = "pwd") String pwd) throws UnauthorizedException {
         log.info("login mapping");
-       @Valid
         UserDto userDto = UserDto.login()
                 .id(id)
                 .pwd(pwd)
                 .build();
-
         log.info("login info:'{}'",userDto);
-        userService.validate(userDto);
 
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(userDto.getId(),userDto.getPwd());

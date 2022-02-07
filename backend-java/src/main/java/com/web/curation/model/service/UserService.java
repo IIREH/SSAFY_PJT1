@@ -9,5 +9,4 @@ public interface UserService  {
     void register(UserDto userDto);
     void update(UserDto userDto);
     void delete(String jwt);
-    UserDto validate(@Valid UserDto userDto);
 }

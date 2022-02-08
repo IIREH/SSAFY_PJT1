@@ -16,5 +16,5 @@ public interface ContestRepository extends MongoRepository<Contest, ObjectId> {
     @Override
     void deleteById(ObjectId id);
 
-    Optional<Contest> findAllByName(String name);
+    Optional<List<Contest>> findAllByNameContaining(String name);
 }

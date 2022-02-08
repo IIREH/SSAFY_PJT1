@@ -70,7 +70,7 @@ public class IndexController {
                 .genre("horror")
                 .build();
         contestRepository.save(contest);
-        log.info("contest list:{}", contestRepository.findAllByName("테스트 공연"));
+        log.info("contest list:{}", contestRepository.findAllByNameContaining("테스트 공연"));
 
         Comment comment = Comment.builder()
                 .user(user)

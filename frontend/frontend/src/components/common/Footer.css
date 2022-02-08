@@ -11,9 +11,20 @@
 
 .image {
   cursor: pointer;
-  margin-left: 450px;
+  padding: 10px;
   height: 110px;
 }
+
+.fa {
+  text-align: center;
+  text-decoration: none;
+  margin: 10px 2px;
+}
+
+.fa:hover {
+  opacity: 0.7;
+}
+
 
 .footer-distributed .footer-left,
 .footer-distributed .footer-center,
@@ -25,7 +36,8 @@
 /* Footer left */
 
 .footer-distributed .footer-left {
-  width: 35%;
+  position:absolute;
+  left: 20%;
 }
 .footer-description {
   font-weight: bold;
@@ -33,11 +45,13 @@
 /* Footer Center */
 
 .footer-distributed .footer-center {
-  width: 35%;
+  position:relative;
+  left: 20%;
+  margin-left: 150px;
 }
 
 .footer-distributed .footer-center i {
-  background-color: #33383b;
+  background-color: #eebefa;
   color: #ffffff;
   font-size: 20px;
   width: 34px;
@@ -45,7 +59,7 @@
   border-radius: 50%;
   text-align: center;
   line-height: 42px;
-  margin: 5px 15px;
+  margin: 5px 15px 0px 30px;
   vertical-align: middle;
   line-height: 38px;
 }
@@ -55,7 +69,7 @@
   color: black;
   font-weight: 400;
   vertical-align: middle;
-  margin: 0;
+  margin: 10px;
 }
 
 .footer-distributed .footer-center p span {
@@ -73,7 +87,8 @@
 /* Footer Right */
 
 .footer-distributed .footer-right {
-  width: 20%;
+  position:relative;
+  left: 30%;
 }
 
 .footer-distributed .footer-about {
@@ -81,7 +96,8 @@
   color: black;
   font-size: 18px;
   font-weight: bold;
-  margin-bottom: 27px;
+  margin-left: 10px;
+  margin-bottom: 20px;
 }
 
 .footer-distributed .footer-icons a {
@@ -94,9 +110,7 @@
   font-size: 23px;
   color: #ffffff;
   text-align: center;
-  margin-right: 5px;
-  margin-bottom: 3px;
-  margin-left: 3px
+  margin: 0px 3px 3px 10px;
 }
 
 @media only screen and (max-width: 700px) {

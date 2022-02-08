@@ -9,7 +9,7 @@ import org.bson.types.ObjectId;
 @Getter
 @ToString
 public class CommentDto {
-    private ObjectId id;
-    private ObjectId userId;
+    private String id;
+    private String userId;
     private String content;
 }

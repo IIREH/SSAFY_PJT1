@@ -11,7 +11,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
+import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Component("userDetailsService")
@@ -24,16 +27,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         //TODO DB 접근 객체를 주입하고,
         // 아이디를 조회후,
         // 비밀번호 encode값에 넣기
-        List<User> userList=userRepository.findByEmail(username);
-        log.info("user:{}",userList);
-        if(userList.isEmpty()){
-            throw new UserIdNotFoundException("아이디가 없음");
-        }
+        User user=userRepository.findByEmail(username);
+        log.info("user:{}",user);
 
-        User user =userList.get(0);
-        return  org.springframework.security.core.userdetails
-                .User.builder().username(user.getEmail())
-                .password(passwordEncoder.encode(user.getPwd()))
-                .roles("USER").build();
+        return Optional.ofNullable(user).map(x->
+                        org.springframework.security.core.userdetails
+                                .User.builder().username(x.getEmail())
+                                .password(passwordEncoder.encode(x.getPwd()))
+                                .roles(x.getRole()).build()
+                ).orElseThrow(UserIdNotFoundException::new);
+
     }
 }

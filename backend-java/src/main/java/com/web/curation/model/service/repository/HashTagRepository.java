@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface HashTagRepository extends MongoRepository<HashTag, ObjectId> {
-    @Override
-    HashTag save(HashTag hashTag);
+    HashTag save(String hashTag);
+
+    Optional<HashTag> findByHashTag(String hashTag);
 }

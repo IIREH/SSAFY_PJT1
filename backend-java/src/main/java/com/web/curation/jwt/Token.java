@@ -9,4 +9,5 @@ import lombok.ToString;
 @RequiredArgsConstructor
 public class Token {
     private final String token;
+
 }

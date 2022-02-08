@@ -21,10 +21,11 @@ public class User {
     private String nickname;
     private String pwd;
     private List<String> follower;
-    private List<String> followee;
-    @Builder
+    private List<String>followee;
+    private String role;
 
-    public User(ObjectId id, String email, String name, String nickname, String pwd, List<String> follower, List<String> followee) {
+    @Builder
+    public User(ObjectId id, String email, String name, String nickname, String pwd, List<String> follower, List<String> followee,String role) {
         this.id = id;
         this.email = email;
         this.name = name;
@@ -32,5 +33,6 @@ public class User {
         this.pwd = pwd;
         this.follower = follower;
         this.followee = followee;
+        this.role=role;
     }
 }

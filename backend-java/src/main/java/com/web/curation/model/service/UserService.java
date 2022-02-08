@@ -4,6 +4,7 @@ import com.web.curation.model.dto.UserDto;
 import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
+import java.util.List;
 
 public interface UserService {
     void register(UserDto userDto);
@@ -11,3 +12,4 @@ public interface UserService {
     void delete(String jwt);
     String getNickName(String jwt);
 }
+

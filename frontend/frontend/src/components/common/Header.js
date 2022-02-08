@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
+import Image from '../../img/cookie.jpg';
+import Modal from './Modal';
+import './Modal.css'
 
 // Banner
 const HeaderBlock = styled.div`
@@ -44,6 +47,10 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ user, onLogout }) => {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     <>
       <HeaderBlock>
@@ -53,6 +60,13 @@ const Header = ({ user, onLogout }) => {
           </Link>
           {user ? (
             <div className="right">
+              <img
+              className="profile"
+              src={Image}
+              alt="User-logo"
+              onClick={handleOpen}
+              />
+              <Modal open={open} handleClose={handleClose} setOpen={setOpen}/>
               <UserInfo>{user.username}</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>

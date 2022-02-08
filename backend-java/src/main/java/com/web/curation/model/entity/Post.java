@@ -33,6 +33,8 @@ public class Post {
     private Date modifyDate;
     private String content;
     @DBRef
+    private Photo photo;
+    @DBRef
     private List<User> likedByList;
     @DBRef
     private List<HashTag> hashTags;

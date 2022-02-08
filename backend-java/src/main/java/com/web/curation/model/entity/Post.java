@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "posts")
+@Document(collection = "post")
 @Getter
 @Setter
 @Builder

@@ -52,3 +52,33 @@
     border: 0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
 }
+
+.card{
+    width: 20rem;
+}
+
+.card:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253) !important;
+}
+
+.card-body{
+    padding: 3rem 0 !important;
+}
+
+.card-text{
+    font-size: 0.9rem;
+    padding: 0.4rem;
+}
+
+.card-img-top {
+    transform: scale(1);
+    transition: transform 0.5s ease;
+}
+
+.card-img-top:hover {
+    transform: scale(1.8);
+}
+
+h2 {
+    margin-left : 100px;
+}

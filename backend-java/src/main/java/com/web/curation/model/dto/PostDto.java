@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.bson.types.ObjectId;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,6 +25,8 @@ public class PostDto {
     private String userId;
     @ApiModelProperty(value = "글 내용")
     private String content;
+    @ApiModelProperty(value = "첨부된 사진")
+    private String photoId;
     @ApiModelProperty(value = "좋아요를 누른 유저들")
     private List<String> likedByList;
     @ApiModelProperty(value = "해시태그들")

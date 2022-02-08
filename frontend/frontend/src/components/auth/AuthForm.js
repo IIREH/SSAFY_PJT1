@@ -78,10 +78,19 @@ const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
         <StyledInput
           autoComplete="username"
           name="username"
-          placeholder="아이디"
+          placeholder="이메일"
           onChange={onChange}
           value={form.username}
         />
+        {type === 'register' && (
+          <StyledInput 
+            autoComplete="nickname"
+            name="nickname"
+            placeholder="닉네임"
+            onChange={onChange}
+            value={form.nickname}
+          />
+        )}
         <StyledInput
           autoComplete="new-password"
           name="password"

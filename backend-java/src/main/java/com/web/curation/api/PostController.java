@@ -3,7 +3,9 @@ package com.web.curation.api;
 import com.web.curation.model.BasicResponse;
 import com.web.curation.model.dto.CommentDto;
 import com.web.curation.model.dto.PostDto;
+import com.web.curation.model.entity.Photo;
 import com.web.curation.model.entity.Post;
+import com.web.curation.model.service.PhotoService;
 import com.web.curation.model.service.PostService;
 import com.web.curation.utils.ApiUtils;
 import io.swagger.annotations.*;
@@ -14,8 +16,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized", response = BasicResponse.class),
         @ApiResponse(code = 403, message = "Forbidden", response = BasicResponse.class),
@@ -33,7 +38,7 @@ public class PostController {
 
     @ApiOperation(value = "글작성", notes = "새 게시글 작성, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
     @PostMapping()
-    public ApiUtils.ApiResult<?> writePost(@RequestBody PostDto postDto) {
+    public ApiUtils.ApiResult<?> writePost(@ApiParam(value = "게시글 정보", required = true) @RequestBody PostDto postDto) throws IOException {
         Post post = postservice.writePost(postDto);
 
         if(post == null) {
@@ -57,7 +62,7 @@ public class PostController {
 
     @ApiOperation(value = "글수정", notes = "기존 게시글 수정, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
     @PutMapping()
-    public ApiUtils.ApiResult<?> updatePost(@RequestBody @ApiParam(value = "게시글 정보", required = true) PostDto postDto) {
+    public ApiUtils.ApiResult<?> updatePost(@ApiParam(value = "게시글 정보", required = true) @RequestBody PostDto postDto) {
         if(postservice.updatePost(postDto) == null) {
             return ApiUtils.error("행사나 사용자를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST);
         }

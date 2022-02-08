@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.*;
 
 @Slf4j
@@ -27,9 +28,12 @@ public class PostService {
     ContestRepository contestRepository;
 
     @Autowired
+    PhotoService photoService;
+
+    @Autowired
     UserRepository userRepository;
 
-    public Post writePost(PostDto postDto) {
+    public Post writePost(PostDto postDto) throws IOException {
         Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
         Optional<User> userOrNull = userRepository.findById(postDto.getUserId());
 
@@ -46,13 +50,15 @@ public class PostService {
                 hashTagRepository.save(hashTag);
 
                 hashTags.add(hashTag);
+            }
         }
 
-        }
+        Photo photo = photoService.getPhoto(postDto.getPhotoId());
         Post post = Post.builder()
                 .contest(contestOrNull.get())
                 .user(userOrNull.get())
                 .content(postDto.getContent())
+                .photo(photo)
                 .hashTags(hashTags)
                 .build();
 
@@ -88,8 +94,7 @@ public class PostService {
         post.setContent(postDto.getContent());
         post.setContest(contestOrNull.get());
         post.setHashTags(hashTags);
-//        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.ssss", Locale.UK);
-//        post.setModifyDate(format.format(new Date()));
+        post.setPhoto(photoService.getPhoto(postDto.getPhotoId()));
         return postRepository.save(post);
     }
 
@@ -99,11 +104,14 @@ public class PostService {
             return false;
         }
 
-        List<Comment> comments = postOrNull.get().getComments();
+        Post post = postOrNull.get();
+        List<Comment> comments = post.getComments();
         if(comments != null) {
             commentRepository.deleteAll(comments);
         }
+        photoService.removePhoto(post.getPhoto());
         postRepository.deleteById(postId);
+
         return true;
     }
 

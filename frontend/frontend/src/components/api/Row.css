@@ -55,7 +55,8 @@
 }
 
 .card{
-    width: 20rem;
+    width: 19.5rem;
+    align-items: center;
 }
 
 .card:hover{
@@ -85,21 +86,21 @@ h2 {
     font-family: 'Cafe24Ssurround';
 }
 
-.button-position {
-    margin-left : 210px;
+.button-position-totheleft {
+    margin-left : 190px;
 }
 
 .carousel-control-next-icon:after
 {
   content: '>';
-  font-size: 55px;
+  font-size: 53px;
   color: purple;
-  margin-left: -150px;
+  margin-left: 100px;
 }
 
 .carousel-control-prev-icon:after {
   content: '<';
-  font-size: 55px;
+  font-size: 53px;
   color: purple;
-  margin-left: 100px;
+  margin-left: -200px;
 }

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import XMLParser from 'react-xml-parser';
-import "./Row.css";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Card, CardGroup, Carousel } from 'react-bootstrap'
+import "./Row.css";
 import Button from '../common/Button';
-import { CardGroup, Card, Carousel } from 'react-bootstrap'
 // xxx6xx
 function Classic({ title }) {
     const [classic, setClassic] = useState(null);
@@ -86,7 +86,7 @@ function Classic({ title }) {
                 the card's content.
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position">상세보기</Button>
+                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -101,7 +101,7 @@ function Classic({ title }) {
                 the card's content.
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position">상세보기</Button>
+                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -116,7 +116,7 @@ function Classic({ title }) {
                 the card's content.
                 </Card.Text>
                 <Link to="/info">
-                        <Button variant="outline-success" className="button-position">상세보기</Button>
+                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -135,7 +135,7 @@ function Classic({ title }) {
                 the card's content.
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position">상세보기</Button>
+                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -150,7 +150,7 @@ function Classic({ title }) {
                 the card's content.
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position">상세보기</Button>
+                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -165,7 +165,7 @@ function Classic({ title }) {
                 the card's content.
                 </Card.Text>
                 <Link to="/info">
-                        <Button variant="outline-success" className="button-position">상세보기</Button>
+                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>

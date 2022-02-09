@@ -69,7 +69,14 @@ const Header = ({ user, onLogout }) => {
 
         <Nav>
           <NavListWrap>
-          <NavList>
+          
+            
+          </NavListWrap>
+          </Nav>
+
+          {user ? (
+            <div className="right">
+              <NavList>
               <a href='#!'>
                 <img src="/images/nav-network.svg" alt="" />
                 <span>Follow</span>
@@ -81,21 +88,12 @@ const Header = ({ user, onLogout }) => {
                 <span>Notifications</span>
               </a>
             </NavList>
-            
-            <Work>
-              <a href='#!'>
-                <img src="/images/nav-work.svg" alt="" />
-                <span>
-                  More
-                  <img src="/images/down-icon.svg" alt="" />
-                </span>
+            <NavList>
+               <a href='#!'>
+                <img src="/images/plus-icon.svg" alt="" />
+                <span>New</span>
               </a>
-            </Work>
-          </NavListWrap>
-          </Nav>
-
-          {user ? (
-            <div className="right">
+            </NavList>
               <img
               className="profile"
               src={Image}
@@ -111,6 +109,7 @@ const Header = ({ user, onLogout }) => {
               <Button to="/login">로그인</Button>
             </div>
           )}
+
         </Wrapper>
       </HeaderBlock>
       <Spacer />
@@ -127,7 +126,7 @@ const Search = styled.div`
     input {
       border: none;
       box-shadow: none;
-      background-color: #ffdcff;
+      background-color: #E8D9FF;
       border-radius: 2px;
       color: rgba(0, 0, 0, 0.9);
       width: 218px;
@@ -226,27 +225,5 @@ const NavList = styled.li`
   }
 `;
 
-const User = styled(NavList)`
-  a > svg {
-    width: 24px;
-    border-radius: 50%;
-  }
-
-  a > img {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-  }
-
-  span {
-    display: flex;
-    align-items: center;
-  }
-
-`;
-
-const Work = styled(User)`
-  border-left: 1px solid rgba(0, 0, 0, 0.08);
-`;
 
 export default Header;

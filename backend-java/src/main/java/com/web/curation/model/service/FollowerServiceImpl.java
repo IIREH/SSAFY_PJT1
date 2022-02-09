@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -25,7 +26,13 @@ public class FollowerServiceImpl implements FollowService{
     public List<String> getFollow(String jwt, Function<User, List<String>> mapper,String errMsg) {
         String email=tokenProvider.getId(jwt);
         User user =userRepository.findByEmail(email);
-        return Optional.ofNullable(user).map(mapper).orElseGet(ArrayList::new);
+
+        //안타깝게도 java8은 여기서 stream을 바로못씀. 자바 버전이 오르면,stream 내장해서 ㄱㄱ.
+        List<String> followEmails = Optional.ofNullable(user)
+                .map(mapper)
+                .orElseGet(ArrayList::new);
+
+        return followEmails.stream().map(x->userRepository.findByEmail(x).getNickname()).collect(Collectors.toList());
     }
 
     @Override

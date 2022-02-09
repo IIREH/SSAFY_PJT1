@@ -4,5 +4,6 @@
 ,"nickname":"testName23"
 ,"pwd":1234567
 ,"follower":["test1@test.com","test2@test.com"]
+,followee:[]
 ,role:"ADMIN"
 }

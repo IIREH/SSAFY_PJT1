@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -34,6 +35,9 @@ public class UserServiceImpl implements UserService {
                 .email(userDto.getId())
                 .pwd(userDto.getPwd())
                 .nickname(userDto.getNickName())
+                .likePost(new ArrayList<>())
+                .follower(new ArrayList<>())
+                .following(new ArrayList<>())
                 .role("USER")
                 .build();
        userRepository.insert(user);
@@ -54,9 +58,8 @@ public class UserServiceImpl implements UserService {
                 User.builder()
                         .id(user.getId())
                         .email(user.getEmail())
-                        .followee(user.getFollowee())
-                        .name(user.getName())
                         .follower(user.getFollower())
+                        .following(user.getFollowing())
                         .nickname(userDto.getNickName())
                         .pwd(userDto.getPwd())
                         .role(user.getRole())

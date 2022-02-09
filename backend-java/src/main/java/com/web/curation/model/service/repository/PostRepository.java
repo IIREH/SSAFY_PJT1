@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface PostRepository extends MongoRepository<Post, ObjectId> {
@@ -15,11 +16,11 @@ public interface PostRepository extends MongoRepository<Post, ObjectId> {
 
     Optional<Post> findById(String id);
 
-    Optional<Post> findAllByUser(User user);
+    List<Post> findAllByUser(User user);
 
     Page<Post> findAll(Pageable pageable);
 
     void deleteById(String id);
 
-    Optional<User> findByIdAndLikedByListId(String postId, String userId);
+    Post findByIdAndLikedByListIsContaining(String postId, User user);
 }

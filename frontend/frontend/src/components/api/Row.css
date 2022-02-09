@@ -12,6 +12,7 @@
     overflow-y: hidden;
     overflow-x: scroll;
     padding: 20px;
+    border-radius: 3em;
 }
 
 /* Removes scrollbar, but keeps functionality */
@@ -23,7 +24,7 @@
 .row__poster {
     width: 100%;
     object-fit: contain;
-    max-height: 200px;
+    max-height: 100px;
     margin-right: 10px;
     margin-left: 10px;
     /* Delay effect */
@@ -32,13 +33,13 @@
 
 .row__poster:hover {
     /* Bigger effect */
-    transform: scale(1.08);
+    transform: scale(1.01);
     opacity:1;
 }
 
 /* Adds a larger row */
 .row__posterLarge {
-    max-height: 250px;
+    max-height: 100px;
 }
 
 /* Hover effect os larger row */
@@ -51,4 +52,54 @@
     height: 10px;
     border: 0;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card{
+    width: 20rem;
+}
+
+.card:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253) !important;
+}
+
+.card-body{
+    padding: 3rem 0 !important;
+}
+
+.card-text{
+    font-size: 0.9rem;
+    padding: 0.4rem;
+}
+
+.card-img-top {
+    transform: scale(1);
+    transition: transform 0.5s ease;
+    max-height: 300px;
+}
+
+.card-img-top:hover {
+    transform: scale(1.04);
+}
+
+h2 {
+    font-family: 'Cafe24Ssurround';
+}
+
+.button-position {
+    margin-left : 210px;
+}
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: purple;
+  margin-left: -150px;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: purple;
+  margin-left: 100px;
 }

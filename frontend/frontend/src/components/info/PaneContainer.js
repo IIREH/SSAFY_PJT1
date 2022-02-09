@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import XMLParser from 'react-xml-parser';
 import styled from "styled-components";
 import Star from "./Star";
 
@@ -205,15 +206,33 @@ const PaneBox = styled.div`
 `;
 
 function PaneContainer() {
+  const [pfrnm, setPfrnm] = useState(null);
+  const [prfpdfrom, setPrfpdfrom] = useState(null);
+  const [genrenm, setGenrenm] = useState(null);
+  const [fcltynm, setFcltynm] = useState(null);
+
+  useEffect(() => {
+    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186242?service=4e391a1107334d7aaf6034069bbcbc5a")
+        .then(res => res.text())
+        .then(data => {
+            var xml = new XMLParser().parseFromString(data); 
+            setPfrnm(xml.getElementsByTagName('prfnm')[0].value);
+            setPrfpdfrom(xml.getElementsByTagName('prfpdfrom')[0].value);
+            setGenrenm(xml.getElementsByTagName('genrenm')[0].value);
+            setFcltynm(xml.getElementsByTagName('fcltynm')[0].value);
+        })
+        .catch(err => console.log(err));
+}, [])
+
   return (
     <PaneBox>
       <div className="WidthGrid">
         <div className="WidthRow">
           <div className="WidthCol">
             <div className="PaneInner">
-              <h1 className="Title">크리스티안 짐머만 피아노 리사이틀</h1>
+              <h1 className="Title">{pfrnm}</h1>
               <div className="Detail">
-                2022 ・ #클래식 ・ 	롯데콘서트홀
+                      {prfpdfrom}   |    # {genrenm}   |    {fcltynm}
               </div>
               <div className="ContentRatings">
                 평균 ★★★★ (10 명)

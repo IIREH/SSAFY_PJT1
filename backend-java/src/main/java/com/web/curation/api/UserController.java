@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized", response = BasicResponse.class),
@@ -45,6 +46,7 @@ public class UserController {
         UserDto userDto = UserDto.login()
                 .id(id)
                 .pwd(pwd)
+
                 .build();
         log.info("login info:'{}'",userDto);
 

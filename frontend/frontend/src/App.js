@@ -5,9 +5,11 @@ import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
 import InfoPage from './pages/InfoPage';
+import './App.css'
 
 const App = () => {
   return (
+    <div className='App'>
     <Routes>
       <Route path="/" element={<ListPage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -19,6 +21,7 @@ const App = () => {
         <Route path=":postId" element={<PostPage />} />
       </Route>
     </Routes>
+    </div>
   );
 };
 export default App;

@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsUtils;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -41,7 +42,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 //                .antMatchers(authPass).permitAll()
 //                .anyRequest().authenticated()
                 .mvcMatchers(swagger).permitAll()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll()
+        //TODO 개발 테스트를 위한 cors와 preFlight 요청 허용.
+                .and()
+                .authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .requestMatchers(CorsUtils::isCorsRequest).permitAll();
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

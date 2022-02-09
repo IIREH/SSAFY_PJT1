@@ -20,7 +20,7 @@ const Modal = ({ handleClose, open, onDelete }) => {
   return (
     <div className={`${open ? "modal-container" : "close"}`}>
       <div ref={ref} className="modal">
-        <h2>팀장님이 만드실 프로필 상세화면 모달창 입니다 ! 쿠키모양을 누르면 모달창이 떠요 !</h2>
+        <h2>프로필 상세화면 모달창 입니다 ! 쿠키모양을 누르면 모달창이 떠요 !</h2>
         <button className="button" onClick={handleClose}>
           Close
         </button>

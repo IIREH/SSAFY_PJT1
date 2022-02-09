@@ -23,7 +23,7 @@ function Classic({ title }) {
     }, [])
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132641?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186427?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -32,7 +32,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132640?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185536?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -41,7 +41,6 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
   
-
     return (
         <div className="row">
         <h2>{title}</h2>
@@ -66,7 +65,7 @@ function Classic({ title }) {
         <Card>
             <Card.Img variant="top" src={ classic2 } alt="Recommend Image"/>
             <Card.Body>
-                <Card.Title>청소년을 위한 음악회</Card.Title>
+                <Card.Title>메타포닉</Card.Title>
                 <Card.Text>
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
@@ -81,7 +80,7 @@ function Classic({ title }) {
         <Card>
             <Card.Img variant="top" src={ classic3 } alt="Recommend Image" />
             <Card.Body>
-                <Card.Title>50주년 서울아카데미앙상블</Card.Title>
+                <Card.Title>랑랑 피아노 리사이틀</Card.Title>
                 <Card.Text>
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.

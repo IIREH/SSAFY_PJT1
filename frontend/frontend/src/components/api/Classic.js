@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 import XMLParser from 'react-xml-parser';
 import "./Row.css";
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+import Button from '../common/Button';
+import { CardGroup, Card } from 'react-bootstrap'
 // xxx6xx
 function Classic({ title }) {
     const [classic, setClassic] = useState(null);
     const [classic2, setClassic2] = useState(null);
     const [classic3, setClassic3] = useState(null);
-    const [classic4, setClassic4] = useState(null);
-    const [classic5, setClassic5] = useState(null);
 
     useEffect(() => {
         fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186242?service=4e391a1107334d7aaf6034069bbcbc5a")
@@ -39,39 +40,61 @@ function Classic({ title }) {
             })
             .catch(err => console.log(err));
     }, [])
-    useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132639?service=4e391a1107334d7aaf6034069bbcbc5a")
-            .then(res => res.text())
-            .then(data => {
-                var xml = new XMLParser().parseFromString(data); 
-                setClassic4(xml.getElementsByTagName('poster')[0].value);
-            })
-            .catch(err => console.log(err));
-    }, [])
-    useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132963?service=4e391a1107334d7aaf6034069bbcbc5a")
-            .then(res => res.text())
-            .then(data => {
-                var xml = new XMLParser().parseFromString(data); 
-                setClassic5(xml.getElementsByTagName('poster')[0].value);
-            })
-            .catch(err => console.log(err));
-    }, [])
+  
 
     return (
         <div className="row">
-            <h2>{title}</h2>
-            <div className="row__posters">
-            <Link to="/info">
-                <img className='row__poster' src={classic} alt="Classic Image"></img>
-            </Link>
-                <img className='row__poster' src={classic2} alt="Classic Image2"></img>
-                <img className='row__poster' src={classic3} alt="Classic Image3"></img>
-                <img className='row__poster' src={classic4} alt="Classic Image4"></img>
-                <img className='row__poster' src={classic5} alt="Classic Image5"></img>
-            </div>
-            <hr className='hr'></hr>
-        </div>
+        <h2>{title}</h2>
+       
+        <CardGroup className="justify-content-center">
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ classic } alt="Recommend Image"/>
+            <Card.Body>
+                <Card.Title>크리스티안 짐머만</Card.Title>
+                <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+                </Card.Text>
+                <Link to="/info">
+                    <Button variant="outline-success" className="button-position">상세보기</Button>
+                </Link>
+            </Card.Body>
+        </Card>
+        </span>
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ classic2 } alt="Recommend Image"/>
+            <Card.Body>
+                <Card.Title>청소년을 위한 음악회</Card.Title>
+                <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+                </Card.Text>
+                <Link to="/info">
+                    <Button variant="outline-success" className="button-position">상세보기</Button>
+                </Link>
+            </Card.Body>
+        </Card>
+        </span>
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ classic3 } alt="Recommend Image" />
+            <Card.Body>
+                <Card.Title>50주년 서울아카데미앙상블</Card.Title>
+                <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+                </Card.Text>
+                <Link to="/info">
+                        <Button variant="outline-success" className="button-position">상세보기</Button>
+                </Link>
+            </Card.Body>
+        </Card>
+        </span>
+        </CardGroup>
+        <hr className='hr'></hr>
+    </div>
     )
 }
 

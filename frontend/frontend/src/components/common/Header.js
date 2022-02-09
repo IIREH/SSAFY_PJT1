@@ -56,7 +56,7 @@ const Header = ({ user, onLogout }) => {
       <HeaderBlock>
         <Wrapper>
           <Link to="/" className="logo">
-            <img src='/logo3.png' alt='logo'></img>
+            <img src='/logo.png' alt='logo'></img>
           </Link>
           {user ? (
             <div className="right">

@@ -89,7 +89,7 @@ const Header = ({ user, onLogout, onDelete }) => {
               </a>
             </NavList>
             <NavList>
-               <a href='#!'>
+               <a href='write'>
                 <img src="/images/plus-icon.svg" alt="" />
                 <span>New</span>
               </a>

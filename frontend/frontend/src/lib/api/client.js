@@ -1,6 +1,8 @@
 import axios from 'axios';
 
-const client = axios.create();
+const client = axios.create({
+  baseURL: "http://i6c208.p.ssafy.io:8080/",
+});
 
 /*
   글로벌 설정 예시:

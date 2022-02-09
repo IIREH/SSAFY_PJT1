@@ -46,6 +46,7 @@ public class UserController {
         UserDto userDto = UserDto.login()
                 .id(id)
                 .pwd(pwd)
+
                 .build();
         log.info("login info:'{}'",userDto);
 

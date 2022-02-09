@@ -38,7 +38,7 @@ public class UserDto {
     }
 
     @Builder(builderClassName = "update",builderMethodName = "update")
-    public UserDto( String pwd, String nickName,StringBuilder jwt) {
+    public UserDto(String pwd, String nickName,StringBuilder jwt) {
         this.pwd = pwd;
         this.nickName = nickName;
         this.jwt=jwt;

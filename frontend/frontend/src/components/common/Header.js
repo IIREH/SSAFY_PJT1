@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
+import Image from '../../img/cookie.jpg';
+import Modal from './Modal';
+import './Modal.css'
 
 // Banner
 const HeaderBlock = styled.div`
@@ -43,7 +46,7 @@ const UserInfo = styled.div`
   margin-right: 1.5rem;
 `;
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ user, onLogout, onDelete }) => {
   return (
     <>
       <HeaderBlock>
@@ -53,8 +56,9 @@ const Header = ({ user, onLogout }) => {
           </Link>
           {user ? (
             <div className="right">
-              <UserInfo>{user.username}</UserInfo>
+              <UserInfo>{user}</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
+              <Button onClick={onDelete}>회원탈퇴</Button>
             </div>
           ) : (
             <div className="right">

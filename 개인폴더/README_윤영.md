@@ -1,3 +1,5 @@
+
+
 # Today I Learn(2022.01.10 ~ )
 
 
@@ -1077,15 +1079,815 @@ export default App;
 <button onClick={ () => { modal === false ? modal변경(true) : modal변경(false) } }>버튼</button>
 ```
 
+라고 했는데, 이런 방법도 있다. 
+
+```react
+<button onClick = {() => {modal변경(!modal)}}>열고닫는버튼</button>
+```
+
+- ! 느낌표 기호를 modal이라는 state에 붙이면 지금 state를 반대로 만들어준다. 
+
 
 
 ---
 
 
 
+### 📕 01/24 Mon
 
 
 
+### 반복문
+
+- 리액트에선 HTML도 반복문으로 반복시킬 수 있다. 
+
+
+
+### 반복문 쓰는법
+
+- 중괄호 안에는 {변수명, 함수명}만 넣을 수 있다.
+  - {} 중괄호 안에 for 등을 못 넣는다. 
+- 반복문을 쓰려면 중괄호 안에 map()함수를 써야한다.
+  - map() 함수는 array에 붙일 수 있는 함수
+  - ![image-20220124160407917](md-images/image-20220124160407917.png)
+
+```react
+var 어레이 = [2,3,4];
+
+var 뉴어레이 = 어레이.map(function(a){
+    return a * 2
+  });
+
+-> 뉴어레이 = [4,6,8]이 된다!!
+```
+
+- a라는 파라미터는 array안에 있던 하나하나의 데이터들에 2씩 곱해서 새로운 array를 만들어준다.
+
+- map함수는 반복문 역할
+
+
+
+![image-20220124160739593](md-images/image-20220124160739593.png)
+
+```react
+let [글제목,글제목변경] = useState(['여성 코트 추천','아이 코트 추천','남성 코트 추천']); 
+
+{
+    글제목.map(function(){
+        return <div>안녕</div>
+    })
+    
+}
+```
+
+![image-20220124160750346](md-images/image-20220124160750346.png)
+
+
+
+![image-20220124160945555](md-images/image-20220124160945555.png)
+
+```react
+{
+    글제목.map(function(){
+        return (
+        <div className="list">
+            <h3> { 글제목[1] } </h3>
+            <p> 1월 19일 발행 </p>
+            <hr/>
+      	</div>
+      )
+    })
+    
+}
+```
+
+- 보통 html들을 소괄호로 감싸준다.
+
+![image-20220124161310844](md-images/image-20220124161310844.png)
+
+
+
+- 그러면 다음과 같이..같은 데이터만 세번 반복되는 것을 확인할 수 있다.
+
+![image-20220124161138116](md-images/image-20220124161138116.png)
+
+- 이럴때는 파라미터를 이용해준다. - array안에 있던 하나하나의 데이터 
+
+```react
+{
+        글제목.map(function( 글 ){
+            return (
+            <div className="list">
+                <h3> { 글 } </h3>
+                <p> 1월 19일 발행 </p>
+                <hr/>
+            </div>
+          )
+})
+```
+
+- 다음과 같이 글 이라는 파라미터를 활용하면 
+
+<img src="md-images/image-20220124161417684.png" alt="image-20220124161417684" style="zoom:80%;" />
+
+- 리스트 안에 있던 요소들이 각각 나와서 제목이 되는 것을 확인할 수 있다. 
+
+
+
+### 따봉도 반복이 가능한가?
+
+<img src="md-images/image-20220124162104107.png" alt="image-20220124162104107" style="zoom:80%;" />
+
+- 하나의 state라서... 공유가 되기 때문에 값이 같이 올라가는 것을 확인할 수 있다. 
+
+![image-20220124162310835](md-images/image-20220124162310835.png)
+
+![image-20220124162317970](md-images/image-20220124162317970.png)
+
+
+
+> 반복문을 쓰고 싶다면?
+
+![image-20220124162534442](md-images/image-20220124162534442.png)
+
+```react
+function 반복된UI(){
+
+    var 어레이 = [];
+
+    for (var i = 0; i < 3; i++){
+      어레이.push(<div>안녕</div>);
+    }
+
+    return 어레이
+  }
+
+  
+
+  return(
+
+      { 반복된UI() }
+```
+
+![image-20220124162819149](md-images/image-20220124162819149.png)
+
+- for in 과 for of는 원래 기능과 동일하다.
+
+
+
+- 각각 좋아요 만들기
+
+```react
+function App() {
+  let [title, titleSet] = useState([
+    "남자 코트 추천",
+    "강남 우동 맛집",
+    "리액트 독학"
+  ]);
+  let [like, setLike] = useState([0, 0, 0]);
+
+  return (
+    <div className="App">
+      <div className="black-nav">
+        <div>개발 Blog</div>
+      </div>
+      {title.map((a, i) => {
+        return (
+          <div className="list" key={a}>
+            <h3>
+              {a}
+              <button
+                onClick={() =>
+                  setLike((arr) =>
+                    arr.map((el, idx) => (idx === i ? el + 1 : el))
+                  )
+                }
+              >
+                <span role="img" aria-label="good">
+                  👍
+                </span>
+              </button>
+              <button
+                onClick={() =>
+                  setLike((arr) =>
+                    arr.map((el, idx) => (idx === i ? el - 1 : el))
+                  )
+                }
+              >
+                <span role="img" aria-label="bad">
+                  👎
+                </span>
+              </button>
+              {like[i]}
+            </h3>
+            <p>2월 18일 발행</p>
+            <hr />
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+```
+
+
+
+---
+
+### Props 
+
+>  자식이 부모의 state를 가져다 쓰고 싶을땐 말하고 쓰기!!
+
+![image-20220124164230253](md-images/image-20220124164230253.png)
+
+전해주고 싶은 데이터를 
+
+
+
+App이라는 컴포넌트 안에 Modal컴포넌트 넣어놨다. 
+
+![image-20220124164312174](md-images/image-20220124164312174.png)
+
+- App이 가진 State를 쓸 수 있게 전송을 해줘야 자식컴포넌트는 부모 컴포넌트가 가진 state를 사용 가능하다.
+
+
+
+![image-20220125012204080](md-images/image-20220125012204080.png)
+
+![image-20220125012222211](md-images/image-20220125012222211.png)
+
+- 보통은 작명을 생략하고 state명과 똑같이 써준다.
+
+```react
+<Modal title={title} />
+```
+
+![image-20220125012338417](md-images/image-20220125012338417.png)
+
+![image-20220125012414050](md-images/image-20220125012414050.png)
+
+
+
+- 자식컴포넌트는 부모컴포넌트가 가진 state를 쓰려면 props로 전송해줘야 쓸 수 있다. 
+
+```react
+function Modal(props){
+  return(
+      <div className="modal">
+        <h2> {props.title[0]} </h2>
+        <p> 날짜 </p>
+        <p> 상세내용 </p>
+      </div>
+  ) 
+}
+```
+
+---
+
+### 그렇다면 제목을 누를때 각각 모달창이 뜨게 어떻게 할 수 있나?
+
+- 몇번째 제목 눌렀는지 상태정보를 state에 저장하고
+
+- state에 따라서 UI가 수정되게 만든다.
+  - if문을 쓰든, for반복문을 쓰든..
+
+
+
+![image-20220125015040771](md-images/image-20220125015040771.png)
+
+
+
+```react
+let [num, numSet] = useState(0);
+
+{
+    modal === true
+    ? <Modal title={title} num={num} />
+    : null
+}
+
+
+function Modal(props){
+  return(
+      <div className="modal">
+        <h2> {props.title[props.num]} </h2>
+          <p> 날짜 </p>
+        <p> 상세내용 </p>
+      </div>
+  ) 
+}
+```
+
+![image-20220125020121853](md-images/image-20220125020121853.png)
+
+```react
+	  <button onClick={ ()=> {numSet(0)} } >버튼1</button>
+      <button onClick={ ()=> {numSet(1)} } >버튼2</button>
+      <button onClick={ ()=> {numSet(2)} } >버튼3</button>
+```
+
+
+
+- map함수의 두번째 파라미터 i는 1씩 증가되는 파라미터
+
+![image-20220125020307964](md-images/image-20220125020307964.png)
+
+
+
+```react 
+{
+        title.map(function( a, i ){
+            return (
+              <div className="list" key={a}>
+              <h3 onClick={ ()=> {numSet(i)} }>
+                {a}
+                  .....
+```
+
+---
+
+### react에서 사용자의 input을 받는법
+
+![image-20220125024503478](md-images/image-20220125024503478.png)
+
+- onChange()와 onInput()은 같다. 
+
+
+
+- input창에 글자를 쓸때마다, 콘솔에 안녕 출력하기
+
+![image-20220125024727717](md-images/image-20220125024727717.png)
+
+![image-20220125024747565](md-images/image-20220125024747565.png)
+
+
+
+- 안녕 말고 사용자가 입력한 값을 출력하려면?
+
+![image-20220125024854277](md-images/image-20220125024854277.png)
+
+- e는 event / value는 이벤트가 동작한 곳 
+
+- onChange라는건 input에 무언가 입력할 때마다 특정 함수를 동작시키고 싶을 때 사용헌다. 
+
+  그래서 입력할 때마다 console.log(e.target.value)를 콘솔창에 출력하라고 써놓은 것 
+
+  e.target이라는건 쌩자바스크립트 문법으로 '지금 이벤트가 동작하는 HTML요소'
+
+  .value라는건 input등에 입력한 값을 의미한다. 
+
+```react
+<input onChange={ ()=>{ e.target.value } } />
+```
+
+![image-20220125025126405](md-images/image-20220125025126405.png)
+
+- 오잉 왜 오류가 뜨는거지?
+
+![image-20220125025140468](md-images/image-20220125025140468.png)
+
+![image-20220125025148220](md-images/image-20220125025148220.png)
+
+
+
+```react
+<input onChange={ (e)=>{ console.log(e.target.value) } } />
+```
+
+- 일단 이렇게 하니까 오류가 해결되었다.
+
+![image-20220125025851850](md-images/image-20220125025851850.png)
+
+![image-20220125025901342](md-images/image-20220125025901342.png)
+
+- 다음과 같이 input에 입력된 값들 출력
+
+
+
+### input값을 state에 저장하려면?
+
+```react
+<input onChange={ (e)=>{ inputValueSet(e.target.value) } } />
+{inputValue}
+```
+
+![image-20220125030245963](md-images/image-20220125030245963.png)
+
+- 콘솔창에 등장하는 warning은 error가 아니다. 잘 동작은 한다.
+
+![image-20220125030221292](md-images/image-20220125030221292.png)
+
+![image-20220125030330532](md-images/image-20220125030330532.png)
+
+- key를 적어줘야 warning이 생기지 않는다.
+
+```react
+ {
+        title.map(function( a, i ){
+            return (
+              <div className="list" key={a}>
+              <h3 onClick={ ()=> {numSet(i)} }>
+                {a}
+```
+
+---
+
+### 블로그 글 발행기능을 만들어보자
+
+
+
+| App.js                                                       | App.css                                                      |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| ![image-20220125031114957](md-images/image-20220125031114957.png) | ![image-20220125031058154](md-images/image-20220125031058154.png) |
+
+
+
+Q. 글 발행기능 만들기 - 글 적고 저장버튼 누르면 글이 위에 하나 떠야한다.
+
+
+
+- 사용자가 입력한 글을 state로 저장하기
+
+```react
+<input onChange={ (e)=> { inputValueSet(e.target.value) }  } />
+```
+
+
+
+- 저장버튼을 누르고 글 목록을 추가하기
+  - 원래있던 배열에 데이터 하나를 추가해주면 된다.
+  - .unshift(); - 배열 앞에 값을 추가
+
+```react
+title.unshift(inputValue);
+```
+
+- 이렇게 state 데이터를 직접 변경하는 것은 나쁜 관습!! 
+
+- 그럼 어떻게?? 사본을 만들어서 수정하기
+
+```react
+<div className='publish'>
+        <input onChange={ (e)=> { inputValueSet(e.target.value) }  } />
+        <button onClick={ () => { 
+            var arrayCopy = [...title];
+            arrayCopy.unshift(inputValue);
+            titleSet( arrayCopy );
+          } }>저장</button>
+</div>
+```
+
+<img src="md-images/image-20220125032622884.png" alt="image-20220125032622884" style="zoom:67%;" />
+
+
+
+![image-20220125032639013](md-images/image-20220125032639013.png)
+
+
+
+---
+
+### react bootstrap 적용하기
+
+```bash
+npm install react-bootstrap bootstrap@5.1.3
+```
+
+- bash에 다음과 같은 명령어 입력하기
+
+```bash
+yarn add react-bootstrap bootstrap@5.1.3
+```
+
+- npm install 혹은 yarn add 둘중 하나 이용
+
+![image-20220125040059186](md-images/image-20220125040059186.png)
+
+![image-20220125040432605](md-images/image-20220125040432605.png)
+
+- index.html에 복붙하기
+- cdn방식으로 라이브러리 첨부하기
+
+```html
+<link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+/>
+```
+
+
+
+---
+
+![image-20220125041922798](md-images/image-20220125041922798.png)
+
+![image-20220125043055695](md-images/image-20220125043055695.png)
+
+
+
+- src에 넣은 파일은 파일명 변경 + 압축된다.
+- public 폴더에 넣은 파일은 보존된다.
+
+
+
+- 3등분 하고싶다?
+
+```js
+<div className="container">
+    <div className="row">
+        <div className="col-md-4"> 박스 </div>
+ 		<div className="col-md-4"> 박스 </div>
+ 		<div className="col-md-4"> 박스 </div>
+	</div>
+</div>
+```
+
+
+
+---
+
+### import 와 export 사용하기
+
+- 데이터 바인딩할 상품데이터 3개
+- 하나하나의 상품 정보를 object {} 자료형에 담았으며 이거 3개를 하나의 array에다가 담았다.
+
+```react
+[
+  {
+    id : 0,
+    title : "White and Black",
+    content : "Born in France",
+    price : 120000
+  },
+
+  {
+    id : 1,
+    title : "Red Knit",
+    content : "Born in Seoul",
+    price : 110000
+  },
+
+  {
+    id : 2,
+    title : "Grey Yordan",
+    content : "Born in the States",
+    price : 130000
+  }
+] 
+```
+
+
+
+- 연습용 데이터가 너무 길어서 다른파일로 잘라내자.
+  - 그 다음에 state로 저장하고 데이터바인딩 할것!
+
+
+
+### useState를 쓸때는 꼭 import 잊지말고 할것
+
+```
+import React, {useState} from 'react';
+```
+
+
+
+- 새로운 js파일을 만들었다면, export default 적기 
+
+
+
+### 📙 01/25 Tue
+
+### 프로젝트 적용 - 아이콘 바꾸기
+
+- 위에 아이콘 바꾸기!
+
+![image-20220125235030910](md-images/image-20220125235030910.png)
+
+- 기본 세팅
+
+![image-20220126001235543](md-images/image-20220126001235543.png)
+
+- 아래로는 스크롤 내릴 수 있고, 옆으로는 스크롤바 없게 만들기
+
+- border-box 사이즈로 지정해주기
+
+![image-20220126001307576](md-images/image-20220126001307576.png)
+
+
+
+- 내가 쓸 모든 html 태그들에 일괄 적용해주기
+
+![image-20220126001432490](md-images/image-20220126001432490.png)
+
+
+
+- 일단 2개 설치해준다. 
+
+```bash
+$ yarn add react-router-dom@5
+```
+
+```bash
+$ yarn add styled-components
+```
+
+
+
+- LoginPage.js에서 잠시 작업해주고, App.js로 간다.
+
+![image-20220126002012626](md-images/image-20220126002012626.png)
+
+
+
+---
+
+
+
+```react
+import logo from '../../images/ag_logo.png'
+
+<NavLink to="/" className="logo" >
+            <img className="logo" alt="" src={ logo }></img>
+</NavLink>
+
+```
+
+- 네브바에 로고가 잘 적용이 되지 않는다. 보류...
+
+- 열심히 적어두었지만, 네브바가 중복되어 일단 보류~~
+
+```react
+const Nav = styled.nav`
+  max-width: 1128px;
+  margin: auto;
+  padding: 12px 0 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+
+  & > a {
+    width: 135px;
+    height: 34px;
+    @media(max-width: 768px){
+      padding: 0.5px
+    }
+  }
+
+`;
+
+
+const Join = styled.a`
+  font-size: 16px;
+  padding: 10px 12px;
+  text-decoration: NamedNodeMap;
+  border-radius: 6px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-right: 12px
+  &:hover {
+    background-color : rgba(0, 0, 0, 0.08);
+    color : rgba(0, 0, 0, 0.9);
+    text-decoration: none;
+  }
+`;
+```
+
+
+
+### 📙 01/26 Wed
+
+> 오류와의 싸움...!!
+
+
+
+팀원들은 이상 없이 실행이 된다는데,, 같은 코드로 나만 실행이 되지 않았다..
+
+npm이나 yarn 어떤 명령어를 써도 실행이 되지 않았기 때문에..
+
+오류 해결에 들어갔다.
+
+![image-20220127043452848](md-images/image-20220127043452848.png)
+
+우선, 오류들을 쭉 보니까
+
+<aside> 💡 was not found in 'react-router-dom'
+
+</aside>
+
+라는 오류 문구가 공통적으로 있었다.
+
+거기서 react-router-dom 부분이 문제가 있구나 라는 생각이 들어서 위로 올라가서
+
+```bash
+import { Route, Routes } from "react-router-dom";
+```
+
+import 부분에서 BrowserRouter as ~~~ 라는식으로도 바꿔보았지만.. 해결되지 않았다.
+
+그래서 구글링을 통해 해결 방법을 모색했다.
+
+react-router-dom 관련 오류 블로그 중
+
+```bash
+$ yarn add react-router-dom
+$ yarn add cross-env --dev
+$ npm install react-router-dom --save
+```
+
+이 명령어들도 활용해 봤지만... 해결되지 않았다.
+
+그래서 다른 방법을 찾아보기로 했다.
+
+------
+
+내가 참고했던 블로그에서 yarn 과 npm 관련 정리내용을 가져왔다.
+
+yarn과 npm에 대해 정리해보았다.
+
+### npm
+
+- 노드 패키지 매니저
+- js 프로그래밍을 위한 패키지 관리자
+- node.js의 기본 패키지 관리자
+
+### yarn
+
+- npm의 비결정적인 구조, 속도가 느린 문제점을 해결하기 위해 개발된 도구
+- npm과 호환되므로 같이 사용 가능
+
+![image-20220127043428602](md-images/image-20220127043428602.png)
+
+출처 : https://velog.io/@uoayop/React-Failed-to-compile.-Module-not-found-Cant-resolve-react-router-dom
+
+------
+
+구글링을 통해
+
+다음으로 의심 되는 부분은 node-modules이다...
+
+그래서 npm 모듈을 재설치 하기로 마음먹었다.
+
+1. package-lock.json파일 삭제
+2. node_modules 삭제
+3. npm설치
+
+```bash
+$ npm install
+```
+
+결과는...
+
+![image-20220127043415041](md-images/image-20220127043415041.png)
+
+아무것도 해결된 것이 없었다...
+
+------
+
+다음으로 의심되는 부분은 proxy의 포트 4000으로 되어있다고 하니까.. 3000으로 실행해보기
+
+- 명령어를 통한 구동 실패..
+
+```bash
+PORT=3000 npm start
+```
+
+- package.json 파일을 수정해봐도 안된다...
+
+```bash
+"scripts": {
+    "start": "set PORT=3000 && react-scripts start",
+```
+
+------
+
+다음으로 검색한 것은
+
+<aside> 💡 export 'Routes' (imported as 'Routes') was not found in 'react-router-dom’
+
+</aside>
+
+이대로 구글링을 해봤더니
+
+신빙성 있는 두 가지 사례가 있었다.
+
+1. npm과 Yarn이 충돌난 것. 둘중 하나를 지우고 하나만 이용하기
+
+2. react-router와 react-router-dom의 버전이 다를 수 있다는 것.
+
+   따라서 둘을 삭제하고 다시 설치해보기
+
+   ![image-20220127043346500](md-images/image-20220127043346500.png)
+
+```bash
+$ npm uninstall react-router
+$ npm uninstall react-router-dom
+$ npm install react-router react-router-dom
+```
+
+이로써 겨우 해결 완료 😭
 
 
 

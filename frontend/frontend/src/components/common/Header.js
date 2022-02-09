@@ -46,7 +46,7 @@ const UserInfo = styled.div`
   margin-right: 1.5rem;
 `;
 
-const Header = ({ user, onLogout }) => {
+const Header = ({ user, onLogout, onDelete }) => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => setOpen(true)
   const handleClose = () => setOpen(false)
@@ -102,7 +102,7 @@ const Header = ({ user, onLogout }) => {
               alt="User-logo"
               onClick={handleOpen}
               />
-              <Modal open={open} handleClose={handleClose} setOpen={setOpen}/>
+              <Modal open={open} handleClose={handleClose} setOpen={setOpen} onDelete={onDelete}/>
               <UserInfo>{user}</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>

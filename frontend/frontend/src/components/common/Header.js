@@ -46,7 +46,11 @@ const UserInfo = styled.div`
   margin-right: 1.5rem;
 `;
 
-const Header = ({ user, onLogout, onDelete }) => {
+const Header = ({ user, onLogout }) => {
+  const [open, setOpen] = useState(false)
+  const handleOpen = () => setOpen(true)
+  const handleClose = () => setOpen(false)
+
   return (
     <>
       <HeaderBlock>
@@ -56,9 +60,15 @@ const Header = ({ user, onLogout, onDelete }) => {
           </Link>
           {user ? (
             <div className="right">
+              <img
+              className="profile"
+              src={Image}
+              alt="User-logo"
+              onClick={handleOpen}
+              />
+              <Modal open={open} handleClose={handleClose} setOpen={setOpen}/>
               <UserInfo>{user}</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
-              <Button onClick={onDelete}>회원탈퇴</Button>
             </div>
           ) : (
             <div className="right">

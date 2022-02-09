@@ -23,7 +23,7 @@ public class FollowerServiceImpl implements FollowService{
     private final TokenProvider tokenProvider;
 
     @Override
-    public List<String> getFollow(String jwt, Function<User, List<String>> mapper,String errMsg) {
+    public List<String> getList(String jwt, Function<User, List<String>> mapper,String errMsg) {
         String email=tokenProvider.getId(jwt);
         User user =userRepository.findByEmail(email);
 
@@ -36,7 +36,7 @@ public class FollowerServiceImpl implements FollowService{
     }
 
     @Override
-    public List<String> addFollow(String jwt, String nickName) {
+    public boolean add(String jwt, String nickName,String errMsg) {
         String email=tokenProvider.getId(jwt);
         User user =userRepository.findByEmail(email);
         User follower = userRepository.findByEmailOrNickname("garage",nickName);
@@ -44,7 +44,6 @@ public class FollowerServiceImpl implements FollowService{
         log.info("follow:{}",follower);
 
         String followerEmail=follower.getEmail();
-        String errMsg="이미 있는 팔로워 관계입니다";
 
         boolean isContain=user.getFollowing().parallelStream().anyMatch(x->x.equals(followerEmail));
         if(isContain)
@@ -53,11 +52,11 @@ public class FollowerServiceImpl implements FollowService{
         follower.getFollower().add(email);
         userRepository.save(user);
         userRepository.save(follower);
-        return user.getFollower();
+        return true;
     }
 
     @Override
-    public List<String> removeFollow(String jwt,String nickName) {
+    public boolean remove(String jwt,String nickName,String errMsg) {
         String email=tokenProvider.getId(jwt);
         User user =userRepository.findByEmail(email);
         User follower = userRepository.findByEmailOrNickname("garage",nickName);
@@ -66,7 +65,6 @@ public class FollowerServiceImpl implements FollowService{
 
         String followerEmail=follower.getEmail();
         boolean isContains=user.getFollowing().parallelStream().anyMatch(x->x.equals(followerEmail));
-        String errMsg = "이미 없는 팔로워 관계입니다";
 
         if(!isContains)
             throw new RuntimeException(errMsg);
@@ -76,7 +74,7 @@ public class FollowerServiceImpl implements FollowService{
         userRepository.save(user);
         userRepository.save(follower);
 
-        return user.getFollower();
+        return true;
     }
 
         //리펙토링 실패(깔끔하게 안되네....?)

@@ -3,7 +3,7 @@ import PaneContainer from "./PaneContainer";
 import MainInfo from "./MainInfo";
 import PosterContainer from "./PosterContainer";
 
-function MovieInfo() {
+function ConcertInfo() {
   return (
     <>
       <div className="Content">
@@ -19,4 +19,4 @@ function MovieInfo() {
   );
 }
 
-export default MovieInfo;
+export default ConcertInfo;

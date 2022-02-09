@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public interface FollowService {
-    List<String> addFollow(String jwt,String nickName);
-    List<String> removeFollow(String jwt,String nickName);
-    List<String> getFollow(String jwt, Function<User,List<String>>mapper,String errMsg);
+public interface FollowService extends CRD{
+
 }

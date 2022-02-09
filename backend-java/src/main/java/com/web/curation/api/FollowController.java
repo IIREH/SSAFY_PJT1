@@ -19,37 +19,35 @@ import java.util.function.Function;
 @RestController
 @RequestMapping("/api/follow")
 public class FollowController {
-    private final UserService userService;
-    private final FollowService followService;
+     private final FollowService followService;
 
     @GetMapping("/follower")
     public ApiUtils.ApiResult<List<String>> getFollower(@RequestParam(value = "jwt") String jwt){
         log.info("follower search");
-        final String errMsg ="팔로우쪽 목록 조회 불가능";
-        List <String> value=followService.getFollow(jwt,User::getFollower,errMsg);
+
+        List <String> value=followService.getList(jwt,User::getFollower,"팔로우쪽 목록 조회 불가능");
         log.info("follower size:{}",value);
         return ApiUtils.success(value);
     }
-    @GetMapping("/followee")
-    public ApiUtils.ApiResult<List<String>> getFollowee(@RequestParam(value = "jwt") String jwt){
-        log.info("followee search");
-        final String errMsg ="팔로잉쪽 목록 조회 불가능";
+    @GetMapping("/following")
+    public ApiUtils.ApiResult<List<String>> getFollowing(@RequestParam(value = "jwt") String jwt){
+        log.info("following search");
 
-        List <String> value=followService.getFollow(jwt,User::getFollowing,errMsg);
-        log.info("followee size:{}",value);
+        List <String> value=followService.getList(jwt,User::getFollowing,"팔로잉쪽 목록 조회 불가능");
+        log.info("following size:{}",value);
         return ApiUtils.success(value);
     }
     @DeleteMapping()
-    public ApiUtils.ApiResult<List<String>> removeFollow(@RequestParam(value = "jwt") String jwt,@RequestParam(value = "nickName")String nickName){
+    public ApiUtils.ApiResult<Boolean> removeFollow(@RequestParam(value = "jwt") String jwt,@RequestParam(value = "nickName")String nickName){
         log.info("follow remove");
-        List <String> value=followService.removeFollow(jwt,nickName);
+        boolean value=followService.remove(jwt,nickName,"이미 없어진 팔로우 관계입니다.");
         log.info("follow size:{}",value);
         return ApiUtils.success(value);
     }
     @PostMapping()
-    public ApiUtils.ApiResult<List<String>> addFollow(@RequestParam(value = "jwt") String jwt,@RequestParam(value = "nickName")String nickName){
+    public ApiUtils.ApiResult<Boolean> addFollow(@RequestParam(value = "jwt") String jwt,@RequestParam(value = "nickName")String nickName){
         log.info("follow add");
-        List <String> value=followService.addFollow(jwt,nickName);
+        boolean value=followService.add(jwt,nickName,"이미 추가된 팔로우 관계입니다.");
         log.info("follow size:{}",value);
         return ApiUtils.success(value);
     }

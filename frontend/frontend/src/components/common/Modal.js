@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-const Modal = ({ handleClose, open }) => {
+const Modal = ({ handleClose, open, onDelete }) => {
   const ref = useRef();
   
   useEffect(() => {
@@ -24,6 +24,7 @@ const Modal = ({ handleClose, open }) => {
         <button className="button" onClick={handleClose}>
           Close
         </button>
+        <button className="button" onClick={onDelete}> 회원탈퇴</button>
       </div>
     </div>
   );

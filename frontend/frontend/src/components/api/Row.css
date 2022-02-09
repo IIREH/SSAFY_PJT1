@@ -88,3 +88,18 @@ h2 {
 .button-position {
     margin-left : 210px;
 }
+
+.carousel-control-next-icon:after
+{
+  content: '>';
+  font-size: 55px;
+  color: purple;
+  margin-left: -150px;
+}
+
+.carousel-control-prev-icon:after {
+  content: '<';
+  font-size: 55px;
+  color: purple;
+  margin-left: 100px;
+}

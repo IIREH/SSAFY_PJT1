@@ -54,12 +54,11 @@ const LoginForm = () => {
             dispatch(checkUser(userNickname));
           })
           .catch(e => {
-            console.log(e);
+            setError(`${e.response.data.error.message}`)
           })
       })
       .catch(e => {
-        console.log(e);
-        setError('로그인 실패');
+        setError(`${e.response.data.error.message}`)
       })
   };
 

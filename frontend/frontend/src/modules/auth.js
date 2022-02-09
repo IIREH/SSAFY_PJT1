@@ -53,6 +53,11 @@ const initialState = {
     username: '',
     password: ''
   },
+  updateUserInfo: {
+    nickname: '',
+    password: '',
+    passwordConfirm: ''
+  },
   auth: null,
   authError: null
 };

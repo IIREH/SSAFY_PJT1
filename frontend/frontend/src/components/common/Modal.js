@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 
 const Modal = ({ handleClose, open, onDelete }) => {
   const ref = useRef();
@@ -24,7 +25,10 @@ const Modal = ({ handleClose, open, onDelete }) => {
         <button className="button" onClick={handleClose}>
           Close
         </button>
-        <button className="button" onClick={onDelete}> 회원탈퇴</button>
+        <button>
+          <Link to="/updateUserInfo">회원정보수정</Link>
+        </button>
+        <button className="button" onClick={onDelete}>회원탈퇴</button>
       </div>
     </div>
   );

@@ -22,7 +22,7 @@ function Classic({ title }) {
     }, [])
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132641?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186427?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -31,7 +31,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132640?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185536?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -40,7 +40,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132639?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186277?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -49,7 +49,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132963?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186551?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -61,15 +61,15 @@ function Classic({ title }) {
     return (
         <div className="row">
             <h2>{title}</h2>
-            <div className="row__posters">
             <Link to="/info">
+            <div className="row__posters">
                 <img className='row__poster' src={classic} alt="Classic Image"></img>
-            </Link>
                 <img className='row__poster' src={classic2} alt="Classic Image2"></img>
                 <img className='row__poster' src={classic3} alt="Classic Image3"></img>
                 <img className='row__poster' src={classic4} alt="Classic Image4"></img>
                 <img className='row__poster' src={classic5} alt="Classic Image5"></img>
             </div>
+            </Link>
             <hr className='hr'></hr>
         </div>
     )

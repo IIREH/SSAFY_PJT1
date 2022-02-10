@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
 import Image from '../../img/cookie.jpg';
-import Modal from './Modal';
+// import Modal from './Modal';
 import './Modal.css'
+import { Modal } from 'react-bootstrap';
 
 // Banner
 const HeaderBlock = styled.div`
@@ -47,9 +48,9 @@ const UserInfo = styled.div`
 `;
 
 const Header = ({ user, onLogout, onDelete }) => {
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => setOpen(false)
+  const [show, setShow] = useState(false)
+  const handleShow = () => setShow(true)
+  const handleClose = () => setShow(false)
 
   return (
     <>
@@ -98,9 +99,23 @@ const Header = ({ user, onLogout, onDelete }) => {
               className="profile"
               src={Image}
               alt="User-logo"
-              onClick={handleOpen}
+              onClick={handleShow}
               />
-              <Modal open={open} handleClose={handleClose} setOpen={setOpen} onDelete={onDelete}/>
+              <Modal show={show} onHide={handleClose}>
+                <Modal.Header closeButton>
+                  <Modal.Title>프로필</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>프로필 상세화면 모달창 입니다!</Modal.Body>
+                <Modal.Footer>
+                  <Button onClick={handleClose}>
+                    닫기
+                  </Button>
+                  <Button>
+                    <Link to="/updateUserInfo" style={{ textDecoration: 'none', color: 'white' }}>회원정보수정</Link>
+                  </Button>
+                  <Button className="button" onClick={onDelete}>회원탈퇴</Button>
+                </Modal.Footer>
+              </Modal>
               <UserInfo>{user}</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>

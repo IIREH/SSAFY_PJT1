@@ -86,7 +86,7 @@ function Theatre({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/theatre">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -101,7 +101,7 @@ function Theatre({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/theatre2">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -116,7 +116,7 @@ function Theatre({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/theatre3">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -135,7 +135,7 @@ function Theatre({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/theatre4">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -150,7 +150,7 @@ function Theatre({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/theatre5">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>

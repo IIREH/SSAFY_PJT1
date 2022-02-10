@@ -84,7 +84,7 @@ function Musical({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/musical">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -99,7 +99,7 @@ function Musical({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/musical2">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -114,7 +114,7 @@ function Musical({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/musical3">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -133,7 +133,7 @@ function Musical({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/musical4">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
@@ -148,7 +148,7 @@ function Musical({ title }) {
                     Some quick example text to build on the card title and make up the bulk of
                     the card's content.
                     </Card.Text>
-                    <Link to="/info">
+                    <Link to="/musical5">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>

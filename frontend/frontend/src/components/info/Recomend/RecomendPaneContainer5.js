@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import XMLParser from 'react-xml-parser';
 import styled from "styled-components";
-import Star from "./Star";
 
 const PaneBox = styled.div`
   text-align: center;
@@ -212,7 +211,7 @@ function PaneContainer() {
   const [fcltynm, setFcltynm] = useState(null);
 
   useEffect(() => {
-    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186242?service=4e391a1107334d7aaf6034069bbcbc5a")
+    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186424?service=4e391a1107334d7aaf6034069bbcbc5a")
         .then(res => res.text())
         .then(data => {
             var xml = new XMLParser().parseFromString(data); 
@@ -235,7 +234,7 @@ function PaneContainer() {
                       {prfpdfrom}   |    # {genrenm}   |    {fcltynm}
               </div>
               <div className="ContentRatings">
-                평균 ★★★★ (10 명)
+                평균 ★★★★ (399 명)
               </div>
               <div className="ButtonBlock">
                 <div className="Self">
@@ -248,7 +247,6 @@ function PaneContainer() {
                   </button>
                 </div>
               </div>
-              <Star />
             </div>
           </div>
         </div>

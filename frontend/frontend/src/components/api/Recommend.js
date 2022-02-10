@@ -88,7 +88,7 @@ function Recommend({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/recomend">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -103,7 +103,7 @@ function Recommend({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/recomend2">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -118,7 +118,7 @@ function Recommend({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/recomend3">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -137,7 +137,7 @@ function Recommend({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/recomend4">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -152,7 +152,7 @@ function Recommend({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/recomend5">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>

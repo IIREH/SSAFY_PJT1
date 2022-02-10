@@ -85,7 +85,7 @@ function Classic({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/classic">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -100,7 +100,7 @@ function Classic({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/classic2">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -115,7 +115,7 @@ function Classic({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/classic3">
                         <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -134,7 +134,7 @@ function Classic({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/classic4">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
@@ -149,7 +149,7 @@ function Classic({ title }) {
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content.
                 </Card.Text>
-                <Link to="/info">
+                <Link to="/classic5">
                     <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>

@@ -28,6 +28,7 @@ import TheatreInfoPage2 from './theatrePages/TheatreInfoPage2';
 import TheatreInfoPage3 from './theatrePages/TheatreInfoPage3';
 import TheatreInfoPage4 from './theatrePages/TheatreInfoPage4';
 import TheatreInfoPage5 from './theatrePages/TheatreInfoPage5';
+import ProfilePage from './pages/ProfilePage';
 
 const App = () => {
   return (
@@ -65,6 +66,7 @@ const App = () => {
         <Route index element={<ListPage />} />
         <Route path=":postId" element={<PostPage />} />
       </Route>
+      <Route path="/profile/:nickname" element={<ProfilePage />} />
     </Routes>
   );
 };

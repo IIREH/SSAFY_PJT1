@@ -24,8 +24,8 @@ const ProfileContainer = ({ nickname }) => {
 
   return (
     <div>
-      {nickname}님의 프로필 페이지
       <FollowComponent 
+        nickname={nickname}
         isfollowing={profile.isfollowing}
         following={profile.following}
         follower={profile.follower}

@@ -1,14 +1,4 @@
-웹 디자인 Backend
-
-나중에 해야할 것.
-
-redis, 엘라스틱 서치 pom.xml에 넣기.
-
-개발 환경 구성 변경.
-
-
-
-소개
+### 소개
 
 웹 디자인 프로젝트의 Backend  코드
 
@@ -16,8 +6,10 @@ redis, 엘라스틱 서치 pom.xml에 넣기.
 
 Project	Version	Description
 Java   	1.8    	           
-Maven  	3.6.3  	Build Tool
-Mongdb
+Maven  	  		Build Tool
+Mongdb	5
+
+
 
 개발 환경 구성
 
@@ -35,40 +27,37 @@ Windows 기준 개발 환경 구성 설명
       OpenJDK Runtime Environment (Zulu 8.33.0.1-win64) (build 1.8.0_192-b01)
       OpenJDK 64-Bit Server VM (Zulu 8.33.0.1-win64) (build 25.192-b01, mixed mode)
 
-2. Docker 및 데이터베이스 구성 (이미 설치되어 있거나 원격 DB를 사용하는 경우 설치 부분 생략)
+2. Docker 및 데이터베이스 구성 
    1. Docker 사이트를 참조하여 Docker For Windows 설치
+
       - https://docs.docker.com/docker-for-windows/install/
-   2. MariaDB 설치
-      - cmd에서 docker run 커맨드 실행
-        > docker run --name maria-db -p 3306:3306 -e MYSQl_ROOT_PASSWORD=<패스워드> -d mariadb
-
-   3. DB 및 계정 생성
-      - cmd에서 docker exec 커맨드 실행
-        > docker exec -it maria-db mysql -u root -p
-
-      - DB 생성
-        create database IF NOT EXISTS `ssafy_sns`;
-
-3. 스켈레톤 다운로드 및 설정
-   1. 프로젝트 다운로드
-      git clone <repo URL>
-
-   2. src/main/resources/application.properties 수정
-
-   spring.datasource.username=<사용자 계정> spring.datasource.password=<비밀번호>
 
 
-디렉토리 구조
+   - 까는 방식은 vm을 추천
+   - 리눅스로 하면 성능향상이있어서 좋다고 하지만, 설치 방식이 생각보다 귀찮음.
 
-    .
-    └─src
-        ├─main
-             ├─java
-             │  └─com
-             │      └─web
-             │          └─curation
-             │              ├─config  /* Spring Config 파일 */
-             │              ├─controller  /* Controller 단위의 클래스 */
-             │              ├─dao  /* DB 연결을 위한 Data Access Object */
-             │              └─model  /* 객체 모델 클래스 */
-             └─resources
+
+
+
+3. Lombok 설치
+
+   - [이클립스(Eclipse)에 롬복(Lombok) 설치하기 (tistory.com)](https://congsong.tistory.com/31)
+   - 인텔리제이를 사용하면,  lombok 설치후 플러그인만 설치하면 됨.
+
+
+
+4.  stack.yml에 있는 폴더에서 
+
+   ``` 
+   docker-compose -f stack.yml up
+   ```
+
+   ​
+
+5. 이제 스프링을 돌리면 끝!!!  
+
+   - 안돌아가면, WebCurationApplication.java를 run 하게 유도하면 되요.
+
+     ​
+
+   ​

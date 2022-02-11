@@ -92,7 +92,8 @@ const RegisterForm = () => {
           })
       })
       .catch(e => {
-        console.log(e);
+        console.log(e.response)
+        setError(`${e.response.data.error.message}`)
       })
     // dispatch(register({ username, nickname, password }));
   };

@@ -24,6 +24,7 @@ public class LikePostServiceImpl implements LikePostService{
     private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+
     @Override
     public boolean add(String jwt, String postId,String errMsg) {
         String email=tokenProvider.getId(jwt);

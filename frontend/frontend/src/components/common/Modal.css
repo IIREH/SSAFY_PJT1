@@ -3,9 +3,8 @@
   position: relative;
   width: 100px;
 }
-
+/* 
 .modal-container {
-  position: fixed;
   background-color: rgba(0, 0, 0, 0.6);
   top: 0;
   left: 0;
@@ -17,7 +16,7 @@
 
 .modal {
   position:fixed;
-  background: white;
+  background: #FFFDDD;
   width: 50%;
   top:50%;
   left:50%;
@@ -25,12 +24,11 @@
   padding: 1rem;
   border-radius: 8px;
 }
-
-.close {
+ .close {
   display: none;
-}
+} */
 
-.button {
+/* .button {
   padding: 8px;
   background-color: #4169e1;
   color: white;
@@ -38,7 +36,7 @@
   border: 1px solid #4169e1;
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 
 .profileScreen {
   height: 100vh;

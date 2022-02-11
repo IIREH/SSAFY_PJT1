@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import XMLParser from 'react-xml-parser';
 import styled from "styled-components";
 
 const MainInfoBackground = styled.div`
@@ -59,10 +60,28 @@ const MainInfoContainer = styled.div`
     position: absolute;
     right: 0;
   }
-
 `;
 
 function MainInfo() {
+  const [prfruntime, setPrfruntime] = useState(null);
+  const [pcseguidance	, setPcseguidance	] = useState(null);
+  const [dtguidance	, setdtGuidance	] = useState(null);
+  const [prfcast , setPrfcast	] = useState(null);
+  const [prfcrew , setdtPrfcrew	] = useState(null);
+
+  useEffect(() => {
+    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF183804?service=4e391a1107334d7aaf6034069bbcbc5a")
+        .then(res => res.text())
+        .then(data => {
+            var xml = new XMLParser().parseFromString(data); 
+            setPrfruntime(xml.getElementsByTagName('prfruntime')[0].value);
+            setPcseguidance(xml.getElementsByTagName('pcseguidance')[0].value);
+            setdtGuidance(xml.getElementsByTagName('dtguidance')[0].value);
+            setPrfcast(xml.getElementsByTagName('prfcast')[0].value);
+            setdtPrfcrew(xml.getElementsByTagName('prfcrew')[0].value);
+        })
+        .catch(err => console.log(err));
+}, [])
 
   return (
     <MainInfoBackground>
@@ -72,21 +91,21 @@ function MainInfo() {
             <h3>기본정보</h3>
           </div>
           <div className="basic-infomation__detail">
-            <p>ㅓㅓ</p>
-            <p>ㅓㅓㅓㅕ</p>
-            <p>ㄷㄷㄷㄷ</p>
+            <p>{prfruntime}</p>
+            <p>{pcseguidance}</p>
+            <p>{dtguidance}</p>
           </div>
         </div>
         <div className="content-box">
           <div className="basic-infomation__detail">
-            <h3>내용 </h3>
-            <p>ㅜㅛㅓ</p>
+            <h3> 예매 링크 </h3>
+            <a href="https://booking.naver.com/booking/12/bizes/638527"> 여기를 눌러 예매하기 </a>
           </div>
         </div>
         <div className="content-box">
           <div className="basic-infomation__detail">
             <h3>출연/제작</h3>
-            <p>ㅇㅈㅇ</p>
+            <p>{prfcast} / {prfcrew}</p>
           </div>
         </div>
         <div className="content-box">

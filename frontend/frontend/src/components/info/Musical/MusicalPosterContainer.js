@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
+import XMLParser from 'react-xml-parser';
 import styled from "styled-components";
 
 const PosterBox = styled.div`
@@ -242,13 +243,24 @@ const PosterBox = styled.div`
 `;
 
 function PosterContainer() {
+  const [poster, setPoster] = useState(null);
+
+  useEffect(() => {
+    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF180838?service=4e391a1107334d7aaf6034069bbcbc5a")
+        .then(res => res.text())
+        .then(data => {
+            var xml = new XMLParser().parseFromString(data); 
+            setPoster(xml.getElementsByTagName('poster')[0].value);
+        })
+        .catch(err => console.log(err));
+}, [])
 
   return (
     <PosterBox>
       <div className="PosterBlock">
         <div className="LeftBackground"></div>
         <div className="Poster">
-          <img src="https://www.kopis.or.kr/upload/pfmIntroImage/PF_PF186242_220128_1041550.jpg" alt=""></img>
+          <img src={poster} alt=""></img>
           <div className="LeftGradinet"></div>
           <div className="RightGradinet"></div>
         </div>
@@ -262,17 +274,17 @@ function PosterContainer() {
               className="PosterWithRankingInfoBlock"
             >
               <div className="StyledLazyLoadingImage">
-                <img alt="영화 포스터" src="https://www.kopis.or.kr/upload/pfmPoster/PF_PF186242_220128_104155.gif"></img>
+                <img alt="공연 포스터" src={poster}></img>
               </div>
               <ul className="RankingInfoList">
                 <li>
-                  예매 순위 · <em>1위 (23%)</em>
+                  예매 순위 · <em>1위 (22%)</em>
                 </li>
                 <li>
-                  개관 · <em>8일째</em>
+                  개관 · <em>23일째</em>
                 </li>
                 <li>
-                  누적 관객 · <em>4만명</em>
+                  누적 관객 · <em>3천 1백명</em>
                 </li>
               </ul>
             </div>

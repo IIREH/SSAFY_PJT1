@@ -51,7 +51,6 @@ public class IndexController {
 //        인덱스 페이지 새로고침하며 테스트
         User user = User.builder()
                 .email("test@test")
-                .name("testName")
                 .nickname("testNickName")
                 .pwd("testPwd")
                 .build();
@@ -89,14 +88,14 @@ public class IndexController {
                 .contest(contest)
                 .user(user)
                 .content("테스트 공연에 관한 글")
-                .likedByList(null)
+                .likedByList(new ArrayList<>())
                 .hashTags(hashTagList)
-                .comments(null)
+                .comments(new ArrayList<>())
                 .build();
         postRepository.save(post);
         postRepository.save(post);
 
-        Optional<Post> postList = postRepository.findAllByUser(user);
+        List<Post> postList = postRepository.findAllByUser(user);
         log.info("post list:{}", postList);
         post.setContent("updated content");
         postRepository.save(post);

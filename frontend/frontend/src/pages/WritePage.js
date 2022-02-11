@@ -10,9 +10,10 @@ const WritePage = () => {
   return (
     <Responsive>
       <Helmet>
-        <title>글 작성하기 - A&C Galleria</title>
+        <title>글 작성하기 </title>
       </Helmet>
-
+      <br></br><br></br><br></br>
+      <h2>SNS글 작성하기</h2>
       <EditorContainer />
       <TagBoxContainer />
       <WriteActionButtonsContainer />

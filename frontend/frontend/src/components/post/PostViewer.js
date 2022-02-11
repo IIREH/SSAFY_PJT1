@@ -43,7 +43,7 @@ const PostViewer = ({ post, error, loading, actionButtons, ownPost }) => {
   return (
     <PostViewerBlock>
       <Helmet>
-        <title>{title} - A&C Galleria</title>
+        <title>{title} - <img src="/logo.png" alt="logo"></img></title>
       </Helmet>
 
       <PostHead>

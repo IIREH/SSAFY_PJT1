@@ -75,7 +75,7 @@ function Recommend({ title }) {
 
     return (
         <div className="row">
-        <h2>{title}</h2>
+        <h2> {title} </h2>
         <Carousel>
         <Carousel.Item>
         <CardGroup className="justify-content-center">
@@ -84,12 +84,14 @@ function Recommend({ title }) {
             <Card.Img variant="top" src={ recommend } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>프랑켄슈타인</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                 후기 : 38건
+                <br></br>
+                평점 : ★★★★★
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -99,12 +101,14 @@ function Recommend({ title }) {
             <Card.Img variant="top" src={ recommend2 } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>지킬 앤 하이드</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 28건
+                <br></br>
+                평점 : ★★★★★
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -114,12 +118,14 @@ function Recommend({ title }) {
             <Card.Img variant="top" src={ recommend3 } alt="Recommend Image" />
             <Card.Body>
                 <Card.Title>라이온킹</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 27건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -133,12 +139,14 @@ function Recommend({ title }) {
             <Card.Img variant="top" src={ recommend4 } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>팬레터</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 25건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -148,12 +156,14 @@ function Recommend({ title }) {
             <Card.Img variant="top" src={ recommend5 } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>길들여진 새</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 25건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -163,12 +173,14 @@ function Recommend({ title }) {
             <Card.Img variant="top" src={ recommend6 } alt="Recommend Image" />
             <Card.Body>
                 <Card.Title>하데스타운</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 24건
+                <br></br>
+                평점 : ★★★☆☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>

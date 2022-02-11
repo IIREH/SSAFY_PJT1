@@ -81,12 +81,14 @@ function Classic({ title }) {
             <Card.Img variant="top" src={ classic } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>크리스티안 짐머만</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 20건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -96,12 +98,14 @@ function Classic({ title }) {
             <Card.Img variant="top" src={ classic2 } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>메타포닉</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 17건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -111,12 +115,14 @@ function Classic({ title }) {
             <Card.Img variant="top" src={ classic3 } alt="Recommend Image" />
             <Card.Body>
                 <Card.Title>랑랑 피아노 리사이틀</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 13건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -130,12 +136,14 @@ function Classic({ title }) {
             <Card.Img variant="top" src={ classic4 } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>크레디아 클래식 클럽 2022</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 11건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -145,12 +153,14 @@ function Classic({ title }) {
             <Card.Img variant="top" src={ classic5 } alt="Recommend Image"/>
             <Card.Body>
                 <Card.Title>블록버스터 영화음악 콘서트</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 10건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>
@@ -160,12 +170,14 @@ function Classic({ title }) {
             <Card.Img variant="top" src={ classic6 } alt="Recommend Image" />
             <Card.Body>
                 <Card.Title>화이트데이 로맨틱 콘서트</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
+                후기 : 10건
+                <br></br>
+                평점 : ★★★★☆
                 </Card.Text>
                 <Link to="/info">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                 </Link>
             </Card.Body>
         </Card>

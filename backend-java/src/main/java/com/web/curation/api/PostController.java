@@ -108,14 +108,4 @@ public class PostController {
         }
         return ApiUtils.success("success");
     }
-
-    @ApiOperation(value = "좋아요 클릭", notes = "좋아요 설정 <-> 해제, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
-    @PostMapping("/{postId}/like")
-    public ApiUtils.ApiResult<?> clickLikeButton(@PathVariable("postId") @ApiParam(value = "게시글 ID", required = true) String postId,
-                                               @RequestParam("userId") @ApiParam(value = "유저 ID", required = true) String userId) {
-        if(postservice.clickLikeButton(postId, userId) == false) {
-            return ApiUtils.error("게시글이나 사용자를 찾을 수 없습니다.", HttpStatus.BAD_REQUEST);
-        }
-        return ApiUtils.success("success");
-    }
 }

@@ -29,8 +29,6 @@ public class Post {
     private User user;
     @CreatedDate
     private Date writeDate;
-    @LastModifiedDate
-    private Date modifyDate;
     private String content;
     @DBRef
     private Photo photo;

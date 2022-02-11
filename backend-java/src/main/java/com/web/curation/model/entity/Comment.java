@@ -27,7 +27,5 @@ public class Comment {
     private User user;
     @CreatedDate
     private Date writeDate;
-    @LastModifiedDate
-    private Date modifyDate;
     private String content;
 }

@@ -53,12 +53,12 @@ public class PostService {
             }
         }
 
-        //Photo photo = photoService.getPhoto(postDto.getPhotoId());
+        Photo photo = photoService.getPhoto(postDto.getPhotoId());
         Post post = Post.builder()
                 .contest(contestOrNull.get())
                 .user(userOrNull.get())
                 .content(postDto.getContent())
-                //.photo(photo)
+                .photo(photo)
                 .hashTags(hashTags)
                 .build();
 

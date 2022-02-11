@@ -38,6 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
                 .and()
                 .authorizeRequests()
+                //TODO 개발 테스트를 위한 cors와 preFlight 요청 허용.start
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                .requestMatchers(CorsUtils::isCorsRequest).permitAll()
+                // end
                 .antMatchers(auth).authenticated()
 //                .antMatchers(authPass).permitAll()
 //                .anyRequest().authenticated()

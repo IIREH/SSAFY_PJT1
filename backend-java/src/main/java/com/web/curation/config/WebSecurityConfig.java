@@ -38,16 +38,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
                 .and()
                 .authorizeRequests()
-                .antMatchers(auth).authenticated()
-                .antMatchers(authPass).permitAll()
-                .anyRequest().authenticated()
-                .mvcMatchers(swagger).permitAll()
-                .anyRequest().permitAll()
-        //TODO 개발 테스트를 위한 cors와 preFlight 요청 허용.
-                .and()
-                .authorizeRequests()
+                //TODO 개발 테스트를 위한 cors와 preFlight 요청 허용.start
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .requestMatchers(CorsUtils::isCorsRequest).permitAll();
+                .requestMatchers(CorsUtils::isCorsRequest).permitAll()
+                // end
+                .antMatchers(auth).authenticated()
+//                .antMatchers(authPass).permitAll()
+//                .anyRequest().authenticated()
+                .mvcMatchers(swagger).permitAll()
+                .anyRequest().permitAll();
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

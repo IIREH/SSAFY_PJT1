@@ -24,6 +24,7 @@ public class User {
     private List<String> follower;
     private List<String>following;
     private List<String> likePost;
+
     private String role;
 
 

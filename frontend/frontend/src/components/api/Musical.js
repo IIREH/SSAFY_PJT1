@@ -60,11 +60,11 @@ function Musical({ title }) {
         <div className="row">
             <h2>{title}</h2>
             <div className="row__posters">
-                <img className='row__poster' src={musical} alt="Musical photo"></img>
-                <img className='row__poster' src={musical2} alt="Musical photo2"></img>
-                <img className='row__poster' src={musical3} alt="Musical photo3"></img>
-                <img className='row__poster' src={musical4} alt="Musical photo4"></img>
-                <img className='row__poster' src={musical5} alt="Musical photo5"></img>
+                <img className='row__poster' src={musical} alt="Musical"></img>
+                <img className='row__poster' src={musical2} alt="Musical2"></img>
+                <img className='row__poster' src={musical3} alt="Musical3"></img>
+                <img className='row__poster' src={musical4} alt="Musical4"></img>
+                <img className='row__poster' src={musical5} alt="Musical5"></img>
             </div>
             <hr className='hr'></hr>
         </div>

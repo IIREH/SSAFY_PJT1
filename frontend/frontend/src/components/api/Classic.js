@@ -63,12 +63,12 @@ function Classic({ title }) {
             <h2>{title}</h2>
             <div className="row__posters">
             <Link to="/info">
-                <img className='row__poster' src={classic} alt="Classic Image"></img>
+                <img className='row__poster' src={classic} alt="Classic"></img>
             </Link>
-                <img className='row__poster' src={classic2} alt="Classic Image2"></img>
-                <img className='row__poster' src={classic3} alt="Classic Image3"></img>
-                <img className='row__poster' src={classic4} alt="Classic Image4"></img>
-                <img className='row__poster' src={classic5} alt="Classic Image5"></img>
+                <img className='row__poster' src={classic2} alt="Classic2"></img>
+                <img className='row__poster' src={classic3} alt="Classic3"></img>
+                <img className='row__poster' src={classic4} alt="Classic4"></img>
+                <img className='row__poster' src={classic5} alt="Classic5"></img>
             </div>
             <hr className='hr'></hr>
         </div>

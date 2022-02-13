@@ -60,11 +60,11 @@ function Recommend({ title }) {
         <div className="row">
             <h2>{title}</h2>
             <div className="row__posters">
-                <img className='row__poster' src={recommend} alt="Recommend Image"></img>
-                <img className='row__poster' src={recommend2} alt="Recommend Image2"></img>
-                <img className='row__poster' src={recommend3} alt="Recommend Image3"></img>
-                <img className='row__poster' src={recommend4} alt="Recommend Image4"></img>
-                <img className='row__poster' src={recommend5} alt="Recommend Image5"></img>
+                <img className='row__poster' src={recommend} alt="Recommend"></img>
+                <img className='row__poster' src={recommend2} alt="Recommend2"></img>
+                <img className='row__poster' src={recommend3} alt="Recommend3"></img>
+                <img className='row__poster' src={recommend4} alt="Recommend4"></img>
+                <img className='row__poster' src={recommend5} alt="Recommend5"></img>
             </div>
             <hr className='hr'></hr>
         </div>

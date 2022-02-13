@@ -46,6 +46,7 @@ const TagForm = styled.form`
 `;
 
 const Tag = styled.div`
+  margin-top: 10px;
   margin-right: 0.5rem;
   color: ${palette.grape[6]};
   cursor: pointer;
@@ -117,7 +118,7 @@ const TagBox = ({ tags, onChangeTags }) => {
 
   return (
     <TagBoxBlock>
-      <h4>태그</h4>
+      <h4 style={{ textAlign: 'start'}}> # 태그</h4>
       <TagForm onSubmit={onSubmit}>
         <input
           placeholder="태그를 입력하세요"

@@ -77,7 +77,7 @@ function Musical({ title }) {
             <CardGroup className="justify-content-center">
             <span className="row__posters">
             <Card>
-                <Card.Img variant="top" src={ musical } alt="Recommend Image"/>
+                <Card.Img variant="top" src={ musical } alt="Recommend"/>
                 <Card.Body>
                     <Card.Title>젠틀맨스 가이드</Card.Title>
                     <hr></hr>
@@ -94,7 +94,7 @@ function Musical({ title }) {
             </span>
             <span className="row__posters">
             <Card>
-                <Card.Img variant="top" src={ musical2 } alt="Recommend Image"/>
+                <Card.Img variant="top" src={ musical2 } alt="Recommend"/>
                 <Card.Body>
                     <Card.Title>데스노트</Card.Title>
                     <hr></hr>
@@ -111,7 +111,7 @@ function Musical({ title }) {
             </span>
             <span className="row__posters">
             <Card>
-                <Card.Img variant="top" src={ musical3 } alt="Recommend Image" />
+                <Card.Img variant="top" src={ musical3 } alt="Recommend" />
                 <Card.Body>
                     <Card.Title>극장형 보이는 라디오</Card.Title>
                     <hr></hr>
@@ -132,7 +132,7 @@ function Musical({ title }) {
             <CardGroup className="justify-content-center">
             <span className="row__posters">
             <Card>
-                <Card.Img variant="top" src={ musical4 } alt="Recommend Image"/>
+                <Card.Img variant="top" src={ musical4 } alt="Recommend"/>
                 <Card.Body>
                     <Card.Title>노트르담드파리</Card.Title>
                     <hr></hr>
@@ -149,7 +149,7 @@ function Musical({ title }) {
             </span>
             <span className="row__posters">
             <Card>
-                <Card.Img variant="top" src={ musical5 } alt="Recommend Image"/>
+                <Card.Img variant="top" src={ musical5 } alt="Recommend"/>
                 <Card.Body>
                     <Card.Title>EQUAL</Card.Title>
                     <hr></hr>
@@ -166,7 +166,7 @@ function Musical({ title }) {
             </span>
             <span className="row__posters">
             <Card>
-                <Card.Img variant="top" src={ musical6 } alt="Recommend Image" />
+                <Card.Img variant="top" src={ musical6 } alt="Recommend" />
                 <Card.Body>
                     <Card.Title>구름빵2</Card.Title>
                     <hr></hr>

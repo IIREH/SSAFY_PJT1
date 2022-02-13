@@ -5,21 +5,42 @@ import EditorContainer from '../containers/write/EditorContainer';
 import TagBoxContainer from '../containers/write/TagBoxContainer';
 import WriteActionButtonsContainer from '../containers/write/WriteActionButtonsContainer';
 import { Helmet } from 'react-helmet-async';
+import { BoxUpload } from '../containers/write/UploadImgContainer'
 
-const WritePage = () => {
+function WritePage() {
+  function handleImageChange(e) {
+
+  }
   return (
     <Responsive>
       <Helmet>
         <title>글 작성하기 </title>
       </Helmet>
       <br></br><br></br><br></br>
-      <h2>SNS글 작성하기</h2>
+      <h2> 내 글 작성하기</h2>
       <EditorContainer />
       <TagBoxContainer />
+      <br/>
+      <h4 style={{ textAlign: 'start'}}> 📂 파일 선택 </h4>
+      <BoxUpload>
+        <div className='image-upload'>
+          <label htmlFor='upload-input'>
+            <img src='/folder.png' draggable='false' alt='folder' style={{ width: 100, height: 100 }}></img>
+            <br></br>
+            <br></br>
+            <p>클릭하여 이미지 업로드하기</p>
+          </label>
+          <input id="upload-input" type="file" accept='.jpg,.jpeg,.gif,.png,.mov,.mp4' onChange={handleImageChange} />
+          
+        </div>
+      </BoxUpload>
       <WriteActionButtonsContainer />
+      <br></br>
     </Responsive>
   );
 };
+
+
 
 // const WritePage = (props) => {
 //   return (

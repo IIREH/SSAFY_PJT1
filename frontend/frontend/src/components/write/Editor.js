@@ -12,6 +12,7 @@ const EditorBlock = styled(Responsive)`
 `;
 const TitleInput = styled.input`
   font-size: 3rem;
+  background-color: #fffcfc;
   outline: none;
   padding-bottom: 0.5rem;
   border: none;
@@ -39,7 +40,7 @@ const Editor = ({ title, body, onChangeField }) => {
   useEffect(() => {
     quillInstance.current = new Quill(quillElement.current, {
       theme: 'bubble',
-      placeholder: '내용을 작성하세요...',
+      placeholder: '내용을 입력해주세요',
       modules: {
         // 더 많은 옵션
         // https://quilljs.com/docs/modules/toolbar/ 참고
@@ -76,7 +77,7 @@ const Editor = ({ title, body, onChangeField }) => {
   return (
     <EditorBlock>
       <TitleInput
-        placeholder="제목을 입력하세요"
+        placeholder="제목을 입력해주세요"
         onChange={onChangeTitle}
         value={title}
       />

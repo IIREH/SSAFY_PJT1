@@ -55,7 +55,7 @@
 }
 
 .card{
-    width: 19.5rem;
+    width: 19rem;
     align-items: center;
 }
 
@@ -88,18 +88,17 @@ h2 {
 }
 
 .button-position-totheleft {
-    margin-left : 190px;
+    align-items: center;
 }
 
-.carousel-control-next-icon:after
-{
+.carousel-control-next-icon:after {
   content: '>';
   font-size: 53px;
   color: purple;
   margin-left: 100px;
 }
 
-.carousel-control-prev-icon:after {
+.carousel-control-prev-icon:before {
   content: '<';
   font-size: 53px;
   color: purple;

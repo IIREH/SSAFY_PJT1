@@ -81,7 +81,7 @@ function Recommend({ title }) {
         <CardGroup className="justify-content-center">
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ recommend } alt="Recommend Image"/>
+            <Card.Img variant="top" src={ recommend } alt="Recommend"/>
             <Card.Body>
                 <Card.Title>프랑켄슈타인</Card.Title>
                 <hr></hr>
@@ -98,7 +98,7 @@ function Recommend({ title }) {
         </span>
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ recommend2 } alt="Recommend Image"/>
+            <Card.Img variant="top" src={ recommend2 } alt="Recommend"/>
             <Card.Body>
                 <Card.Title>지킬 앤 하이드</Card.Title>
                 <hr></hr>
@@ -115,7 +115,7 @@ function Recommend({ title }) {
         </span>
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ recommend3 } alt="Recommend Image" />
+            <Card.Img variant="top" src={ recommend3 } alt="Recommend" />
             <Card.Body>
                 <Card.Title>라이온킹</Card.Title>
                 <hr></hr>
@@ -136,7 +136,7 @@ function Recommend({ title }) {
         <CardGroup className="justify-content-center">
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ recommend4 } alt="Recommend Image"/>
+            <Card.Img variant="top" src={ recommend4 } alt="Recommend"/>
             <Card.Body>
                 <Card.Title>팬레터</Card.Title>
                 <hr></hr>
@@ -153,7 +153,7 @@ function Recommend({ title }) {
         </span>
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ recommend5 } alt="Recommend Image"/>
+            <Card.Img variant="top" src={ recommend5 } alt="Recommend"/>
             <Card.Body>
                 <Card.Title>길들여진 새</Card.Title>
                 <hr></hr>
@@ -170,7 +170,7 @@ function Recommend({ title }) {
         </span>
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ recommend6 } alt="Recommend Image" />
+            <Card.Img variant="top" src={ recommend6 } alt="Recommend" />
             <Card.Body>
                 <Card.Title>하데스타운</Card.Title>
                 <hr></hr>

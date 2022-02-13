@@ -111,17 +111,18 @@ const Header = ({ user, onLogout, onDelete }) => {
                     닫기
                   </Button>
                   <Button>
-                    <Link to="/updateUserInfo" style={{ textDecoration: 'none', color: 'white' }}>회원정보수정</Link>
+                    <Link to="/updateUserInfo" style={{ color: 'white', textDecoration: 'none' }}>회원정보수정</Link>
                   </Button>
-                  <Button className="button" onClick={onDelete}>회원탈퇴</Button>
+                  <Button onClick={onDelete}>회원탈퇴</Button>
                 </Modal.Footer>
               </Modal>
-              <UserInfo>{user}</UserInfo>
+              <UserInfo>{ user } 님</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>
           ) : (
             <div className="right">
-              <Button to="/login">로그인</Button>
+              <Button to="/login" style={{ color : 'white' }}>로그인 </Button>
+              <Button to="/register" style={{ margin : 5, color : 'white' }} >회원가입</Button>
             </div>
           )}
 

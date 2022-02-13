@@ -18,9 +18,10 @@
 
 ## 🔰 프로젝트 소개
 
-- 서비스명  - 아트그램(artgram)
-  - 예술(art) 정보를 보낸다는 의미의 텔레그램(Telegram)을 합쳐 만든 이름
-  - (아직은 가명입니다.)
+- 서비스명  - A&C Galleria
+  - Art and Culture Galleria
+
+![image-20220213164451921](md-images/image-20220213164451921.png)
 
 - 서비스 설명/ 주요기능
 
@@ -35,11 +36,13 @@
     -  계정 관리
     -  해당 공연 SNS글 추천 기능
     -  해당 카테고리의 다양한 공연 추천 기능
-
 - 주요 기술 스택
   - HTML / CSS / JS
   - React
   - Java Spring 
+  - MongoDB
+  - Swagger
+    
 
 * 참조 리소스
   * sass-loader: scss 로드 및 컴파일
@@ -68,13 +71,9 @@
   - Front-end : HTML/CSS/JS, React
   - Back-end : Java Spring
 
+​		
 
-
-- ERD
-
-
-
-### 🔰 우리팀 Git Commit Convention
+## 🔰 우리팀 Git Commit Convention
 
 ![image-20220113130800300](md-images/image-20220113130800300.png)
 

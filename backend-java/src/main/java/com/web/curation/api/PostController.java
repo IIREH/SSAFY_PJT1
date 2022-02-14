@@ -5,10 +5,13 @@ import com.web.curation.model.dto.*;
 import com.web.curation.model.entity.Comment;
 import com.web.curation.model.entity.Contest;
 import com.web.curation.model.entity.Post;
+import com.web.curation.model.entity.User;
 import com.web.curation.model.mapper.CommentMapper;
 import com.web.curation.model.mapper.PostMapper;
 import com.web.curation.model.service.PhotoService;
 import com.web.curation.model.service.PostService;
+import com.web.curation.model.service.UserService;
+import com.web.curation.model.service.repository.UserRepository;
 import com.web.curation.utils.ApiUtils;
 import io.swagger.annotations.*;
 import lombok.Getter;
@@ -24,6 +27,7 @@ import org.springframework.web.bind.annotation.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ApiResponses(value = { @ApiResponse(code = 401, message = "Unauthorized", response = BasicResponse.class),
@@ -42,6 +46,9 @@ public class PostController {
 
     @Autowired
     PhotoService photoService;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     PostMapper postMapper;
@@ -104,18 +111,21 @@ public class PostController {
 //        return ApiUtils.success(posts.stream().map(p -> postMapper.toDto(p)).collect(Collectors.toList()));
 //    }
 
-    @ApiOperation(value = "작성자 or 내용으로 글 검색, 둘 다 없으면 모든 글", notes = "게시글 목록 조회, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
+    @ApiOperation(value = "닉네임 or 내용으로 글 검색, 둘 다 없으면 모든 글", notes = "게시글 목록 조회, 결과 메시지 반환", response = ApiUtils.ApiResult.class)
     @GetMapping()
-    public ApiUtils.ApiResult<?> getPostsByContentAndUser(@ApiParam(value = "글 내용에서 찾을 검색어") @RequestParam(required = false) String word,
-                                                      @ApiParam(value = "회원 email") @RequestParam(required = false) String userEmail,
+    public ApiUtils.ApiResult<?> getPostsByContentAndUserNickname(@ApiParam(value = "글 내용에서 찾을 검색어") @RequestParam(required = false) String word,
+                                                      @ApiParam(value = "회원 nickName") @RequestParam(required = false) String nickName,
                                                       @ApiParam(value = "가져올 페이지 정보", required = false) Pageable pageable) {
         List<Post> posts = new ArrayList<>();
-        if(word == null && userEmail == null) {
+        if(word == null && nickName == null) {
             posts = postService.listPost(pageable);
         } else if(word != null && word.equals("") == false) {
             posts = postService.searchByContentContaining(word, pageable);
-        } else if(userEmail != null && userEmail.equals("") == false) {
-            posts = postService.searchByUser(userEmail, pageable);
+        } else if(nickName != null && nickName.equals("") == false) {
+            User user = userRepository.findByNickname(nickName);
+            if(user != null) {
+                posts = postService.searchByUser(user.getEmail(), pageable);
+            }
         }
 
         return ApiUtils.success(posts);

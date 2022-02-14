@@ -23,14 +23,13 @@ public class FollowerServiceImpl implements FollowService{
     private final TokenProvider tokenProvider;
 
     @Override
-    public List<String> getList(String jwt, Function<User, List<String>> mapper,String errMsg) {
-        String email=tokenProvider.getId(jwt);
-        User user =userRepository.findByEmail(email);
-
+    public List<String> getList(String nickName, Function<User, List<String>> mapper,String errMsg) {
+        User user =userRepository.findByNickname(nickName);
+        log.info("{}",user);
         //안타깝게도 java8은 여기서 stream을 바로못씀. 자바 버전이 오르면,stream 내장해서 ㄱㄱ.
         List<String> followEmails = Optional.ofNullable(user)
                 .map(mapper)
-                .orElseGet(ArrayList::new);
+                .orElseThrow(()->new RuntimeException(errMsg));
 
         return followEmails.stream().map(x->userRepository.findByEmail(x).getNickname()).collect(Collectors.toList());
     }
@@ -39,7 +38,7 @@ public class FollowerServiceImpl implements FollowService{
     public boolean add(String jwt, String nickName,String errMsg) {
         String email=tokenProvider.getId(jwt);
         User user =userRepository.findByEmail(email);
-        User follower = userRepository.findByEmailOrNickname("garage",nickName);
+        User follower = userRepository.findByNickname(nickName);
         log.info("user:{}",user);
         log.info("follow:{}",follower);
 

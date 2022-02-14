@@ -22,18 +22,18 @@ public class FollowController {
      private final FollowService followService;
 
     @GetMapping("/follower")
-    public ApiUtils.ApiResult<List<String>> getFollower(@RequestParam(value = "jwt") String jwt){
+    public ApiUtils.ApiResult<List<String>> getFollower(@RequestParam(value = "nickName") String nickName){
         log.info("follower search");
 
-        List <String> value=followService.getList(jwt,User::getFollower,"팔로우쪽 목록 조회 불가능");
+        List <String> value=followService.getList(nickName,User::getFollower,"팔로우쪽 목록 조회 불가능");
         log.info("follower size:{}",value);
         return ApiUtils.success(value);
     }
     @GetMapping("/following")
-    public ApiUtils.ApiResult<List<String>> getFollowing(@RequestParam(value = "jwt") String jwt){
+    public ApiUtils.ApiResult<List<String>> getFollowing(@RequestParam(value = "nickName") String nickName){
         log.info("following search");
 
-        List <String> value=followService.getList(jwt,User::getFollowing,"팔로잉쪽 목록 조회 불가능");
+        List <String> value=followService.getList(nickName,User::getFollowing,"팔로잉쪽 목록 조회 불가능");
         log.info("following size:{}",value);
         return ApiUtils.success(value);
     }

@@ -52,6 +52,8 @@ const Header = ({ user, onLogout, onDelete }) => {
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
 
+  const newUser = user && user.replace(/"/gi, '');
+
   return (
     <>
       <HeaderBlock>
@@ -95,12 +97,14 @@ const Header = ({ user, onLogout, onDelete }) => {
                 <span>New</span>
               </a>
             </NavList>
-              <img
-              className="profile"
-              src={Image}
-              alt="User-logo"
-              onClick={handleShow}
-              />
+              <Link to={`/profile/${newUser}`}>
+                <img
+                className="profile"
+                src={Image}
+                alt="User-logo"
+                onClick={handleShow}
+                />
+              </Link>
               <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>프로필</Modal.Title>

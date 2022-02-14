@@ -28,7 +28,7 @@ const PostsComponent = (params) => {
                         <p class="card-text">{userPost.content}</p>
                       </div>
                     </div>
-                  </div>                
+                  </div>
                 </div>
               ))}
             </div>

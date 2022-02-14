@@ -10,7 +10,7 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, user } = useSelector(({ auth, user }) => ({
+  const { user, form } = useSelector(({ auth, user }) => ({
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,

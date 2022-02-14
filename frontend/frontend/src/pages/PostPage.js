@@ -10,7 +10,7 @@ const PostPage = () => {
       <HeaderContainer />
       <PostViewerContainer />
       <div className='btn'>
-        <Button cyan to="/info">
+        <Button cyan to="/">
           뒤로가기
         </Button>
       </div>

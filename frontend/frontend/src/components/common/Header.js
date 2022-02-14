@@ -79,19 +79,19 @@ const Header = ({ user, onLogout, onDelete }) => {
             <div className="right">
               <NavList>
               <a href='#!'>
-                <img src="/images/nav-network.svg" alt="" />
+                <img src="/images/user-plus.svg" alt="" />
                 <span>Follow</span>
               </a>
             </NavList>
             <NavList>
                <a href='#!'>
-                <img src="/images/nav-notifications.svg" alt="" />
-                <span>Notifications</span>
+                <img src="/images/bell.svg" alt="" />
+                <span>Bell</span>
               </a>
             </NavList>
             <NavList>
                <a href='write'>
-                <img src="/images/plus-icon.svg" alt="" />
+                <img src="/images/edit.svg" alt="" />
                 <span>New</span>
               </a>
             </NavList>

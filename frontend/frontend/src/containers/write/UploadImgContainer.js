@@ -40,8 +40,50 @@ p{
     display: flex;
     flex-wrap:wrap;
 
+    label{
+        cursor: pointer;
+
+        :hover {
+            opacity: .8;
+        }
+    }
     >input {
         display: none;
     }
 }
+
+
+`
+
+export const ImagePreview = styled.div`
+    position: relative
+
+    cursor: pointer;
+
+    #uploaded-img{
+        width: 247px;
+        height: 226px;
+        object-fit: cover;
+        border-radius: 20px;
+    
+    }
+
+    .close-icon{
+        background: #000;
+        border-radius: 5px;
+        opacity: 0.2;
+
+        position: absolute;
+        z-index: 10;
+        right: 15px;
+        top: 20px;
+        cursor: pointer;
+    
+        :hover {
+            opacity: 1;
+        }
+
+    }
+
+
 `

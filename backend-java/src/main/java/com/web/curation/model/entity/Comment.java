@@ -17,7 +17,6 @@ import java.util.List;
 
 @Document(collection = "comment")
 @Getter
-@Setter
 @Builder
 @ToString
 public class Comment {

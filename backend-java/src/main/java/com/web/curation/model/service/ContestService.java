@@ -25,15 +25,15 @@ public class ContestService {
     @Autowired
     ContestRepository contestRepository;
 
-    public List<Contest> getContestsByNameContaining(String contestName) {
-        return contestRepository.findAllByNameContaining(contestName).orElse(new ArrayList<>());
+    public List<Contest> getContestsByNameContaining(String contestName, Pageable pageable) {
+        return contestRepository.findAllByNameContaining(contestName, pageable).orElse(new ArrayList<>());
     }
 
     public Contest getContestById(String contestId) {
         return contestRepository.findById(contestId).orElse(null);
     }
 
-    public Page<Contest> getRecentContests(Pageable pageable) {
+    public Page<Contest> getContests(Pageable pageable) {
         return contestRepository.findAll(pageable);
     }
 }

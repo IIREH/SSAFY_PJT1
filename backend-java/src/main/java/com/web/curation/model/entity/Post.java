@@ -17,7 +17,6 @@ import java.util.List;
 
 @Document(collection = "post")
 @Getter
-@Setter
 @Builder
 @ToString
 public class Post {

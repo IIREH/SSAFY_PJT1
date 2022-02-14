@@ -172,36 +172,36 @@ public class PostService {
         return true;
     }
 
-    public boolean toggleLike(String postId, String userEmail) {
-        Optional<Post> postOptional = postRepository.findById(postId);
-        User user = userRepository.findByEmail(userEmail);
-        if(postOptional.isPresent() == false || user == null) {
-            return false;
-        }
-
-        Post post = postOptional.get();
-        List<User> likedByList;
-        if(post.getLikedByList() == null) {
-            likedByList = new ArrayList<>();
-            post.setLikedByList(likedByList);
-        } else {
-            likedByList = post.getLikedByList();
-        }
-
-        if(likedByList.stream().anyMatch(u -> u.getEmail().equals(userEmail))) {
-            likedByList.remove(user);
-        } else {
-            likedByList.add(user);
-        }
-//        if(likedByList.contains(user)) {
+//    public boolean toggleLike(String postId, String userEmail) {
+//        Optional<Post> postOptional = postRepository.findById(postId);
+//        User user = userRepository.findByEmail(userEmail);
+//        if(postOptional.isPresent() == false || user == null) {
+//            return false;
+//        }
+//
+//        Post post = postOptional.get();
+//        List<User> likedByList;
+//        if(post.getLikedByList() == null) {
+//            likedByList = new ArrayList<>();
+//            post.setLikedByList(likedByList);
+//        } else {
+//            likedByList = post.getLikedByList();
+//        }
+//
+//        if(likedByList.stream().anyMatch(u -> u.getEmail().equals(userEmail))) {
 //            likedByList.remove(user);
 //        } else {
 //            likedByList.add(user);
 //        }
-
-        postRepository.save(post);
-        return true;
-    }
+////        if(likedByList.contains(user)) {
+////            likedByList.remove(user);
+////        } else {
+////            likedByList.add(user);
+////        }
+//
+//        postRepository.save(post);
+//        return true;
+//    }
 
     public Comment writeComment(String postId, CommentDto commentDto) {
         // TODO: User 검증은 CommentDto에서 처리할까?
@@ -216,13 +216,7 @@ public class PostService {
         commentRepository.save(comment);
 
         Post post = postOptional.get();
-        List<Comment> comments;
-        if(post.getComments() == null) {
-            comments = new ArrayList<>();
-            post.setComments(comments);
-        } else {
-            comments = post.getComments();
-        }
+        List<Comment> comments = post.getComments();
         comments.add(comment);
         postRepository.save(post);
         return comment;
@@ -237,8 +231,14 @@ public class PostService {
         }
 
         Comment comment = commentOptional.get();
-        comment.setContent(commentDto.getContent());
-        commentRepository.save(comment);
+        Comment commentUpdated = Comment.builder()
+                .id(comment.getId())
+                .user(comment.getUser())
+                .content(commentDto.getContent())
+                .writeDate(comment.getWriteDate())
+                .build();
+
+        commentRepository.save(commentUpdated);
         return comment;
     }
 

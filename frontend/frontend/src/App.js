@@ -4,6 +4,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
 import PostPage from './pages/PostPage';
+import UpdateUserInfoPage from './pages/UpdateUserInfoPage'
 
 import ClassicInfoPage from './classicPages/ClassicInfoPage';
 import ClassicInfoPage2 from './classicPages/ClassicInfoPage2';
@@ -36,6 +37,7 @@ const App = () => {
       <Route path="/" element={<ListPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+      <Route path="/updateUserInfo" element={<UpdateUserInfoPage />} />
       <Route path="/write" element={<WritePage />} />
 
       <Route path="/classic" element={<ClassicInfoPage />} />

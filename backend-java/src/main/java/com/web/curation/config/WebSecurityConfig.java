@@ -4,6 +4,7 @@ import com.web.curation.jwt.JwtAccessDeniedHandler;
 import com.web.curation.jwt.JwtAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -41,6 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 //TODO 개발 테스트를 위한 cors와 preFlight 요청 허용.start
                 .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .requestMatchers(CorsUtils::isCorsRequest).permitAll()
+                .antMatchers(HttpMethod.OPTIONS,"/**/*").permitAll()
                 // end
                 .antMatchers(auth).authenticated()
 //                .antMatchers(authPass).permitAll()

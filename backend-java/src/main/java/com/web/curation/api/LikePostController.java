@@ -20,20 +20,12 @@ public class LikePostController {
     //좋아요 cd, 검색
     private final LikePostService likePostService;
 
-    @GetMapping("/following")
-    public ApiUtils.ApiResult<List<Post>> getLikePost(@RequestParam(value = "jwt") String jwt){
+    @GetMapping("")
+    public ApiUtils.ApiResult<List<Post>> getLikePost(@RequestParam(value = "nickName") String nickName){
         log.info("my following likePost search");
-        final String errMsg ="팔로잉의 좋아요 목록 조회 불가능";
-
-        List <Post> value=likePostService.getList(jwt, User::getFollowing,errMsg);
+        final String errMsg ="회원의 좋아요 목록은 없습니다.";
+        List <Post> value=likePostService.getList(nickName, User::getLikePost,errMsg);
         log.info("following size:{}",value);
-        return ApiUtils.success(value);
-    }
-    @GetMapping("/search")
-    public ApiUtils.ApiResult<List<Post>> searchLikePost(@RequestParam(value = "nickName")String nickName ){
-        log.info("likePost search");
-        List <Post> value=likePostService.searchLikeList(nickName);
-        log.info("search size:{}",value);
         return ApiUtils.success(value);
     }
 

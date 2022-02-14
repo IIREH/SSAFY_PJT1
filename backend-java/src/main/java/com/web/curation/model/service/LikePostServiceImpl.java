@@ -85,19 +85,18 @@ public class LikePostServiceImpl implements LikePostService{
     }
 
     @Override
-    public List<Post> getList(String jwt, Function<User, List<String>> mapper, String errMsg) {
-        String email=tokenProvider.getId(jwt);
-        User user =userRepository.findByEmail(email);
+    public List<Post> getList(String nickName, Function<User, List<String>> mapper, String errMsg) {
+        User user =userRepository.findByNickname(nickName);
 
         //안타깝게도 java8은 여기서 stream을 바로못씀. 자바 버전이 오르면,stream 내장해서 ㄱㄱ.
         List<String> postIds = Optional.ofNullable(user)
                 .map(mapper)
-                .orElseGet(ArrayList::new);
+                .orElseThrow(()->new RuntimeException(errMsg));
+
 
         return postIds.stream()
-                .map(x->userRepository.findByEmail(x))
-                .map(x->postRepository.findAllByUser(x))
-                .flatMap(x->x.stream())
+                .map(postRepository::findById)
+                .map(x->x.get())
                 .collect(Collectors.toList());
     }
 

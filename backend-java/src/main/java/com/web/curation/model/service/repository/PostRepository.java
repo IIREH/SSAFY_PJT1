@@ -23,4 +23,10 @@ public interface PostRepository extends MongoRepository<Post, ObjectId> {
     void deleteById(String id);
 
     Post findByIdAndLikedByListIsContaining(String postId, User user);
+
+    Optional<List<Post>> findByUser(User user, Pageable pageable);
+
+    Optional<List<Post>> findByContentContaining(String word, Pageable pageable);
+
+    Optional<List<Post>> findByContentContainingAndUser(String word, User user, Pageable pageable);
 }

@@ -17,7 +17,6 @@ import java.util.List;
 
 @Document(collection = "comment")
 @Getter
-@Setter
 @Builder
 @ToString
 public class Comment {
@@ -27,7 +26,5 @@ public class Comment {
     private User user;
     @CreatedDate
     private Date writeDate;
-    @LastModifiedDate
-    private Date modifyDate;
     private String content;
 }

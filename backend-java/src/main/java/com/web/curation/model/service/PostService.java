@@ -1,7 +1,8 @@
 package com.web.curation.model.service;
 
-import com.web.curation.model.dto.CommentDto;
-import com.web.curation.model.dto.PostDto;
+import com.web.curation.model.mapper.CommentMapper;
+import com.web.curation.model.mapper.PostMapper;
+import com.web.curation.model.dto.*;
 import com.web.curation.model.entity.*;
 import com.web.curation.model.service.repository.*;
 import lombok.extern.slf4j.Slf4j;
@@ -31,36 +32,57 @@ public class PostService {
     PhotoService photoService;
 
     @Autowired
+    UserServiceImpl userService;
+
+    @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    PostMapper postMapper;
+
+    @Autowired
+    CommentMapper commentMapper;
+
+//    static PostMapper postMapper = PostMapper.getInstance();
+
     public Post writePost(PostDto postDto) throws IOException {
-        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
-        Optional<User> userOrNull = userRepository.findById(postDto.getUserId());
-
-        if(contestOrNull.isPresent() == false || userOrNull.isPresent() == false) {
-            return null;
-        }
-
-        List<HashTag> hashTags = new ArrayList<>();
-        if(postDto.getHashTags() != null) {
-            for(String ht : postDto.getHashTags()) {
-                HashTag hashTag = HashTag.builder()
-                        .hashTag(ht)
-                        .build();
-                hashTagRepository.save(hashTag);
-
-                hashTags.add(hashTag);
-            }
-        }
-
-        Photo photo = photoService.getPhoto(postDto.getPhotoId());
-        Post post = Post.builder()
-                .contest(contestOrNull.get())
-                .user(userOrNull.get())
-                .content(postDto.getContent())
-                .photo(photo)
-                .hashTags(hashTags)
-                .build();
+        // TODO: PostDto class에서 처리할까?
+//        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
+//        User user = userRepository.findByEmail(postDto.getUserEmail());
+//
+//        if(contestOrNull.isPresent() == false || user == null) {
+//            return null;
+//        }
+//
+//        List<HashTag> hashTags = new ArrayList<>();
+//        Optional.ofNullable(postDto.getHashTags()).orElseGet(Collections::emptyList)
+//                .stream().map(ht -> hashTags.add(hashTagRepository.save(new HashTag(ht))))
+//                .collect(Collectors.toList());
+//
+////        postDto.getHashTags().stream()
+////                .reduce(hashTags, ht -> hashTags.add(hashTagRepository.save(new HashTag(ht))))
+////                .collect(Collectors.toList());
+////        if(postDto.getHashTags() != null) {
+////            for(String ht : postDto.getHashTags()) {
+////                HashTag hashTag = HashTag.builder()
+////                        .hashTag(ht)
+////                        .build();
+////                hashTagRepository.save(hashTag);
+////
+////                hashTags.add(hashTag);
+////            }
+////        }
+//
+//        Photo photo = photoService.getPhoto(postDto.getPhotoId());
+//        Post post = Post.builder()
+//                .contest(contestOrNull.get())
+//                .user(user)
+//                .content(postDto.getContent())
+//                .photo(photo)
+//                .hashTags(hashTags)
+//                .hashTags(hashTags)
+//                .build();
+        Post post = postMapper.toEntity(postDto);
 
         return postRepository.save(post);
     }
@@ -70,132 +92,174 @@ public class PostService {
         return posts == null ? null : posts;
     }
 
-    public Post updatePost(PostDto postDto) {
-        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
-        Optional<Post> postOrNull = postRepository.findById(postDto.getId());
+    public List<Post> searchByUser(String userEmail, Pageable pageable) {
+        User user = userRepository.findByEmail(userEmail);
+        // TODO: Try findAllByUserUserEmail, etc.
+        return postRepository.findByUser(user, pageable).orElseGet(Collections::emptyList);
+    }
 
-        if(contestOrNull.isPresent() == false || postOrNull.isPresent() == false) {
-            return null;
-        }
+    public List<Post> searchByContentContaining(String word, Pageable pageable) {
+        return postRepository.findByContentContaining(word, pageable).orElseGet(Collections::emptyList);
+    }
 
-        List<HashTag> hashTags = new ArrayList<>();
-        if(postDto.getHashTags() != null) {
-            for (String ht : postDto.getHashTags()) {
-                HashTag hashTag = HashTag.builder()
-                        .hashTag(ht)
-                        .build();
-                hashTagRepository.save(hashTag);
+    public List<Post> searchByContentAndUser(String word, String userEmail, Pageable pageable) {
+        User user = userRepository.findByEmail(userEmail);
+        return postRepository.findByContentContainingAndUser(word, user, pageable).orElseGet(Collections::emptyList);
+    }
 
-                hashTags.add(hashTag);
-            }
-        }
+    public PostDto getPost(String postId) {
+        Optional<Post> postOptional = postRepository.findById(postId);
+        return postOptional.map(postMapper::toDto).orElse(null);
+////        List<String> hashTags = new ArrayList<>();
+//        List<String> hashTags = Optional.ofNullable(post.getHashTags()).orElseGet(Collections::emptyList)
+//                .stream().map(ht -> ht.getHashTag())
+//                .collect(Collectors.toList());
+////        if(post.getHashTags() != null) {
+////            for(HashTag ht : post.getHashTags()) {
+////                hashTags.add(ht.getHashTag());
+////            }
+////        }
+//
+//        PostDto postViewDto = new PostDto(post);
+//        return postViewDto;
+    }
 
-        Post post = postOrNull.get();
-        post.setContent(postDto.getContent());
-        post.setContest(contestOrNull.get());
-        post.setHashTags(hashTags);
-        post.setPhoto(photoService.getPhoto(postDto.getPhotoId()));
+    public Post updatePost(String postId, PostDto postDto) {
+//        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
+//        Optional<Post> postOrNul l = postRepository.findById(postId);
+//
+//        if(contestOrNull.isPresent() == false || postOrNull.isPresent() == false) {
+//            return null;
+//        }
+//
+//        List<HashTag> hashTags = new ArrayList<>();
+//        if(postDto.getHashTags() != null) {
+//            for (String ht : postDto.getHashTags()) {
+//                HashTag hashTag = HashTag.builder()
+//                        .hashTag(ht)
+//                        .build();
+//                hashTagRepository.save(hashTag);
+//
+//                hashTags.add(hashTag);
+//            }
+//        }
+//
+//        Post post = postOrNull.get();
+//        post.setContent(postDto.getContent());
+//        post.setContest(contestOrNull.get());
+//        post.setHashTags(hashTags);
+//        post.setPhoto(photoService.getPhoto(postDto.getPhotoId()));
+//        return postRepository.save(post);
+        Post post = postMapper.toEntity(postDto);
+        // TODO: remove image from db if photo is changed
         return postRepository.save(post);
     }
 
     public boolean deletePost(String postId) {
-        Optional<Post> postOrNull = postRepository.findById(postId);
-        if(postOrNull.isPresent() == false) {
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if(postOptional.isPresent() == false) {
             return false;
         }
 
-        Post post = postOrNull.get();
+        Post post = postOptional.get();
         List<Comment> comments = post.getComments();
         if(comments != null) {
             commentRepository.deleteAll(comments);
         }
         photoService.removePhoto(post.getPhoto());
-        postRepository.deleteById(postId);
+        postRepository.delete(post);
 
         return true;
     }
 
-    public boolean clickLikeButton(String postId, String userId) {
-        Optional<Post> postOrNull = postRepository.findById(postId);
-        Optional<User> userOrNull = userRepository.findById(userId);
-        if(postOrNull.isPresent() == false || userOrNull.isPresent() == false) {
-            return false;
-        }
-
-        Post post = postOrNull.get();
-        User user = userOrNull.get();
-        List<User> likedByList = post.getLikedByList() == null ? new ArrayList<>() : post.getLikedByList();
-//        Optional<User> user = postRepository.findByIdAndLikedByListId(postId, userId);
-//        for(User u : likedByList) {
-//            if(u.getId().equals(userId) == false) {
-//                continue;
-//            }
-//            likedByList.remove(user);
+//    public boolean toggleLike(String postId, String userEmail) {
+//        Optional<Post> postOptional = postRepository.findById(postId);
+//        User user = userRepository.findByEmail(userEmail);
+//        if(postOptional.isPresent() == false || user == null) {
+//            return false;
 //        }
-
-        if(likedByList.contains(user)) {
-            likedByList.remove(user);
-        } else if(likedByList.contains(user) == false) {
-            likedByList.add(user);
-        }
-//        post.setLikedByList(likedByList);
-        postRepository.save(post);
-        return true;
-    }
+//
+//        Post post = postOptional.get();
+//        List<User> likedByList;
+//        if(post.getLikedByList() == null) {
+//            likedByList = new ArrayList<>();
+//            post.setLikedByList(likedByList);
+//        } else {
+//            likedByList = post.getLikedByList();
+//        }
+//
+//        if(likedByList.stream().anyMatch(u -> u.getEmail().equals(userEmail))) {
+//            likedByList.remove(user);
+//        } else {
+//            likedByList.add(user);
+//        }
+////        if(likedByList.contains(user)) {
+////            likedByList.remove(user);
+////        } else {
+////            likedByList.add(user);
+////        }
+//
+//        postRepository.save(post);
+//        return true;
+//    }
 
     public Comment writeComment(String postId, CommentDto commentDto) {
-        Optional<Post> postOrNull = postRepository.findById(postId);
-        Optional<User> userOrNull = userRepository.findById(commentDto.getUserId());
+        // TODO: User 검증은 CommentDto에서 처리할까?
+        Optional<Post> postOptional = postRepository.findById(postId);
+        User user = userRepository.findByEmail(commentDto.getUserEmail());
 
-        if(postOrNull.isPresent() == false || userOrNull.isPresent() == false) {
+        if(postOptional.isPresent() == false || user == null) {
             return null;
         }
 
-        Comment comment = Comment.builder()
-                .user(userOrNull.get())
-                .content(commentDto.getContent())
-                .build();
-
+        Comment comment = commentMapper.toEntity(commentDto);
         commentRepository.save(comment);
-        Post post = postOrNull.get();
-        List<Comment> comments = post.getComments() == null ? new ArrayList<>() : post.getComments();
+
+        Post post = postOptional.get();
+        List<Comment> comments = post.getComments();
         comments.add(comment);
-        post.setComments(comments);
         postRepository.save(post);
         return comment;
     }
 
-    public Comment updateComment(String postId, CommentDto commentDto) {
-        Optional<Post> postOrNull = postRepository.findById(postId);
-        Optional<Comment> commentOrNull = commentRepository.findById(commentDto.getId());
+    public Comment updateComment(String postId, String commentId, CommentDto commentDto) {
+        Optional<Post> postOptional = postRepository.findById(postId);
+        Optional<Comment> commentOptional = commentRepository.findById(commentId);
 
-        if(postOrNull.isPresent() == false || commentOrNull.isPresent() == false) {
+        if(postOptional.isPresent() == false || commentOptional.isPresent() == false) {
             return null;
         }
 
-        Comment comment = commentOrNull.get();
-        comment.setContent(comment.getContent());
-        commentRepository.save(comment);
+        Comment comment = commentOptional.get();
+        Comment commentUpdated = Comment.builder()
+                .id(comment.getId())
+                .user(comment.getUser())
+                .content(commentDto.getContent())
+                .writeDate(comment.getWriteDate())
+                .build();
+
+        commentRepository.save(commentUpdated);
         return comment;
     }
 
     public boolean deleteComment(String postId, String commentId) {
-        Optional<Comment> commentOrNull = commentRepository.findById(commentId);
-        Optional<Post> postOrNull = postRepository.findById(postId);
-        if(commentOrNull.isPresent() == false || postOrNull.isPresent() == false) {
+        Optional<Comment> commentOptional = commentRepository.findById(commentId);
+        Optional<Post> postOptional = postRepository.findById(postId);
+        if(commentOptional.isPresent() == false || postOptional.isPresent() == false) {
             return false;
         }
 
         commentRepository.deleteById(commentId);
-        Post post = postOrNull.get();
-        List<Comment> comments = post.getComments();
-        for(Comment c : comments) {
-            if(c.getId().equals(commentId)) {
-                comments.remove(c);
-                break;
-            }
-        }
-        post.setComments(comments);
+        Post post = postOptional.get();
+        post.getComments().removeIf(c -> commentId.equals(c.getId()));
+//        List<Comment> comments = post.getComments();
+//        for(Comment c : comments) {
+//            if(c.getId().equals(commentId)) {
+//                comments.remove(c);
+//                break;
+//            }
+//        }
+//        post.setComments(comments);
         postRepository.save(post);
         return true;
     }

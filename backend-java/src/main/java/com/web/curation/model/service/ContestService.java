@@ -10,8 +10,12 @@ import com.web.curation.model.service.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,12 +25,15 @@ public class ContestService {
     @Autowired
     ContestRepository contestRepository;
 
-    public List<Contest> getContestsByName(String contestName) {
-        Optional<List<Contest>> contestOrNull = contestRepository.findAllByNameContaining(contestName);
+    public List<Contest> getContestsByNameContaining(String contestName, Pageable pageable) {
+        return contestRepository.findAllByNameContaining(contestName, pageable).orElse(new ArrayList<>());
+    }
 
-        if(contestOrNull.isPresent() == false) {
-            return null;
-        }
-        return contestOrNull.get();
+    public Contest getContestById(String contestId) {
+        return contestRepository.findById(contestId).orElse(null);
+    }
+
+    public Page<Contest> getContests(Pageable pageable) {
+        return contestRepository.findAll(pageable);
     }
 }

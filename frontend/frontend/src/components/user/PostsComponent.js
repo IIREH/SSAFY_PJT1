@@ -1,4 +1,6 @@
 import {  useState } from "react";
+import Button from "../common/Button";
+import "./Profile.css";
 
 const PostsComponent = (params) => {
   const [mode, setMode] = useState('userPosts');
@@ -6,26 +8,23 @@ const PostsComponent = (params) => {
 
 
   return(
-    <div>
-      <div class="container-fluid mb-3">
-        <div class="row mx-0 justify-content-center">
-          <div class="col-2">
-            <button type="button" class="mt-0 btn btn-primary mx-auto" onClick={() => setMode('userPosts')}>포스트</button>
-          </div>
-          <div class="col-2">
-            <button type="button" class="mt-0 btn btn-primary mx-auto" onClick={() => setMode('userLikesPosts')}>관심목록</button>
-          </div>
+    <>
+    <div style={{ display: 'inline' }}>
+            <Button onClick={() => setMode('userPosts')}>포스트</Button>
+         
+            <Button onClick={() => setMode('userLikesPosts')} style={{ marginLeft: 5}}>관심목록</Button>
+            <hr></hr>
+          
         </div>
-        <div class="row mx-0 justify-content-center">
           {mode === 'userPosts' &&
-            <div class="row row-cols-3 g-4 justify-content-start">
+            <div className="row row-cols-3 g-4 justify-content-start">
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
-                  <div class="col">
-                    <div class="card">
-                      <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} class="card-img-top" alt="..." />
-                      <div class="card-body">
-                        <p class="card-text">{userPost.content}</p>
+                  <div className="col">
+                    <div className="card">
+                      <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} className="card-img-top" alt="..." />
+                      <div className="card-body">
+                        <p className="card-text">{userPost.content}</p>
                       </div>
                     </div>
                   </div>
@@ -34,14 +33,14 @@ const PostsComponent = (params) => {
             </div>
           }
           {mode === 'userLikesPosts' &&
-            <div class="row row-cols-3 g-4 justify-content-start">
+            <div className="row row-cols-3 g-4 justify-content-start">
               {userLikesPosts.map(userLikePost => (
                 <div key={userLikePost.id}>
-                  <div class="col">
-                    <div class="card">
-                      <img src={`data:image/jpeg;base64,${userLikePost.photo.image.data}`} class="card-img-top" alt="..." />
-                      <div class="card-body">
-                        <p class="card-text">{userLikePost.content}</p>
+                  <div className="col">
+                    <div className="card">
+                      <img src={`data:image/jpeg;base64,${userLikePost.photo.image.data}`} className="card-img-top" alt="..." />
+                      <div className="card-body">
+                        <p className="card-text">{userLikePost.content}</p>
                       </div>
                     </div>
                   </div>
@@ -49,10 +48,9 @@ const PostsComponent = (params) => {
               ))}
             </div>
           }
-        </div>
-      </div>
-    </div>
+          </>
   );
 };
+
 
 export default PostsComponent;

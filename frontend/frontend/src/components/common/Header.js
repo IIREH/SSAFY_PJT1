@@ -50,7 +50,7 @@ const UserInfo = styled.div`
 const Header = ({ user, onLogout, onDelete }) => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
-  const handleClose = () => setShow(false)
+  // const handleClose = () => setShow(false)
 
   const newUser = user && user.replace(/"/gi, '');
 

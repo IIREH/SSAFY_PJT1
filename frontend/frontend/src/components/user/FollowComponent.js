@@ -1,34 +1,38 @@
 import { Link } from "react-router-dom";
+import Button from "../common/Button";
+import "./Profile.css";
 
 const FollowComponent = (params) => {
   const { user, nickname, isfollowing, following, follower, onClickFollow, onDelete } = params;
 
+
   return(
-    <div>
-      <div class="container-fluid mb-3">
-        <div class="row mx-0 justify-content-center">
-          <div class="col-2">{nickname}</div>
-          <div class="col-2">팔로잉: {following}</div>
-          <div class="col-2">팔로워: {follower}</div>
+    <>
+    <div className="right" style={{ textAlign: 'center'}}>
+          <h1>{nickname}</h1><h2>님의 프로필 페이지</h2>
+          <br></br>
+          <span style={{marginRight: 10}}> 팔로잉: {following}  </span>
+          <span> | </span>
+          <span style={{marginLeft: 10}}> 팔로워: {follower}  </span>
+          <hr></hr>
+    </div>
           {user && user !== nickname ?
-            <div class="col-2">
+            <div>
             {isfollowing ?
-              <button type="button" class="mt-0 btn btn-primary mx-auto" onClick={onClickFollow}>Unfollow</button>
-            :
-              <button type="button" class="mt-0 btn btn-primary mx-auto" onClick={onClickFollow}>Follow</button>
+              <Button onClick={onClickFollow}>Unfollow</Button>
+              :
+              <Button onClick={onClickFollow}>Follow</Button>
             }
             </div>
           :
-            <div class="col-2">
-              <button type="button" class="col-6 mt-0 btn btn-primary mx-auto">
+          <div style={{ display: 'inline'}} >
+              <Button style={{ marginLeft: 750}}>
                 <Link to="/updateUserInfo" style={{ textDecoration: 'none', color: 'white' }}>회원정보수정</Link>
-              </button>
-              <button type="button" class="col-6 mt-0 btn btn-primary mx-auto" onClick={onDelete}>회원탈퇴</button>
+              </Button>
+              <Button style={{marginLeft : 5, marginRight: 5}} onClick={onDelete}>회원탈퇴</Button>
             </div>
           }
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

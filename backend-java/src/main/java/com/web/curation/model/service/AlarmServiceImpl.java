@@ -8,11 +8,9 @@ import com.web.curation.model.service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Function;
 
 @Service
 @Slf4j
@@ -21,12 +19,34 @@ public class AlarmServiceImpl implements AlarmService{
     private final AlarmRepository alarmRepository;
     private final UserRepository userRepository;
     private final TokenProvider tokenProvider;
+    @Override
+    public void addAlarm(User sendUser, String sendId, String sendType, String path) {
+        sendUser.getFollower().stream()
+                .map(userRepository::findByEmail)
+                .map(receivedUser->Alarm.builder()
+                        .receivedUser(receivedUser)
+                        .sendId(sendId)
+                        .expireAt(LocalDate.now())
+                        .sendType(sendType)
+                        .build())
+                .forEach(alarmRepository::save);
+    }
 
     @Override
-    public List getList(String jwt) {
-        String email = tokenProvider.getId(jwt);
-        User user=userRepository.findByEmail(email);
-        List<Alarm> list=alarmRepository.findByUser(user);
-        return Optional.of(list).orElseGet(ArrayList::new);
+    public void removeAlarm(User sendUser, String sendId) {
+        sendUser.getFollower().stream()
+                .map(userRepository::findByEmail)
+                .forEach(receivedUser -> alarmRepository.deleteAlarmBySendIdAndReceivedUser(sendId, receivedUser));
     }
+
+    @Override
+    public List<Alarm> getList(String jwt) {
+        String email=tokenProvider.getId(jwt);
+        List<Alarm> alarmList=alarmRepository.findAllByReceivedUser(userRepository.findByEmail(email));
+        if(alarmList==null||alarmList.isEmpty())
+            alarmList=new ArrayList<>();
+
+        return alarmList;
+    }
+
 }

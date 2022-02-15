@@ -6,6 +6,7 @@ import com.web.curation.model.entity.*;
 import com.web.curation.model.service.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -32,35 +33,66 @@ public class PostService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    CommentMapper commentMapper;
+    @Autowired
+    AlarmService alarmService;
+
+    @Value("${frontend.alarm.post}")
+    private String postType;
+    @Value("${frontend.alarm.postPath}")
+    private String postPath;
+
+    @Value("${frontend.alarm.comment}")
+    private String commentType;
+    @Value("${frontend.alarm.commentPath}")
+    private String commentPath;
+
 
     public Post writePost(PostDto postDto) throws IOException {
-        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
-        Optional<User> userOrNull = userRepository.findById(postDto.getUserId());
-
-        if(contestOrNull.isPresent() == false || userOrNull.isPresent() == false) {
-            return null;
-        }
-
-        List<HashTag> hashTags = new ArrayList<>();
-        if(postDto.getHashTags() != null) {
-            for(String ht : postDto.getHashTags()) {
-                HashTag hashTag = HashTag.builder()
-                        .hashTag(ht)
-                        .build();
-                hashTagRepository.save(hashTag);
-
-                hashTags.add(hashTag);
-            }
-        }
-
-        Photo photo = photoService.getPhoto(postDto.getPhotoId());
-        Post post = Post.builder()
-                .contest(contestOrNull.get())
-                .user(userOrNull.get())
-                .content(postDto.getContent())
-                .photo(photo)
-                .hashTags(hashTags)
-                .build();
+        // TODO: PostDto class에서 처리할까?
+//        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
+//        User user = userRepository.findByEmail(postDto.getUserEmail());
+//
+//        if(contestOrNull.isPresent() == false || user == null) {
+//            return null;
+//        }
+//
+//        List<HashTag> hashTags = new ArrayList<>();
+//        Optional.ofNullable(postDto.getHashTags()).orElseGet(Collections::emptyList)
+//                .stream().map(ht -> hashTags.add(hashTagRepository.save(new HashTag(ht))))
+//                .collect(Collectors.toList());
+//
+////        postDto.getHashTags().stream()
+////                .reduce(hashTags, ht -> hashTags.add(hashTagRepository.save(new HashTag(ht))))
+////                .collect(Collectors.toList());
+////        if(postDto.getHashTags() != null) {
+////            for(String ht : postDto.getHashTags()) {
+////                HashTag hashTag = HashTag.builder()
+////                        .hashTag(ht)
+////                        .build();
+////                hashTagRepository.save(hashTag);
+////
+////                hashTags.add(hashTag);
+////            }
+////        }
+//
+//        Photo photo = photoService.getPhoto(postDto.getPhotoId());
+//        Post post = Post.builder()
+//                .contest(contestOrNull.get())
+//                .user(user)
+//                .content(postDto.getContent())
+//                .photo(photo)
+//                .hashTags(hashTags)
+//                .hashTags(hashTags)
+//                .build();
+        Post post = postMapper.toEntity(postDto);
+        alarmService.addAlarm(
+                post.getUser()
+                , postDto.getId()
+                , postType
+                , postPath + post.getId()
+        );
 
         return postRepository.save(post);
     }
@@ -106,11 +138,16 @@ public class PostService {
 
         Post post = postOrNull.get();
         List<Comment> comments = post.getComments();
-        if(comments != null) {
+        if (comments != null) {
             commentRepository.deleteAll(comments);
         }
         photoService.removePhoto(post.getPhoto());
         postRepository.deleteById(postId);
+
+        alarmService.removeAlarm(
+                post.getUser()
+                , post.getId()
+        );
 
         return true;
     }
@@ -162,6 +199,13 @@ public class PostService {
         comments.add(comment);
         post.setComments(comments);
         postRepository.save(post);
+        alarmService.addAlarm(
+                comment.getUser()
+                , comment.getId()
+                , commentType
+                , commentPath + comment.getId()
+        );
+
         return comment;
     }
 
@@ -186,17 +230,21 @@ public class PostService {
             return false;
         }
 
-        commentRepository.deleteById(commentId);
-        Post post = postOrNull.get();
-        List<Comment> comments = post.getComments();
-        for(Comment c : comments) {
-            if(c.getId().equals(commentId)) {
-                comments.remove(c);
-                break;
-            }
-        }
-        post.setComments(comments);
+
+        Post post = postOptional.get();
+        post.getComments().removeIf(c -> commentId.equals(c.getId()));
+//        List<Comment> comments = post.getComments();
+//        for(Comment c : comments) {
+//            if(c.getId().equals(commentId)) {
+//                comments.remove(c);
+//                break;
+//            }
+//        }
+//        post.setComments(comments);
+        alarmService.removeAlarm(commentOptional.get().getUser(),commentOptional.get().getId());
         postRepository.save(post);
+        commentRepository.deleteById(commentId);
+
         return true;
     }
 }

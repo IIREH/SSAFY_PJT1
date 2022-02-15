@@ -7,7 +7,9 @@ import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AlarmRepository extends MongoRepository<Alarm, ObjectId> {
-    List<Alarm> findByUser(User user);
+    List<Alarm> findAllByReceivedUser(User receivedUser);
+    void deleteAlarmBySendIdAndReceivedUser(String sendIdFrom, User user);
 }

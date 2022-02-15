@@ -43,7 +43,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF182289?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186277?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -52,7 +52,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186277?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186551?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -61,7 +61,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186551?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186616?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -141,7 +141,7 @@ function Classic({ title }) {
         <Card>
             <Card.Img variant="top" src={ classic4 } alt="Recommend"/>
             <Card.Body>
-                <Card.Title>크레디아 클래식 클럽 2022</Card.Title>
+                <Card.Title>블록버스터 영화음악 콘서트</Card.Title>
                 <hr></hr>
                 <Card.Text>
                 후기 : 11건
@@ -160,7 +160,7 @@ function Classic({ title }) {
         <Card>
             <Card.Img variant="top" src={ classic5 } alt="Recommend"/>
             <Card.Body>
-                <Card.Title>블록버스터 영화음악 콘서트</Card.Title>
+                <Card.Title>화이트데이 로맨틱 콘서트</Card.Title>
                 <hr></hr>
                 <Card.Text>
                 후기 : 10건
@@ -179,7 +179,7 @@ function Classic({ title }) {
         <Card>
             <Card.Img variant="top" src={ classic6 } alt="Recommend" />
             <Card.Body>
-                <Card.Title>화이트데이 로맨틱 콘서트</Card.Title>
+                <Card.Title>2022 포레스텔라 콘서트</Card.Title>
                 <hr></hr>
                 <Card.Text>
                 후기 : 10건

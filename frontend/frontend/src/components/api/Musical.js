@@ -61,7 +61,7 @@ function Musical({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185112?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186645?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -88,7 +88,7 @@ function Musical({ title }) {
                 <br></br>
                 <br></br>
                 <Link to="/musical">
-                    <Button>상세보기</Button>
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
                 </Link>
                 </Card.Text>
             </Card.Body>
@@ -107,7 +107,7 @@ function Musical({ title }) {
                 <br></br>
                 <br></br>
                 <Link to="/musical2">
-                    <Button>상세보기</Button>
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
                 </Link>
                 </Card.Text>
             </Card.Body>
@@ -149,7 +149,7 @@ function Musical({ title }) {
                 <br></br>
                 <br></br>
                 <Link to="/musical4">
-                    <Button>상세보기</Button>
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
                 </Link>
                 </Card.Text>
             </Card.Body>
@@ -168,7 +168,7 @@ function Musical({ title }) {
                 <br></br>
                 <br></br>
                 <Link to="/musical5">
-                    <Button>상세보기</Button>
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
                 </Link>
                 </Card.Text>
             </Card.Body>
@@ -178,7 +178,7 @@ function Musical({ title }) {
             <Card>
                 <Card.Img variant="top" src={ musical6 } alt="Recommend Image" />
                 <Card.Body>
-                    <Card.Title>구름빵2</Card.Title>
+                    <Card.Title>미오 프라텔로</Card.Title>
                      <hr></hr>
                 <Card.Text>
                 후기 : 10건
@@ -187,7 +187,7 @@ function Musical({ title }) {
                 <br></br>
                 <br></br>
                 <Link to="/musical6">
-                    <Button>상세보기</Button>
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
                 </Link>
                 </Card.Text>
             </Card.Body>

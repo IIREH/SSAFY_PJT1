@@ -15,7 +15,7 @@ function Theatre({ title }) {
     const [theatre6, setTheatre6] = useState(null);
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186508?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185242?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -61,7 +61,7 @@ function Theatre({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF174844?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186548?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -81,7 +81,7 @@ function Theatre({ title }) {
             <Card>
                 <Card.Img variant="top" src={ theatre } alt="Recommend Image"/>
                 <Card.Body>
-                    <Card.Title>앤젤스 인 아메리카</Card.Title>
+                    <Card.Title>가족이란 이름의 부족</Card.Title>
                     <hr></hr>
                 <Card.Text>
                 후기 : 45건
@@ -128,7 +128,7 @@ function Theatre({ title }) {
                 <br></br>
                 <br></br>
                 <Link to="/theatre3">
-                    <Button>상세보기</Button>
+                    <Button style= {{ marginLeft: 8}} >상세보기</Button>
                 </Link>
                 </Card.Text>
             </Card.Body>
@@ -180,7 +180,7 @@ function Theatre({ title }) {
             <Card>
                 <Card.Img variant="top" src={ theatre6 } alt="Recommend Image" />
                 <Card.Body>
-                    <Card.Title>설레임이 찾아왔다</Card.Title>
+                    <Card.Title>회란기</Card.Title>
                     <hr></hr>
                 <Card.Text>
                 후기 : 15건

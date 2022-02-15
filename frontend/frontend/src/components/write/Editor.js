@@ -39,7 +39,7 @@ const Editor = ({ content, onChangeField }) => {
   useEffect(() => {
     quillInstance.current = new Quill(quillElement.current, {
       theme: 'bubble',
-      placeholder: '내용을 작성하세요...',
+      placeholder: '글을 작성해주세요..🖍',
       modules: {
         // 더 많은 옵션
         // https://quilljs.com/docs/modules/toolbar/ 참고

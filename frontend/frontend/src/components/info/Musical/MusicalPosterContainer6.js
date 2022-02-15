@@ -246,7 +246,7 @@ function PosterContainer() {
   const [poster, setPoster] = useState(null);
 
   useEffect(() => {
-    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185242?service=4e391a1107334d7aaf6034069bbcbc5a")
+    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186645?service=4e391a1107334d7aaf6034069bbcbc5a")
         .then(res => res.text())
         .then(data => {
             var xml = new XMLParser().parseFromString(data); 
@@ -278,13 +278,13 @@ function PosterContainer() {
               </div>
               <ul className="RankingInfoList">
                 <li>
-                  예매 순위 · <em>1위 (26%)</em>
+                  예매 순위 · <em>5위 (12%)</em>
                 </li>
                 <li>
-                  개관 · <em>17일째</em>
+                  개관 · <em>8일째</em>
                 </li>
                 <li>
-                  누적 관객 · <em>3천 1백명</em>
+                  누적 관객 · <em>1천 1백명</em>
                 </li>
               </ul>
             </div>

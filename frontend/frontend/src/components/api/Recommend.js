@@ -91,7 +91,7 @@ function Recommend({ title }) {
                 평점 : ★★★★★
                 <br></br>
                 <br></br>
-                <Link to="/recomend">
+                <Link to="/recommend">
                     <Button style= {{ marginLeft: 5}}>상세보기</Button>
                 </Link>
                 </Card.Text>
@@ -110,7 +110,7 @@ function Recommend({ title }) {
                 평점 : ★★★★★
                 <br></br>
                 <br></br>
-                <Link to="/recomend2">
+                <Link to="/recommend2">
                     <Button style= {{ marginLeft: 5}}>상세보기</Button>
                 </Link>
                 </Card.Text>
@@ -129,7 +129,7 @@ function Recommend({ title }) {
                 평점 : ★★★★★
                 <br></br>
                 <br></br>
-                <Link to="/recomend3">
+                <Link to="/recommend3">
                     <Button style= {{ marginLeft: 5}} >상세보기</Button>
                 </Link>
                 </Card.Text>
@@ -152,7 +152,7 @@ function Recommend({ title }) {
                 평점 : ★★★★☆
                 <br></br>
                 <br></br>
-                <Link to="/recomend4">
+                <Link to="/recommend4">
                     <Button style= {{ marginLeft: 10}} >상세보기</Button>
                 </Link>
                 </Card.Text>
@@ -171,7 +171,7 @@ function Recommend({ title }) {
                 평점 : ★★★★☆
                 <br></br>
                 <br></br>
-                <Link to="/recomend5">
+                <Link to="/recommend5">
                     <Button style= {{ marginLeft: 5}} >상세보기</Button>
                 </Link>
                 </Card.Text>
@@ -190,7 +190,7 @@ function Recommend({ title }) {
                 평점 : ★★★★☆
                 <br></br>
                 <br></br>
-                <Link to="/recomend6">
+                <Link to="/recommend6">
                     <Button style= {{ marginLeft: 10}} >상세보기</Button>
                 </Link>
                 </Card.Text>

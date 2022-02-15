@@ -6,7 +6,7 @@ import Responsive from './Responsive';
 import Button from './Button';
 // import Image from '../../img/cookie.jpg';
 // import Modal from './Modal';
-import './Modal.css'
+// import './Modal.css'
 // import { Modal } from 'react-bootstrap';
 import { changeKeyword, searchContest, searchUser, resetState } from '../../modules/search';
 import client from '../../lib/api/client';
@@ -47,7 +47,7 @@ const Spacer = styled.div`
 
 const UserInfo = styled.div`
   font-weight: 800;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
 `;
 
 const Header = ({ user, onLogout, onDelete }) => {
@@ -130,7 +130,7 @@ const Header = ({ user, onLogout, onDelete }) => {
                   <tbody class="border">
                     <tr class="bg-dark text-light">사용자 검색</tr>
                     {searchUsers.map(searchUser => (
-                      <tr class="" key={searchUser.id}>
+                      <tr class="" key={searchUser.id}> 
                         <Link to={`/profile/${searchUser}`} class="text-black p-0 mb-1" onClick={onResetState}>
                           {searchUser}
                         </Link>
@@ -207,45 +207,45 @@ const Header = ({ user, onLogout, onDelete }) => {
   );
 };
 
-const Search = styled.div`
-  opacity: 1;
-  flex-grow: 1;
-  position: relative;
-  margin-left: 20px;
-  & > div {
-    max-width: 280px;
-    input {
-      border: none;
-      box-shadow: none;
-      background-color: #FFEFEF;
-      border-radius: 6px;
-      color: rgba(0, 0, 0, 0.9);
-      width: 218px;
-      padding: 0 8px 0 40px;
-      margin-y: auto;
-      line-height: 1.75;
-      font-weight: 400;
-      font-size: 14px;
-      height: 34px;
-      border-color: #ffd2d2;
-      vertical-align: text-top;
-    }
-  }
-`;
+// const Search = styled.div`
+//   opacity: 1;
+//   flex-grow: 1;
+//   position: relative;
+//   margin-left: 20px;
+//   & > div {
+//     max-width: 280px;
+//     input {
+//       border: none;
+//       box-shadow: none;
+//       background-color: #FFEFEF;
+//       border-radius: 6px;
+//       color: rgba(0, 0, 0, 0.9);
+//       width: 218px;
+//       padding: 0 8px 0 40px;
+//       margin-y: auto;
+//       line-height: 1.75;
+//       font-weight: 400;
+//       font-size: 14px;
+//       height: 34px;
+//       border-color: #ffd2d2;
+//       vertical-align: text-top;
+//     }
+//   }
+// `;
 
-const SearchIcon = styled.div`
-  width: 40px;
-  position: absolute;
-  z-index: 1;
-  top: 10px;
-  left: 2px;
-  border-radius: 0 2px 2px 0;
-  margin: 0;
-  pointer-events: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+// const SearchIcon = styled.div`
+//   width: 40px;
+//   position: absolute;
+//   z-index: 1;
+//   top: 10px;
+//   left: 2px;
+//   border-radius: 0 2px 2px 0;
+//   margin: 0;
+//   pointer-events: none;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `;
 
 const Nav = styled.nav`
   margin-left: auto;

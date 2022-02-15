@@ -17,11 +17,11 @@ const FollowComponent = (params) => {
           <hr></hr>
     </div>
           {user && user !== nickname ?
-            <div>
+            <div style={{ display: 'inline'}}>
             {isfollowing ?
-              <Button onClick={onClickFollow}>Unfollow</Button>
+              <Button style={{ marginLeft: 830, marginRight: 5}} onClick={onClickFollow}>Unfollow</Button>
               :
-              <Button onClick={onClickFollow}>Follow</Button>
+              <Button style={{ marginLeft: 830, marginRight: 5}} onClick={onClickFollow}>Follow</Button>
             }
             </div>
           :

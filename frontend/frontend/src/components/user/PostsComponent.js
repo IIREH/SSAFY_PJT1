@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 import {  useState } from "react";
 import Button from "../common/Button";
 import "./Profile.css";
-=======
-import { useState } from "react";
->>>>>>> feature/contest
 
 const PostsComponent = (params) => {
   const [mode, setMode] = useState('userPosts');
@@ -14,9 +10,9 @@ const PostsComponent = (params) => {
   return(
     <>
     <div style={{ display: 'inline' }}>
-            <Button onClick={() => setMode('userPosts')}>포스트</Button>
+            <Button style={{ display: 'inline'}} onClick={() => setMode('userPosts')}>포스트</Button>
          
-            <Button onClick={() => setMode('userLikesPosts')} style={{ marginLeft: 5}}>관심목록</Button>
+            <Button onClick={() => setMode('userLikesPosts')} style={{ marginLeft: 5, display: 'inline'}}>관심목록</Button>
             <hr></hr>
           
         </div>

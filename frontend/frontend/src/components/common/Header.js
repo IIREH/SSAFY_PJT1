@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
@@ -7,6 +8,8 @@ import Button from './Button';
 // import Modal from './Modal';
 import './Modal.css'
 // import { Modal } from 'react-bootstrap';
+import { changeKeyword, searchContest, searchUser, resetState } from '../../modules/search';
+import client from '../../lib/api/client';
 
 // Banner
 const HeaderBlock = styled.div`
@@ -51,6 +54,46 @@ const Header = ({ user, onLogout, onDelete }) => {
   const [show, setShow] = useState(false)
   const handleShow = () => setShow(true)
   const handleClose = () => setShow(false)
+  const dispatch = useDispatch();
+  const { searchContests, searchUsers, keyword } = useSelector(({ search }) => ({
+    searchContests: search.searchContests,
+    searchUsers: search.searchUsers,
+    keyword: search.keyword,
+  }))
+
+  // 검색 인풋 변경 이벤트 핸들러
+  const onChange = (e) => {
+    const value = e.target.value;
+    dispatch(changeKeyword(value));
+  };
+
+  // 키워드에 따른 공연 검색
+  useEffect(() => {
+    client.get(`/api/contest?name=${keyword}`)
+      .then(res => {
+        console.log(res.data.response)
+        dispatch(searchContest(res.data.response));
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }, [keyword])
+
+  // 키워드에 따른 유저 검색
+  useEffect(() => {
+    client.get(`/api/user/nickNameSearch?nickName=${keyword}`)
+      .then(res => {
+        console.log(res.data.response)
+        dispatch(searchUser(res.data.response));
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  }, [keyword])
+
+  const onResetState = () => {
+    dispatch(resetState());
+  }
 
   const newUser = user && user.replace(/"/gi, '');
 
@@ -61,14 +104,48 @@ const Header = ({ user, onLogout, onDelete }) => {
           <Link to="/" className="logo">
             <img src='/logo.png' alt='logo'></img>
           </Link>
-          <Search>
-          <div>
-            <input type="text" placeholder="검색어를 입력해주세요" />
+          <div class="col-5 row mx-0 ms-5" style={{"position": "relative"}}>
+            <input type="text" class="col-12 d-flex" name="keyword" placeholder="검색어를 입력해주세요" onChange={onChange} />
+            <table
+              style={{
+                "position": "absolute",
+                "table-layout": "fixed",
+                "z-index": "1",
+                "width": "100%",
+              }} 
+              class="table table-light table-bordered d-block p-0 mt-5 text-start"
+            >
+              {keyword &&
+                <div>
+                  <tbody class="border">
+                    <tr class="bg-dark text-light">공연 검색</tr>
+                    {searchContests.map(searchContest => (
+                      <tr class="" key={searchContest.id}>
+                        <Link to="#" class="text-black p-0 mb-1">
+                          {searchContest.name}
+                        </Link>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tbody class="border">
+                    <tr class="bg-dark text-light">사용자 검색</tr>
+                    {searchUsers.map(searchUser => (
+                      <tr class="" key={searchUser.id}>
+                        <Link to={`/profile/${searchUser}`} class="text-black p-0 mb-1" onClick={onResetState}>
+                          {searchUser}
+                        </Link>
+                      </tr>
+                    ))}
+                  </tbody>
+                </div>
+              }
+            </table>
           </div>
-          <SearchIcon>
-            <img src="/images/search-icon.svg" alt="" />
-          </SearchIcon>
-        </Search>
+          {/* <Search>
+            <SearchIcon>
+              <img src="/images/search-icon.svg" alt="" />
+            </SearchIcon>
+          </Search> */}
 
         <Nav>
           <NavListWrap>
@@ -145,6 +222,7 @@ const Search = styled.div`
       color: rgba(0, 0, 0, 0.9);
       width: 218px;
       padding: 0 8px 0 40px;
+      margin-y: auto;
       line-height: 1.75;
       font-weight: 400;
       font-size: 14px;

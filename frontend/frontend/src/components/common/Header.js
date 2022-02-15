@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import Responsive from './Responsive';
 import Button from './Button';
-import Image from '../../img/cookie.jpg';
+// import Image from '../../img/cookie.jpg';
 // import Modal from './Modal';
 import './Modal.css'
-import { Modal } from 'react-bootstrap';
+// import { Modal } from 'react-bootstrap';
 
 // Banner
 const HeaderBlock = styled.div`
@@ -87,19 +87,19 @@ const Header = ({ user, onLogout, onDelete }) => {
             </NavList>
             <NavList>
                <Link to='/write'>
-                <img src="/images/plus-icon.svg" alt="" />
-                <span>New</span>
+                <img src="/images/edit.svg" alt="" />
+                <span>새글작성</span>
               </Link>
             </NavList>
               <Link to={`/profile/${newUser}`}>
                 <img
                 className="profile"
-                src={Image}
+                src='/images/profile.png'
                 alt="User-logo"
                 onClick={handleShow}
                 />
               </Link>
-              <Modal show={show} onHide={handleClose}>
+              {/* <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                   <Modal.Title>프로필</Modal.Title>
                 </Modal.Header>
@@ -113,7 +113,7 @@ const Header = ({ user, onLogout, onDelete }) => {
                   </Button>
                   <Button className="button" onClick={onDelete}>회원탈퇴</Button>
                 </Modal.Footer>
-              </Modal>
+              </Modal> */}
               <UserInfo>{user} 님</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>
@@ -134,13 +134,14 @@ const Search = styled.div`
   opacity: 1;
   flex-grow: 1;
   position: relative;
+  margin-left: 20px;
   & > div {
     max-width: 280px;
     input {
       border: none;
       box-shadow: none;
-      background-color: #E8D9FF;
-      border-radius: 2px;
+      background-color: #FFEFEF;
+      border-radius: 6px;
       color: rgba(0, 0, 0, 0.9);
       width: 218px;
       padding: 0 8px 0 40px;
@@ -213,7 +214,7 @@ const NavList = styled.li`
     justify-content: center;
     line-height: 1.5;
     min-height: 52px;
-    min-width: 80px;
+    min-width: 50px;
     position: relative;
     text-decoration: none;
 

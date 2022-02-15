@@ -93,10 +93,6 @@ h2 {
     color: rgb(44, 196, 158);
 }
 
-.button-position-totheleft {
-    margin-left: 6px;
-}
-
 .carousel-control-next-icon:after
 {
   content: '>';

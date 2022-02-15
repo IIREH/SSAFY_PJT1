@@ -17,6 +17,7 @@ import RecomendInfoPage2 from './recomendPages/RecomendInfoPage2';
 import RecomendInfoPage3 from './recomendPages/RecomendInfoPage3';
 import RecomendInfoPage4 from './recomendPages/RecomendInfoPage4';
 import RecomendInfoPage5 from './recomendPages/RecomendInfoPage5';
+import RecomendInfoPage6 from './recomendPages/RecomendInfoPage6';
 
 import MusicalInfoPage from './musicalPages/MusicalInfoPage';
 import MusicalInfoPage2 from './musicalPages/MusicalInfoPage2';
@@ -53,6 +54,7 @@ const App = () => {
       <Route path="/recomend3" element={<RecomendInfoPage3 />} />
       <Route path="/recomend4" element={<RecomendInfoPage4 />} />
       <Route path="/recomend5" element={<RecomendInfoPage5 />} />
+      <Route path="/recomend6" element={<RecomendInfoPage6 />} />
 
       <Route path="/musical" element={<MusicalInfoPage />} />
       <Route path="/musical2" element={<MusicalInfoPage2 />} />

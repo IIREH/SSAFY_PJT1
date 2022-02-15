@@ -87,11 +87,13 @@ function Theatre({ title }) {
                 후기 : 45건
                 <br></br>
                 평점 : ★★★★★
-                    </Card.Text>
-                    <Link to="/theatre">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/theatre">
+                    <Button style= {{ marginLeft: 20}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -104,11 +106,13 @@ function Theatre({ title }) {
                 후기 : 33건
                 <br></br>
                 평점 : ★★★★★
-                    </Card.Text>
-                    <Link to="/theatre2">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/theatre2">
+                    <Button style= {{ marginLeft: 8}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -121,11 +125,13 @@ function Theatre({ title }) {
                 후기 : 25건
                 <br></br>
                 평점 : ★★★★★
-                    </Card.Text>
-                    <Link to="/theatre3">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/theatre3">
+                    <Button>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             </CardGroup>
@@ -142,11 +148,13 @@ function Theatre({ title }) {
                 후기 : 22건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/theatre4">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/theatre4">
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -159,11 +167,13 @@ function Theatre({ title }) {
                 후기 : 20건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/theatre5">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/theatre5">
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -176,11 +186,13 @@ function Theatre({ title }) {
                 후기 : 15건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/info">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/theatre6">
+                    <Button style= {{ marginLeft: 15}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             </CardGroup>

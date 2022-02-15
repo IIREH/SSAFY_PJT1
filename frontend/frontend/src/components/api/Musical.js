@@ -85,11 +85,13 @@ function Musical({ title }) {
                 후기 : 22건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/musical">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/musical">
+                    <Button>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -102,11 +104,13 @@ function Musical({ title }) {
                 후기 : 20건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/musical2">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/musical2">
+                    <Button>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -119,11 +123,13 @@ function Musical({ title }) {
                 후기 : 17건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/musical3">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/musical3">
+                    <Button style={{ marginLeft: 25}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             </CardGroup>
@@ -140,11 +146,13 @@ function Musical({ title }) {
                 후기 : 13건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/musical4">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/musical4">
+                    <Button>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -157,11 +165,13 @@ function Musical({ title }) {
                 후기 : 11건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/musical5">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/musical5">
+                    <Button>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -174,11 +184,13 @@ function Musical({ title }) {
                 후기 : 10건
                 <br></br>
                 평점 : ★★★★☆
-                    </Card.Text>
-                    <Link to="/info">
-                        <Button className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                <br></br>
+                <br></br>
+                <Link to="/musical6">
+                    <Button>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             </CardGroup>

@@ -86,10 +86,12 @@ function Classic({ title }) {
                 후기 : 20건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/classic">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button  style={{ marginLeft: 20}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -103,10 +105,12 @@ function Classic({ title }) {
                 후기 : 17건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/classic2">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button  style={{ marginLeft: 10}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -120,10 +124,12 @@ function Classic({ title }) {
                 후기 : 13건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/classic3">
-                        <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style={{ marginLeft: 30}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -141,10 +147,12 @@ function Classic({ title }) {
                 후기 : 11건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/classic4">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style={{ marginLeft: 50}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -158,10 +166,12 @@ function Classic({ title }) {
                 후기 : 10건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/classic5">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style={{ marginLeft: 50}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -175,10 +185,12 @@ function Classic({ title }) {
                 후기 : 10건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/classic6">
-                        <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style={{ marginLeft: 50}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>

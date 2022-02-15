@@ -53,7 +53,7 @@ function Recommend({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186190?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186601?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -62,7 +62,7 @@ function Recommend({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186424?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF181077?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -89,10 +89,12 @@ function Recommend({ title }) {
                 후기 : 60건
                 <br></br>
                 평점 : ★★★★★
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/recomend">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style= {{ marginLeft: 5}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -106,10 +108,12 @@ function Recommend({ title }) {
                 후기 : 50건
                 <br></br>
                 평점 : ★★★★★
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/recomend2">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style= {{ marginLeft: 5}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -123,10 +127,12 @@ function Recommend({ title }) {
                 후기 : 35건
                 <br></br>
                 평점 : ★★★★★
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/recomend3">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style= {{ marginLeft: 5}} >상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -144,10 +150,12 @@ function Recommend({ title }) {
                 후기 : 30건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/recomend4">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -155,16 +163,18 @@ function Recommend({ title }) {
         <Card>
             <Card.Img variant="top" src={ recommend5 } alt="Recommend Image"/>
             <Card.Body>
-                <Card.Title>길들여진 새</Card.Title>
+                <Card.Title>또! 오해영</Card.Title>
                  <hr></hr>
                 <Card.Text>
                 후기 : 25건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
+                <br></br>
+                <br></br>
                 <Link to="/recomend5">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                    <Button style= {{ marginLeft: 5}} >상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -172,16 +182,18 @@ function Recommend({ title }) {
         <Card>
             <Card.Img variant="top" src={ recommend6 } alt="Recommend Image" />
             <Card.Body>
-                <Card.Title>하데스타운</Card.Title>
+                <Card.Title>레베카</Card.Title>
                  <hr></hr>
                 <Card.Text>
                 후기 : 22건
                 <br></br>
                 평점 : ★★★★☆
-                </Card.Text>
-                <Link to="/recommend5">
-                    <Button className="button-position-totheleft">상세보기</Button>
+                <br></br>
+                <br></br>
+                <Link to="/recomend6">
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>

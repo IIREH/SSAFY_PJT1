@@ -1,6 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 // import styled from "styled-components";
+import HeaderContainer from "../containers/common/HeaderContainer";
 import Responsive from '../components/common/Responsive';
 import EditorContainer from '../containers/write/EditorContainer';
 import TagBoxContainer from '../containers/write/TagBoxContainer';
@@ -55,15 +56,16 @@ const WritePage = () => {
   }
 
   return (
+    <>
+    <HeaderContainer />
     <Responsive>
       <Helmet>
         <title>글 작성하기 </title>
       </Helmet>
-      <br></br><br></br><br></br>
       <h2> 글 작성하기</h2>
       <EditorContainer />
       <TagBoxContainer />
-
+      <br></br>
       <h4 style={{ textAlign: 'start'}}> 📂 파일 선택 </h4>
       <BoxUpload>
         <div className='image-upload'>
@@ -75,7 +77,7 @@ const WritePage = () => {
                     <input type="submit" value="Upload" />
                 </form> */}
                 <label htmlFor='upload-input'>
-                  <img src='/folder.png' draggable='false' alt='folder' style={{ width: 100, height: 100 }}></img>
+                  <img src='/folder.png' draggable='false' alt='folder' style={{ width: 100, height: 100, marginLeft: 40}}></img>
                   <br></br>
                   <br></br>
                   <p>클릭하여 이미지 업로드하기</p>
@@ -100,6 +102,7 @@ const WritePage = () => {
       <WriteActionButtonsContainer />
       <br></br>
     </Responsive>
+    </>
   );
 };
 

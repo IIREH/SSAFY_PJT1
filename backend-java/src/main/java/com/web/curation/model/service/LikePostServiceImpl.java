@@ -3,10 +3,12 @@ package com.web.curation.model.service;
 import com.web.curation.jwt.TokenProvider;
 import com.web.curation.model.entity.Post;
 import com.web.curation.model.entity.User;
+import com.web.curation.model.service.repository.AlarmRepository;
 import com.web.curation.model.service.repository.PostRepository;
 import com.web.curation.model.service.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,12 @@ public class LikePostServiceImpl implements LikePostService{
     private final TokenProvider tokenProvider;
     private final UserRepository userRepository;
     private final PostRepository postRepository;
+    private final AlarmService alarmService;
+    @Value("${frontend.alarm.likePost}")
+    private String likePostType;
+    @Value("${frontend.alarm.likePostPath]")
+    private String likePostPath;
+
 
     @Override
     public boolean add(String jwt, String postId,String errMsg) {
@@ -38,8 +46,10 @@ public class LikePostServiceImpl implements LikePostService{
         log.info("likePost add Service post:{}",post);
         post.getLikedByList().add(user);
         user.getLikePost().add(post.getId());
+        alarmService.addAlarm(user,post.getId(),likePostType,likePostPath+post.getId());
         postRepository.save(post);
         userRepository.save(user);
+
 
         return true;
     }
@@ -50,38 +60,19 @@ public class LikePostServiceImpl implements LikePostService{
         User user =userRepository.findByEmail(email);
         //"이미 좋아요 누른 글입니다.";
 
-        Post post=postRepository.findByIdAndLikedByListIsContaining(postId,user);
-        if(post==null)
-            throw new RuntimeException(errMsg);
+        Post post=postRepository.findById(postId).orElseThrow(()->new RuntimeException(errMsg));
+
 
         log.info("before likePost remove Service post:{}",post.getLikedByList());
         post.getLikedByList().removeIf(x->x.getId().equals(user.getId()));
         user.getLikePost().remove(post.getId());
         log.info("after likePost remove Service post:{}",post.getLikedByList());
 
+        alarmService.removeAlarm(user,post.getId());
         postRepository.save(post);
         userRepository.save(user);
 
         return true;
-    }
-
-    @Override
-    public List<Post> searchLikeList(String nickName) {
-       User user= userRepository.findByEmailOrNickname("garage",nickName);
-       List <Post> list = new ArrayList<>();
-       try {
-
-           list=user.getLikePost().stream()
-                   .map(postRepository::findById)
-                   .map(x->x.get())
-                   .collect(Collectors.toList());
-       }catch (NoSuchElementException e){
-            log.info("좋아요 누른 글없음");
-       }catch (NullPointerException e){
-           log.info("없는 회원 조회");
-       }
-
-        return list;
     }
 
     @Override

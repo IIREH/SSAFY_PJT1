@@ -29,8 +29,6 @@ public class AlarmController {
     @GetMapping("/")
     public ApiUtils.ApiResult<List<Alarm>> getAlarmList(@RequestParam(value = "jwt") String jwt){
         log.info("get AlarmList");
-        final String errMsg ="팔로잉의 좋아요 목록 조회 불가능";
-
         List<Alarm>value=alarmService.getList(jwt);
         log.info("alarmList size:{}",value);
         return ApiUtils.success(value);

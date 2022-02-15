@@ -7,6 +7,7 @@ import com.web.curation.model.entity.*;
 import com.web.curation.model.service.repository.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,21 @@ public class PostService {
 
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    CommentMapper commentMapper;
+    @Autowired
+    AlarmService alarmService;
+
+    @Value("${frontend.alarm.post}")
+    private String postType;
+    @Value("${frontend.alarm.postPath}")
+    private String postPath;
+
+    @Value("${frontend.alarm.comment}")
+    private String commentType;
+    @Value("${frontend.alarm.commentPath}")
+    private String commentPath;
+
 
     @Autowired
     PostMapper postMapper;
@@ -83,6 +99,12 @@ public class PostService {
 //                .hashTags(hashTags)
 //                .build();
         Post post = postMapper.toEntity(postDto);
+        alarmService.addAlarm(
+                post.getUser()
+                , postDto.getId()
+                , postType
+                , postPath + post.getId()
+        );
 
         return postRepository.save(post);
     }
@@ -163,11 +185,16 @@ public class PostService {
 
         Post post = postOptional.get();
         List<Comment> comments = post.getComments();
-        if(comments != null) {
+        if (comments != null) {
             commentRepository.deleteAll(comments);
         }
         photoService.removePhoto(post.getPhoto());
         postRepository.delete(post);
+
+        alarmService.removeAlarm(
+                post.getUser()
+                , post.getId()
+        );
 
         return true;
     }
@@ -219,6 +246,13 @@ public class PostService {
         List<Comment> comments = post.getComments();
         comments.add(comment);
         postRepository.save(post);
+        alarmService.addAlarm(
+                comment.getUser()
+                , comment.getId()
+                , commentType
+                , commentPath + comment.getId()
+        );
+
         return comment;
     }
 
@@ -249,7 +283,6 @@ public class PostService {
             return false;
         }
 
-        commentRepository.deleteById(commentId);
         Post post = postOptional.get();
         post.getComments().removeIf(c -> commentId.equals(c.getId()));
 //        List<Comment> comments = post.getComments();
@@ -260,7 +293,10 @@ public class PostService {
 //            }
 //        }
 //        post.setComments(comments);
+        alarmService.removeAlarm(commentOptional.get().getUser(),commentOptional.get().getId());
         postRepository.save(post);
+        commentRepository.deleteById(commentId);
+
         return true;
     }
 }

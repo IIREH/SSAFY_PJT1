@@ -86,10 +86,10 @@ const Header = ({ user, onLogout, onDelete }) => {
               </a>
             </NavList>
             <NavList>
-               <a href='write'>
-                <img src="/images/edit.svg" alt="" />
-                <span>새글작성</span>
-              </a>
+               <Link to='/write'>
+                <img src="/images/plus-icon.svg" alt="" />
+                <span>New</span>
+              </Link>
             </NavList>
               <Link to={`/profile/${newUser}`}>
                 <img

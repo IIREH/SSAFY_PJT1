@@ -28,6 +28,7 @@ const HeaderContainer = () => {
   const onLogout = () => {
     localStorage.removeItem('user');
     localStorage.removeItem('jwt');
+    localStorage.removeItem('userEmail');
     window.location.reload();
   };
 

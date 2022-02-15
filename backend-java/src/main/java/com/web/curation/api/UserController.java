@@ -106,5 +106,12 @@ public class UserController {
         return ApiUtils.success(value);
     }
 
+    @GetMapping("/nickNameSearch")
+    public ApiUtils.ApiResult<List<String>> searchNickName(@RequestParam(value = "nickName") String nickName){
+        log.info("nickName Search connect");
+        List<String> value=userService.searchNickName(nickName);
+        log.info("nickName success:{}",value);
+        return ApiUtils.success(value);
+    }
 
 }

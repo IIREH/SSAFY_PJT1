@@ -15,8 +15,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Validated
 @Service
@@ -94,6 +96,19 @@ public class UserServiceImpl implements UserService {
     public String getNickName(String jwt) {
         User user = userRepository.findByEmail(tokenProvider.getId(jwt));
         return Optional.ofNullable(user.getNickname()).orElseThrow(()->new RuntimeException(ERROR_MESSAGE));
+    }
+
+    @Override
+    public List<String> searchNickName(String nickName) {
+       List<User> list = userRepository.findUserByNicknameContaining(nickName);
+        log.info("searchNicNameList:{}",list);
+        if(list==null||list.isEmpty())
+            throw new RuntimeException("조회하신 닉네임이 없습니다.");
+
+
+        return list
+                .stream().map(User::getNickname)
+                .collect(Collectors.toList());
     }
 
 

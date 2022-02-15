@@ -27,7 +27,7 @@ public class WebCurationApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/**").allowedOrigins("*").maxAge(6000);
+				registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").maxAge(6000);
 			}
 		};
 	}

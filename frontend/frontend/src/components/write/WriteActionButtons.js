@@ -15,6 +15,8 @@ const StyledButton = styled(Button)`
   height: 2.125rem;
   & + & {
     margin-left: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
   }
 `;
 

@@ -18,23 +18,33 @@ const PostsComponent = (params) => {
         </div>
         <div class="row mx-0 justify-content-center">
           {mode === 'userPosts' &&
-            <div>
+            <div class="row row-cols-3 g-4 justify-content-start">
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
-                  <p>{userPost.title}</p>
-                  <p>{userPost.content}</p>
-                  <hr />
+                  <div class="col">
+                    <div class="card">
+                      <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} class="card-img-top" alt="..." />
+                      <div class="card-body">
+                        <p class="card-text">{userPost.content}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
           }
           {mode === 'userLikesPosts' &&
-            <div>
+            <div class="row row-cols-3 g-4 justify-content-start">
               {userLikesPosts.map(userLikePost => (
                 <div key={userLikePost.id}>
-                  <p>{userLikePost.title}</p>
-                  <p>{userLikePost.content}</p>
-                  <hr />
+                  <div class="col">
+                    <div class="card">
+                      <img src={`data:image/jpeg;base64,${userLikePost.photo.image.data}`} class="card-img-top" alt="..." />
+                      <div class="card-body">
+                        <p class="card-text">{userLikePost.content}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>

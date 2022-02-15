@@ -63,12 +63,16 @@
     box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253) !important;
 }
 
+.card-title{
+    text-align: center;
+}
+
 .card-body{
     padding: 3rem 0 !important;
 }
 
 .card-text{
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding: 0.4rem;
 }
 
@@ -83,11 +87,14 @@
 }
 
 h2 {
+    text-align: center;
+    padding-top : 10px;
     font-family: 'Cafe24Ssurround';
+    color: rgb(44, 196, 158);
 }
 
 .button-position-totheleft {
-    margin-left : 190px;
+    margin-left: 6px;
 }
 
 .carousel-control-next-icon:after

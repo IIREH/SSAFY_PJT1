@@ -80,12 +80,14 @@ function Musical({ title }) {
                 <Card.Img variant="top" src={ musical } alt="Recommend Image"/>
                 <Card.Body>
                     <Card.Title>젠틀맨스 가이드</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                     <hr></hr>
+                <Card.Text>
+                후기 : 22건
+                <br></br>
+                평점 : ★★★★☆
                     </Card.Text>
                     <Link to="/musical">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
             </Card>
@@ -95,12 +97,14 @@ function Musical({ title }) {
                 <Card.Img variant="top" src={ musical2 } alt="Recommend Image"/>
                 <Card.Body>
                     <Card.Title>데스노트</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                     <hr></hr>
+                <Card.Text>
+                후기 : 20건
+                <br></br>
+                평점 : ★★★★☆
                     </Card.Text>
                     <Link to="/musical2">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
             </Card>
@@ -110,12 +114,14 @@ function Musical({ title }) {
                 <Card.Img variant="top" src={ musical3 } alt="Recommend Image" />
                 <Card.Body>
                     <Card.Title>극장형 보이는 라디오</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                     <hr></hr>
+                <Card.Text>
+                후기 : 17건
+                <br></br>
+                평점 : ★★★★☆
                     </Card.Text>
                     <Link to="/musical3">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
             </Card>
@@ -129,12 +135,14 @@ function Musical({ title }) {
                 <Card.Img variant="top" src={ musical4 } alt="Recommend Image"/>
                 <Card.Body>
                     <Card.Title>노트르담드파리</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                     <hr></hr>
+                <Card.Text>
+                후기 : 13건
+                <br></br>
+                평점 : ★★★★☆
                     </Card.Text>
                     <Link to="/musical4">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
             </Card>
@@ -144,12 +152,14 @@ function Musical({ title }) {
                 <Card.Img variant="top" src={ musical5 } alt="Recommend Image"/>
                 <Card.Body>
                     <Card.Title>EQUAL</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                     <hr></hr>
+                <Card.Text>
+                후기 : 11건
+                <br></br>
+                평점 : ★★★★☆
                     </Card.Text>
                     <Link to="/musical5">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
             </Card>
@@ -159,12 +169,14 @@ function Musical({ title }) {
                 <Card.Img variant="top" src={ musical6 } alt="Recommend Image" />
                 <Card.Body>
                     <Card.Title>구름빵2</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
+                     <hr></hr>
+                <Card.Text>
+                후기 : 10건
+                <br></br>
+                평점 : ★★★★☆
                     </Card.Text>
                     <Link to="/info">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                        <Button className="button-position-totheleft">상세보기</Button>
                     </Link>
                 </Card.Body>
             </Card>

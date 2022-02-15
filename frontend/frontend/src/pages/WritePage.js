@@ -1,21 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import styled from "styled-components";
 import Responsive from '../components/common/Responsive';
 import EditorContainer from '../containers/write/EditorContainer';
 import TagBoxContainer from '../containers/write/TagBoxContainer';
 import WriteActionButtonsContainer from '../containers/write/WriteActionButtonsContainer';
 import { Helmet } from 'react-helmet-async';
+import { BoxUpload, ImagePreview } from '../containers/write/UploadImgContainer'
 
 const WritePage = () => {
+  const [image, setImage] = useState('')
+  const [isUploaded, setIsUploaded] = useState(false)
+
+  function handleImageChange(e) {
+    if(e.target.files && e.target.files[0]) {
+      let reader = new FileReader()
+
+      reader.onload = function(e) {
+        setImage(e.target.result)
+        setIsUploaded(true)
+      }
+
+        reader.readAsDataURL(e.target.files[0])
+    }
+  }
   return (
     <Responsive>
       <Helmet>
-        <title>글 작성하기 - A&C Galleria</title>
+        <title>글 작성하기 </title>
       </Helmet>
-
+      <br></br><br></br><br></br>
+      <h2> 글 작성하기</h2>
       <EditorContainer />
       <TagBoxContainer />
+      <br/>
+      <h4> 📂 파일 선택 </h4>
+      <BoxUpload>
+        <div className='image-upload'>
+          {
+            !isUploaded ? (
+              <>
+                <label htmlFor='upload-input'>
+                  <img src='/folder.png' draggable='false' alt='folder' style={{ width: 100, height: 100, marginLeft: 40 }}></img>
+                  <br></br>
+                  <br></br>
+                  <p>클릭하여 이미지 업로드하기</p>
+                </label>
+                <input id="upload-input" type="file" accept='.jpg,.jpeg,.gif,.png,.mov,.mp4' onChange={handleImageChange} />
+              </>
+            ) : (
+              <ImagePreview>
+                <img className="close-icon" src='/closeIcon.svg' alt='CloseIcon'
+                onClick={() => {
+                  setIsUploaded(false)
+                  setImage(null)
+                }}  
+                />
+                 <img id="uploaded-img" src={image} draggable={false} alt="uploaded-img" />
+              </ImagePreview>
+            )
+          }
+
+          
+        </div>
+      </BoxUpload>
       <WriteActionButtonsContainer />
+      <br></br>
     </Responsive>
   );
 };

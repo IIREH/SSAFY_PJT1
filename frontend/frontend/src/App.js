@@ -30,9 +30,11 @@ import TheatreInfoPage3 from './theatrePages/TheatreInfoPage3';
 import TheatreInfoPage4 from './theatrePages/TheatreInfoPage4';
 import TheatreInfoPage5 from './theatrePages/TheatreInfoPage5';
 import ProfilePage from './pages/ProfilePage';
+import './App.css'
 
 const App = () => {
   return (
+    <div className='App'>
     <Routes>
       <Route path="/" element={<ListPage />} />
       <Route path="/login" element={<LoginPage />} />
@@ -70,6 +72,7 @@ const App = () => {
       </Route>
       <Route path="/profile/:nickname" element={<ProfilePage />} />
     </Routes>
+    </div>
   );
 };
 export default App;

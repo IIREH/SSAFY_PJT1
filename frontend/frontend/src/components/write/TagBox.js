@@ -117,7 +117,7 @@ const TagBox = ({ tags, onChangeTags }) => {
 
   return (
     <TagBoxBlock>
-      <h4>태그</h4>
+      <h4># 태그</h4>
       <TagForm onSubmit={onSubmit}>
         <input
           placeholder="태그를 입력하세요"

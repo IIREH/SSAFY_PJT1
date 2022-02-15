@@ -79,22 +79,16 @@ const Header = ({ user, onLogout, onDelete }) => {
 
           {user ? (
             <div className="right">
-              <NavList>
-              <a href='#!'>
-                <img src="/images/nav-network.svg" alt="" />
-                <span>Follow</span>
-              </a>
-            </NavList>
             <NavList>
                <a href='#!'>
-                <img src="/images/nav-notifications.svg" alt="" />
-                <span>Notifications</span>
+                <img src="/images/bell.svg" alt="" />
+                <span>알림</span>
               </a>
             </NavList>
             <NavList>
                <a href='write'>
-                <img src="/images/plus-icon.svg" alt="" />
-                <span>New</span>
+                <img src="/images/edit.svg" alt="" />
+                <span>새글작성</span>
               </a>
             </NavList>
               <Link to={`/profile/${newUser}`}>
@@ -120,7 +114,7 @@ const Header = ({ user, onLogout, onDelete }) => {
                   <Button className="button" onClick={onDelete}>회원탈퇴</Button>
                 </Modal.Footer>
               </Modal>
-              <UserInfo>{user}</UserInfo>
+              <UserInfo>{user} 님</UserInfo>
               <Button onClick={onLogout}>로그아웃</Button>
             </div>
           ) : (

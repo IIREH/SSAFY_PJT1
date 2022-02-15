@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import palette from '../../lib/styles/palette';
 
 const WriteActionButtonsBlock = styled.div`
   margin-top: 1rem;
@@ -17,6 +18,9 @@ const StyledButton = styled(Button)`
     margin-left: 0.5rem;
     margin-top: 2rem;
     margin-bottom: 5rem;
+  }
+  &:hover {
+    background: ${palette.cyan[8]};
   }
 `;
 

@@ -1,12 +1,59 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 // import styled from "styled-components";
 import Responsive from '../components/common/Responsive';
 import EditorContainer from '../containers/write/EditorContainer';
 import TagBoxContainer from '../containers/write/TagBoxContainer';
 import WriteActionButtonsContainer from '../containers/write/WriteActionButtonsContainer';
 import { Helmet } from 'react-helmet-async';
+import { BoxUpload, ImagePreview } from '../containers/write/UploadImgContainer';
+import { changeField } from '../modules/write';
+import client from '../lib/api/client';
 
 const WritePage = () => {
+  const [image, setImage] = useState('');
+  const [isUploaded, setIsUploaded] = useState(false);
+  const [imageId, setImageId] = useState('');
+
+  const dispatch = useDispatch();
+
+  const onChangePhoto = useCallback(imageId => 
+    dispatch(
+      changeField({
+        key: 'photoId',
+        value: imageId,
+      }),
+    ),
+    [dispatch]
+  );
+
+  function handleImageChange(e) {
+    console.log(e.target.files[0])
+    if(e.target.files && e.target.files[0]) {
+      let reader = new FileReader()
+
+      reader.onload = function(e) {
+        setImage(e.target.result)
+        setIsUploaded(true)
+      }
+
+      reader.readAsDataURL(e.target.files[0])
+
+      const formData = new FormData();
+      formData.append('image', e.target.files[0]);
+
+      client.post('/api/photo', formData)
+        .then(res => {
+          setImageId(res.data.response);
+          console.log(imageId)
+          onChangePhoto(imageId);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+    }
+  }
+
   return (
     <Responsive>
       <Helmet>
@@ -15,6 +62,40 @@ const WritePage = () => {
 
       <EditorContainer />
       <TagBoxContainer />
+
+      <h4 style={{ textAlign: 'start'}}> 📂 파일 선택 </h4>
+      <BoxUpload>
+        <div className='image-upload'>
+          {
+            !isUploaded ? (
+              <>
+                {/* <form method="POST" action="http://i6c208.p.ssafy.io:8090/api/photo" encType="multipart/form-data">
+                    Image:<input type="file" name="image" accept="image/*" />
+                    <input type="submit" value="Upload" />
+                </form> */}
+                <label htmlFor='upload-input'>
+                  <img src='/folder.png' draggable='false' alt='folder' style={{ width: 100, height: 100 }}></img>
+                  <br></br>
+                  <br></br>
+                  <p>클릭하여 이미지 업로드하기</p>
+                </label>
+                <input id="upload-input" type="file" name="image" accept='.jpg,.jpeg,.gif,.png,.mov,.mp4' onChange={handleImageChange}/>
+              </>
+            ) : (
+              <ImagePreview>
+                <img className="close-icon" src='/closeIcon.svg' alt='CloseIcon'
+                onClick={() => {
+                  setIsUploaded(false)
+                  setImage(null)
+                }}  
+                />
+                <img id="uploaded-img" src={image} draggable={false} alt="uploaded-img" />
+              </ImagePreview>
+            )
+          }          
+        </div>
+      </BoxUpload>
+
       <WriteActionButtonsContainer />
     </Responsive>
   );

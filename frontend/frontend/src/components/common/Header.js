@@ -92,10 +92,10 @@ const Header = ({ user, onLogout, onDelete }) => {
               </a>
             </NavList>
             <NavList>
-               <a href='write'>
+               <Link to='/write'>
                 <img src="/images/plus-icon.svg" alt="" />
                 <span>New</span>
-              </a>
+              </Link>
             </NavList>
               <Link to={`/profile/${newUser}`}>
                 <img

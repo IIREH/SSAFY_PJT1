@@ -11,5 +11,6 @@ public interface UserService {
     void update(UserDto userDto);
     void delete(String jwt);
     String getNickName(String jwt);
+    List<String> searchNickName(String nickName);
 }
 

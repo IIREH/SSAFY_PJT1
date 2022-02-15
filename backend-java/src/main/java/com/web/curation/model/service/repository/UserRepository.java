@@ -11,6 +11,8 @@ public interface UserRepository extends MongoRepository<User, ObjectId> {
     User findByEmailOrNickname(String email,String nickname);
     User findByNickname(String nickname);
     User findByEmail(String email);
+    List<User> findUserByNicknameContaining(String nickName);
+
 
     //TODO 안쓸것같음.(삭제에정)
     @Override

@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 import {  useState } from "react";
 import Button from "../common/Button";
 import "./Profile.css";
+=======
+import { useState } from "react";
+>>>>>>> feature/contest
 
 const PostsComponent = (params) => {
   const [mode, setMode] = useState('userPosts');

@@ -25,7 +25,7 @@ const FollowComponent = (params) => {
             }
             </div>
           :
-          <div style={{ display: 'inline'}} >
+            <div style={{ display: 'inline' }}>
               <Button style={{ marginLeft: 750}}>
                 <Link to="/updateUserInfo" style={{ textDecoration: 'none', color: 'white' }}>회원정보수정</Link>
               </Button>

@@ -1,10 +1,7 @@
-<<<<<<< HEAD
 import {  useState } from "react";
 import Button from "../common/Button";
 import "./Profile.css";
-=======
-import { useState } from "react";
->>>>>>> feature/contest
+import { Link } from "react-router-dom";
 
 const PostsComponent = (params) => {
   const [mode, setMode] = useState('userPosts');
@@ -25,12 +22,14 @@ const PostsComponent = (params) => {
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
                   <div className="col">
-                    <div className="card">
-                      <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} className="card-img-top" alt="..." />
-                      <div className="card-body">
-                        <p className="card-text">{userPost.content}</p>
+                    <Link to={`/post/${userPost.id}`}>
+                      <div className="card">
+                        <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                          <p className="card-text">{userPost.content}</p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               ))}

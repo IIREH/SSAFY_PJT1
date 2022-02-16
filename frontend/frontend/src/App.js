@@ -3,7 +3,6 @@ import ListPage from './pages/ListPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import WritePage from './pages/WritePage';
-import PostPage from './pages/PostPage';
 import UpdateUserInfoPage from './pages/UpdateUserInfoPage'
 
 import ClassicInfoPage from './classicPages/ClassicInfoPage';
@@ -34,6 +33,7 @@ import TheatreInfoPage4 from './theatrePages/TheatreInfoPage4';
 import TheatreInfoPage5 from './theatrePages/TheatreInfoPage5';
 import TheatreInfoPage6 from './theatrePages/TheatreInfoPage6';
 import ProfilePage from './pages/ProfilePage';
+import PostPage from './pages/PostPage';
 import './App.css'
 
 const App = () => {
@@ -74,11 +74,8 @@ const App = () => {
       <Route path="/theatre5" element={<TheatreInfoPage5 />} />
       <Route path="/theatre6" element={<TheatreInfoPage6 />} />
 
-      <Route path="/@:username">
-        <Route index element={<ListPage />} />
-        <Route path=":postId" element={<PostPage />} />
-      </Route>
       <Route path="/profile/:nickname" element={<ProfilePage />} />
+      <Route path="/post/:postId" element={<PostPage />} />
     </Routes>
     </div>
   );

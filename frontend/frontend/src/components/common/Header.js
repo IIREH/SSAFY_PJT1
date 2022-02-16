@@ -104,7 +104,7 @@ const Header = ({ user, onLogout, onDelete }) => {
           <Link to="/" className="logo">
             <img src='/logo.png' alt='logo'></img>
           </Link>
-          <div class="col-5 row mx-0 ms-5" style={{"position": "relative"}}>
+          <div class="col-5 row mx-0 ms-5" style={{"position": "relative", "z-index": "100"}}>
             <input type="text" class="col-12 d-flex" name="keyword" placeholder="검색어를 입력해주세요" onChange={onChange} />
             <table
               style={{
@@ -116,16 +116,20 @@ const Header = ({ user, onLogout, onDelete }) => {
               class="table table-light table-bordered d-block p-0 mt-5 text-start"
             >
               {keyword &&
-                <div>
+                <div style={{"position": "absolute", "z-index": "100"}}>
                   <tbody class="border">
                     <tr class="bg-dark text-light">공연 검색</tr>
-                    {searchContests.map(searchContest => (
-                      <tr class="" key={searchContest.id}>
-                        <Link to="#" class="text-black p-0 mb-1">
-                          {searchContest.name}
-                        </Link>
-                      </tr>
-                    ))}
+                    {searchContests ?
+                      (searchContests.map(searchContest => (
+                        <tr class="" key={searchContest.id}>
+                          <Link to="#" class="text-black p-0 mb-1">
+                            {searchContest.name}
+                          </Link>
+                        </tr>
+                      )))
+                    :
+                      <tr>공연 검색 결과가 없습니다.</tr>
+                    }
                   </tbody>
                   <tbody class="border">
                     <tr class="bg-dark text-light">사용자 검색</tr>

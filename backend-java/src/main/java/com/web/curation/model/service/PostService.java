@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -67,11 +68,11 @@ public class PostService {
 //            return null;
 //        }
 //
-//        List<HashTag> hashTags = new ArrayList<>();
-//        Optional.ofNullable(postDto.getHashTags()).orElseGet(Collections::emptyList)
-//                .stream().map(ht -> hashTags.add(hashTagRepository.save(new HashTag(ht))))
-//                .collect(Collectors.toList());
-//
+        List<HashTag> hashTags = new ArrayList<>();
+        Optional.ofNullable(postDto.getHashTags()).orElseGet(Collections::emptyList)
+                .stream().map(ht -> hashTagRepository.save(new HashTag(ht)))
+                .collect(Collectors.toList());
+
 ////        postDto.getHashTags().stream()
 ////                .reduce(hashTags, ht -> hashTags.add(hashTagRepository.save(new HashTag(ht))))
 ////                .collect(Collectors.toList());

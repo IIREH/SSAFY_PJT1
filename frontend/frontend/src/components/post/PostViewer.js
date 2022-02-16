@@ -4,7 +4,6 @@ import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
-import { Helmet } from 'react-helmet-async';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 4rem;
@@ -25,7 +24,7 @@ const PostContent = styled.div`
   color: ${palette.gray[8]};
 `;
 
-const PostViewer = ({ post, error, loading, actionButtons, ownPost }) => {
+const PostViewer = ({ post, imageCode, error, loading, actionButtons, ownPost }) => {
   // 에러 발생 시
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -39,24 +38,21 @@ const PostViewer = ({ post, error, loading, actionButtons, ownPost }) => {
     return null;
   }
 
-  const { title, body, user, publishedDate, tags } = post;
+  const { content, userEmail, writeDate, hashTags } = post;
+
   return (
     <PostViewerBlock>
-      <Helmet>
-        <title>{title} - A&C Galleria</title>
-      </Helmet>
-
       <PostHead>
-        <h1>{title}</h1>
         <SubInfo
-          username={user.username}
-          publishedDate={publishedDate}
+          userEmail={userEmail}
+          writeDate={writeDate}
           hasMarginTop
         />
-        <Tags tags={tags} />
+        <Tags tags={hashTags} />
       </PostHead>
+      <img src={`data:image/jpeg;base64,${imageCode}`} alt="..." />
+      <PostContent dangerouslySetInnerHTML={{ __html: content }} />
       {actionButtons}
-      <PostContent dangerouslySetInnerHTML={{ __html: body }} />
     </PostViewerBlock>
   );
 };

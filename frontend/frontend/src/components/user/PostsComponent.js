@@ -4,6 +4,7 @@ import Responsive from '../common/Responsive';
 import palette from '../../lib/styles/palette';
 import Button from "../common/Button";
 import "./Profile.css";
+import { Link } from "react-router-dom";
 
 const IconButton = styled(Responsive)`
   font-size: 1.25rem;
@@ -36,13 +37,15 @@ const PostsComponent = (params) => {
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
                   <div className="col">
-                    <div className="card">
-                      <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} className="card-img-top" alt="..." />
-                      <div className="card-body">
-                        <p className="card-text">{userPost.content}</p>
-                        <IconButton><i onClick={onIncrease} className="fa fa-heart"></i> {count} Likes </IconButton>
+                    <Link to={`/post/${userPost.id}`}>
+                      <div className="card">
+                        <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} className="card-img-top" alt="..." />
+                        <div className="card-body">
+                          <p className="card-text">{userPost.content}</p>
+                          <IconButton><i onClick={onIncrease} className="fa fa-heart"></i> {count} Likes </IconButton>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
                   </div>
                 </div>
               ))}

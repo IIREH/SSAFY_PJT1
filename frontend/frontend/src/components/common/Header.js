@@ -104,7 +104,7 @@ const Header = ({ user, onLogout, onDelete }) => {
           <Link to="/" className="logo">
             <img src='/logo.png' alt='logo'></img>
           </Link>
-          <div class="col-5 row mx-0 ms-5" style={{"position": "relative", "z-index": "100"}}>
+          <div class="col-5 row mx-0 ms-5" style={{"position": "relative", "z-index": "201"}}>
             <input type="text" class="col-12 d-flex" name="keyword" placeholder="검색어를 입력해주세요" onChange={onChange} />
             <table
               style={{
@@ -116,7 +116,7 @@ const Header = ({ user, onLogout, onDelete }) => {
               class="table table-light table-bordered d-block p-0 mt-5 text-start"
             >
               {keyword &&
-                <div style={{"position": "absolute", "z-index": "100"}}>
+                <div style={{"position": "absolute", "z-index": "201"}}>
                   <tbody class="border">
                     <tr class="bg-dark text-light">공연 검색</tr>
                     {searchContests ?

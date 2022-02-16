@@ -10,6 +10,7 @@ import { Helmet } from 'react-helmet-async';
 import { BoxUpload, ImagePreview } from '../containers/write/UploadImgContainer';
 import { changeField } from '../modules/write';
 import client from '../lib/api/client';
+import ContestContainer from '../containers/write/ContestContainer';
 
 const WritePage = () => {
   const [image, setImage] = useState('');
@@ -64,6 +65,7 @@ const WritePage = () => {
       </Helmet>
       <h2 style={{textIndent: 20}}>추억 남기기</h2>
       <EditorContainer />
+      <ContestContainer />
       <TagBoxContainer />
       <br></br>
       <h4> 📂 파일 선택 </h4>

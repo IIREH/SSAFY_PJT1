@@ -34,7 +34,7 @@ const PostsComponent = (params) => {
           
     </div>
           {mode === 'userPosts' &&
-            <CardGroup className="justify-content-start">
+            <CardGroup className="justify-content-start" style={{ marginLeft: 40, marginRight: 40 }}>
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
                   <span className="row__posters">

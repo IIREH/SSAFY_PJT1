@@ -63,8 +63,11 @@ const WritePage = () => {
       <Helmet>
         <title>글 작성하기 </title>
       </Helmet>
-      <h2 style={{textIndent: 20}}>추억 남기기</h2>
+      <div style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc', paddingTop: 50, paddingLeft: 100, paddingBottom: 50 }}>
+      <h2 style={{ textIndent: 20 }}>추억 남기기</h2>
       <EditorContainer />
+      
+      <h4>🔍 공연 검색하기</h4>
       <ContestContainer />
       <TagBoxContainer />
       <br></br>
@@ -101,6 +104,7 @@ const WritePage = () => {
         </div>
       </BoxUpload>
 
+      </div>
       <WriteActionButtonsContainer />
     </Responsive>
     </>

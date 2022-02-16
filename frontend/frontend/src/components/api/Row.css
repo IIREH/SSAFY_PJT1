@@ -91,6 +91,21 @@ h2 {
     padding-top : 10px;
     font-family: 'Cafe24Ssurround';
     color: rgb(44, 196, 158);
+    display: inline-block;
+}
+
+h3 {
+    padding-top : 10px;
+    font-family: 'Cafe24Ssurround';
+    color: rgb(148, 61, 160);
+}
+
+h1 {
+    text-align: center;
+    padding-top : 10px;
+    font-family: 'Cafe24Ssurround';
+    color: rgb(25, 170, 134);
+    display: inline-block;
 }
 
 .carousel-control-next-icon:after

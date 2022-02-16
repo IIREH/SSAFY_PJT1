@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import Button from "../common/Button";
-import "./Profile.css";
 
 const FollowComponent = (params) => {
   const { user, nickname, isfollowing, following, follower, onClickFollow, onDelete } = params;
@@ -17,19 +16,23 @@ const FollowComponent = (params) => {
           <hr></hr>
     </div>
           {user && user !== nickname ?
-            <div style={{ display: 'inline'}}>
+            <div style={{ textAlign : 'center'}}>
+              <h3 style={{ display : 'inline', marginRight: 6}}> {nickname}님을 💨 </h3>
             {isfollowing ?
-              <Button style={{ marginLeft: 830, marginRight: 5}} onClick={onClickFollow}>Unfollow</Button>
+              <Button style={{ marginRight: 6, display: 'inline-block'}} onClick={onClickFollow}>Unfollow</Button>
               :
-              <Button style={{ marginLeft: 830, marginRight: 5}} onClick={onClickFollow}>Follow</Button>
+              <Button style={{ marginRight: 6, display: 'inline-block'}} onClick={onClickFollow}>Follow</Button>
             }
+            <hr></hr>
             </div>
           :
-            <div style={{ display: 'inline' }}>
-              <Button style={{ marginLeft: 750}}>
-                <Link to="/updateUserInfo" style={{ textDecoration: 'none', color: 'white' }}>회원정보수정</Link>
+            <div style={{ textAlign: 'center'}}>
+              <h3 style={{ display : 'inline', marginRight: 6}}>회원 정보 💨 </h3>
+              <Button style={{ marginRight: 6, display: 'inline-block'}}>
+                <Link to="/updateUserInfo" style={{ textDecoration: 'none', color: 'white', display: 'inline-block' }}>회원정보수정</Link>
               </Button>
-              <Button style={{marginLeft : 5, marginRight: 5}} onClick={onDelete}>회원탈퇴</Button>
+              <Button style={{ marginRight: 6, display: 'inline-block'}} onClick={onDelete}>회원탈퇴</Button>
+            <hr></hr>
             </div>
           }
     </>

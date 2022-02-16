@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import palette from '../../lib/styles/palette';
 import Button from "../common/Button";
-import "./Profile.css";
 import { Link } from "react-router-dom";
+import { Card, CardGroup } from 'react-bootstrap'
 
 const IconButton = styled(Responsive)`
   font-size: 1.25rem;
@@ -25,47 +25,48 @@ const PostsComponent = (params) => {
   return(
     <>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-    <div style={{ display: 'inline' }}>
-            <Button style={{ display: 'inline'}} onClick={() => setMode('userPosts')}>포스트</Button>
+    <div style={{ textAlign: 'center'}}>
+    <h3 style={{ display : 'inline', marginRight: 6}}>추억 목록 💨 </h3>
+            <Button style={{ marginRight: 6, display: 'inline-block'}} onClick={() => setMode('userPosts')}>포스트</Button>
          
-            <Button onClick={() => setMode('userLikesPosts')} style={{ marginLeft: 5, display: 'inline'}}>관심목록</Button>
+            <Button onClick={() => setMode('userLikesPosts')} style={{  marginRight: 6, display: 'inline-block'}}>관심목록</Button>
             <hr></hr>
           
-        </div>
+    </div>
           {mode === 'userPosts' &&
-            <div className="row row-cols-3 g-4 justify-content-start">
+            <CardGroup className="justify-content-start">
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
-                  <div className="col">
+                  <span className="row__posters">
                     <Link to={`/post/${userPost.id}`}>
-                      <div className="card">
-                        <img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} className="card-img-top" alt="..." />
-                        <div className="card-body">
-                          <p className="card-text">{userPost.content}</p>
+                      <Card>
+                        <Card.Img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} variant="top" alt="..." />
+                        <Card.Body>
+                          <Card.Text>{userPost.content}</Card.Text>
                           <IconButton><i onClick={onIncrease} className="fa fa-heart"></i> {count} Likes </IconButton>
-                        </div>
-                      </div>
+                        </Card.Body>
+                      </Card>
                     </Link>
-                  </div>
+                  </span>
                 </div>
               ))}
-            </div>
+            </CardGroup>
           }
           {mode === 'userLikesPosts' &&
-            <div className="row row-cols-3 g-4 justify-content-start">
+            <CardGroup className="justify-content-start">
               {userLikesPosts.map(userLikePost => (
                 <div key={userLikePost.id}>
-                  <div className="col">
-                    <div className="card">
-                      <img src={`data:image/jpeg;base64,${userLikePost.photo.image.data}`} className="card-img-top" alt="..." />
-                      <div className="card-body">
-                        <p className="card-text">{userLikePost.content}</p>
-                      </div>
-                    </div>
-                  </div>
+                  <span className="row__posters">
+                    <Card>
+                      <Card.Img src={`data:image/jpeg;base64,${userLikePost.photo.image.data}`} variant="top" alt="..." />
+                      <Card.Body>
+                        <Card.Text>{userLikePost.content}</Card.Text>
+                      </Card.Body>
+                    </Card>
+                  </span>
                 </div>
               ))}
-            </div>
+            </CardGroup>
           }
           </>
   );

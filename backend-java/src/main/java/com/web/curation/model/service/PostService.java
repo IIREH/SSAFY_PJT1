@@ -56,9 +56,6 @@ public class PostService {
     @Autowired
     PostMapper postMapper;
 
-    @Autowired
-    CommentMapper commentMapper;
-
 //    static PostMapper postMapper = PostMapper.getInstance();
 
     public Post writePost(PostDto postDto) throws IOException {

@@ -99,9 +99,9 @@ public class UserController {
         return ApiUtils.success(Boolean.TRUE);
     }
     @GetMapping("/nickName")
-    public ApiUtils.ApiResult<String> getNickName(@RequestParam(value = "jwt") String jwt){
+    public ApiUtils.ApiResult<String> getNickName(@RequestParam(value = "email") String email){
         log.info("nickName connect");
-        String value=userService.getNickName(jwt);
+        String value=userService.getNickName(email);
         log.info("nickName success:{}",value);
         return ApiUtils.success(value);
     }

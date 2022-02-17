@@ -4,9 +4,10 @@ import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
+import Button from '../common/Button';
 
 const PostViewerBlock = styled(Responsive)`
-  margin-top: 4rem;
+  margin-top: 1rem;
 `;
 const PostHead = styled.div`
   border-bottom: 1px solid ${palette.gray[2]};
@@ -23,7 +24,6 @@ const PostContent = styled.div`
   font-size: 1.3125rem;
   color: ${palette.gray[8]};
 `;
-
 const PostViewer = ({ post, imageCode, error, loading, actionButtons, ownPost }) => {
   // 에러 발생 시
   if (error) {
@@ -38,20 +38,29 @@ const PostViewer = ({ post, imageCode, error, loading, actionButtons, ownPost })
     return null;
   }
 
-  const { content, userEmail, writeDate, hashTags } = post;
+  const { content, userEmail, writeDate, hashTags} = post;
 
   return (
-    <PostViewerBlock>
+    <PostViewerBlock style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc' }}>
+      <br></br>
+      <div style={{ textAlign: 'start' }}>
+        <Button cyan to="/">
+          뒤로가기
+        </Button>
+      </div> 
       <PostHead>
-        <SubInfo
+      <br></br>
+      <div style={{textAlign: 'end'}}>
+      <SubInfo 
           userEmail={userEmail}
           writeDate={writeDate}
-          hasMarginTop
+          hasMarginTop 
         />
+      </div>
         <Tags tags={hashTags} />
       </PostHead>
-      <img src={`data:image/jpeg;base64,${imageCode}`} alt="..." />
-      <PostContent dangerouslySetInnerHTML={{ __html: content }} />
+      <img src={`data:image/jpeg;base64,${imageCode}`} style={{ width: 300, height: 300, display: 'inline-block', marginLeft: 50 }} alt="..." />
+      <PostContent dangerouslySetInnerHTML={{ __html: content }} style={{ display: 'inline-block', marginLeft: 90 }} />
       {actionButtons}
     </PostViewerBlock>
   );

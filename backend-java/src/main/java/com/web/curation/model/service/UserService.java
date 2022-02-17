@@ -10,7 +10,7 @@ public interface UserService {
     void register(UserDto userDto);
     void update(UserDto userDto);
     void delete(String jwt);
-    String getNickName(String jwt);
+    String getNickName(String nickName);
     List<String> searchNickName(String nickName);
 }
 

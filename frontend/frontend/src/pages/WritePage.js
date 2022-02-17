@@ -63,12 +63,15 @@ const WritePage = () => {
       <Helmet>
         <title>글 작성하기 </title>
       </Helmet>
-      <h2> 글 작성하기</h2>
+      <div style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc', paddingTop: 50, paddingLeft: 100, paddingBottom: 50 }}>
+      <h2 style={{ textIndent: 20 }}>추억 남기기</h2>
       <EditorContainer />
+      
+      <h4>🔍 공연 검색하기</h4>
       <ContestContainer />
       <TagBoxContainer />
       <br></br>
-      <h4 style={{ textAlign: 'start'}}> 📂 파일 선택 </h4>
+      <h4> 📂 파일 선택 </h4>
       <BoxUpload>
         <div className='image-upload'>
           {
@@ -101,8 +104,8 @@ const WritePage = () => {
         </div>
       </BoxUpload>
 
+      </div>
       <WriteActionButtonsContainer />
-      <br></br>
     </Responsive>
     </>
   );

@@ -7,25 +7,21 @@ import Responsive from '../common/Responsive';
 
 const EditorBlock = styled(Responsive)`
   /* 페이지 위 아래 여백 지정 */
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 `;
-const TitleInput = styled.input`
-  font-size: 3rem;
-  outline: none;
-  padding-bottom: 0.5rem;
-  border: none;
-  border-bottom: 1px solid ${palette.gray[4]};
-  margin-bottom: 2rem;
-  width: 100%;
-`;
+
 const QuillWrapper = styled.div`
   /* 최소 크기 지정 및 padding 제거 */
   .ql-editor {
     padding: 0;
-    min-height: 320px;
+    min-height: 300px;
+    width : 700px;
     font-size: 1.125rem;
-    line-height: 1.5;
+    line-height: 1.3;
+    background-color: white;
+    border: 1px solid rgb(227, 227, 227);
+    border-radius: 15px;
   }
   .ql-editor.ql-blank::before {
     left: 0px;

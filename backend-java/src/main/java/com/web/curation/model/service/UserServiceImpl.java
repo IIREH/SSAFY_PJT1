@@ -93,8 +93,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String getNickName(String jwt) {
-        User user = userRepository.findByEmail(tokenProvider.getId(jwt));
+    public String getNickName(String email) {
+        User user = userRepository.findByEmail(email);
         return Optional.ofNullable(user.getNickname()).orElseThrow(()->new RuntimeException(ERROR_MESSAGE));
     }
 

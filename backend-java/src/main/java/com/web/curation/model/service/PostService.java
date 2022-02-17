@@ -41,6 +41,9 @@ public class PostService {
     @Autowired
     CommentMapper commentMapper;
     @Autowired
+    PostMapper postMapper;
+
+    @Autowired
     AlarmService alarmService;
 
     @Value("${frontend.alarm.post}")
@@ -54,20 +57,18 @@ public class PostService {
     private String commentPath;
 
 
-    @Autowired
-    PostMapper postMapper;
 
 //    static PostMapper postMapper = PostMapper.getInstance();
 
     public Post writePost(PostDto postDto) throws IOException {
         // TODO: PostDto class에서 처리할까?
-//        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
-//        User user = userRepository.findByEmail(postDto.getUserEmail());
-//
-//        if(contestOrNull.isPresent() == false || user == null) {
-//            return null;
-//        }
-//
+        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
+        User user = userRepository.findByEmail(postDto.getUserEmail());
+
+        if(contestOrNull.isPresent() == false || user == null) {
+            return null;
+        }
+
         List<HashTag> hashTags = new ArrayList<>();
         Optional.ofNullable(postDto.getHashTags()).orElseGet(Collections::emptyList)
                 .stream().map(ht -> hashTagRepository.save(new HashTag(ht)))

@@ -99,30 +99,30 @@ const Header = ({ user, onLogout, onDelete }) => {
 
   return (
     <>
-      <HeaderBlock>
+      <HeaderBlock style={{zIndex:101}}>
         <Wrapper>
           <Link to="/" className="logo">
             <img src='/logo.png' alt='logo'></img>
           </Link>
-          <div class="col-5 row mx-0 ms-5" style={{"position": "relative", "z-index": "201"}}>
-            <input type="text" class="col-12 d-flex" name="keyword" placeholder="검색어를 입력해주세요" onChange={onChange} />
+          <div className="col-5 row mx-0 ms-5">
+            <input type="text" className="col-12 d-flex" name="keyword" placeholder="검색어를 입력해주세요" onChange={onChange} />
             <table
               style={{
                 "position": "absolute",
-                "table-layout": "fixed",
-                "z-index": "1",
+                "tableLayout": "fixed",
+                "zIndex": "1",
                 "width": "100%",
               }} 
-              class="table table-light table-bordered d-block p-0 mt-5 text-start"
+              className="table table-light table-bordered d-block p-0 mt-5 text-start"
             >
               {keyword &&
-                <div style={{"position": "absolute", "z-index": "201"}}>
-                  <tbody class="border">
-                    <tr class="bg-dark text-light">공연 검색</tr>
+                <div>
+                  <tbody className="border">
+                    <tr className="bg-dark text-light">공연 검색</tr>
                     {searchContests ?
                       (searchContests.map(searchContest => (
-                        <tr class="" key={searchContest.id}>
-                          <Link to="#" class="text-black p-0 mb-1">
+                        <tr className="" key={searchContest.id}>
+                          <Link to="#" className="text-black p-0 mb-1">
                             {searchContest.name}
                           </Link>
                         </tr>
@@ -131,11 +131,11 @@ const Header = ({ user, onLogout, onDelete }) => {
                       <tr>공연 검색 결과가 없습니다.</tr>
                     }
                   </tbody>
-                  <tbody class="border">
-                    <tr class="bg-dark text-light">사용자 검색</tr>
+                  <tbody className="border">
+                    <tr className="bg-dark text-light">사용자 검색</tr>
                     {searchUsers.map(searchUser => (
-                      <tr class="" key={searchUser.id}> 
-                        <Link to={`/profile/${searchUser}`} class="text-black p-0 mb-1" onClick={onResetState}>
+                      <tr className="" key={searchUser.id}> 
+                        <Link to={`/profile/${searchUser}`} className="text-black p-0 mb-1" onClick={onResetState}>
                           {searchUser}
                         </Link>
                       </tr>
@@ -150,13 +150,6 @@ const Header = ({ user, onLogout, onDelete }) => {
               <img src="/images/search-icon.svg" alt="" />
             </SearchIcon>
           </Search> */}
-
-        <Nav>
-          <NavListWrap>
-          
-            
-          </NavListWrap>
-          </Nav>
 
           {user ? (
             <div className="right">
@@ -250,38 +243,6 @@ const Header = ({ user, onLogout, onDelete }) => {
 //   justify-content: center;
 //   align-items: center;
 // `;
-
-const Nav = styled.nav`
-  margin-left: auto;
-  display: block;
-  @media (max-width: 768px) {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    background: white;
-    width: 100%;
-  }
-`;
-
-const NavListWrap = styled.ul`
-  display: flex;
-  flex-wrap: nowrap;
-  list-style-type: none;
-
-  .active {
-    span:after {
-      content: "";
-      transform: scaleX(1);
-      border-bottom: 2px solid var(--white, #fff);
-      bottom: 0;
-      left: 0;
-      position: absolute;
-      transition: transform 0.2s ease-in-out;
-      width: 100%;
-      border-color: rgba(0, 0, 0, 0.9);
-    }
-  }
-`;
 
 const NavList = styled.li`
   display: flex;

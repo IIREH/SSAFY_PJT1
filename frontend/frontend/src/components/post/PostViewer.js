@@ -44,7 +44,7 @@ const PostViewer = ({ post, nickname, imageCode, error, loading, actionButtons, 
   const usernickname = nickname;
 
   return (
-    <PostViewerBlock style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc', paddingBottom: 30, width: 850 }}>
+    <PostViewerBlock style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc', paddingBottom: 30, width: 850, padding: 30 }}>
       <br></br>
       <div style={{ textAlign: 'start' }}>
         <Button cyan to="/">
@@ -62,8 +62,10 @@ const PostViewer = ({ post, nickname, imageCode, error, loading, actionButtons, 
       </div>
         <Tags tags={hashTags} />
       </PostHead>
-      <img src={`data:image/jpeg;base64,${imageCode}`} style={{ width: 400, height: 300, display: 'inline-block', marginLeft: 50, marginBottom: 30 }} alt="..." />
-      <PostContent dangerouslySetInnerHTML={{ __html: content }} style={{ marginLeft: 50}} />
+      <div style={{textAlign: 'center'}}>
+      <img src={`data:image/jpeg;base64,${imageCode}`} style={{ width: 400, height: 300, textAlign: 'center', marginBottom: 30 }} alt="..." />
+      <PostContent dangerouslySetInnerHTML={{ __html: content }} />
+      </div>
       {actionButtons}
     </PostViewerBlock>
   );

@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useCallback, useState } from "react";
 import styled from 'styled-components';
 import Responsive from '../common/Responsive';
 import palette from '../../lib/styles/palette';
@@ -6,6 +6,7 @@ import Button from "../common/Button";
 import { Link } from "react-router-dom";
 import client from '../../lib/api/client'
 import { Card, CardGroup } from 'react-bootstrap'
+import PostCardComponent from "./PostCardComponent";
 
 const IconButton = styled(Responsive)`
   font-size: 1.25rem;
@@ -22,21 +23,19 @@ const PostsComponent = (params) => {
 
   const onClickLike = (userPost) => {
     const postId = userPost.id
-    console.log(userPost.user.email)
-    
-    userPost.likedByList.map((likeuser) => {
-      // 이미 좋아요를 누른 목록에 있다면 좋아요 취소
-      if (nickname === likeuser.nickname) {
-        console.log(likeuser.nickname)
-        client.delete(`/api/likePost?jwt=${jwt}&postId=${postId}`)
-          .then(res => {
-            console.log(res)
-          })
-          .catch(e => {
-            console.log(e)
-          })
-      }
-      // 목록에 없다면 좋아요
+    const likeuser = userPost.likedByList && userPost.likedByList.filter(likeuser => {
+      return nickname === likeuser.nickname      
+    })
+
+    if (likeuser.length !== 0) {
+      client.delete(`/api/likePost?jwt=${jwt}&postId=${postId}`)
+        .then(res => {
+          console.log(res)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    } else {
       client.post(`/api/likePost?jwt=${jwt}&postId=${postId}`)
         .then(res => {
           console.log(res)
@@ -44,18 +43,10 @@ const PostsComponent = (params) => {
         .catch(e => {
           console.log(e)
         })
-
-      return likeuser
-    })
-    // 목록에 없다면 좋아요
-    client.post(`/api/likePost?jwt=${jwt}&postId=${postId}`)
-      .then(res => {
-        console.log(res)
-      })
-      .catch(e => {
-        console.log(e)
-      })
+    }
   }
+
+  
 
   return(
     <>
@@ -72,16 +63,17 @@ const PostsComponent = (params) => {
             <CardGroup className="justify-content-start" style={{ marginLeft: 40, marginRight: 40 }}>
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
-                  <span className="row__posters">                    
-                      <Card>
-                      <Link to={`/post/${userPost.id}`}>
-                        <Card.Img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} variant="top" alt="..." />
-                      </Link>
+                  <span className="row__posters">
+                    <PostCardComponent userPost={userPost} onClickLike={onClickLike} />
+                      {/* <Card>
+                        <Link to={`/post/${userPost.id}`}>
+                          <Card.Img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} variant="top" alt="..." />
+                        </Link>
                         <Card.Body>
-                          <Card.Text>{userPost.content}</Card.Text>
+                          <Card.Text dangerouslySetInnerHTML={{ __html: userPost.content }}></Card.Text>
                           <IconButton><i onClick={() => onClickLike(userPost)} className="fa fa-heart"></i> {userPost.likedByList.length} Likes </IconButton>
                         </Card.Body>
-                      </Card>
+                      </Card> */}
                   </span>
                 </div>
               ))}
@@ -106,6 +98,5 @@ const PostsComponent = (params) => {
           </>
   );
 };
-
 
 export default PostsComponent;

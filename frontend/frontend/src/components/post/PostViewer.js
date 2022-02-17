@@ -5,6 +5,8 @@ import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
 import Button from '../common/Button';
+import { useEffect, useState } from 'react';
+import client from '../../lib/api/client';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 1rem;
@@ -24,7 +26,7 @@ const PostContent = styled.div`
   font-size: 1.3125rem;
   color: ${palette.gray[8]};
 `;
-const PostViewer = ({ post, imageCode, error, loading, actionButtons, ownPost }) => {
+const PostViewer = ({ post, nickname, imageCode, error, loading, actionButtons, ownPost }) => {
   // 에러 발생 시
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -39,6 +41,7 @@ const PostViewer = ({ post, imageCode, error, loading, actionButtons, ownPost })
   }
 
   const { content, userEmail, writeDate, hashTags} = post;
+  const usernickname = nickname;
 
   return (
     <PostViewerBlock style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc' }}>
@@ -52,7 +55,7 @@ const PostViewer = ({ post, imageCode, error, loading, actionButtons, ownPost })
       <br></br>
       <div style={{textAlign: 'end'}}>
       <SubInfo 
-          userEmail={userEmail}
+          usernickname={usernickname}
           writeDate={writeDate}
           hasMarginTop 
         />

@@ -19,15 +19,24 @@ const WritePage = () => {
 
   const dispatch = useDispatch();
 
-  const onChangePhoto = useCallback(imageId => 
+  // const onChangePhoto = useCallback(imageId => 
+  //   dispatch(
+  //     changeField({
+  //       key: 'photoId',
+  //       value: imageId,
+  //     }),
+  //   ),
+  //   [dispatch]
+  // );
+
+  const onChangePhoto = (imageId) => {
     dispatch(
       changeField({
         key: 'photoId',
         value: imageId,
       }),
-    ),
-    [dispatch]
-  );
+    )
+    };
 
   function handleImageChange(e) {
     console.log(e.target.files[0])

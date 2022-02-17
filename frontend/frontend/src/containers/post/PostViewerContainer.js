@@ -66,9 +66,22 @@ const PostViewerContainer = () => {
 
   const ownPost = (user && userEmail) === (post && post.userEmail);
 
+  const [nickname, setNickname] = useState('');
+
+  useEffect(() => {
+    client.get(`/api/user/nickName?email=${userEmail}`)
+      .then(res => {
+        setNickname(res.data.response)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+  })
+
   return (
     <PostViewer
       post={post}
+      nickname={nickname}
       imageCode={imageCode}
       loading={loading}
       error={error}

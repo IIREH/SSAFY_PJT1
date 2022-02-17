@@ -67,7 +67,7 @@ const ProfileContainer = ({ nickname }) => {
       })
 
     
-  }, []);
+  }, [nickname]);
 
   useEffect(() => {
     // 해당 profile 주인이 작성한 글 찾기

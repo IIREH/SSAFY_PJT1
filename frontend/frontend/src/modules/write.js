@@ -86,6 +86,8 @@ const write = handleActions(
       ...state,
       content: post.content,
       tags: post.tags,
+      photoId: post.photoId,
+      contestId: post.contestId,
       originalPostId: post._id,
     }),
     [UPDATE_POST_SUCCESS]: (state, { payload: post }) => ({

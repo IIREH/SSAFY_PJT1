@@ -40,7 +40,7 @@ const PostViewer = ({ post, nickname, imageCode, error, loading, actionButtons, 
     return null;
   }
 
-  const { content, userEmail, writeDate, hashTags} = post;
+  const { content, writeDate, hashTags} = post;
   const usernickname = nickname;
 
   return (

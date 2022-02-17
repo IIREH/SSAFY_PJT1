@@ -53,13 +53,17 @@ const PostViewerContainer = () => {
     navigate('/write');
   };
 
-  const onRemove = async () => {
-    try {
-      await removePost(postId);
-      navigate('/'); // 홈으로 이동
-    } catch (e) {
-      console.log(e);
-    }
+  const username = localStorage.getItem('user');
+
+  const onRemove = () => {
+    client.delete(`/api/post/${postId}`)
+      .then(res => {
+        console.log(res)
+        navigate(`/profile/${username}`)
+      })
+      .catch(e => {
+        console.log(e)
+      })
   };
 
   const userEmail = localStorage.getItem('userEmail')

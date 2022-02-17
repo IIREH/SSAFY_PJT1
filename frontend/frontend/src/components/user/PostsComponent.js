@@ -65,15 +65,6 @@ const PostsComponent = (params) => {
                 <div key={userPost.id}>
                   <span className="row__posters">
                     <PostCardComponent userPost={userPost} onClickLike={onClickLike} />
-                      {/* <Card>
-                        <Link to={`/post/${userPost.id}`}>
-                          <Card.Img src={`data:image/jpeg;base64,${userPost.photo.image.data}`} variant="top" alt="..." />
-                        </Link>
-                        <Card.Body>
-                          <Card.Text dangerouslySetInnerHTML={{ __html: userPost.content }}></Card.Text>
-                          <IconButton><i onClick={() => onClickLike(userPost)} className="fa fa-heart"></i> {userPost.likedByList.length} Likes </IconButton>
-                        </Card.Body>
-                      </Card> */}
                   </span>
                 </div>
               ))}
@@ -84,12 +75,7 @@ const PostsComponent = (params) => {
               {userLikesPosts.map(userLikePost => (
                 <div key={userLikePost.id}>
                   <span className="row__posters">
-                    <Card>
-                      <Card.Img src={`data:image/jpeg;base64,${userLikePost.photo.image.data}`} variant="top" alt="..." />
-                      <Card.Body>
-                        <Card.Text>{userLikePost.content}</Card.Text>
-                      </Card.Body>
-                    </Card>
+                    <PostCardComponent userPost={userLikePost} onClickLike={onClickLike} />
                   </span>
                 </div>
               ))}

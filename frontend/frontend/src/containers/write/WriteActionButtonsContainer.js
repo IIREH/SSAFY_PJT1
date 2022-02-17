@@ -26,12 +26,6 @@ const WriteActionButtonsContainer = () => {
       dispatch(updatePost({ content, tags, id: originalPostId }));
       return;
     }
-    // dispatch(
-    //   writePost({
-    //     content,
-    //     tags,
-    //   }),
-    // );
 
     // 글작성 요청
     const userEmail = localStorage.getItem('userEmail');

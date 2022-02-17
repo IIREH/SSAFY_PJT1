@@ -61,6 +61,7 @@ public class PostService {
 //    static PostMapper postMapper = PostMapper.getInstance();
 
     public Post writePost(PostDto postDto) throws IOException {
+        log.info("postDto: {}", postDto);
         // TODO: PostDto class에서 처리할까?
         Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
         User user = userRepository.findByEmail(postDto.getUserEmail());

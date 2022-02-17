@@ -26,7 +26,7 @@ const PostContent = styled.div`
   font-size: 1.3125rem;
   color: ${palette.gray[8]};
 `;
-const PostViewer = ({ post, nickname, imageCode, error, loading, actionButtons, ownPost }) => {
+const PostViewer = ({ post, nickname, imageCode, contestName, error, loading, actionButtons, ownPost }) => {
   // 에러 발생 시
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -40,7 +40,7 @@ const PostViewer = ({ post, nickname, imageCode, error, loading, actionButtons, 
     return null;
   }
 
-  const { content, writeDate, hashTags} = post;
+  const { content, writeDate, hashTags } = post;
   const usernickname = nickname;
 
   return (
@@ -54,11 +54,12 @@ const PostViewer = ({ post, nickname, imageCode, error, loading, actionButtons, 
       <PostHead>
         {/* <h2 style={{textIndent: 50}}>{usernickname}님의 글</h2> */}
       <div style={{textAlign: 'end'}}>
-      <SubInfo 
-          usernickname={usernickname}
-          writeDate={writeDate}
-          hasMarginTop 
-        />
+        {contestName}
+        <SubInfo 
+            usernickname={usernickname}
+            writeDate={writeDate}
+            hasMarginTop 
+          />
       </div>
         <Tags tags={hashTags} />
       </PostHead>

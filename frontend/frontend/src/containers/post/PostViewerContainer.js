@@ -12,6 +12,7 @@ const PostViewerContainer = () => {
   // 처음 마운트될 때 포스트 읽기 API 요청
   const { postId } = useParams();
   const [imageCode, setImageCode] = useState('');
+  const [contestName, setContestName] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { post, error, loading, user } = useSelector(
@@ -37,6 +38,17 @@ const PostViewerContainer = () => {
           .catch(e => {
             console.log(e)
           })
+
+        const contestId = myPost.contestId;
+
+        client.get(`/api/contest?id=${contestId}`)
+          .then(res => {
+            setContestName(res.data.response[0].name);
+          })
+          .catch(e => {
+            console.log(e)
+          })
+
       })
       .catch(e => {
         console.log(e)
@@ -87,6 +99,7 @@ const PostViewerContainer = () => {
       post={post}
       nickname={nickname}
       imageCode={imageCode}
+      contestName={contestName}
       loading={loading}
       error={error}
       actionButtons={

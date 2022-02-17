@@ -104,14 +104,13 @@ const Header = ({ user, onLogout, onDelete }) => {
           <Link to="/" className="logo">
             <img src='/logo.png' alt='logo'></img>
           </Link>
-          <div className="col-5 row mx-0 ms-5">
+          <div>
             <input type="text" className="col-12 d-flex" name="keyword" placeholder="검색어를 입력해주세요" onChange={onChange} />
             <table
               style={{
-                "position": "absolute",
-                "tableLayout": "fixed",
-                "zIndex": "1",
-                "width": "100%",
+                position: "absolute",
+                tableLayout: "fixed",
+                width: "50%",
               }} 
               className="table table-light table-bordered d-block p-0 mt-5 text-start"
             >

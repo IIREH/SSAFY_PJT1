@@ -77,7 +77,7 @@ const RegisterForm = () => {
             localStorage.setItem('jwt', res.data.response.token);
             const jwt = res.data.response.token;
 
-            client.get(`/api/user/nickName?jwt=${jwt}`)
+            client.get(`/api/user/nickName?email=${username}`)
               .then(res => {
                 console.log(res.data.response);
                 const userNickname = res.data.response;

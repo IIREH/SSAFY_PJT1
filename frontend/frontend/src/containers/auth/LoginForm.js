@@ -49,7 +49,7 @@ const LoginForm = () => {
         localStorage.setItem('jwt', res.data.response.token);
         const jwt = res.data.response.token;
 
-        client.get(`/api/user/nickName?jwt=${jwt}`)
+        client.get(`/api/user/nickName?email=${username}`)
           .then(res => {
             const userNickname = res.data.response;
             dispatch(checkUser(userNickname));

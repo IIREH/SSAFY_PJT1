@@ -5,12 +5,13 @@ import { changeField, initializeForm } from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm';
 import { checkUser } from '../../modules/user';
 import client from '../../lib/api/client';
+import { setUserEmail } from '../../modules/user';
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const { form, user } = useSelector(({ auth, user }) => ({
+  const { user, form } = useSelector(({ auth, user }) => ({
     form: auth.login,
     auth: auth.auth,
     authError: auth.authError,
@@ -52,6 +53,8 @@ const LoginForm = () => {
           .then(res => {
             const userNickname = res.data.response;
             dispatch(checkUser(userNickname));
+            localStorage.setItem('userEmail', username);
+            dispatch(setUserEmail(username));
           })
           .catch(e => {
             setError(`${e.response.data.error.message}`)

@@ -43,7 +43,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF182289?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186277?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -52,7 +52,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186277?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186551?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -61,7 +61,7 @@ function Classic({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186551?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186616?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -80,44 +80,56 @@ function Classic({ title }) {
         <Card>
             <Card.Img variant="top" src={ classic } alt="Recommend Image"/>
             <Card.Body>
-                <Card.Title>크리스티안 짐머만</Card.Title>
+            <Card.Title>크리스티안 짐머만</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
+                후기 : 20건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
                 <Link to="/classic">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button  style={{ marginLeft: 20}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ classic2 } alt="Recommend Image"/>
+            <Card.Img variant="top" src={ classic2 } alt="Recommend"/>
             <Card.Body>
                 <Card.Title>메타포닉</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
+                후기 : 17건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
                 <Link to="/classic2">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button  style={{ marginLeft: 10}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ classic3 } alt="Recommend Image" />
+            <Card.Img variant="top" src={ classic3 } alt="Recommend" />
             <Card.Body>
                 <Card.Title>랑랑 피아노 리사이틀</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
+                후기 : 13건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
                 <Link to="/classic3">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                    <Button style={{ marginLeft: 30}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
@@ -127,46 +139,58 @@ function Classic({ title }) {
         <CardGroup className="justify-content-center">
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ classic4 } alt="Recommend Image"/>
-            <Card.Body>
-                <Card.Title>크레디아 클래식 클럽 2022</Card.Title>
-                <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
-                <Link to="/classic4">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
-                </Link>
-            </Card.Body>
-        </Card>
-        </span>
-        <span className="row__posters">
-        <Card>
-            <Card.Img variant="top" src={ classic5 } alt="Recommend Image"/>
+            <Card.Img variant="top" src={ classic4 } alt="Recommend"/>
             <Card.Body>
                 <Card.Title>블록버스터 영화음악 콘서트</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
-                <Link to="/classic5">
-                    <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                후기 : 11건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/classic4">
+                    <Button style={{ marginLeft: 50}}>상세보기</Button>
                 </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>
         <span className="row__posters">
         <Card>
-            <Card.Img variant="top" src={ classic6 } alt="Recommend Image" />
+            <Card.Img variant="top" src={ classic5 } alt="Recommend"/>
             <Card.Body>
                 <Card.Title>화이트데이 로맨틱 콘서트</Card.Title>
+                <hr></hr>
                 <Card.Text>
-                Some quick example text to build on the card title and make up the bulk of
-                the card's content.
-                </Card.Text>
-                <Link to="/info">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
+                후기 : 10건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/classic5">
+                    <Button style={{ marginLeft: 50}}>상세보기</Button>
                 </Link>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </span>
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ classic6 } alt="Recommend" />
+            <Card.Body>
+                <Card.Title>2022 포레스텔라 콘서트</Card.Title>
+                <hr></hr>
+                <Card.Text>
+                후기 : 10건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/classic6">
+                    <Button style={{ marginLeft: 50}}>상세보기</Button>
+                </Link>
+                </Card.Text>
             </Card.Body>
         </Card>
         </span>

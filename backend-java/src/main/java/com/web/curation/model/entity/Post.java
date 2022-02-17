@@ -17,7 +17,6 @@ import java.util.List;
 
 @Document(collection = "post")
 @Getter
-@Setter
 @Builder
 @ToString
 public class Post {
@@ -29,8 +28,6 @@ public class Post {
     private User user;
     @CreatedDate
     private Date writeDate;
-    @LastModifiedDate
-    private Date modifyDate;
     private String content;
     @DBRef
     private Photo photo;

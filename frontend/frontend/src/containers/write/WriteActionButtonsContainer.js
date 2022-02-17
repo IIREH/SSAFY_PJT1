@@ -3,15 +3,17 @@ import WriteActionButtons from '../../components/write/WriteActionButtons';
 import { useSelector, useDispatch } from 'react-redux';
 import { writePost, updatePost } from '../../modules/write';
 import { useNavigate } from 'react-router-dom';
+import client from '../../lib/api/client';
 
 const WriteActionButtonsContainer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { title, body, tags, post, postError, originalPostId } = useSelector(
-    ({ write }) => ({
-      title: write.title,
-      body: write.body,
+  const { content, contestId, tags, photoId, post, postError, originalPostId } = useSelector(
+    ({ write, user }) => ({
+      content: write.content,
+      contestId: write.contestId,
       tags: write.tags,
+      photoId: write.photoId,
       post: write.post,
       postError: write.postError,
       originalPostId: write.originalPostId,
@@ -21,16 +23,36 @@ const WriteActionButtonsContainer = () => {
   // 포스트 등록
   const onPublish = () => {
     if (originalPostId) {
-      dispatch(updatePost({ title, body, tags, id: originalPostId }));
+      dispatch(updatePost({ content, tags, id: originalPostId }));
       return;
     }
-    dispatch(
-      writePost({
-        title,
-        body,
-        tags,
-      }),
-    );
+    // dispatch(
+    //   writePost({
+    //     content,
+    //     tags,
+    //   }),
+    // );
+
+    // 글작성 요청
+    const userEmail = localStorage.getItem('userEmail');
+    const username = localStorage.getItem('user').replace(/"/gi, "");
+
+    const params = {
+      content: content,
+      contestId: contestId,
+      tags: tags,
+      photoId: photoId,
+      userEmail: userEmail,
+    }
+
+    client.post('/api/post', params)
+      .then(res => {
+        console.log(res)
+        navigate(`/profile/${username}`)
+      })
+      .catch(e => {
+        console.log(e)
+      })
   };
 
   // 취소

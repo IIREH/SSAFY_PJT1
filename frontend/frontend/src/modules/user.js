@@ -13,12 +13,14 @@ const [CHECK, CHECK_SUCCESS, CHECK_FAILURE] = createRequestActionTypes(
 const LOGOUT = 'user/LOGOUT';
 const CHECK_USER = 'user/CHECK_USER';
 const DELETE_USER_INFO = 'user/DELETE_USER_INFO';
+const SET_USER_EMAIL = 'user/SET_USER_EMAIL';
 
 export const tempSetUser = createAction(TEMP_SET_USER, user => user);
 export const check = createAction(CHECK);
 export const logout = createAction(LOGOUT);
 export const checkUser = createAction(CHECK_USER, userNickname => userNickname);
 export const deleteUserInfo = createAction(DELETE_USER_INFO);
+export const setUserEmail = createAction(SET_USER_EMAIL, userEmail => userEmail);
 
 const checkSaga = createRequestSaga(CHECK, authAPI.check);
 
@@ -47,6 +49,7 @@ export function* userSaga() {
 
 const initialState = {
   user: null,
+  userEmail: '',
   checkError: null,
 };
 
@@ -78,6 +81,10 @@ export default handleActions(
       ...state,
       user: null,
     }),
+    [SET_USER_EMAIL]: (staet, { payload: userEmail }) => ({
+      ...staet,
+      userEmail: userEmail,
+    })
   },
   initialState,
 );

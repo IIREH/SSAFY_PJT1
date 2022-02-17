@@ -13,10 +13,12 @@ const buttonStyle = css`
   color: white;
   outline: none;
   cursor: pointer;
+  text-decoration: none;
 
   background: ${palette.grape[8]};
   &:hover {
-    background: ${palette.gray[6]};
+    background: ${palette.cyan[6]};
+    color: white;
   }
 
   ${props =>
@@ -31,9 +33,9 @@ const buttonStyle = css`
   ${props =>
     props.cyan &&
     css`
-      background: ${palette.cyan[5]};
+      background: ${palette.cyan[9]};
       &:hover {
-        background: ${palette.cyan[4]};
+        background: ${palette.gray[8]};
       }
     `}
 

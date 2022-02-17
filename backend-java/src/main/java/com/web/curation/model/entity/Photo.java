@@ -11,7 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "photo")
 @Getter
-@Setter
 @Builder
 @ToString
 public class Photo {

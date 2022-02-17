@@ -234,7 +234,7 @@ function PaneContainer() {
                       {prfpdfrom}   |    # {genrenm}   |    {fcltynm}
               </div>
               <div className="ContentRatings">
-                평균 ★★★★ (399 명)
+                평균 ★★★★ (320 명)
               </div>
               <div className="ButtonBlock">
                 <div className="Self">

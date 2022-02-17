@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import client from '../../lib/api/client'
 import { Card, CardGroup } from 'react-bootstrap'
 import PostCardComponent from "./PostCardComponent";
+import { Ellipsis } from "../../../node_modules/react-bootstrap/esm/PageItem";
 
 const IconButton = styled(Responsive)`
   font-size: 1.25rem;
@@ -64,7 +65,7 @@ const PostsComponent = (params) => {
               {userPosts.map(userPost => (
                 <div key={userPost.id}>
                   <span className="row__posters">
-                    <PostCardComponent userPost={userPost} onClickLike={onClickLike} />
+                    <PostCardComponent userPost={userPost} onClickLike={onClickLike}/>
                   </span>
                 </div>
               ))}

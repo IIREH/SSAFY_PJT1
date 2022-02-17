@@ -7,6 +7,7 @@ import Tags from '../common/Tags';
 import Button from '../common/Button';
 import { useEffect, useState } from 'react';
 import client from '../../lib/api/client';
+import { Link } from 'react-router-dom';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 1rem;
@@ -26,7 +27,7 @@ const PostContent = styled.div`
   font-size: 1.3125rem;
   color: ${palette.gray[8]};
 `;
-const PostViewer = ({ post, nickname, imageCode, contestName, error, loading, actionButtons, ownPost }) => {
+const PostViewer = ({ post, nickname, imageCode, contestName, error, loading, actionButtons, ownPost}) => {
   // 에러 발생 시
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -47,14 +48,18 @@ const PostViewer = ({ post, nickname, imageCode, contestName, error, loading, ac
     <PostViewerBlock style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc', paddingBottom: 30, width: 850, padding: 30 }}>
       <br></br>
       <div style={{ textAlign: 'start' }}>
-        <Button cyan to="/">
+        <Button cyan >
+          <Link style={{color : 'white'}} to={`/profile/${nickname}`}>
           뒤로가기
+          </Link>
         </Button>
       </div> 
       <PostHead>
-        {/* <h2 style={{textIndent: 50}}>{usernickname}님의 글</h2> */}
+        <div style={{textAlign: 'center'}}>
+        <h2>{contestName}</h2>
+        </div>
+
       <div style={{textAlign: 'end'}}>
-        {contestName}
         <SubInfo 
             usernickname={usernickname}
             writeDate={writeDate}

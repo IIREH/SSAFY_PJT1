@@ -83,9 +83,9 @@ function Classic({ title }) {
             <Card.Title>크리스티안 짐머만</Card.Title>
                 <hr></hr>
                 <Card.Text>
-                후기 : 20건
+                후기 : 45건
                 <br></br>
-                평점 : ★★★★☆
+                평점 : ★★★★★
                 <br></br>
                 <br></br>
                 <Link to="/classic">
@@ -102,7 +102,7 @@ function Classic({ title }) {
                 <Card.Title>메타포닉</Card.Title>
                 <hr></hr>
                 <Card.Text>
-                후기 : 17건
+                후기 : 23건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -121,7 +121,7 @@ function Classic({ title }) {
                 <Card.Title>랑랑 피아노 리사이틀</Card.Title>
                 <hr></hr>
                 <Card.Text>
-                후기 : 13건
+                후기 : 19건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -144,9 +144,9 @@ function Classic({ title }) {
                 <Card.Title>블록버스터 영화음악 콘서트</Card.Title>
                 <hr></hr>
                 <Card.Text>
-                후기 : 11건
+                후기 : 15건
                 <br></br>
-                평점 : ★★★★☆
+                평점 : ★★★☆☆
                 <br></br>
                 <br></br>
                 <Link to="/classic4">
@@ -163,7 +163,7 @@ function Classic({ title }) {
                 <Card.Title>화이트데이 로맨틱 콘서트</Card.Title>
                 <hr></hr>
                 <Card.Text>
-                후기 : 10건
+                후기 : 31건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -182,7 +182,7 @@ function Classic({ title }) {
                 <Card.Title>2022 포레스텔라 콘서트</Card.Title>
                 <hr></hr>
                 <Card.Text>
-                후기 : 10건
+                후기 : 31건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>

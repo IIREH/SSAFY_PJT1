@@ -86,7 +86,7 @@ function Recommend({ title }) {
                 <Card.Title>프랑켄슈타인</Card.Title>
                  <hr></hr>
                 <Card.Text>
-                후기 : 60건
+                후기 : 629건
                 <br></br>
                 평점 : ★★★★★
                 <br></br>
@@ -105,7 +105,7 @@ function Recommend({ title }) {
                 <Card.Title>지킬 앤 하이드</Card.Title>
                  <hr></hr>
                 <Card.Text>
-                후기 : 50건
+                후기 : 549건
                 <br></br>
                 평점 : ★★★★★
                 <br></br>
@@ -124,7 +124,7 @@ function Recommend({ title }) {
                 <Card.Title>라이온킹</Card.Title>
                  <hr></hr>
                 <Card.Text>
-                후기 : 35건
+                후기 : 423건
                 <br></br>
                 평점 : ★★★★★
                 <br></br>
@@ -147,7 +147,7 @@ function Recommend({ title }) {
                 <Card.Title>팬레터</Card.Title>
                  <hr></hr>
                 <Card.Text>
-                후기 : 30건
+                후기 : 433건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -166,7 +166,7 @@ function Recommend({ title }) {
                 <Card.Title>또! 오해영</Card.Title>
                  <hr></hr>
                 <Card.Text>
-                후기 : 25건
+                후기 : 399건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -185,7 +185,7 @@ function Recommend({ title }) {
                 <Card.Title>레베카</Card.Title>
                  <hr></hr>
                 <Card.Text>
-                후기 : 22건
+                후기 : 320건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>

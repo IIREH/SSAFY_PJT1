@@ -82,7 +82,7 @@ function Musical({ title }) {
                     <Card.Title>젠틀맨스 가이드</Card.Title>
                      <hr></hr>
                 <Card.Text>
-                후기 : 22건
+                후기 : 42건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -101,7 +101,7 @@ function Musical({ title }) {
                     <Card.Title>데스노트</Card.Title>
                      <hr></hr>
                 <Card.Text>
-                후기 : 20건
+                후기 : 39건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -120,7 +120,7 @@ function Musical({ title }) {
                     <Card.Title>극장형 보이는 라디오</Card.Title>
                      <hr></hr>
                 <Card.Text>
-                후기 : 17건
+                후기 : 15건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -143,7 +143,7 @@ function Musical({ title }) {
                     <Card.Title>노트르담드파리</Card.Title>
                      <hr></hr>
                 <Card.Text>
-                후기 : 13건
+                후기 : 23건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -162,7 +162,7 @@ function Musical({ title }) {
                     <Card.Title>EQUAL</Card.Title>
                      <hr></hr>
                 <Card.Text>
-                후기 : 11건
+                후기 : 33건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -181,7 +181,7 @@ function Musical({ title }) {
                     <Card.Title>미오 프라텔로</Card.Title>
                      <hr></hr>
                 <Card.Text>
-                후기 : 10건
+                후기 : 33건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>

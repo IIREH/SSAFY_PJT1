@@ -84,7 +84,7 @@ function Theatre({ title }) {
                     <Card.Title>가족이란 이름의 부족</Card.Title>
                     <hr></hr>
                 <Card.Text>
-                후기 : 45건
+                후기 : 59건
                 <br></br>
                 평점 : ★★★★★
                 <br></br>
@@ -103,7 +103,7 @@ function Theatre({ title }) {
                     <Card.Title>리자드 3세</Card.Title>
                     <hr></hr>
                 <Card.Text>
-                후기 : 33건
+                후기 : 43건
                 <br></br>
                 평점 : ★★★★★
                 <br></br>
@@ -122,9 +122,9 @@ function Theatre({ title }) {
                     <Card.Title>플레이백</Card.Title>
                     <hr></hr>
                 <Card.Text>
-                후기 : 25건
+                후기 : 34건
                 <br></br>
-                평점 : ★★★★★
+                평점 : ★★★★☆
                 <br></br>
                 <br></br>
                 <Link to="/theatre3">
@@ -145,7 +145,7 @@ function Theatre({ title }) {
                     <Card.Title>한뼘사이</Card.Title>
                     <hr></hr>
                 <Card.Text>
-                후기 : 22건
+                후기 : 29건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -164,7 +164,7 @@ function Theatre({ title }) {
                     <Card.Title>라스트 세션</Card.Title>
                     <hr></hr>
                 <Card.Text>
-                후기 : 20건
+                후기 : 21건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>
@@ -183,7 +183,7 @@ function Theatre({ title }) {
                     <Card.Title>회란기</Card.Title>
                     <hr></hr>
                 <Card.Text>
-                후기 : 15건
+                후기 : 21건
                 <br></br>
                 평점 : ★★★★☆
                 <br></br>

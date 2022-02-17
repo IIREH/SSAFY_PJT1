@@ -41,6 +41,9 @@ public class PostService {
     @Autowired
     CommentMapper commentMapper;
     @Autowired
+    PostMapper postMapper;
+
+    @Autowired
     AlarmService alarmService;
 
     @Value("${frontend.alarm.post}")
@@ -54,8 +57,6 @@ public class PostService {
     private String commentPath;
 
 
-    @Autowired
-    PostMapper postMapper;
 
 //    static PostMapper postMapper = PostMapper.getInstance();
 

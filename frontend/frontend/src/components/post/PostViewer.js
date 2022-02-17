@@ -7,7 +7,7 @@ import Tags from '../common/Tags';
 import Button from '../common/Button';
 import { useEffect, useState } from 'react';
 import client from '../../lib/api/client';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const PostViewerBlock = styled(Responsive)`
   margin-top: 1rem;
@@ -48,10 +48,8 @@ const PostViewer = ({ post, nickname, imageCode, contestName, error, loading, ac
     <PostViewerBlock style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc', paddingBottom: 30, width: 850, padding: 30 }}>
       <br></br>
       <div style={{ textAlign: 'start' }}>
-        <Button cyan >
-          <Link style={{color : 'white'}} to={`/profile/${nickname}`}>
-          뒤로가기
-          </Link>
+        <Button cyan to="/">
+          Home
         </Button>
       </div> 
       <PostHead>

@@ -61,13 +61,13 @@ public class PostService {
 
     public Post writePost(PostDto postDto) throws IOException {
         // TODO: PostDto class에서 처리할까?
-//        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
-//        User user = userRepository.findByEmail(postDto.getUserEmail());
-//
-//        if(contestOrNull.isPresent() == false || user == null) {
-//            return null;
-//        }
-//
+        Optional<Contest> contestOrNull = contestRepository.findById(postDto.getContestId());
+        User user = userRepository.findByEmail(postDto.getUserEmail());
+
+        if(contestOrNull.isPresent() == false || user == null) {
+            return null;
+        }
+
         List<HashTag> hashTags = new ArrayList<>();
         Optional.ofNullable(postDto.getHashTags()).orElseGet(Collections::emptyList)
                 .stream().map(ht -> hashTagRepository.save(new HashTag(ht)))

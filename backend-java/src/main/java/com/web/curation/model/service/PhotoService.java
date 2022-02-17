@@ -16,7 +16,7 @@ public class PhotoService {
     @Autowired
     private PhotoRepository photoRepository;
 
-    static String defaultPhotoId = "620292e2b124292ad28ba93b";
+    static String defaultPhotoId = "620edbdbaf5ebd5e7f603563";
 
     public Photo addPhoto(MultipartFile file) throws IOException {
         Photo photo = Photo.builder()
@@ -27,7 +27,7 @@ public class PhotoService {
     }
 
     public Photo getPhoto(String id) {
-        String photoId = id == null ? defaultPhotoId : id;
+        String photoId = id == null || id.equals("") ? defaultPhotoId : id;
 //        Photo photo = photoRepository.findById(photoId).get();
 
 //        return  Base64.getEncoder().encodeToString(photo.getImage().getData());
@@ -35,7 +35,7 @@ public class PhotoService {
     }
 
     public void removePhoto(Photo photo) {
-        if(photo.getId() != defaultPhotoId) {
+        if(photo.getId().equals(defaultPhotoId) == false) {
             photoRepository.delete(photo);
         }
     }

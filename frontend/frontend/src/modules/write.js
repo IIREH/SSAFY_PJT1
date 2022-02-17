@@ -18,27 +18,27 @@ const [
   UPDATE_POST_SUCCESS,
   UPDATE_POST_FAILURE,
 ] = createRequestActionTypes('write/UPDATE_POST'); // 포스트 수정
+const SET_CONTEST_ID = 'write/SET_CONTEST_ID'
 
 export const initialize = createAction(INITIALIZE);
 export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
   key,
   value,
 }));
-export const writePost = createAction(WRITE_POST, ({ title, body, tags }) => ({
-  title,
-  body,
+export const writePost = createAction(WRITE_POST, ({ content, tags }) => ({
+  content,
   tags,
 }));
 export const setOriginalPost = createAction(SET_ORIGINAL_POST, post => post);
 export const updatePost = createAction(
   UPDATE_POST,
-  ({ id, title, body, tags }) => ({
+  ({ id,  content, tags }) => ({
     id,
-    title,
-    body,
+    content,
     tags,
   }),
 );
+export const setContestId = createAction(SET_CONTEST_ID, contestId => contestId);
 
 // saga 생성
 const writePostSaga = createRequestSaga(WRITE_POST, postsAPI.writePost);
@@ -50,9 +50,10 @@ export function* writeSaga() {
 }
 
 const initialState = {
-  title: '',
-  body: '',
+  content: '',
   tags: [],
+  photoId: '',
+  contestId: '',
   post: null,
   postError: null,
   originalPostId: null,
@@ -83,8 +84,7 @@ const write = handleActions(
     }),
     [SET_ORIGINAL_POST]: (state, { payload: post }) => ({
       ...state,
-      title: post.title,
-      body: post.body,
+      content: post.content,
       tags: post.tags,
       originalPostId: post._id,
     }),
@@ -95,6 +95,10 @@ const write = handleActions(
     [UPDATE_POST_FAILURE]: (state, { payload: postError }) => ({
       ...state,
       postError,
+    }),
+    [SET_CONTEST_ID]: (state, { payload: contestId }) => ({
+      ...state,
+      contestId: contestId,
     }),
   },
   initialState,

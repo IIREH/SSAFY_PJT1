@@ -10,7 +10,7 @@ const ListPage = () => {
   return (
     <>
       <HeaderContainer />
-      <Recommend title="추천 예술 작품" />
+      <Recommend title="추천 작품" />
       <Classic title="클래식" />
       <Musical title="뮤지컬" />
       <Theatre title="연극" />

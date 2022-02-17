@@ -15,7 +15,7 @@ function Theatre({ title }) {
     const [theatre6, setTheatre6] = useState(null);
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186508?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185242?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -61,7 +61,7 @@ function Theatre({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF174844?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186548?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -81,15 +81,19 @@ function Theatre({ title }) {
             <Card>
                 <Card.Img variant="top" src={ theatre } alt="Recommend Image"/>
                 <Card.Body>
-                    <Card.Title>앤젤스 인 아메리카</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/theatre">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                    <Card.Title>가족이란 이름의 부족</Card.Title>
+                    <hr></hr>
+                <Card.Text>
+                후기 : 45건
+                <br></br>
+                평점 : ★★★★★
+                <br></br>
+                <br></br>
+                <Link to="/theatre">
+                    <Button style= {{ marginLeft: 20}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -97,14 +101,18 @@ function Theatre({ title }) {
                 <Card.Img variant="top" src={ theatre2 } alt="Recommend Image"/>
                 <Card.Body>
                     <Card.Title>리자드 3세</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/theatre2">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                    <hr></hr>
+                <Card.Text>
+                후기 : 33건
+                <br></br>
+                평점 : ★★★★★
+                <br></br>
+                <br></br>
+                <Link to="/theatre2">
+                    <Button style= {{ marginLeft: 8}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -112,14 +120,18 @@ function Theatre({ title }) {
                 <Card.Img variant="top" src={ theatre3 } alt="Recommend Image" />
                 <Card.Body>
                     <Card.Title>플레이백</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/theatre3">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                    <hr></hr>
+                <Card.Text>
+                후기 : 25건
+                <br></br>
+                평점 : ★★★★★
+                <br></br>
+                <br></br>
+                <Link to="/theatre3">
+                    <Button style= {{ marginLeft: 8}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             </CardGroup>
@@ -131,14 +143,18 @@ function Theatre({ title }) {
                 <Card.Img variant="top" src={ theatre4 } alt="Recommend Image"/>
                 <Card.Body>
                     <Card.Title>한뼘사이</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/theatre4">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                    <hr></hr>
+                <Card.Text>
+                후기 : 22건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/theatre4">
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
@@ -146,29 +162,37 @@ function Theatre({ title }) {
                 <Card.Img variant="top" src={ theatre5 } alt="Recommend Image"/>
                 <Card.Body>
                     <Card.Title>라스트 세션</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/theatre5">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                    <hr></hr>
+                <Card.Text>
+                후기 : 20건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/theatre5">
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             <span className="row__posters">
             <Card>
                 <Card.Img variant="top" src={ theatre6 } alt="Recommend Image" />
                 <Card.Body>
-                    <Card.Title>설레임이 찾아왔다</Card.Title>
-                    <Card.Text>
-                    Some quick example text to build on the card title and make up the bulk of
-                    the card's content.
-                    </Card.Text>
-                    <Link to="/info">
-                        <Button variant="outline-success" className="button-position-totheleft">상세보기</Button>
-                    </Link>
-                </Card.Body>
+                    <Card.Title>회란기</Card.Title>
+                    <hr></hr>
+                <Card.Text>
+                후기 : 15건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/theatre6">
+                    <Button style= {{ marginLeft: 15}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
             </Card>
             </span>
             </CardGroup>

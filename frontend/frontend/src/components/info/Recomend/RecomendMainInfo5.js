@@ -70,7 +70,7 @@ function MainInfo() {
   const [prfcrew , setdtPrfcrew	] = useState(null);
 
   useEffect(() => {
-    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186424?service=4e391a1107334d7aaf6034069bbcbc5a")
+    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186601?service=4e391a1107334d7aaf6034069bbcbc5a")
         .then(res => res.text())
         .then(data => {
             var xml = new XMLParser().parseFromString(data); 
@@ -99,7 +99,7 @@ function MainInfo() {
         <div className="content-box">
           <div className="basic-infomation__detail">
             <h3> 예매 링크 </h3>
-            <a href="http://www.lgart.com/UIPage/Perform/Calender_view.aspx?seq=252603"> 여기를 눌러 예매하기 </a>
+            <a href="https://tickets.interpark.com/goods/22001193"> 여기를 눌러 예매하기 </a>
           </div>
         </div>
         <div className="content-box">

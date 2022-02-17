@@ -5,6 +5,7 @@ import {
   updateFollowingNumber, updateFollowerNumber,
   updatePosts, updateLikesPosts
 } from '../../modules/profile';
+import { deleteUserInfo } from '../../modules/user';
 import FollowComponent from '../../components/user/FollowComponent';
 import PostsComponent from '../../components/user/PostsComponent';
 import client from '../../lib/api/client';
@@ -119,6 +120,20 @@ const ProfileContainer = ({ nickname }) => {
   };
 
   const newUser = user && user.replace(/"/gi, '');
+
+  const onDelete = () => {
+    dispatch(deleteUserInfo());
+    localStorage.removeItem('user');
+
+    client.delete(`/api/user?jwt=${jwt}`)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    localStorage.removeItem('jwt');
+  }
   
   return (
     <div>
@@ -129,6 +144,7 @@ const ProfileContainer = ({ nickname }) => {
         following={profile.following}
         follower={profile.follower}
         onClickFollow={onClickFollow}
+        onDelete={onDelete}
       />
       <PostsComponent
         userPosts={profile.userPosts}

@@ -4,10 +4,10 @@ import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags';
-import { Helmet } from 'react-helmet-async';
+import Button from '../common/Button';
 
 const PostViewerBlock = styled(Responsive)`
-  margin-top: 4rem;
+  margin-top: 1rem;
 `;
 const PostHead = styled.div`
   border-bottom: 1px solid ${palette.gray[2]};
@@ -24,8 +24,7 @@ const PostContent = styled.div`
   font-size: 1.3125rem;
   color: ${palette.gray[8]};
 `;
-
-const PostViewer = ({ post, error, loading, actionButtons, ownPost }) => {
+const PostViewer = ({ post, imageCode, error, loading, actionButtons, ownPost }) => {
   // 에러 발생 시
   if (error) {
     if (error.response && error.response.status === 404) {
@@ -39,24 +38,30 @@ const PostViewer = ({ post, error, loading, actionButtons, ownPost }) => {
     return null;
   }
 
-  const { title, body, user, publishedDate, tags } = post;
-  return (
-    <PostViewerBlock>
-      <Helmet>
-        <title>{title} - A&C Galleria</title>
-      </Helmet>
+  const { content, userEmail, writeDate, hashTags} = post;
 
+  return (
+    <PostViewerBlock style={{ border: 10, borderStyle: 'dashed', borderRadius: 15, borderColor: '#f8f0fc' }}>
+      <br></br>
+      <div style={{ textAlign: 'start' }}>
+        <Button cyan to="/">
+          뒤로가기
+        </Button>
+      </div> 
       <PostHead>
-        <h1>{title}</h1>
-        <SubInfo
-          username={user.username}
-          publishedDate={publishedDate}
-          hasMarginTop
+      <br></br>
+      <div style={{textAlign: 'end'}}>
+      <SubInfo 
+          userEmail={userEmail}
+          writeDate={writeDate}
+          hasMarginTop 
         />
-        <Tags tags={tags} />
+      </div>
+        <Tags tags={hashTags} />
       </PostHead>
+      <img src={`data:image/jpeg;base64,${imageCode}`} style={{ width: 300, height: 300, display: 'inline-block', marginLeft: 50 }} alt="..." />
+      <PostContent dangerouslySetInnerHTML={{ __html: content }} style={{ display: 'inline-block', marginLeft: 90 }} />
       {actionButtons}
-      <PostContent dangerouslySetInnerHTML={{ __html: body }} />
     </PostViewerBlock>
   );
 };

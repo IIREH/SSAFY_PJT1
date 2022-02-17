@@ -246,7 +246,7 @@ function PosterContainer() {
   const [poster, setPoster] = useState(null);
 
   useEffect(() => {
-    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186508?service=4e391a1107334d7aaf6034069bbcbc5a")
+    fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185242?service=4e391a1107334d7aaf6034069bbcbc5a")
         .then(res => res.text())
         .then(data => {
             var xml = new XMLParser().parseFromString(data); 

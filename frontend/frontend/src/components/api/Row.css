@@ -63,19 +63,23 @@
     box-shadow: 5px 10px 20px 1px rgba(0,0,0,0.253) !important;
 }
 
+.card-title{
+    text-align: center;
+}
+
 .card-body{
     padding: 3rem 0 !important;
 }
 
 .card-text{
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     padding: 0.4rem;
 }
 
 .card-img-top {
     transform: scale(1);
     transition: transform 0.5s ease;
-    max-height: 300px;
+    height: 290px;
 }
 
 .card-img-top:hover {
@@ -83,11 +87,25 @@
 }
 
 h2 {
+    text-align: center;
+    padding-top : 10px;
     font-family: 'Cafe24Ssurround';
+    color: rgb(44, 196, 158);
+    display: inline-block;
 }
 
-.button-position-totheleft {
-    margin-left : 190px;
+h3 {
+    padding-top : 10px;
+    font-family: 'Cafe24Ssurround';
+    color: rgb(148, 61, 160);
+}
+
+h1 {
+    text-align: center;
+    padding-top : 10px;
+    font-family: 'Cafe24Ssurround';
+    color: rgb(25, 170, 134);
+    display: inline-block;
 }
 
 .carousel-control-next-icon:after

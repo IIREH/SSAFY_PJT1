@@ -8,29 +8,24 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Document(collection = "users")
+@Document(collection = "user")
 @Getter
-@Builder
 @ToString
+@Builder
+
 public class User {
     private ObjectId id;
     private String email;
-    private String name;
     private String nickname;
     private String pwd;
     private List<String> follower;
-    private List<String> followee;
-    @Builder
+    private List<String>following;
+    private List<String> likePost;
 
-    public User(ObjectId id, String email, String name, String nickname, String pwd, List<String> follower, List<String> followee) {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.nickname = nickname;
-        this.pwd = pwd;
-        this.follower = follower;
-        this.followee = followee;
-    }
+    private String role;
+
+
 }

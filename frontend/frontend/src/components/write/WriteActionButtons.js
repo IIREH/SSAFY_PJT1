@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import palette from '../../lib/styles/palette';
 
 const WriteActionButtonsBlock = styled.div`
   margin-top: 1rem;
@@ -15,12 +16,17 @@ const StyledButton = styled(Button)`
   height: 2.125rem;
   & + & {
     margin-left: 0.5rem;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
+  }
+  &:hover {
+    background: ${palette.cyan[8]};
   }
 `;
 
 const WriteActionButtons = ({ onCancel, onPublish, isEdit }) => {
   return (
-    <WriteActionButtonsBlock>
+    <WriteActionButtonsBlock style={{textAlign : 'center'}}>
       <StyledButton cyan onClick={onPublish}>
         포스트 {isEdit ? '수정' : '등록'}
       </StyledButton>

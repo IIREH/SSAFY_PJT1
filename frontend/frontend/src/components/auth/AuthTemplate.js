@@ -43,7 +43,7 @@ const AuthTemplate = ({ children }) => {
     <AuthTemplateBlock>
       <WhiteBox>
         <div className="logo-area">
-          <Link to="/">A&C Galleria</Link>
+          <Link to="/"><img src='/logo.png' alt='logo'/></Link>
         </div>
         {children}
       </WhiteBox>

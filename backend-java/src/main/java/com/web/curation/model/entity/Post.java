@@ -7,6 +7,7 @@ import lombok.ToString;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,14 +15,13 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-@Document(collection = "posts")
+@Document(collection = "post")
 @Getter
-@Setter
 @Builder
 @ToString
 public class Post {
     @Id
-    private ObjectId id;
+    private String id;
     @DBRef
     private Contest contest;
     @DBRef
@@ -29,6 +29,8 @@ public class Post {
     @CreatedDate
     private Date writeDate;
     private String content;
+    @DBRef
+    private Photo photo;
     @DBRef
     private List<User> likedByList;
     @DBRef

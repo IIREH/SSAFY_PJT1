@@ -1,9 +1,9 @@
 {
- "user_id":ObjectID()
-,"email":"test@test"
+"email":"test@test.com"
 ,"name":"test"
-,"nickname":"testName"
-,"pwd":1234
-,"follower":["test1@test","test2@test"]
+,"nickname":"testName23"
+,"pwd":1234567
+,"follower":["test1@test.com","test2@test.com"]
+,followee:[]
 ,role:"ADMIN"
 }

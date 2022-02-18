@@ -23,3 +23,15 @@ api:
   contest:
     servicekey: fa6c5efa2a0747fe9c047f5af687869d
     url: http://kopis.or.kr/openApi/restful/pblprfr
+
+
+frontend:
+  alarm:
+    post: 글
+    postPath: /posts/
+
+    comment: 댓글
+    commentPath: /comments/
+
+    likePost: 좋아요
+    likePostPath: /likePost/

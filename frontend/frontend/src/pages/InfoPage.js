@@ -3,13 +3,13 @@ import HeaderContainer from '../containers/common/HeaderContainer';
 import PostListContainer from '../containers/posts/PostListContainer';
 import PaginationContainer from '../containers/posts/PaginationContainer';
 import Footer from '../components/common/Footer';
-import MovieInfo from '../components/info/MovieInfo';
+import ConcertInfo from '../components/info/ConcertInfo';
 
 const InfoPage = () => {
     return (
     <>
     <HeaderContainer />
-    <MovieInfo />
+    <ConcertInfo />
     <PostListContainer />
     <PaginationContainer />
     <Footer />

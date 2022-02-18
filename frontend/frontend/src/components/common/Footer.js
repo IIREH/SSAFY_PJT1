@@ -5,8 +5,10 @@ function Footer() {
   const scrollToTop = () => {
     window.scrollTo(0, 0);
   };
+
   return (
     <div>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
       <footer className="footer-distributed">
         <div className="footer-left">
           <img
@@ -19,15 +21,15 @@ function Footer() {
 
         <div className="footer-center">
           <div>
-            <i className="marker"></i>
+            <i className="fa fa-heart"></i>
             <p>
-              <span>2반 8조</span>공통 프로젝트
+              2반 8조 공통 프로젝트
             </p>
           </div>
 
           <div>
-            <i className="phone"></i>
-            <p>전화번호를 입력해주세요.</p>
+            <i className="fa fa-user"></i>
+            <p>윤영, 준석, 현수, 승우, 이레</p>
           </div>
 
           <div>
@@ -47,8 +49,8 @@ function Footer() {
             <a href="https://www.facebook.com" target="_blank" rel="noreferrer">
               <i className="fa fa-facebook"></i>
             </a>
-            <a href="https://www.naver.com" target="_blank" rel="noreferrer">
-              <i className="naver"></i>
+            <a href="https://www.youtube.com" target="_blank" rel="noreferrer">
+              <i className="fa fa-youtube-play"></i>
             </a>
           </div>
         </div>

@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import XMLParser from 'react-xml-parser';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Card, CardGroup, Carousel } from 'react-bootstrap'
 import "./Row.css";
+import Button from '../common/Button';
 
 function Recommend({ title }) {
     const [recommend, setRecommend] = useState(null);
@@ -8,9 +12,10 @@ function Recommend({ title }) {
     const [recommend3, setRecommend3] = useState(null);
     const [recommend4, setRecommend4] = useState(null);
     const [recommend5, setRecommend5] = useState(null);
+    const [recommend6, setRecommend6] = useState(null);
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132236?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF179943?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -20,7 +25,7 @@ function Recommend({ title }) {
     }, [])
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132235?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF178981?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -29,7 +34,7 @@ function Recommend({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132234?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF183486?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -37,8 +42,9 @@ function Recommend({ title }) {
             })
             .catch(err => console.log(err));
     }, [])
+
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132233?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF182052?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -47,7 +53,7 @@ function Recommend({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132333?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186601?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -55,19 +61,147 @@ function Recommend({ title }) {
             })
             .catch(err => console.log(err));
     }, [])
+    useEffect(() => {
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF181077?service=4e391a1107334d7aaf6034069bbcbc5a")
+            .then(res => res.text())
+            .then(data => {
+                var xml = new XMLParser().parseFromString(data); 
+                setRecommend6(xml.getElementsByTagName('poster')[0].value);
+            })
+            .catch(err => console.log(err));
+    }, [])
+
+
 
     return (
         <div className="row">
-            <h2>{title}</h2>
-            <div className="row__posters">
-                <img className='row__poster' src={recommend} alt="Recommend"></img>
-                <img className='row__poster' src={recommend2} alt="Recommend2"></img>
-                <img className='row__poster' src={recommend3} alt="Recommend3"></img>
-                <img className='row__poster' src={recommend4} alt="Recommend4"></img>
-                <img className='row__poster' src={recommend5} alt="Recommend5"></img>
-            </div>
-            <hr className='hr'></hr>
-        </div>
+        <h2><img src="/images/award.jpg" alt="" /> {title} <img src="/images/award.jpg" alt="" /></h2>
+        <Carousel>
+        <Carousel.Item>
+        <CardGroup className="justify-content-center">
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ recommend } alt="Recommend Image"/>
+            <Card.Body>
+                <Card.Title>프랑켄슈타인</Card.Title>
+                 <hr></hr>
+                <Card.Text>
+                후기 : 629건
+                <br></br>
+                평점 : ★★★★★
+                <br></br>
+                <br></br>
+                <Link to="/recommend">
+                    <Button style= {{ marginLeft: 5}}>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </span>
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ recommend2 } alt="Recommend Image"/>
+            <Card.Body>
+                <Card.Title>지킬 앤 하이드</Card.Title>
+                 <hr></hr>
+                <Card.Text>
+                후기 : 549건
+                <br></br>
+                평점 : ★★★★★
+                <br></br>
+                <br></br>
+                <Link to="/recommend2">
+                    <Button style= {{ marginLeft: 5}}>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </span>
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ recommend3 } alt="Recommend Image" />
+            <Card.Body>
+                <Card.Title>라이온킹</Card.Title>
+                 <hr></hr>
+                <Card.Text>
+                후기 : 423건
+                <br></br>
+                평점 : ★★★★★
+                <br></br>
+                <br></br>
+                <Link to="/recommend3">
+                    <Button style= {{ marginLeft: 5}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </span>
+        </CardGroup>
+        </Carousel.Item>
+        <Carousel.Item>
+        <CardGroup className="justify-content-center">
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ recommend4 } alt="Recommend Image"/>
+            <Card.Body>
+                <Card.Title>팬레터</Card.Title>
+                 <hr></hr>
+                <Card.Text>
+                후기 : 433건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/recommend4">
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </span>
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ recommend5 } alt="Recommend Image"/>
+            <Card.Body>
+                <Card.Title>또! 오해영</Card.Title>
+                 <hr></hr>
+                <Card.Text>
+                후기 : 399건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/recommend5">
+                    <Button style= {{ marginLeft: 5}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </span>
+        <span className="row__posters">
+        <Card>
+            <Card.Img variant="top" src={ recommend6 } alt="Recommend Image" />
+            <Card.Body>
+                <Card.Title>레베카</Card.Title>
+                 <hr></hr>
+                <Card.Text>
+                후기 : 320건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/recommend6">
+                    <Button style= {{ marginLeft: 10}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+        </Card>
+        </span>
+        </CardGroup>
+        </Carousel.Item>
+        </Carousel>
+        <hr className='hr'></hr>
+    </div>
     )
 }
 

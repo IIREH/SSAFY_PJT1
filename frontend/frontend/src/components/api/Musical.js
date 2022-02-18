@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import XMLParser from 'react-xml-parser';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import { Card, CardGroup, Carousel } from 'react-bootstrap'
 import "./Row.css";
+import Button from '../common/Button';
 
 function Musical({ title }) {
     const [musical, setMusical] = useState(null);
@@ -8,9 +12,10 @@ function Musical({ title }) {
     const [musical3, setMusical3] = useState(null);
     const [musical4, setMusical4] = useState(null);
     const [musical5, setMusical5] = useState(null);
+    const [musical6, setMusical6] = useState(null);
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132433?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF180838?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -20,7 +25,7 @@ function Musical({ title }) {
     }, [])
 
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132155?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186531?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -29,7 +34,7 @@ function Musical({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132674?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF183854?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -38,7 +43,7 @@ function Musical({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132642?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185604?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -47,7 +52,7 @@ function Musical({ title }) {
             .catch(err => console.log(err));
     }, [])
     useEffect(() => {
-        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF132562?service=4e391a1107334d7aaf6034069bbcbc5a")
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF185279?service=4e391a1107334d7aaf6034069bbcbc5a")
             .then(res => res.text())
             .then(data => {
                 var xml = new XMLParser().parseFromString(data); 
@@ -55,17 +60,142 @@ function Musical({ title }) {
             })
             .catch(err => console.log(err));
     }, [])
-
+    useEffect(() => {
+        fetch("http://www.kopis.or.kr/openApi/restful/pblprfr/PF186645?service=4e391a1107334d7aaf6034069bbcbc5a")
+            .then(res => res.text())
+            .then(data => {
+                var xml = new XMLParser().parseFromString(data); 
+                setMusical6(xml.getElementsByTagName('poster')[0].value);
+            })
+            .catch(err => console.log(err));
+    }, [])
     return (
         <div className="row">
             <h2>{title}</h2>
-            <div className="row__posters">
-                <img className='row__poster' src={musical} alt="Musical"></img>
-                <img className='row__poster' src={musical2} alt="Musical2"></img>
-                <img className='row__poster' src={musical3} alt="Musical3"></img>
-                <img className='row__poster' src={musical4} alt="Musical4"></img>
-                <img className='row__poster' src={musical5} alt="Musical5"></img>
-            </div>
+            <Carousel interval={null}>
+            <Carousel.Item>
+            <CardGroup className="justify-content-center">
+            <span className="row__posters">
+            <Card>
+                <Card.Img variant="top" src={ musical } alt="Recommend Image"/>
+                <Card.Body>
+                    <Card.Title>젠틀맨스 가이드</Card.Title>
+                     <hr></hr>
+                <Card.Text>
+                후기 : 42건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/musical">
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+            </Card>
+            </span>
+            <span className="row__posters">
+            <Card>
+                <Card.Img variant="top" src={ musical2 } alt="Recommend Image"/>
+                <Card.Body>
+                    <Card.Title>데스노트</Card.Title>
+                     <hr></hr>
+                <Card.Text>
+                후기 : 39건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/musical2">
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+            </Card>
+            </span>
+            <span className="row__posters">
+            <Card>
+                <Card.Img variant="top" src={ musical3 } alt="Recommend Image" />
+                <Card.Body>
+                    <Card.Title>극장형 보이는 라디오</Card.Title>
+                     <hr></hr>
+                <Card.Text>
+                후기 : 15건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/musical3">
+                    <Button style={{ marginLeft: 25}} >상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+            </Card>
+            </span>
+            </CardGroup>
+            </Carousel.Item>
+            <Carousel.Item>  
+            <CardGroup className="justify-content-center">
+            <span className="row__posters">
+            <Card>
+                <Card.Img variant="top" src={ musical4 } alt="Recommend Image"/>
+                <Card.Body>
+                    <Card.Title>노트르담드파리</Card.Title>
+                     <hr></hr>
+                <Card.Text>
+                후기 : 23건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/musical4">
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+            </Card>
+            </span>
+            <span className="row__posters">
+            <Card>
+                <Card.Img variant="top" src={ musical5 } alt="Recommend Image"/>
+                <Card.Body>
+                    <Card.Title>EQUAL</Card.Title>
+                     <hr></hr>
+                <Card.Text>
+                후기 : 33건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/musical5">
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+            </Card>
+            </span>
+            <span className="row__posters">
+            <Card>
+                <Card.Img variant="top" src={ musical6 } alt="Recommend Image" />
+                <Card.Body>
+                    <Card.Title>미오 프라텔로</Card.Title>
+                     <hr></hr>
+                <Card.Text>
+                후기 : 33건
+                <br></br>
+                평점 : ★★★★☆
+                <br></br>
+                <br></br>
+                <Link to="/musical6">
+                    <Button style={{ marginLeft: 10}}>상세보기</Button>
+                </Link>
+                </Card.Text>
+            </Card.Body>
+            </Card>
+            </span>
+            </CardGroup>
+            </Carousel.Item>  
+            </Carousel>  
             <hr className='hr'></hr>
         </div>
     )

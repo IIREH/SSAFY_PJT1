@@ -4,26 +4,77 @@ package com.web.curation.model.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
-import org.bson.types.ObjectId;
+import lombok.extern.slf4j.Slf4j;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-@Builder
+
 @Getter
 @ToString
-//TODO Validation 체크
+@Slf4j
 public class UserDto {
-//    @NotEmpty(message = "id를 채워주세요.")
-//   @Size(min=3,max=50,message = "아이디를 3자 이상 50자 이하로 해주세요.")
     private String id;
-    private String email;
-    private String name;
-    private String nickName;
-//    @NotEmpty(message = "pwd를 채워주세요.")
-//    @Size(min=6,message = "비밀번호를 6자리 이상 해주세요.")
     private String pwd;
-    List<ObjectId> followers;
+    private String nickName;
+    private StringBuilder jwt;
+
+    @Builder(builderClassName = "login",builderMethodName = "login" )
+    public UserDto(String id, String pwd) {
+        this.id = id;
+        this.pwd = pwd;
+        validationId();
+        validationPwd();
+    }
+
+    @Builder(builderClassName = "register",builderMethodName = "register")
+    public UserDto(String id, String pwd, String nickName) {
+        this.id = id;
+        this.pwd = pwd;
+        this.nickName = nickName;
+        validationId();
+        validationPwd();
+        validationNickName();
+    }
+
+    @Builder(builderClassName = "update",builderMethodName = "update")
+    public UserDto(String pwd, String nickName,StringBuilder jwt) {
+        this.pwd = pwd;
+        this.nickName = nickName;
+        this.jwt=jwt;
+        validationPwd();
+        validationNickName();
+
+    }
+    public String getJwt(){
+        return jwt==null?null:jwt.toString();
+    }
+
+    private void validationId(){
+        log.info("validationId:{}",id);
+        String msg= "아이디는 이메일로 해주세요.";
+        checkArgument(id==null||id.isEmpty(),msg);
+        Pattern emailPattern = Pattern.compile("[a-zA-Z0-9[!#$%&'()*+,/\\-_\\.\"]]+@[a-zA-Z0-9[!#$%&'()*+,/\\-_\"]]+\\.[a-zA-Z0-9[!#$%&'()*+,/\\-_\"\\.]]+");
+        Matcher m = emailPattern.matcher(id);
+        checkArgument(!m.matches(),msg);
+    }
+    private void validationPwd(){
+        log.info("validationPwd:{}",pwd);
+
+        String msg= "비밀번호를 6자리 이상 20자리 이하로 해주세요.";
+        checkArgument(pwd==null||pwd.isEmpty(),msg);
+        checkArgument(6>pwd.length()||pwd.length()>20,msg);
+
+    }
+    private void validationNickName(){
+        log.info("validationNickName:{}",nickName);
+
+        String msg="닉네임를 3자리 이상 20자리 이하로 해주세요.";
+        checkArgument(nickName==null||nickName.isEmpty(),msg);
+        checkArgument(3>nickName.length()||nickName.length()>20,msg);
+    }
+    private void checkArgument(boolean exp, String msg){
+        if(exp)
+            throw new IllegalArgumentException(msg);
+    }
 }

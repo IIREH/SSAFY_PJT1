@@ -11,13 +11,17 @@ OpenJDK 64-Bit Server VM (build 25.312-b07, mixed mode)
 
 # 2. 빌드
 ## 백엔드
-maven으로 jar 빌드하여 배포, 8080 포트로 접속 예시)
+maven으로 jar 빌드하여 배포, 8080 포트로 접속 
+
+예시)
 - backend-java 경로로 이동
 - mvn clean package로 jar 빌드
 - java -jar ./target/webcuration-0.0.1-SNAPSHOT.jar 실행
 
 ## 프론트엔드
-npm으로 빌드하여 배포, 3000 포트로 접속 예시)
+npm으로 빌드하여 배포, 3000 포트로 접속 
+
+예시)
 - frontend/frontend 경로로 이동
 - npm install --legacy-peer-deps
 - npm run build
@@ -27,3 +31,4 @@ npm으로 빌드하여 배포, 3000 포트로 접속 예시)
 git exec/dump 폴더 내에 위치
 
 # 4. 시연 시나리오
+[시연 시나리오](./상세화면.md)
